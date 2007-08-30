@@ -14,14 +14,6 @@ Object.extend(Date.prototype, {
 		return this._getMonth() + 1;
 	},	
 	
-	getJSMonth: function() {
-		return this._getMonth();
-	},	
-	
-	setJSMonth: function(month) {
-		this._setMonth(month);
-	},	
-	
 	setMonth: function(month) {
 		this._setMonth(month - 1);
 	},	
