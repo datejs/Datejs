@@ -16,22 +16,22 @@
     Test.context("Number", {
       "should support converting to years from now": function() { with(this) {
           Date.today().addYears(2).
-          equals((2).yearsFromNow().atBeginningOfDay()).shouldEqual(true);
+          equals((2).years().fromNow().atBeginningOfDay()).shouldEqual(true);
       }}, 
       
       "should support converting to years ago": function() { with(this) {
           Date.today().subtractYears(2).
-          equals((2).yearsAgo().atBeginningOfDay()).shouldEqual(true);
+          equals((2).years().ago().atBeginningOfDay()).shouldEqual(true);
       }}, 
       
       "should support converting to days ago": function() { with(this) {
           Date.today().subtractDays(1).equals(
-            (1).daysAgo().atBeginningOfDay()).shouldEqual(true);
+            (1).day().ago().atBeginningOfDay()).shouldEqual(true);
       }},
 
       "should support converting to days from now": function() { with(this) {
           Date.today().addDays(12).equals(
-            (12).daysFromNow().atBeginningOfDay()).shouldEqual(true);
+            (12).days().fromNow().atBeginningOfDay()).shouldEqual(true);
       }}
     });
   // ]]>
