@@ -1,0 +1,11 @@
+add/subtract
+  - months
+  - weeks
+  - hours
+  - minutes
+  - seconds
+  - milliseconds
+
+format / toString    
+Time span object
+Many more tests

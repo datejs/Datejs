@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Date.js Unit Tests</title>	
+	<script src="../lib/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>	
+	<script src="../src/date.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="test.css" type="text/css" media="all" />
+</head>
+<body>
+  <div id="testlog"></div>
+  <script type="text/javascript" language="javascript">
+  // <![CDATA[
+    Test.context("Number", {
+      "should support converting to years from now": function() { with(this) {
+          Date.today().addYears(2).
+          equals((2).yearsFromNow().atBeginningOfDay()).shouldEqual(true);
+      }}, 
+      
+      "should support converting to years ago": function() { with(this) {
+          Date.today().subtractYears(2).
+          equals((2).yearsAgo().atBeginningOfDay()).shouldEqual(true);
+      }}, 
+      
+      "should support converting to days ago": function() { with(this) {
+          Date.today().subtractDays(1).equals(
+            (1).daysAgo().atBeginningOfDay()).shouldEqual(true);
+      }},
+
+      "should support converting to days from now": function() { with(this) {
+          Date.today().addDays(12).equals(
+            (12).daysFromNow().atBeginningOfDay()).shouldEqual(true);
+      }}
+    });
+  // ]]>
+  </script>
+</body>
+</html>
