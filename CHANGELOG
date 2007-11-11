@@ -1,7 +1,0 @@
-2007-08-28
-  * Changed license to BSD License
-  * Added Date#leapYear
-  * Added Date#addDays, Date#subtractDays, Number#daysFromNow, Number#daysAgo
-
-2007-08-27
-  * Created initial version of the library [Christian Romney]
