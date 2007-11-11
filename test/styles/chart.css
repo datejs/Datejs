@@ -1,0 +1,32 @@
+﻿#chart 
+{
+	padding: 10px;
+}
+
+#chart div.item 
+{
+	height: 18px; 
+	padding: 4px;
+}
+
+#chart div.item label 
+{
+	display: block; 
+	float: left; 
+	clear: both;
+	width: 200px;
+	text-align: right;
+}
+
+#chart div.item div.bar 
+{
+	float: left; 
+	height: 18px; 
+	background-color: #72C868;
+	margin: 0 15px; 
+}
+
+#chart div.item div.display 
+{
+	float: left; 
+}

@@ -1,0 +1,10 @@
+* { margin:0; padding: 0; font-size: 12pt; font-family: verdana;}
+body { margin:20px;}
+h1 { font-size: 18pt; }
+h1, h2, h3, p { margin-bottom: 20px; }
+#chart { border: 1px solid gray; padding: 10px;}
+#chart div.bar { height: 60px; padding: 10px;}
+#chart div.bar label { display: block; float: left; clear: both; width: 340px; 
+	margin: 20px; text-align: right;}
+#chart div.bar div.value { float: left; height: 30px; background-color: green; margin: 15px; }
+#chart div.bar div.display { float: left; font-size: 10pt; margin: 20px; }
