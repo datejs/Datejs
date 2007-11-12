@@ -1,8 +1,9 @@
 ﻿/**
  * Version: 1.0 Alpha-1 
- * Release Date: 13-Nov-2007
+ * Build Date: 12-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
+ * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 
 /**
@@ -31,7 +32,7 @@ Date.today = function () {
 Date.prototype._orient = +1;
 
 /** 
- * Moves the date to the next instance of a date as specified by the following date element function (eg. second|minute|hour|day|month|year), month name function (eg. january|jan|march) or day name function (eg. friday|fri|monday).
+ * Moves the date to the next instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
  * Example
 <pre><code>
 Date.today().next().friday();
@@ -49,7 +50,7 @@ Date.prototype.next = function () {
 };
 
 /** 
- * Moves the date to the previous instance of a date as specified by the following date element function (eg. second|minute|hour|day|month|year), month name function (eg. january|jan|march) or day name function (eg. friday|fri|monday).
+ * Moves the date to the previous instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
  * Example
 <pre><code>
 Date.today().last().friday();
@@ -237,24 +238,6 @@ Date.prototype.toLongTimeString = function () {
 };
 
 /**
- * Gets the number of milliseconds between the current date instance and now.
- * @return {Number}  milliseconds
- */
-Date.prototype.getAge = function () {
-    return new Date() - this;
-};
-
-/**
- * Calculates the age in years from current date instance to today.
- * @return {Number}  The age
- */
-Date.prototype.getAgeInYears = function () {
-    var t = Date.now(), d1 = t.getDate(), m1 = t.getMonth(), y1 = t.getFullYear();
-    var d2 = this.getDate(), m2 = this.getMonth(), y2 = this.getFullYear();
-    return (m1 < m2 || m1 == m2 && d1 < d2) ? y1 - y2 - 1 : y1 - y2;
-};
-
-/**
  * Get the ordinal suffix of the current day.
  * @return {String}  "st, "nd", "rd" or "th"
  */
@@ -272,45 +255,5 @@ Date.prototype.getOrdinal = function () {
         return "rd";
     default: 
         return "th";
-    }
-};
-
-/**
- * Calculates the number of full time intervals between the current date instance and parameter date.
- * @param {String}   String value representing the time interval to use as the unit of difference [Required]
- * @param {Date}     Second Date value to use in the calculation. Default to "today" if no date value supplied for comparison [Optional]
- * @return {Number}  Number of full time intervals
- */
-Date.prototype.diff = function (interval, date) {
-    /* .diff() will eventually get refactored out of Date and into TimeSpan class. */
-    var ms = this - (date || Date.now());
-    switch (interval) {
-    case "yyyy":
-    case "yy":
-    case "y":
-        return Math.floor(ms / 31536000000); /* (1000*60*60*24*365) */
-    case "qq":
-    case "q":
-        return Math.floor(ms / 345600000); /* (1000*60*60*24*4) */
-    case "mm":
-    case "m":
-        return this.diff("yyyy", date) * 12 + this.getMonth();
-    case "wk":
-    case "ww":
-    case "w":		
-        return Math.floor(ms / 604800000); /* (1000*60*60*24*7) */
-    case "hh":
-    case "h":		
-        return Math.floor(ms / 3600000); /* (1000*60*60) */
-    case "mi":
-    case "n":
-        return Math.floor(ms / 60000); /* (1000*60) */
-    case "ss":
-    case "s":
-        return Math.floor(ms / 1000);
-    case "ms":
-        return ms;
-    default:
-        return Math.floor(ms / 86400000); /* (1000*60*60*24) */
     }
 };

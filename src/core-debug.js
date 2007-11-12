@@ -1,8 +1,9 @@
 ﻿/**
  * Version: 1.0 Alpha-1 
- * Release Date: 13-Nov-2007
+ * Build Date: 12-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
+ * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 
 /**
@@ -60,7 +61,7 @@ Date.getTimezoneOffset = function (s, dst) {
 };
 
 Date.getTimezoneAbbreviation = function (offset, dst) {
-    var n = (dst || false) ? Date.CultureInfo.abbreviatedTimeZoneDST : Date.CultureInfo.abbreviatedTimeZoneStandard;
+    var n = (dst || false) ? Date.CultureInfo.abbreviatedTimeZoneDST : Date.CultureInfo.abbreviatedTimeZoneStandard, p;
     for (p in n) { 
         if (n[p] === offset) { 
             return p; 
@@ -231,105 +232,77 @@ Date.prototype.add = function (config) {
     return this;
 };
 
+// private
+Date._validate = function (value, min, max, name) {
+    if (typeof value != "number") {
+        throw new TypeError(value + " is not a Number."); 
+    } else if (value < min || value > max) {
+        throw new RangeError(value + " is not a valid value for " + name + "."); 
+    }
+    return true;
+};
+
 /**
- * Validates that the number passed is within an acceptable range for milliseconds [0-999].
+ * Validates the number is within an acceptable range for milliseconds [0-999].
  * @param {Number}   The number to check if within range.
  * @return {Boolean} true if within range, otherwise false.
  */
 Date.validateMillisecond = function (n) {
-    if (typeof n != "number") {
-        throw new TypeError(n + " is not a Number."); 
-    } else if (n < 0 || n > 999) {
-        throw new RangeError(n + " is not a valid value for milliseconds."); 
-    }
-    return true;
+    return Date._validate(n, 0, 999, "milliseconds");
 };
 
 /**
- * Validates that the number passed is within an acceptable range for seconds [0-59].
+ * Validates the number is within an acceptable range for seconds [0-59].
  * @param {Number}   The number to check if within range.
  * @return {Boolean} true if within range, otherwise false.
  */
 Date.validateSecond = function (n) {
-    if (typeof n != "number") {
-        throw new TypeError(n + " is not a Number."); 
-    } else if (n < 0 || n > 59) {
-        throw new RangeError(n + " is not a valid value for seconds."); 
-    }
-    return true;
+    return Date._validate(n, 0, 59, "seconds");
 };
 
 /**
- * Validates that the number passed is within an acceptable range for minutes [0-59].
+ * Validates the number is within an acceptable range for minutes [0-59].
  * @param {Number}   The number to check if within range.
  * @return {Boolean} true if within range, otherwise false.
  */
 Date.validateMinute = function (n) {
-    if (typeof n != "number") {
-        throw new TypeError(n + " is not a Number."); 
-    } else if (n < 0 || n > 59) {
-        throw new RangeError(n + " is not a valid value for minutes."); 
-    }
-    return true;
+    return Date._validate(n, 0, 59, "minutes");
 };
 
-
 /**
- * Validates that the number passed is within an acceptable range for hours [0-23].
+ * Validates the number is within an acceptable range for hours [0-23].
  * @param {Number}   The number to check if within range.
  * @return {Boolean} true if within range, otherwise false.
  */
 Date.validateHour = function (n) {
-    if (typeof n != "number") {
-        throw new TypeError(n + " is not a Number."); 
-    } else if (n < 0 || n > 23) {
-        throw new RangeError(n + " is not a valid value for hours."); 
-    }
-    return true;
+    return Date._validate(n, 0, 23, "hours");
 };
 
-
 /**
- * Validates that the number passed is within an acceptable range for the days in a month [0-MaxDaysInMonth].
+ * Validates the number is within an acceptable range for the days in a month [0-MaxDaysInMonth].
  * @param {Number}   The number to check if within range.
  * @return {Boolean} true if within range, otherwise false.
  */
 Date.validateDay = function (n, year, month) {
-    if (typeof n != "number") {
-        throw new TypeError(n + " is not a Number."); 
-    } else if (n < 1 || n > Date.getDaysInMonth(year, month)) {
-        throw new RangeError(n + " is not a valid value for days."); 
-    }
-    return true;
+    return Date._validate(n, 1, Date.getDaysInMonth(year, month), "days");
 };
 
-
 /**
- * Validates that the number passed is within an acceptable range for months [0-11].
+ * Validates the number is within an acceptable range for months [0-11].
  * @param {Number}   The number to check if within range.
  * @return {Boolean} true if within range, otherwise false.
  */
 Date.validateMonth = function (n) {
-    if (typeof n != "number") {
-        throw new TypeError(n + " is not a Number."); 
-    } else if (n < 0 || n > 11) {
-        throw new RangeError(n + " is not a valid value for months."); 
-    }
-    return true;
+    return Date._validate(n, 0, 11, "months");
 };
 
 /**
- * Validates that the number passed is within an acceptable range for years [0-9999].
+ * Validates the number is within an acceptable range for years [0-9999].
  * @param {Number}   The number to check if within range.
  * @return {Boolean} true if within range, otherwise false.
  */
 Date.validateYear = function (n) {
-    if (typeof n != "number") {
-        throw new TypeError(n + " is not a Number."); 
-    } else if (n < 1 || n > 9999) {
-        throw new RangeError(n + " is not a valid value for years."); 
-    }
-    return true;
+    return Date._validate(n, 1, 9999, "seconds");
 };
 
 /**
@@ -428,8 +401,7 @@ Date.prototype.isLeapYear = function () {
  * @return {Boolean} true if this instance is a weekday
  */
 Date.prototype.isWeekday = function () { 
-    var n = this.getDay(); 
-    return (n > 0 && n < 6);
+    return !(this.is().sat() || this.is().sun());
 };
 
 /**
@@ -519,6 +491,7 @@ Date.prototype.getWeekOfYear = function (firstDayOfWeek) {
  * @return {Boolean} True if DST is in effect.
  */
 Date.prototype.isDST = function () {
+    console.log('isDST');
     /* TODO: not sure if this is portable ... get from Date.CultureInfo? */
     return this.toString().match(/(E|C|M|P)(S|D)T/)[2] == "D";
 };
@@ -528,7 +501,7 @@ Date.prototype.isDST = function () {
  * @return {String} The abbreviated timezone name (e.g. "EST")
  */
 Date.prototype.getTimezone = function () {
-    return Date.getTimezoneAbbreviation(this.getGMTOffset, this.isDST());
+    return Date.getTimezoneAbbreviation(this.getUTCOffset, this.isDST());
 };
 
 Date.prototype.setTimezoneOffset = function (s) {
@@ -542,10 +515,10 @@ Date.prototype.setTimezone = function (s) {
 };
 
 /**
- * Get the offset from GMT/UTC of the current date.
+ * Get the offset from UTC of the current date.
  * @return {String} The 4-character offset string prefixed with + or - (e.g. "-0500")
  */
-Date.prototype.getGMTOffset = function () {
+Date.prototype.getUTCOffset = function () {
     var n = this.getTimezoneOffset() * -10 / 6, r;
     if (n < 0) { 
         r = (n - 10000).toString(); 
