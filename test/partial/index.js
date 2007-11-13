@@ -341,10 +341,10 @@
 		    return false;
 		}
 	},	
-	'32 : Year 2032': {
+	'32 : Year 1932': {
     run: function() { },
 		assert: function() {
-            return Date.today().set( { year: 2032 } ).equals( Date.parse('32') );
+            return Date.today().set( { year: 1932 } ).equals( Date.parse('32') );
 		}
 	},
     '1st': {

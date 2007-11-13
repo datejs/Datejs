@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"kn-IN",
+    name: "kn-IN",
     englishName: "Kannada (India)",
     nativeName: "ಕನ್ನಡ (ಭಾರತ)",
     
     /* Day Name Strings */
-    dayNames: ["ಭಾನುವಾರ","ಸೋಮವಾರ","ಮಂಗಳವಾರ","ಬುಧವಾರ","ಗುರುವಾರ","ಶುಕ್ರವಾರ","ಶನಿವಾರ"],
-    abbreviatedDayNames: ["ಭಾನು.","ಸೋಮ.","ಮಂಗಳ.","ಬುಧ.","ಗುರು.","ಶುಕ್ರ.","ಶನಿ."],
-    shortestDayNames: ["ರ","ಸ","ಮ","ಬ","ಗ","ಶ","ಶ"],
-    firstLetterDayNames: ["ರ","ಸ","ಮ","ಬ","ಗ","ಶ","ಶ"],
+    dayNames: ["ಭಾನುವಾರ", "ಸೋಮವಾರ", "ಮಂಗಳವಾರ", "ಬುಧವಾರ", "ಗುರುವಾರ", "ಶುಕ್ರವಾರ", "ಶನಿವಾರ"],
+    abbreviatedDayNames: ["ಭಾನು.", "ಸೋಮ.", "ಮಂಗಳ.", "ಬುಧ.", "ಗುರು.", "ಶುಕ್ರ.", "ಶನಿ."],
+    shortestDayNames: ["ರ", "ಸ", "ಮ", "ಬ", "ಗ", "ಶ", "ಶ"],
+    firstLetterDayNames: ["ರ", "ಸ", "ಮ", "ಬ", "ಗ", "ಶ", "ಶ"],
     
     /* Month Name Strings */
-    monthNames: ["ಜನವರಿ","ಫೆಬ್ರವರಿ","ಮಾರ್ಚ್","ಎಪ್ರಿಲ್","ಮೇ","ಜೂನ್","ಜುಲೈ","ಆಗಸ್ಟ್","ಸೆಪ್ಟಂಬರ್","ಅಕ್ಟೋಬರ್","ನವೆಂಬರ್","ಡಿಸೆಂಬರ್"],
-    abbreviatedMonthNames: ["ಜನವರಿ","ಫೆಬ್ರವರಿ","ಮಾರ್ಚ್","ಎಪ್ರಿಲ್","ಮೇ","ಜೂನ್","ಜುಲೈ","ಆಗಸ್ಟ್","ಸೆಪ್ಟಂಬರ್","ಅಕ್ಟೋಬರ್","ನವೆಂಬರ್","ಡಿಸೆಂಬರ್"],
+    monthNames: ["ಜನವರಿ", "ಫೆಬ್ರವರಿ", "ಮಾರ್ಚ್", "ಎಪ್ರಿಲ್", "ಮೇ", "ಜೂನ್", "ಜುಲೈ", "ಆಗಸ್ಟ್", "ಸೆಪ್ಟಂಬರ್", "ಅಕ್ಟೋಬರ್", "ನವೆಂಬರ್", "ಡಿಸೆಂಬರ್"],
+    abbreviatedMonthNames: ["ಜನವರಿ", "ಫೆಬ್ರವರಿ", "ಮಾರ್ಚ್", "ಎಪ್ರಿಲ್", "ಮೇ", "ಜೂನ್", "ಜುಲೈ", "ಆಗಸ್ಟ್", "ಸೆಪ್ಟಂಬರ್", "ಅಕ್ಟೋಬರ್", "ನವೆಂಬರ್", "ಡಿಸೆಂಬರ್"],
 
 	/* AM/PM Designators */
     amDesignator: "ಪೂರ್ವಾಹ್ನ",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^ಜನವರಿ/i,
+        jan: /^ಜನವರಿ/i,
         feb: /^ಫೆಬ್ರವರಿ/i,
         mar: /^ಮಾರ್ಚ್/i,
         apr: /^ಎಪ್ರಿಲ್/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

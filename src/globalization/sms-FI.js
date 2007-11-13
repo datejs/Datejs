@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"sms-FI",
+    name: "sms-FI",
     englishName: "Sami (Skolt) (Finland)",
     nativeName: "sääm´ǩiõll (Lää´ddjânnam)",
     
     /* Day Name Strings */
-    dayNames: ["pâ´sspei´vv","vuõssargg","mââibargg","seärad","nelljdpei´vv","piâtnâc","sue´vet"],
-    abbreviatedDayNames: ["pâ","vu","mâ","se","ne","pi","su"],
-    shortestDayNames: ["pâ","vu","mâ","se","ne","pi","su"],
-    firstLetterDayNames: ["p","v","m","s","n","p","s"],
+    dayNames: ["pâ´sspei´vv", "vuõssargg", "mââibargg", "seärad", "nelljdpei´vv", "piâtnâc", "sue´vet"],
+    abbreviatedDayNames: ["pâ", "vu", "mâ", "se", "ne", "pi", "su"],
+    shortestDayNames: ["pâ", "vu", "mâ", "se", "ne", "pi", "su"],
+    firstLetterDayNames: ["p", "v", "m", "s", "n", "p", "s"],
     
     /* Month Name Strings */
-    monthNames: ["ođđee´jjmään","tä´lvvmään","pâ´zzlâšttammään","njuhččmään","vue´ssmään","ǩie´ssmään","suei´nnmään","på´rǧǧmään","čõhččmään","kålggmään","skamm´mään","rosttovmään"],
-    abbreviatedMonthNames: ["ođjm","tä´lvv","pâzl","njuh","vue","ǩie","suei","på´r","čõh","kålg","ska","rost"],
+    monthNames: ["ođđee´jjmään", "tä´lvvmään", "pâ´zzlâšttammään", "njuhččmään", "vue´ssmään", "ǩie´ssmään", "suei´nnmään", "på´rǧǧmään", "čõhččmään", "kålggmään", "skamm´mään", "rosttovmään"],
+    abbreviatedMonthNames: ["ođjm", "tä´lvv", "pâzl", "njuh", "vue", "ǩie", "suei", "på´r", "čõh", "kålg", "ska", "rost"],
 
 	/* AM/PM Designators */
     amDesignator: "",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^ođđee´jjmään/i,
+        jan: /^ođđee´jjmään/i,
         feb: /^tä´lvv(mään)?/i,
         mar: /^pâ´zzlâšttammään/i,
         apr: /^njuh(ččmään)?/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

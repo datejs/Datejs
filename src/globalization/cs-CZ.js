@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"cs-CZ",
+    name: "cs-CZ",
     englishName: "Czech (Czech Republic)",
     nativeName: "čeština (Česká republika)",
     
     /* Day Name Strings */
-    dayNames: ["neděle","pondělí","úterý","středa","čtvrtek","pátek","sobota"],
-    abbreviatedDayNames: ["ne","po","út","st","čt","pá","so"],
-    shortestDayNames: ["ne","po","út","st","čt","pá","so"],
-    firstLetterDayNames: ["n","p","ú","s","č","p","s"],
+    dayNames: ["neděle", "pondělí", "úterý", "středa", "čtvrtek", "pátek", "sobota"],
+    abbreviatedDayNames: ["ne", "po", "út", "st", "čt", "pá", "so"],
+    shortestDayNames: ["ne", "po", "út", "st", "čt", "pá", "so"],
+    firstLetterDayNames: ["n", "p", "ú", "s", "č", "p", "s"],
     
     /* Month Name Strings */
-    monthNames: ["leden","únor","březen","duben","květen","červen","červenec","srpen","září","říjen","listopad","prosinec"],
-    abbreviatedMonthNames: ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"],
+    monthNames: ["leden", "únor", "březen", "duben", "květen", "červen", "červenec", "srpen", "září", "říjen", "listopad", "prosinec"],
+    abbreviatedMonthNames: ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"],
 
 	/* AM/PM Designators */
     amDesignator: "dop.",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^leden/i,
+        jan: /^leden/i,
         feb: /^únor/i,
         mar: /^březen/i,
         apr: /^duben/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

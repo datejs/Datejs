@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"mn-MN",
+    name: "mn-MN",
     englishName: "Mongolian (Cyrillic, Mongolia)",
     nativeName: "Монгол хэл (Монгол улс)",
     
     /* Day Name Strings */
-    dayNames: ["Ням","Даваа","Мягмар","Лхагва","Пүрэв","Баасан","Бямба"],
-    abbreviatedDayNames: ["Ня","Да","Мя","Лх","Пү","Ба","Бя"],
-    shortestDayNames: ["Ня","Да","Мя","Лх","Пү","Ба","Бя"],
-    firstLetterDayNames: ["Н","Д","М","Л","П","Б","Б"],
+    dayNames: ["Ням", "Даваа", "Мягмар", "Лхагва", "Пүрэв", "Баасан", "Бямба"],
+    abbreviatedDayNames: ["Ня", "Да", "Мя", "Лх", "Пү", "Ба", "Бя"],
+    shortestDayNames: ["Ня", "Да", "Мя", "Лх", "Пү", "Ба", "Бя"],
+    firstLetterDayNames: ["Н", "Д", "М", "Л", "П", "Б", "Б"],
     
     /* Month Name Strings */
-    monthNames: ["1 дүгээр сар","2 дугаар сар","3 дугаар сар","4 дүгээр сар","5 дугаар сар","6 дугаар сар","7 дугаар сар","8 дугаар сар","9 дүгээр сар","10 дугаар сар","11 дүгээр сар","12 дугаар сар"],
-    abbreviatedMonthNames: ["I","II","III","IV","V","VI","VII","VШ","IX","X","XI","XII"],
+    monthNames: ["1 дүгээр сар", "2 дугаар сар", "3 дугаар сар", "4 дүгээр сар", "5 дугаар сар", "6 дугаар сар", "7 дугаар сар", "8 дугаар сар", "9 дүгээр сар", "10 дугаар сар", "11 дүгээр сар", "12 дугаар сар"],
+    abbreviatedMonthNames: ["I", "II", "III", "IV", "V", "VI", "VII", "VШ", "IX", "X", "XI", "XII"],
 
 	/* AM/PM Designators */
     amDesignator: "",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^1 дүгээр сар/i,
+        jan: /^1 дүгээр сар/i,
         feb: /^2 дугаар сар/i,
         mar: /^3 дугаар сар/i,
         apr: /^4 дүгээр сар/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

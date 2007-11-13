@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"sv-FI",
+    name: "sv-FI",
     englishName: "Swedish (Finland)",
     nativeName: "svenska (Finland)",
     
     /* Day Name Strings */
-    dayNames: ["söndag","måndag","tisdag","onsdag","torsdag","fredag","lördag"],
-    abbreviatedDayNames: ["sö","må","ti","on","to","fr","lö"],
-    shortestDayNames: ["sö","må","ti","on","to","fr","lö"],
-    firstLetterDayNames: ["s","m","t","o","t","f","l"],
+    dayNames: ["söndag", "måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag"],
+    abbreviatedDayNames: ["sö", "må", "ti", "on", "to", "fr", "lö"],
+    shortestDayNames: ["sö", "må", "ti", "on", "to", "fr", "lö"],
+    firstLetterDayNames: ["s", "m", "t", "o", "t", "f", "l"],
     
     /* Month Name Strings */
-    monthNames: ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"],
-    abbreviatedMonthNames: ["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec"],
+    monthNames: ["januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december"],
+    abbreviatedMonthNames: ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"],
 
 	/* AM/PM Designators */
     amDesignator: "",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^jan(uari)?/i,
+        jan: /^jan(uari)?/i,
         feb: /^feb(ruari)?/i,
         mar: /^mar(s)?/i,
         apr: /^apr(il)?/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

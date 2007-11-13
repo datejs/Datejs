@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"ja-JP",
+    name: "ja-JP",
     englishName: "Japanese (Japan)",
     nativeName: "日本語 (日本)",
     
     /* Day Name Strings */
-    dayNames: ["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"],
-    abbreviatedDayNames: ["日","月","火","水","木","金","土"],
-    shortestDayNames: ["日","月","火","水","木","金","土"],
-    firstLetterDayNames: ["日","月","火","水","木","金","土"],
+    dayNames: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
+    abbreviatedDayNames: ["日", "月", "火", "水", "木", "金", "土"],
+    shortestDayNames: ["日", "月", "火", "水", "木", "金", "土"],
+    firstLetterDayNames: ["日", "月", "火", "水", "木", "金", "土"],
     
     /* Month Name Strings */
-    monthNames: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
-    abbreviatedMonthNames: ["1","2","3","4","5","6","7","8","9","10","11","12"],
+    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+    abbreviatedMonthNames: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
 
 	/* AM/PM Designators */
     amDesignator: "午前",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^1(月)?/i,
+        jan: /^1(月)?/i,
         feb: /^2(月)?/i,
         mar: /^3(月)?/i,
         apr: /^4(月)?/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

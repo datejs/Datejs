@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"ro-RO",
+    name: "ro-RO",
     englishName: "Romanian (Romania)",
     nativeName: "română (România)",
     
     /* Day Name Strings */
-    dayNames: ["duminică","luni","marţi","miercuri","joi","vineri","sâmbătă"],
-    abbreviatedDayNames: ["D","L","Ma","Mi","J","V","S"],
-    shortestDayNames: ["D","L","Ma","Mi","J","V","S"],
-    firstLetterDayNames: ["D","L","M","M","J","V","S"],
+    dayNames: ["duminică", "luni", "marţi", "miercuri", "joi", "vineri", "sâmbătă"],
+    abbreviatedDayNames: ["D", "L", "Ma", "Mi", "J", "V", "S"],
+    shortestDayNames: ["D", "L", "Ma", "Mi", "J", "V", "S"],
+    firstLetterDayNames: ["D", "L", "M", "M", "J", "V", "S"],
     
     /* Month Name Strings */
-    monthNames: ["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"],
-    abbreviatedMonthNames: ["ian.","feb.","mar.","apr.","mai.","iun.","iul.","aug.","sep.","oct.","nov.","dec."],
+    monthNames: ["ianuarie", "februarie", "martie", "aprilie", "mai", "iunie", "iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"],
+    abbreviatedMonthNames: ["ian.", "feb.", "mar.", "apr.", "mai.", "iun.", "iul.", "aug.", "sep.", "oct.", "nov.", "dec."],
 
 	/* AM/PM Designators */
     amDesignator: "",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^ian(.(uarie)?)?/i,
+        jan: /^ian(.(uarie)?)?/i,
         feb: /^feb(.(ruarie)?)?/i,
         mar: /^mar(.(tie)?)?/i,
         apr: /^apr(.(ilie)?)?/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

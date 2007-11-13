@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"sma-SE",
+    name: "sma-SE",
     englishName: "Sami (Southern) (Sweden)",
     nativeName: "åarjelsaemiengiele (Sveerje)",
     
     /* Day Name Strings */
-    dayNames: ["aejlege","måanta","dæjsta","gaskevåhkoe","duarsta","bearjadahke","laavvardahke"],
-    abbreviatedDayNames: ["aej","måa","dæj","gask","duar","bearj","laav"],
-    shortestDayNames: ["aej","måa","dæj","gask","duar","bearj","laav"],
-    firstLetterDayNames: ["a","m","d","g","d","b","l"],
+    dayNames: ["aejlege", "måanta", "dæjsta", "gaskevåhkoe", "duarsta", "bearjadahke", "laavvardahke"],
+    abbreviatedDayNames: ["aej", "måa", "dæj", "gask", "duar", "bearj", "laav"],
+    shortestDayNames: ["aej", "måa", "dæj", "gask", "duar", "bearj", "laav"],
+    firstLetterDayNames: ["a", "m", "d", "g", "d", "b", "l"],
     
     /* Month Name Strings */
-    monthNames: ["tsïengele","goevte","njoktje","voerhtje","suehpede","ruffie","snjaltje","mïetske","skïerede","golke","rahka","goeve"],
-    abbreviatedMonthNames: ["tsïen","goevt","njok","voer","sueh","ruff","snja","mïet","skïer","golk","rahk","goev"],
+    monthNames: ["tsïengele", "goevte", "njoktje", "voerhtje", "suehpede", "ruffie", "snjaltje", "mïetske", "skïerede", "golke", "rahka", "goeve"],
+    abbreviatedMonthNames: ["tsïen", "goevt", "njok", "voer", "sueh", "ruff", "snja", "mïet", "skïer", "golk", "rahk", "goev"],
 
 	/* AM/PM Designators */
     amDesignator: "",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^tsïen(gele)?/i,
+        jan: /^tsïen(gele)?/i,
         feb: /^goevt(e)?/i,
         mar: /^njok(tje)?/i,
         apr: /^voer(htje)?/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Version: 1.0 Alpha-1 
  * Build Date: 12-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.

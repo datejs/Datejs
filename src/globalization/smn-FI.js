@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"smn-FI",
+    name: "smn-FI",
     englishName: "Sami (Inari) (Finland)",
     nativeName: "sämikielâ (Suomâ)",
     
     /* Day Name Strings */
-    dayNames: ["pasepeivi","vuossargâ","majebargâ","koskokko","tuorâstâh","vástuppeivi","lávárdâh"],
-    abbreviatedDayNames: ["pa","vu","ma","ko","tu","vá","lá"],
-    shortestDayNames: ["pa","vu","ma","ko","tu","vá","lá"],
-    firstLetterDayNames: ["p","v","m","k","t","v","l"],
+    dayNames: ["pasepeivi", "vuossargâ", "majebargâ", "koskokko", "tuorâstâh", "vástuppeivi", "lávárdâh"],
+    abbreviatedDayNames: ["pa", "vu", "ma", "ko", "tu", "vá", "lá"],
+    shortestDayNames: ["pa", "vu", "ma", "ko", "tu", "vá", "lá"],
+    firstLetterDayNames: ["p", "v", "m", "k", "t", "v", "l"],
     
     /* Month Name Strings */
-    monthNames: ["uđđâivemáánu","kuovâmáánu","njuhčâmáánu","cuáŋuimáánu","vyesimáánu","kesimáánu","syeinimáánu","porgemáánu","čohčâmáánu","roovvâdmáánu","skammâmáánu","juovlâmáánu"],
-    abbreviatedMonthNames: ["uđiv","kuov","njuh","cuoŋ","vyes","kesi","syei","porg","čoh","roov","ska","juov"],
+    monthNames: ["uđđâivemáánu", "kuovâmáánu", "njuhčâmáánu", "cuáŋuimáánu", "vyesimáánu", "kesimáánu", "syeinimáánu", "porgemáánu", "čohčâmáánu", "roovvâdmáánu", "skammâmáánu", "juovlâmáánu"],
+    abbreviatedMonthNames: ["uđiv", "kuov", "njuh", "cuoŋ", "vyes", "kesi", "syei", "porg", "čoh", "roov", "ska", "juov"],
 
 	/* AM/PM Designators */
     amDesignator: "",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^uđđâivemáánu/i,
+        jan: /^uđđâivemáánu/i,
         feb: /^kuov(âmáánu)?/i,
         mar: /^njuh(čâmáánu)?/i,
         apr: /^cuáŋuimáánu/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

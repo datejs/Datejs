@@ -70,7 +70,7 @@
     },
 	'2004 : "yyyy"': {
       run: function() { this.date = Date.parseExact('2004', 'yyyy' ) },
-      assert: function() { return Date.today().set({year: 2004}).equals( this.date ) }
+      assert: function() { return Date.today().set({ year: 2004, day: 1 }).equals( this.date ) }
     },
     'July 2004 : "MMMM, yyyy"': {
       run: function() { this.date = Date.parseExact('July 2004', 'MMMM yyyy') },
@@ -83,8 +83,7 @@
       assert: function() { 
 				return new Date(2004, 2, 15).equals( this.date );
 			}
-    }	    	
-    
+    }
   }
 });
 

@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"sq-AL",
+    name: "sq-AL",
     englishName: "Albanian (Albania)",
     nativeName: "shqipe (Shqipëria)",
     
     /* Day Name Strings */
-    dayNames: ["e diel","e hënë","e martë","e mërkurë","e enjte","e premte","e shtunë"],
-    abbreviatedDayNames: ["Die","Hën","Mar","Mër","Enj","Pre","Sht"],
-    shortestDayNames: ["Di","Hë","Ma","Më","En","Pr","Sh"],
-    firstLetterDayNames: ["D","H","M","M","E","P","S"],
+    dayNames: ["e diel", "e hënë", "e martë", "e mërkurë", "e enjte", "e premte", "e shtunë"],
+    abbreviatedDayNames: ["Die", "Hën", "Mar", "Mër", "Enj", "Pre", "Sht"],
+    shortestDayNames: ["Di", "Hë", "Ma", "Më", "En", "Pr", "Sh"],
+    firstLetterDayNames: ["D", "H", "M", "M", "E", "P", "S"],
     
     /* Month Name Strings */
-    monthNames: ["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],
-    abbreviatedMonthNames: ["Jan","Shk","Mar","Pri","Maj","Qer","Kor","Gsh","Sht","Tet","Nën","Dhj"],
+    monthNames: ["janar", "shkurt", "mars", "prill", "maj", "qershor", "korrik", "gusht", "shtator", "tetor", "nëntor", "dhjetor"],
+    abbreviatedMonthNames: ["Jan", "Shk", "Mar", "Pri", "Maj", "Qer", "Kor", "Gsh", "Sht", "Tet", "Nën", "Dhj"],
 
 	/* AM/PM Designators */
     amDesignator: "PD",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^jan(ar)?/i,
+        jan: /^jan(ar)?/i,
         feb: /^shk(urt)?/i,
         mar: /^mar(s)?/i,
         apr: /^pri(ll)?/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },

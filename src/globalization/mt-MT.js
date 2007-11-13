@@ -1,25 +1,25 @@
 /**
  * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
+ * Build Date: 13-Nov-2007
  * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
  */
 Date.CultureInfo = {
 	/* Culture Name */
-    name:"mt-MT",
+    name: "mt-MT",
     englishName: "Maltese (Malta)",
     nativeName: "Malti (Malta)",
     
     /* Day Name Strings */
-    dayNames: ["Il-Ħadd","It-Tnejn","It-Tlieta","L-Erbgħa","Il-Ħamis","Il-Ġimgħa","Is-Sibt"],
-    abbreviatedDayNames: ["Ħad","Tne","Tli","Erb","Ħam","Ġim","Sib"],
-    shortestDayNames: ["Ħad","Tne","Tli","Erb","Ħam","Ġim","Sib"],
-    firstLetterDayNames: ["Ħ","T","T","E","Ħ","Ġ","S"],
+    dayNames: ["Il-Ħadd", "It-Tnejn", "It-Tlieta", "L-Erbgħa", "Il-Ħamis", "Il-Ġimgħa", "Is-Sibt"],
+    abbreviatedDayNames: ["Ħad", "Tne", "Tli", "Erb", "Ħam", "Ġim", "Sib"],
+    shortestDayNames: ["Ħad", "Tne", "Tli", "Erb", "Ħam", "Ġim", "Sib"],
+    firstLetterDayNames: ["Ħ", "T", "T", "E", "Ħ", "Ġ", "S"],
     
     /* Month Name Strings */
-    monthNames: ["Jannar","Frar","Marzu","April","Mejju","Ġunju","Lulju","Awissu","Settembru","Ottubru","Novembru","Diċembru"],
-    abbreviatedMonthNames: ["Jan","Fra","Mar","Apr","Mej","Ġun","Lul","Awi","Set","Ott","Nov","Diċ"],
+    monthNames: ["Jannar", "Frar", "Marzu", "April", "Mejju", "Ġunju", "Lulju", "Awissu", "Settembru", "Ottubru", "Novembru", "Diċembru"],
+    abbreviatedMonthNames: ["Jan", "Fra", "Mar", "Apr", "Mej", "Ġun", "Lul", "Awi", "Set", "Ott", "Nov", "Diċ"],
 
 	/* AM/PM Designators */
     amDesignator: "AM",
@@ -91,7 +91,7 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-		jan: /^jan(nar)?/i,
+        jan: /^jan(nar)?/i,
         feb: /^fra(r)?/i,
         mar: /^mar(zu)?/i,
         apr: /^apr(il)?/i,
@@ -131,11 +131,11 @@ Date.CultureInfo = {
         day: /^d(ays?)?/i,
         year: /^y((ea)?rs?)?/i,
 		
-		shortMeridian: /^(a|p)/i,
-		longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-		timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
-		ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-		timeContext: /^\s*(\:|a|p)/i
+        shortMeridian: /^(a|p)/i,
+        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
+        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        timeContext: /^\s*(\:|a|p)/i
     },
 
     abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },
