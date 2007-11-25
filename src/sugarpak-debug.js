@@ -68,6 +68,9 @@ Date.prototype.last = Date.prototype.prev = Date.prototype.previous = function (
 };
 
 // private
+Date.prototype._nth = null;
+
+// private
 Date.prototype._is = false;
     
 /** 
@@ -136,10 +139,11 @@ Number.prototype.ago = function () {
 (function () {
     var $D = Date.prototype, $N = Number.prototype;
 
-    /* Do NOT modify the following string tokens. These tokens are used to build dynamic functions. */
+    // Do NOT modify the following string tokens. These tokens are used to build dynamic functions.
     var dx = ("sunday monday tuesday wednesday thursday friday saturday").split(/\s/),
         mx = ("january february march april may june july august september october november december").split(/\s/),
         px = ("Millisecond Second Minute Hour Day Week Month Year").split(/\s/),
+		nth = ("final first second third forth fifth").split(/\s/),
         de;
     
     // Create day name functions and abbreviated day name functions (eg. monday(), friday(), fri()).
@@ -149,11 +153,33 @@ Number.prototype.ago = function () {
                 this._is = false; 
                 return this.getDay() == n; 
             }
+            if (this._nth !== null) {
+				var ntemp = this._nth;
+                this._nth = null;
+				var temp = this.clone().moveToLastDayOfMonth();
+				this.moveToNthOccurrence(n, ntemp);
+				if(this > temp) {
+					throw new RangeError(Date.getDayName(n) + " does not occur " + ntemp + " times in the month of " + temp.getMonthName() + " " + temp.getFullYear() + ".");
+				}
+                return this;
+            }			
             return this.moveToDayOfWeek(n, this._orient);
         };
     };
     
-    for (var i = 0 ; i < dx.length ; i++) { 
+	var sdf = function (n) {
+        return function () {
+			var t = Date.today(), shift = n - t.getDay();
+			if(n === 0 && Date.CultureInfo.firstDayOfWeek === 1 && t.getDay() !== 0) {
+				shift = shift + 7;
+			}
+			return t.addDays(shift);
+        };
+    };
+	
+    for (var i = 0 ; i < dx.length ; i++) {
+		Date[dx[i].toUpperCase()] = Date[dx[i].toUpperCase().substring(0, 3)] = i;
+		Date[dx[i]] = Date[dx[i].substring(0, 3)] = sdf(i);
         $D[dx[i]] = $D[dx[i].substring(0, 3)] = df(i);
     }
     
@@ -168,7 +194,15 @@ Number.prototype.ago = function () {
         };
     };
     
-    for (var j = 0 ; j < mx.length ; j++) { 
+	var smf = function (n) {
+        return function () {
+			return Date.today().set({ month: n, day: 1 });
+        };
+    };
+    
+    for (var j = 0 ; j < mx.length ; j++) {
+		Date[mx[j].toUpperCase()] = Date[mx[j].toUpperCase().substring(0, 3)] = j;
+		Date[mx[j]] = Date[mx[j].substring(0, 3)] = smf(j);
         $D[mx[j]] = $D[mx[j].substring(0, 3)] = mf(j);
     }
     
@@ -194,6 +228,20 @@ Number.prototype.ago = function () {
         de = px[k].toLowerCase();
         $D[de] = $D[de + "s"] = ef(px[k]);
         $N[de] = $N[de + "s"] = nf(de);
+    }
+	
+	var nthfn = function (n) {
+        return function (dayOfWeek) {
+			if (dayOfWeek || dayOfWeek === 0) {
+				return this.moveToNthOccurrence(dayOfWeek, n);
+			}
+            this._nth = n;
+            return this;
+        };
+    };
+	
+	for (var l = 0 ; l < nth.length ; l++) {
+        $D[nth[l]] = (nth[l] == "final") ? nthfn(-1) : nthfn(l);
     }
 }());
 

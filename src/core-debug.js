@@ -7,6 +7,28 @@
  */
 
 /**
+ * Gets the name of the day given a dayOfWeek number. 0 = Sunday, 6 = Saturday.
+ * @param {Number}   The dayOfWeek.
+ * @param {Boolean}  true to return the abbreviated name of the day.
+ * @return {String}  The name of the day.
+ */
+Date.getDayName = function (dayOfWeek, abbreviated) {
+	return (abbreviated && typeof abbreviated == "boolean") ? Date.CultureInfo.abbreviatedDayNames[dayOfWeek] :
+		Date.CultureInfo.dayNames[dayOfWeek];
+};
+
+/**
+ * Gets the name of the month given a month number.
+ * @param {Number}   The month.
+ * @param {Boolean}  true to return the abbreviated name of the month.
+ * @return {String}  The name of the month.
+ */
+Date.getMonthName = function (month, abbreviated) {
+	return (abbreviated && typeof abbreviated == "boolean") ? Date.CultureInfo.abbreviatedMonthNames[month] :
+		Date.CultureInfo.monthNames[month];
+};
+
+/**
  * Gets the month number (0-11) if given a Culture Info specific string which is a valid monthName or abbreviatedMonthName.
  * @param {String}   The name of the month (eg. "February, "Feb", "october", "oct").
  * @return {Number}  The day number
@@ -117,7 +139,7 @@ Date.prototype.between = function (start, end) {
 /**
  * Adds the specified number of milliseconds to this instance. 
  * @param {Number}   The number of milliseconds to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addMilliseconds = function (value) {
     this.setMilliseconds(this.getMilliseconds() + value);
@@ -127,7 +149,7 @@ Date.prototype.addMilliseconds = function (value) {
 /**
  * Adds the specified number of seconds to this instance. 
  * @param {Number}   The number of seconds to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addSeconds = function (value) { 
     return this.addMilliseconds(value * 1000); 
@@ -136,7 +158,7 @@ Date.prototype.addSeconds = function (value) {
 /**
  * Adds the specified number of seconds to this instance. 
  * @param {Number}   The number of seconds to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addMinutes = function (value) { 
     return this.addMilliseconds(value * 60000); /* 60*1000 */
@@ -145,7 +167,7 @@ Date.prototype.addMinutes = function (value) {
 /**
  * Adds the specified number of hours to this instance. 
  * @param {Number}   The number of hours to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addHours = function (value) { 
     return this.addMilliseconds(value * 3600000); /* 60*60*1000 */
@@ -154,7 +176,7 @@ Date.prototype.addHours = function (value) {
 /**
  * Adds the specified number of days to this instance. 
  * @param {Number}   The number of days to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addDays = function (value) { 
     return this.addMilliseconds(value * 86400000); /* 60*60*24*1000 */
@@ -163,16 +185,16 @@ Date.prototype.addDays = function (value) {
 /**
  * Adds the specified number of weeks to this instance. 
  * @param {Number}   The number of weeks to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addWeeks = function (value) { 
-    return this.addMilliseconds(value * 604800000); /* 60*60*24*7*1000 */
+    return this.addDays(value * 7);
 };
 
 /**
  * Adds the specified number of months to this instance. 
  * @param {Number}   The number of months to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addMonths = function (value) {
     var n = this.getDate();
@@ -185,7 +207,7 @@ Date.prototype.addMonths = function (value) {
 /**
  * Adds the specified number of years to this instance. 
  * @param {Number}   The number of years to add. The number can be positive or negative [Required]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.addYears = function (value) {
     return this.addMonths(value * 12);
@@ -200,7 +222,7 @@ Date.today().add( { day: 1, month: 1 } )
 new Date().add( { year: -1 } )
 </code></pre> 
  * @param {Object}   Configuration object containing attributes (month, day, etc.)
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.add = function (config) {
     if (typeof config == "number") {
@@ -315,7 +337,7 @@ new Date().set( { millisecond: 0 } )
 </code></pre>
  * 
  * @param {Object}   Configuration object containing attributes (month, day, etc.)
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.set = function (config) {
     var x = config;
@@ -377,7 +399,7 @@ Date.prototype.set = function (config) {
 
 /**
  * Resets the time of this Date object to 12:00 AM (00:00), which is the start of the day.
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.clearTime = function () {
     this.setHours(0); 
@@ -414,7 +436,7 @@ Date.prototype.getDaysInMonth = function () {
 
 /**
  * Moves the date to the first day of the month.
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.moveToFirstDayOfMonth = function () {
     return this.set({ day: 1 });
@@ -422,20 +444,38 @@ Date.prototype.moveToFirstDayOfMonth = function () {
 
 /**
  * Moves the date to the last day of the month.
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.moveToLastDayOfMonth = function () { 
     return this.set({ day: this.getDaysInMonth()});
 };
 
 /**
+ * Moves the date to the next n'th occurrence of the dayOfWeek starting from the beginning of the month. The number (-1) is a magic number and will return the last occurrence of the dayOfWeek in the month.
+ * @param {Number}   The dayOfWeek to move to.
+ * @param {Number}   The n'th occurrence to move to. Use (-1) to return the last occurrence in the month.
+ * @return {Date}    date
+ */
+Date.prototype.moveToNthOccurrence = function (dayOfWeek, occurrence) {
+	var shift = 0;
+	if (occurrence) {
+		if (occurrence > 0) {
+			shift = occurrence - 1;
+		} else if (occurrence == -1) {
+			return this.moveToLastDayOfMonth().moveToDayOfWeek(dayOfWeek, -1);
+		}
+	}
+	return this.moveToFirstDayOfMonth().addDays(-1).moveToDayOfWeek(dayOfWeek, +1).addWeeks(shift);
+};
+
+/**
  * Move to the next or last dayOfWeek based on the orient value.
  * @param {Number}   The dayOfWeek to move to.
  * @param {Number}   Forward (+1) or Back (-1). Defaults to +1. [Optional]
- * @return {Date}    this
+ * @return {Date}    date
  */
-Date.prototype.moveToDayOfWeek = function (day, orient) {
-    var diff = (day - this.getDay() + 7 * (orient || +1)) % 7;
+Date.prototype.moveToDayOfWeek = function (dayOfWeek, orient) {
+    var diff = (dayOfWeek - this.getDay() + 7 * (orient || +1)) % 7;
     return this.addDays((diff === 0) ? diff += 7 * (orient || +1) : diff);
 };
 
@@ -443,7 +483,7 @@ Date.prototype.moveToDayOfWeek = function (day, orient) {
  * Move to the next or last month based on the orient value.
  * @param {Number}   The month to move to. 0 = January, 11 = December.
  * @param {Number}   Forward (+1) or Back (-1). Defaults to +1. [Optional]
- * @return {Date}    this
+ * @return {Date}    date
  */
 Date.prototype.moveToMonth = function (month, orient) {
     var diff = (month - this.getMonth() + 12 * (orient || +1)) % 12;
@@ -530,13 +570,12 @@ Date.prototype.getUTCOffset = function () {
 };
 
 /**
- * Gets the name of the day of the week.
- * @param {Boolean}  true to return the abbreviated name of the day of the week
- * @return {String}  The name of the day
+ * Gets the day name.
+ * @param {Boolean}  true to return the abbreviated name of the day.
+ * @return {String}  The name of the day.
  */
-Date.prototype.getDayName = function (abbrev) {
-    return abbrev ? Date.CultureInfo.abbreviatedDayNames[this.getDay()] : 
-        Date.CultureInfo.dayNames[this.getDay()];
+Date.prototype.getDayName = function (abbreviated) {
+    return Date.getDayName(this.getDay(), (abbreviated || false));
 };
 
 /**
@@ -544,10 +583,8 @@ Date.prototype.getDayName = function (abbrev) {
  * @param {Boolean}  true to return the abbreviated name of the month
  * @return {String}  The name of the month
  */
-Date.prototype.getMonthName = function (abbrev) {
-    return abbrev ? Date.CultureInfo.abbreviatedMonthNames[this.getMonth()] : 
-        Date.CultureInfo.monthNames[this.getMonth()];
-};
+Date.prototype.getMonthName = function (abbreviated) {
+    return Date.getMonthName(this.getMonth(), (abbreviated || false))};
 
 // private
 Date.prototype._toString = Date.prototype.toString;

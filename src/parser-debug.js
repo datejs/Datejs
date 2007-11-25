@@ -641,7 +641,7 @@
                     this.hour = (this.hour < 13 && this.meridian == "p") ? this.hour + 12 : this.hour;			
                 }
                 if (this.weekday && !this.day) {
-                    this.day = (today.addDays((Date.getDayNumberFromName(this.weekday) - today.getDay()))).getDate();
+					this.day = Date[this.weekday]().getDate();
                 }
                 if (this.month && !this.day) { 
                     this.day = 1; 
