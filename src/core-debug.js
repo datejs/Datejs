@@ -7,6 +7,47 @@
  */
 
 /**
+ * Gets a date that is set to the current date and time. 
+ * @return {Date}    The current date and time.
+ */
+Date.now = function () {
+    return new Date();
+};
+
+/**
+ * Resets the time of this Date object to 12:00 AM (00:00), which is the start of the day.
+ * @return {Date}    date
+ */
+Date.prototype.clearTime = function () {
+    this.setHours(0); 
+    this.setMinutes(0); 
+    this.setSeconds(0);
+    this.setMilliseconds(0); 
+    return this;
+};
+
+/**
+ * Resets the time of this Date object to the current time ('now').
+ * @return {Date}    date
+ */
+Date.prototype.setTimeToNow = function (config) {
+	var n = Date.now();
+	this.setHours(n.getHours());
+	this.setMinutes(n.getMinutes());
+	this.setSeconds(n.getSeconds());
+	this.setMilliseconds(n.getMilliseconds());
+	return this;
+};
+
+/** 
+ * Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM).
+ * @return {Date}    The current date.
+ */
+Date.today = function () {
+    return Date.now().clearTime();
+};
+
+/**
  * Gets the name of the day given a dayOfWeek number. 0 = Sunday, 6 = Saturday.
  * @param {Number}   The dayOfWeek.
  * @param {Boolean}  true to return the abbreviated name of the day.
@@ -395,31 +436,6 @@ Date.prototype.set = function (config) {
     }
     
     return this;   
-};
-
-/**
- * Resets the time of this Date object to 12:00 AM (00:00), which is the start of the day.
- * @return {Date}    date
- */
-Date.prototype.clearTime = function () {
-    this.setHours(0); 
-    this.setMinutes(0); 
-    this.setSeconds(0);
-    this.setMilliseconds(0); 
-    return this;
-};
-
-/**
- * Resets the time of this Date object to the current time ('now').
- * @return {Date}    date
- */
-Date.prototype.setTimeToNow = function (config) {
-	var n = Date.now();
-	this.setHours(n.getHours());
-	this.setMinutes(n.getMinutes());
-	this.setSeconds(n.getSeconds());
-	this.setMilliseconds(n.getMilliseconds());
-	return this;
 };
 
 /**

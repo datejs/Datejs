@@ -12,22 +12,6 @@
  **************************************************************
  */
  
-/**
- * Gets a date that is set to the current date and time. 
- * @return {Date}    The current date and time.
- */
-Date.now = function () {
-    return new Date();
-};
-
-/** 
- * Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM).
- * @return {Date}    The current date.
- */
-Date.today = function () {
-    return Date.now().clearTime();
-};
-
 // private
 Date.prototype._orient = +1;
 
