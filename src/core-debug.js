@@ -410,8 +410,21 @@ Date.prototype.clearTime = function () {
 };
 
 /**
+ * Resets the time of this Date object to the current time ('now').
+ * @return {Date}    date
+ */
+Date.prototype.setTimeToNow = function (config) {
+	var n = Date.now();
+	this.setHours(n.getHours());
+	this.setMinutes(n.getMinutes());
+	this.setSeconds(n.getSeconds());
+	this.setMilliseconds(n.getMilliseconds());
+	return this;
+};
+
+/**
  * Determines whether or not this instance is in a leap year.
- * @return {Boolean} true if this instance is in a leap year, else false
+ * @return {Boolean} true if this instance is in a leap year, otherwise false.
  */
 Date.prototype.isLeapYear = function () { 
     var y = this.getFullYear(); 
@@ -420,7 +433,7 @@ Date.prototype.isLeapYear = function () {
 
 /**
  * Determines whether or not this instance is a weekday.
- * @return {Boolean} true if this instance is a weekday
+ * @return {Boolean} true if this instance is a weekday, otherwise false.
  */
 Date.prototype.isWeekday = function () { 
     return !(this.is().sat() || this.is().sun());
@@ -531,7 +544,6 @@ Date.prototype.getWeekOfYear = function (firstDayOfWeek) {
  * @return {Boolean} True if DST is in effect.
  */
 Date.prototype.isDST = function () {
-    console.log('isDST');
     /* TODO: not sure if this is portable ... get from Date.CultureInfo? */
     return this.toString().match(/(E|C|M|P)(S|D)T/)[2] == "D";
 };
