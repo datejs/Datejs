@@ -1,11 +1,12 @@
 /**
- * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
- * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
- * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
- * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
+ * @version: 1.0 Alpha-1
+ * @author: Coolite Inc. http://www.coolite.com/
+ * @date: 26-Nov-2007
+ * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
+ * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
+ * @website: http://www.datejs.com/
  */
-
+ 
 /**
  * Gets a date that is set to the current date and time. 
  * @return {Date}    The current date and time.
@@ -31,12 +32,12 @@ Date.prototype.clearTime = function () {
  * @return {Date}    date
  */
 Date.prototype.setTimeToNow = function (config) {
-	var n = Date.now();
-	this.setHours(n.getHours());
-	this.setMinutes(n.getMinutes());
-	this.setSeconds(n.getSeconds());
-	this.setMilliseconds(n.getMilliseconds());
-	return this;
+    var n = Date.now();
+    this.setHours(n.getHours());
+    this.setMinutes(n.getMinutes());
+    this.setSeconds(n.getSeconds());
+    this.setMilliseconds(n.getMilliseconds());
+    return this;
 };
 
 /** 
@@ -54,8 +55,7 @@ Date.today = function () {
  * @return {String}  The name of the day.
  */
 Date.getDayName = function (dayOfWeek, abbreviated) {
-	return (abbreviated && typeof abbreviated == "boolean") ? Date.CultureInfo.abbreviatedDayNames[dayOfWeek] :
-		Date.CultureInfo.dayNames[dayOfWeek];
+    return (abbreviated && typeof abbreviated == "boolean") ? Date.CultureInfo.abbreviatedDayNames[dayOfWeek] : Date.CultureInfo.dayNames[dayOfWeek];
 };
 
 /**
@@ -65,8 +65,7 @@ Date.getDayName = function (dayOfWeek, abbreviated) {
  * @return {String}  The name of the month.
  */
 Date.getMonthName = function (month, abbreviated) {
-	return (abbreviated && typeof abbreviated == "boolean") ? Date.CultureInfo.abbreviatedMonthNames[month] :
-		Date.CultureInfo.monthNames[month];
+    return (abbreviated && typeof abbreviated == "boolean") ? Date.CultureInfo.abbreviatedMonthNames[month] : Date.CultureInfo.monthNames[month];
 };
 
 /**
@@ -486,15 +485,15 @@ Date.prototype.moveToLastDayOfMonth = function () {
  * @return {Date}    date
  */
 Date.prototype.moveToNthOccurrence = function (dayOfWeek, occurrence) {
-	var shift = 0;
-	if (occurrence) {
-		if (occurrence > 0) {
-			shift = occurrence - 1;
-		} else if (occurrence == -1) {
-			return this.moveToLastDayOfMonth().moveToDayOfWeek(dayOfWeek, -1);
-		}
-	}
-	return this.moveToFirstDayOfMonth().addDays(-1).moveToDayOfWeek(dayOfWeek, +1).addWeeks(shift);
+    var shift = 0;
+    if (occurrence) {
+        if (occurrence > 0) {
+            shift = occurrence - 1;
+        } else if (occurrence == -1) {
+            return this.moveToLastDayOfMonth().moveToDayOfWeek(dayOfWeek, -1);
+        }
+    }
+    return this.moveToFirstDayOfMonth().addDays(-1).moveToDayOfWeek(dayOfWeek, +1).addWeeks(shift);
 };
 
 /**
@@ -598,6 +597,16 @@ Date.prototype.getUTCOffset = function () {
 };
 
 /**
+<<<<<<< .mine
+ * Returns the number of milliseconds between this date and date.
+ * @param {Date} Defaults to now
+ * @return {Number} The diff in milliseconds
+ */
+Date.prototype.getElapsed = function (date) {
+    return (date || Date.now()) - this;
+};
+
+/**
  * Gets the day name.
  * @param {Boolean}  true to return the abbreviated name of the day.
  * @return {String}  The name of the day.
@@ -612,7 +621,8 @@ Date.prototype.getDayName = function (abbreviated) {
  * @return {String}  The name of the month
  */
 Date.prototype.getMonthName = function (abbreviated) {
-    return Date.getMonthName(this.getMonth(), (abbreviated || false))};
+    return Date.getMonthName(this.getMonth(), (abbreviated || false));
+};
 
 // private
 Date.prototype._toString = Date.prototype.toString;

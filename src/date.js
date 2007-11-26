@@ -3,7 +3,7 @@
  * 
  * Individual date.js files have been compiled for each of the 150+ supported Cultures.
  * 
- * Example:
+ * Example
  * date.js       // English (United States)
  * date-en-US.js // English (United States)
  * date-de-DE.js // Deutsch (Deutschland)
@@ -13,7 +13,7 @@
 alert(
     "Please include a date.js file from the /build/ folder.\n\n" +
     "Individual date.js files have been compiled for each supported Culture.\n\n" + 
-    "Example:\n" + 
+    "Example\n" + 
     "    date.js       // English (United States)\n" + 
     "    date-en-US.js // English (United States)\n" + 
     "    date-de-DE.js // Deutsch (Deutschland)\n" + 

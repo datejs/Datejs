@@ -1,9 +1,10 @@
 /**
- * Version: 1.0 Alpha-1 
- * Build Date: 12-Nov-2007
- * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
- * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
- * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
+ * @version: 1.0 Alpha-1
+ * @author: Coolite Inc. http://www.coolite.com/
+ * @date: 26-Nov-2007
+ * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
+ * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
+ * @website: http://www.datejs.com/
  */
 
 /**
@@ -14,6 +15,15 @@
  
 // private
 Date.prototype._orient = +1;
+
+// private
+Date.prototype._nth = null;
+
+// private
+Date.prototype._is = false;
+
+// private
+Number.prototype._dateElement = "day";
 
 /** 
  * Moves the date to the next instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
@@ -51,12 +61,6 @@ Date.prototype.last = Date.prototype.prev = Date.prototype.previous = function (
     return this;
 };
 
-// private
-Date.prototype._nth = null;
-
-// private
-Date.prototype._is = false;
-    
 /** 
  * Performs a equality check when followed by either a month name or day name function.
  * Example
@@ -67,15 +71,12 @@ Date.today().is().march();
 Date.today().is().mar();
 </code></pre>
  *  
- * @return {bool}    true|false
+ * @return {Boolean}    true|false
  */
 Date.prototype.is = function () { 
     this._is = true; 
     return this; 
 }; 
-
-// private
-Number.prototype._dateElement = "day";
 
 /** 
  * Creates a new Date (Date.now()) and adds this (Number) to the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
@@ -92,10 +93,10 @@ n.months().fromNow();
  *  
  * @return {Date}    A new Date instance
  */
-Number.prototype.fromNow = function () {
+Number.prototype.fromNow = Number.prototype.after = function (date) {
     var c = {};
     c[this._dateElement] = this;
-    return Date.now().add(c);
+    return ((!date) ? Date.now() : date.clone()).add(c);
 };
 
 /** 
@@ -113,15 +114,15 @@ n.months().ago();
  *  
  * @return {Date}    A new Date instance
  */
-Number.prototype.ago = function () {
+Number.prototype.ago = Number.prototype.before = function (date) {
     var c = {};
     c[this._dateElement] = this * -1;
-    return Date.now().add(c);
+    return ((!date) ? Date.now() : date.clone()).add(c);
 };
 
 // Build dynamic date element, month name and day name functions.
 (function () {
-    var $D = Date.prototype, $N = Number.prototype;
+    var $D = Date.prototype, $N = Number.prototype, _isSecond = false;
 
     // Do NOT modify the following string tokens. These tokens are used to build dynamic functions.
     var dx = ("sunday monday tuesday wednesday thursday friday saturday").split(/\s/),
@@ -138,32 +139,55 @@ Number.prototype.ago = function () {
                 return this.getDay() == n; 
             }
             if (this._nth !== null) {
-				var ntemp = this._nth;
+                // If the .second() function was called earlier, remove the _orient 
+                // from the date, and then continue.
+                // The problem happens because 'second' can be used in two different context.
+                // 
+                // Example
+                //
+                //   Date.today().add(1).second();
+                //   Date.march().second().monday();
+                // 
+                // Things get crazy with the following...
+                //   Date.march().add(1).second().second().monday(); // but it works!!
+                //  
+                if (this._isSecond) {
+                    this.addSeconds(this._orient * -1);
+                }
+                // make sure we reset _isSecond
+                this._isSecond = false;
+
+                var ntemp = this._nth;
                 this._nth = null;
-				var temp = this.clone().moveToLastDayOfMonth();
-				this.moveToNthOccurrence(n, ntemp);
-				if(this > temp) {
-					throw new RangeError(Date.getDayName(n) + " does not occur " + ntemp + " times in the month of " + temp.getMonthName() + " " + temp.getFullYear() + ".");
-				}
+                var temp = this.clone().moveToLastDayOfMonth();
+                this.moveToNthOccurrence(n, ntemp);
+                if (this > temp) {
+                    throw new RangeError(Date.getDayName(n) + " does not occur " + ntemp + " times in the month of " + temp.getMonthName() + " " + temp.getFullYear() + ".");
+                }
                 return this;
             }			
             return this.moveToDayOfWeek(n, this._orient);
         };
     };
     
-	var sdf = function (n) {
+    var sdf = function (n) {
         return function () {
-			var t = Date.today(), shift = n - t.getDay();
-			if(n === 0 && Date.CultureInfo.firstDayOfWeek === 1 && t.getDay() !== 0) {
-				shift = shift + 7;
-			}
-			return t.addDays(shift);
+            var t = Date.today(), shift = n - t.getDay();
+            if (n === 0 && Date.CultureInfo.firstDayOfWeek === 1 && t.getDay() !== 0) {
+                shift = shift + 7;
+            }
+            return t.addDays(shift);
         };
     };
 	
     for (var i = 0 ; i < dx.length ; i++) {
-		Date[dx[i].toUpperCase()] = Date[dx[i].toUpperCase().substring(0, 3)] = i;
-		Date[dx[i]] = Date[dx[i].substring(0, 3)] = sdf(i);
+        // Create constant static Day Name variables. Example: Date.MONDAY or Date.MON
+        Date[dx[i].toUpperCase()] = Date[dx[i].toUpperCase().substring(0, 3)] = i;
+
+        // Create Day Name functions. Example: Date.monday() or Date.mon()
+        Date[dx[i]] = Date[dx[i].substring(0, 3)] = sdf(i);
+
+        // Cretae Day Name instance functions. Example: Date.today().next().monday()
         $D[dx[i]] = $D[dx[i].substring(0, 3)] = df(i);
     }
     
@@ -178,29 +202,40 @@ Number.prototype.ago = function () {
         };
     };
     
-	var smf = function (n) {
+    var smf = function (n) {
         return function () {
-			return Date.today().set({ month: n, day: 1 });
+            return Date.today().set({ month: n, day: 1 });
         };
     };
     
     for (var j = 0 ; j < mx.length ; j++) {
-		Date[mx[j].toUpperCase()] = Date[mx[j].toUpperCase().substring(0, 3)] = j;
-		Date[mx[j]] = Date[mx[j].substring(0, 3)] = smf(j);
+        // Create constant static Month Name variables. Example: Date.MARCH or Date.MAR
+        Date[mx[j].toUpperCase()] = Date[mx[j].toUpperCase().substring(0, 3)] = j;
+
+        // Create Month Name functions. Example: Date.march() or Date.mar()
+        Date[mx[j]] = Date[mx[j].substring(0, 3)] = smf(j);
+
+        // Cretae Month Name instance functions. Example: Date.today().next().march()
         $D[mx[j]] = $D[mx[j].substring(0, 3)] = mf(j);
     }
     
     // Create date element functions and plural date element functions used with Date (eg. day(), days(), months()).
-    var ef = function (j) { 
+    var ef = function (j) {
         return function () {
-            if (j.substring(j.length - 1) != "s") { 
+            // if the .second() function was called earlier, the _orient 
+            // has alread been added. Just return this and reset _isSecond.
+            if (this._isSecond) {
+                this._isSecond = false;
+                return this;
+            }
+            if (j.substring(j.length - 1) != "s") {
                 j += "s"; 
             }
-            return this["add" + j](this._orient); 
+            return this["add" + j](this._orient);
         };
     };
     
-    // Create date element functions and plural date element functions used with Number (eg. day(), days(), months()).
+    
     var nf = function (n) {
         return function () {
             this._dateElement = n;
@@ -210,22 +245,32 @@ Number.prototype.ago = function () {
     
     for (var k = 0 ; k < px.length ; k++) {
         de = px[k].toLowerCase();
+    
+        // Create date element functions and plural date element functions used with Date (eg. day(), days(), months()).
         $D[de] = $D[de + "s"] = ef(px[k]);
+        
+        // Create date element functions and plural date element functions used with Number (eg. day(), days(), months()).
         $N[de] = $N[de + "s"] = nf(de);
     }
 	
-	var nthfn = function (n) {
+    var nthfn = function (n) {
         return function (dayOfWeek) {
-			if (dayOfWeek || dayOfWeek === 0) {
-				return this.moveToNthOccurrence(dayOfWeek, n);
-			}
+            if (dayOfWeek || dayOfWeek === 0) {
+                return this.moveToNthOccurrence(dayOfWeek, n);
+            }
             this._nth = n;
+
+            // if the operator is 'second' add the _orient, then deal with it later...
+            if (n === 2 && (dayOfWeek === undefined || dayOfWeek === null)) {
+                this._isSecond = true;
+                return this.addSeconds(this._orient);
+            }
             return this;
         };
     };
-	
-	for (var l = 0 ; l < nth.length ; l++) {
-        $D[nth[l]] = (nth[l] == "final") ? nthfn(-1) : nthfn(l);
+
+    for (var l = 0 ; l < nth.length ; l++) {
+        $D[nth[l]] = (l === 0) ? nthfn(-1) : nthfn(l);
     }
 }());
 
@@ -242,7 +287,7 @@ Date.prototype.toJSONString = function () {
  * @return {String}  A string formatted as per the culture specific shortDatePattern
  */
 Date.prototype.toShortDateString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.shortDatePattern);
+    return this.toString(Date.CultureInfo.formatPatterns.shortDate);
 };
 
 /**
@@ -250,7 +295,7 @@ Date.prototype.toShortDateString = function () {
  * @return {String}  A string formatted as per the culture specific longDatePattern
  */
 Date.prototype.toLongDateString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.longDatePattern);
+    return this.toString(Date.CultureInfo.formatPatterns.longDate);
 };
 
 /**
@@ -258,7 +303,7 @@ Date.prototype.toLongDateString = function () {
  * @return {String}  A string formatted as per the culture specific shortTimePattern
  */
 Date.prototype.toShortTimeString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.shortTimePattern);
+    return this.toString(Date.CultureInfo.formatPatterns.shortTime);
 };
 
 /**
@@ -266,7 +311,7 @@ Date.prototype.toShortTimeString = function () {
  * @return {String}  A string formatted as per the culture specific longTimePattern
  */
 Date.prototype.toLongTimeString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.longTimePattern);
+    return this.toString(Date.CultureInfo.formatPatterns.longTime);
 };
 
 /**

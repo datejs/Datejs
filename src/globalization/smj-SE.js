@@ -1,9 +1,10 @@
 /**
- * Version: 1.0 Alpha-1 
- * Build Date: 13-Nov-2007
- * Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
- * License: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
- * Website: http://www.datejs.com/ or http://www.coolite.com/datejs/
+ * @version: 1.0 Alpha-1
+ * @author: Coolite Inc. http://www.coolite.com/
+ * @date: 26-Nov-2007
+ * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
+ * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
+ * @website: http://www.datejs.com/
  */
 Date.CultureInfo = {
 	/* Culture Name */
@@ -40,11 +41,10 @@ Date.CultureInfo = {
      "dd/MM/yyyy"        "dmy"
      "yyyy-MM-dd"        "ymd"
      </pre>
+     *
      * The correct dateElementOrder is required by the parser to
      * determine the expected order of the date elements in the
      * string being parsed.
-     * 
-     * NOTE: It is VERY important this value be correct for each Culture.
      */
     dateElementOrder: "ymd",
     
@@ -80,10 +80,9 @@ Date.CultureInfo = {
      * providing the correct regular expression pattern. 
      *
      * If you modify this file, please post your revised CultureInfo file
-     * to the Datejs Discussions located at
-     *     http://groups.google.com/group/date-js
+     * to the Datejs Forum located at http://www.datejs.com/forums/.
      *
-     * Please mark the subject with [CultureInfo]. Example:
+     * Please mark the subject of the post with [CultureInfo]. Example:
      *    Subject: [CultureInfo] Translated "da-DK" Danish(Denmark)
      * 
      * We will add the modified patterns to the master source files.
@@ -147,15 +146,15 @@ Date.CultureInfo = {
  ** Future Strings **
  ********************
  * 
- * The following list of strings are not currently being used, but 
- * may be incorporated later. We would appreciate any help translating
- * the strings below.
+ * The following list of strings may not be currently being used, but 
+ * may be incorporated into the Datejs library later. 
+ *
+ * We would appreciate any help translating the strings below.
  * 
  * If you modify this file, please post your revised CultureInfo file
- * to the Datejs Discussions located at
- *     http://groups.google.com/group/date-js
+ * to the Datejs Forum located at http://www.datejs.com/forums/.
  *
- * Please mark the subject with [CultureInfo]. Example:
+ * Please mark the subject of the post with [CultureInfo]. Example:
  *    Subject: [CultureInfo] Translated "da-DK" Danish(Denmark)
  *
  * English Name        Translated
@@ -183,4 +182,13 @@ Date.CultureInfo = {
  * repeat              repeat
  * times               times
  * per                 per
+ * min (abbrev minute) min
+ * morning             morning
+ * noon                noon
+ * night               night
+ * midnight            midnight
+ * mid-night           mid-night
+ * evening             evening
+ * final               final
+ * future              future
  */
