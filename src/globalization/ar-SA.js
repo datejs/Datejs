@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 26-Nov-2007
+ * @date: 28-Nov-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -15,8 +15,8 @@ Date.CultureInfo = {
     /* Day Name Strings */
     dayNames: ["الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة", "السبت"],
     abbreviatedDayNames: ["الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة", "السبت"],
-    shortestDayNames: ["أ", "ا", "ث", "أ", "خ", "ج", "س"],
-    firstLetterDayNames: ["أ", "ا", "ث", "أ", "خ", "ج", "س"],
+    shortestDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
+    firstLetterDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
     
     /* Month Name Strings */
     monthNames: ["محرم", "صفر", "ربيع الأول", "ربيع الثاني", "جمادى الأولى", "جمادى الثانية", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"],
@@ -104,7 +104,7 @@ Date.CultureInfo = {
         dec: /^ذو الحجة/i,
 
         sun: /^الاحد/i,
-        mon: /^ا(1)?/i,
+        mon: /^الاثنين/i,
         tue: /^الثلاثاء/i,
         wed: /^الاربعاء/i,
         thu: /^الخميس/i,

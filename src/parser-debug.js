@@ -614,7 +614,7 @@
                     mod = 7;
                     this.days = gap ? ((gap + (orient * mod)) % mod) : (orient * mod);
                 }
-                if (this.month) {
+                if (this.month || this.month === 0) {
                     this.unit = "month";
                     gap = (this.month - today.getMonth());
                     mod = 12;
@@ -639,7 +639,12 @@
                 return today.add(this);
             } else {
                 if (this.meridian && this.hour) {
-                    this.hour = (this.hour < 13 && this.meridian == "p") ? this.hour + 12 : this.hour;			
+                    if (this.meridian == "p" && this.hour < 12) {
+                        this.hour = this.hour + 12;
+                    } else if (this.meridian == "a" && this.hour == 12) {
+                        this.hour = 0;
+                    }
+                    //this.hour = (this.hour < 13 && this.meridian == "p") ? this.hour + 12 : this.hour;			
                 }
                 if (this.weekday && !this.day) {
 					this.day = Date[this.weekday]().getDate();

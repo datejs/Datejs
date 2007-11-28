@@ -1,16 +1,6 @@
 ﻿Date.Specification = new Specification({
   'Overview': {
     setup: function() { },
-    'Now': {
-      run: function() { this.date = Date.parse('Now') },
-      assert: function() { 
-        // clear milliseconds since there is a delay between parsing and testing
-        if(this.date != null)
-            return this.date.setMilliseconds(0) == ( Date.now() ).setMilliseconds(0) 
-        else
-            return false;
-        }
-    },
     'Today': {
       run: function() { this.date = Date.parse('Today'); },
       assert: function() { return Date.today().equals( this.date ) }

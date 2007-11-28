@@ -6,7 +6,39 @@
       this.baseline[1] = Date.today().set( { hour: 6, minute: 45 } );
       this.baseline[2] = Date.today().set( { hour: 22 } );
       this.baseline[3] = Date.today().set( { hour: 22, minute: 30 } );
+    }, 
+    '12 am': {
+      run: function() { },
+      assert: function() { return Date.today().equals(Date.parse("12 am")) }
     },
+    '12 AM': {
+      run: function() { },
+      assert: function() { return Date.today().equals(Date.parse("12 am")) }
+    }, 
+    '12 A': {
+      run: function() { },
+      assert: function() { return Date.today().equals(Date.parse("12 A")) }
+    }, 
+    '12A': {
+      run: function() { },
+      assert: function() { return Date.today().equals(Date.parse("12A")) }
+    },         
+    '12 pm': {
+      run: function() { },
+      assert: function() { return Date.today().add(12).hours().equals(Date.parse("12 pm")) }
+    }, 
+    '12 PM': {
+      run: function() { },
+      assert: function() { return Date.today().add(12).hours().equals(Date.parse("12 PM")) }
+    }, 
+    '12 P': {
+      run: function() { },
+      assert: function() { return Date.today().add(12).hours().equals(Date.parse("12 P")) }
+    }, 
+    '12P': {
+      run: function() { },
+      assert: function() { return Date.today().add(12).hours().equals(Date.parse("12P")) }
+    },                    
 
     '22:30': {
       run: function() { this.date = Date.parse('22:30') },

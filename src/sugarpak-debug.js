@@ -79,7 +79,7 @@ Date.prototype.is = function () {
 }; 
 
 /** 
- * Creates a new Date (Date.now()) and adds this (Number) to the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
+ * Creates a new Date() and adds this (Number) to the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
  * Example
 <pre><code>
 // Undeclared Numbers must be wrapped with parentheses. Requirment of JavaScript.
@@ -96,11 +96,11 @@ n.months().fromNow();
 Number.prototype.fromNow = Number.prototype.after = function (date) {
     var c = {};
     c[this._dateElement] = this;
-    return ((!date) ? Date.now() : date.clone()).add(c);
+    return ((!date) ? new Date() : date.clone()).add(c);
 };
 
 /** 
- * Creates a new Date (Date.now()) and subtract this (Number) from the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
+ * Creates a new Date() and subtract this (Number) from the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
  * Example
 <pre><code>
 // Undeclared Numbers must be wrapped with parentheses. Requirment of JavaScript.
@@ -117,7 +117,7 @@ n.months().ago();
 Number.prototype.ago = Number.prototype.before = function (date) {
     var c = {};
     c[this._dateElement] = this * -1;
-    return ((!date) ? Date.now() : date.clone()).add(c);
+    return ((!date) ? new Date() : date.clone()).add(c);
 };
 
 // Build dynamic date element, month name and day name functions.

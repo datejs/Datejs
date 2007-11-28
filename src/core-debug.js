@@ -6,14 +6,6 @@
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
  */
- 
-/**
- * Gets a date that is set to the current date and time. 
- * @return {Date}    The current date and time.
- */
-Date.now = function () {
-    return new Date();
-};
 
 /**
  * Resets the time of this Date object to 12:00 AM (00:00), which is the start of the day.
@@ -32,7 +24,7 @@ Date.prototype.clearTime = function () {
  * @return {Date}    date
  */
 Date.prototype.setTimeToNow = function (config) {
-    var n = Date.now();
+    var n = new Date();
     this.setHours(n.getHours());
     this.setMinutes(n.getMinutes());
     this.setSeconds(n.getSeconds());
@@ -45,7 +37,7 @@ Date.prototype.setTimeToNow = function (config) {
  * @return {Date}    The current date.
  */
 Date.today = function () {
-    return Date.now().clearTime();
+    return new Date().clearTime();
 };
 
 /**
@@ -282,6 +274,9 @@ Date.prototype.add = function (config) {
     if (x.hour || x.hours) { 
         this.addHours(x.hour || x.hours); 
     }
+    if (x.week || x.weeks) { 
+        this.addWeeks(x.week || x.weeks); 
+    }    
     if (x.month || x.months) { 
         this.addMonths(x.month || x.months); 
     }
@@ -597,13 +592,12 @@ Date.prototype.getUTCOffset = function () {
 };
 
 /**
-<<<<<<< .mine
  * Returns the number of milliseconds between this date and date.
  * @param {Date} Defaults to now
  * @return {Number} The diff in milliseconds
  */
 Date.prototype.getElapsed = function (date) {
-    return (date || Date.now()) - this;
+    return (date || new Date()) - this;
 };
 
 /**
