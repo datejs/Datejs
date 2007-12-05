@@ -276,15 +276,15 @@
         this.baseline = new Date(2004,6,1);
         
         this.today = Date.today();
-        this.now = Date.now();
+        this.now = new Date();
     },
     '1': {
-      run: function() { this.date =  Date.parse('1') },
-      assert: function() { return new Date(this.today.getFullYear(), this.today.getMonth(), 1).equals( this.date ) }
+      run: function() { },
+      assert: function() { return Date.today().set({day: 1}).equals(Date.parse('1')) }
     }, 
     '5': {
-      run: function() { this.date =  Date.parse('5') },
-      assert: function() { return new Date(this.today.getFullYear(), this.today.getMonth(), 5).equals( this.date ) }
+      run: function() { },
+      assert: function() { return Date.today().set({day: 5}).equals(Date.parse('5')) }
     }, 
     '12': {
       run: function() { this.date =  Date.parse('12') },

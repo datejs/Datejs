@@ -109,16 +109,15 @@ Date.getDaysInMonth = function (year, month) {
     return [31, (Date.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
 };
 
-Date.getTimezoneOffset = function (s, dst) {
-    return (dst || false) ? Date.CultureInfo.abbreviatedTimeZoneDST[s.toUpperCase()] :
-        Date.CultureInfo.abbreviatedTimeZoneStandard[s.toUpperCase()];
+Date.getTimezoneOffset = function (s) {
+    return Date.CultureInfo.timezones[s.toUpperCase()];
 };
 
-Date.getTimezoneAbbreviation = function (offset, dst) {
-    var n = (dst || false) ? Date.CultureInfo.abbreviatedTimeZoneDST : Date.CultureInfo.abbreviatedTimeZoneStandard, p;
-    for (p in n) { 
-        if (n[p] === offset) { 
-            return p; 
+Date.getTimezoneAbbreviation = function (offset) {
+    var n = Date.CultureInfo.timezones, p;
+    for (var i = 0; i < n.length; i++) {
+        if (n[i] === offset) {
+            return n[i];
         }
     }
     return null;
@@ -563,13 +562,12 @@ Date.prototype.isDST = function () {
  * @return {String} The abbreviated timezone name (e.g. "EST")
  */
 Date.prototype.getTimezone = function () {
-    return Date.getTimezoneAbbreviation(this.getUTCOffset, this.isDST());
+    return Date.getTimezoneAbbreviation(this.getUTCOffset);
 };
 
 Date.prototype.setTimezoneOffset = function (s) {
     var here = this.getTimezoneOffset(), there = Number(s) * -6 / 10;
-    this.addMinutes(there - here); 
-    return this;
+    return this.addMinutes(there - here); 
 };
 
 Date.prototype.setTimezone = function (s) { 

@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 28-Nov-2007
+ * @date: 4-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -113,22 +113,22 @@ Date.CultureInfo = {
 
         future: /^next/i,
         past: /^last|past|prev(ious)?/i,
-        add: /^(\+|after|from)/i,
-        subtract: /^(\-|before|ago)/i,
+        add: /^(\+|aft(er)?|from|hence)/i,
+        subtract: /^(\-|bef(ore)?|ago)/i,
         
-        yesterday: /^yesterday/i,
-        today: /^t(oday)?/i,
-        tomorrow: /^tomorrow/i,
+        yesterday: /^yes(terday)?/i,
+        today: /^t(od(ay)?)?/i,
+        tomorrow: /^tom(orrow)?/i,
         now: /^n(ow)?/i,
         
         millisecond: /^ms|milli(second)?s?/i,
         second: /^sec(ond)?s?/i,
-        minute: /^min(ute)?s?/i,
-        hour: /^h(ou)?rs?/i,
-        week: /^w(ee)?k/i,
-        month: /^m(o(nth)?s?)?/i,
-        day: /^d(ays?)?/i,
-        year: /^y((ea)?rs?)?/i,
+        minute: /^mn|min(ute)?s?/i,
+		hour: /^h(our)?s?/i,
+		week: /^w(eek)?s?/i,
+        month: /^m(onth)?s?/i,
+        day: /^d(ay)?s?/i,
+        year: /^y(ear)?s?/i,
 		
         shortMeridian: /^(a|p)/i,
         longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
@@ -137,9 +137,7 @@ Date.CultureInfo = {
         timeContext: /^\s*(\:|a|p)/i
     },
 
-    abbreviatedTimeZoneStandard: { GMT: "-000", EST: "-0400", CST: "-0500", MST: "-0600", PST: "-0700" },
-    abbreviatedTimeZoneDST: { GMT: "-000", EDT: "-0500", CDT: "-0600", MDT: "-0700", PDT: "-0800" }
-    
+    timezones: { GMT: "-000", EST: "-0400", EDT: "-0500", CST: "-0500", CDT: "-0600", MST: "-0600", MDT: "-0700", PST: "-0700", PDT: "-0800" },
 };
 
 /********************
@@ -167,6 +165,7 @@ Date.CultureInfo = {
  * daily               daily
  * weekly              weekly
  * bi-weekly           bi-weekly
+ * fortnight           fortnight
  * monthly             monthly
  * bi-monthly          bi-monthly
  * quarter             quarter
@@ -191,4 +190,8 @@ Date.CultureInfo = {
  * evening             evening
  * final               final
  * future              future
+ * spring              spring
+ * summer              summer
+ * fall                fall
+ * winter              winter
  */

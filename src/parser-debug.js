@@ -504,6 +504,7 @@
         },
         timezone: function (s) {
             return function () {
+                //var n = s.replace(/[^\d\+\-]/g, "");
                 var n = s.replace(/[^\d\+\-]/g, "");
                 if (n.length) { 
                     this.timezoneOffset = Number(n); 
@@ -595,65 +596,89 @@
                     x[i].call(this); 
                 }
             }
-
-            if (this.now) { 
+            
+            var today = Date.today();
+            
+            if (this.now && !this.unit && !this.operator) { 
                 return new Date(); 
+            } else if (this.now) {
+                today = new Date();
+            }
+            
+            var expression = !!(this.days && this.days !== null || this.orient || this.operator);
+            
+            var gap, mod, orient;
+            orient = ((this.orient == "past" || this.operator == "subtract") ? -1 : 1);
+
+            if (!expression && this.weekday && !this.day && !this.days) {
+                var temp = Date[this.weekday]();
+                this.day = temp.getDate();
+                if (temp.getMonth() !== today.getMonth()) {
+                    this.month = temp.getMonth();
+                }
+            }
+            
+            if (expression && this.weekday) {
+                this.unit = "day";
+                gap = (Date.getDayNumberFromName(this.weekday) - today.getDay());
+                mod = 7;
+                this.days = gap ? ((gap + (orient * mod)) % mod) : (orient * mod);
+            }
+            
+            if (this.month && this.unit == "day" && this.operator) {
+                this.value = (this.month + 1);
+                this.month = null;
+            }
+            
+            if (this.month && !this.day && this.value) {
+                today.set({ day: this.value * 1 });
+                this.day = this.value * 1;
             }
 
-            var today = Date.today(); 
-            var method = null;
-
-            var expression = !!(this.days != null || this.orient || this.operator);
-            if (expression) {
-                var gap, mod, orient;
-                orient = ((this.orient == "past" || this.operator == "subtract") ? -1 : 1);
-
-                if (this.weekday) {
-                    this.unit = "day";
-                    gap = (Date.getDayNumberFromName(this.weekday) - today.getDay());
-                    mod = 7;
-                    this.days = gap ? ((gap + (orient * mod)) % mod) : (orient * mod);
-                }
-                if (this.month || this.month === 0) {
-                    this.unit = "month";
-                    gap = (this.month - today.getMonth());
-                    mod = 12;
-                    this.months = gap ? ((gap + (orient * mod)) % mod) : (orient * mod);
-                    this.month = null;
-                }
-                if (!this.unit) { 
-                    this.unit = "day"; 
-                }
-                if (this[this.unit + "s"] == null || this.operator != null) {
-                    if (!this.value) { 
-                        this.value = 1;
-                    }
-
-                    if (this.unit == "week") { 
-                        this.unit = "day"; 
-                        this.value = this.value * 7; 
-                    }
-
-                    this[this.unit + "s"] = this.value * orient;
-                }
-                return today.add(this);
-            } else {
-                if (this.meridian && this.hour) {
-                    if (this.meridian == "p" && this.hour < 12) {
-                        this.hour = this.hour + 12;
-                    } else if (this.meridian == "a" && this.hour == 12) {
-                        this.hour = 0;
-                    }
-                    //this.hour = (this.hour < 13 && this.meridian == "p") ? this.hour + 12 : this.hour;			
-                }
-                if (this.weekday && !this.day) {
-					this.day = Date[this.weekday]().getDate();
-                }
-                if (this.month && !this.day) { 
-                    this.day = 1; 
-                }
-                return today.set(this);
+            if (expression && (this.month || this.month === 0)) {
+                this.unit = "month";
+                gap = (this.month - today.getMonth());
+                mod = 12;
+                this.months = gap ? ((gap + (orient * mod)) % mod) : (orient * mod);
+                this.month = null;
             }
+
+            if (!this.unit) { 
+                this.unit = "day"; 
+            }
+
+            if (!this.value && this.operator && this.operator !== null && this[this.unit + "s"] && this[this.unit + "s"] !== null) {
+                this[this.unit + "s"] = this[this.unit + "s"] + ((this.operator == "add") ? 1 : -1) + (this.value||0) * orient;
+            } else if (this[this.unit + "s"] == null || this.operator != null) {
+                if (!this.value) { 
+                    this.value = 1;
+                }
+                this[this.unit + "s"] = this.value * orient;
+            }
+
+            if (this.meridian && this.hour) {
+                if (this.meridian == "p" && this.hour < 12) {
+                    this.hour = this.hour + 12;
+                } else if (this.meridian == "a" && this.hour == 12) {
+                    this.hour = 0;
+                }
+            }
+            if (this.weekday && !this.day && !this.days) {
+                var temp = Date[this.weekday]();
+                this.day = temp.getDate();
+                if (temp.getMonth() !== today.getMonth()) {
+                    this.month = temp.getMonth();
+                }
+            }
+            if (this.month && !this.day) { 
+                this.day = 1; 
+            }
+            
+            if (!this.orient && !this.operator && this.unit == "week" && this.value && !this.day && !this.month) {
+                return Date.january().first().monday().addWeeks(this.value);
+            }
+            
+            return (expression) ? today.add(this) : today.set(this);
         }
     };
 
@@ -662,7 +687,7 @@
     g.datePartDelimiter = _.rtoken(/^([\s\-\.\,\/\x27]+)/); 
     g.timePartDelimiter = _.stoken(":");
     g.whiteSpace = _.rtoken(/^\s*/);
-    g.generalDelimiter = _.rtoken(/^(([\s\,]|at|on)+)/);
+    g.generalDelimiter = _.rtoken(/^(([\s\,]|@|at|on)+)/);
   
     var _C = {};
     g.ctoken = function (keys) {
@@ -700,7 +725,7 @@
     g.zzz = _.cache(_.process(g.ctoken2("timezone"), t.timezone));
     g.timeSuffix = _.each(_.ignore(g.whiteSpace), _.set([ g.tt, g.zzz ]));
     g.time = _.each(_.optional(_.ignore(_.stoken("T"))), g.hms, g.timeSuffix);
-	  
+    	  
     // days, months, years
     g.d = _.cache(_.process(_.each(_.rtoken(/^([0-2]\d|3[0-1]|\d)/), 
         _.optional(g.ctoken2("ordinalSuffix"))), t.day));
@@ -747,7 +772,7 @@
         }
     );  
     g.rday = _.process(g.ctoken("yesterday tomorrow today now"), t.rday);
-    g.unit = _.process(g.ctoken("minute hour day week month year"), 
+    g.unit = _.process(g.ctoken("second minute hour day week month year"), 
         function (s) { 
             return function () { 
                 this.unit = s; 
@@ -835,7 +860,9 @@
 
 	// check for these formats first
     g._formats = g.formats([
+        "yyyy-MM-ddTHH:mm:ssZ",
         "yyyy-MM-ddTHH:mm:ss",
+        "yyyy-MM-ddTHH:mm",
         "ddd, MMM dd, yyyy H:mm:ss tt",
         "ddd MMM d yyyy HH:mm:ss zzz",
         "d"
