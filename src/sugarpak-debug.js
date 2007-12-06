@@ -63,6 +63,23 @@
     };
 
     /** 
+     * Creates a new Date (Date.today()) and moves the date to the next instance of the date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Example
+    <pre><code>
+    Date.next().friday();
+    Date.next().fri();
+    Date.next().march();
+    Date.next().mar();
+    Date.next().week();
+    </code></pre>
+     * 
+     * @return {Date}    date
+     */    
+    $D.next = function () {
+        return Date.tod().next();
+    };
+
+    /** 
      * Moves the date to the previous instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
      * Example
     <pre><code>
@@ -79,6 +96,23 @@
         this._orient = -1;
         return this;
     };
+
+    /** 
+     * Creates a new Date (Date.today()) and moves the date to the previous instance of the date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Example
+    <pre><code>
+    Date.last().friday();
+    Date.last().fri();
+    Date.previous().march();
+    Date.prev().mar();
+    Date.last().week();
+    </code></pre>
+     *  
+     * @return {Date}    date
+     */
+    $D.last = $D.prev = $D.previous = function () {
+        return Date.tod().last();
+    };    
 
     /** 
      * Performs a equality check when followed by either a month name or day name function.
