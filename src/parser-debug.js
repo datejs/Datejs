@@ -465,6 +465,8 @@
 }());
 
 (function () {
+    var $D = Date, $P = $D.prototype, $C = $D.CultureInfo;
+
     var flattenAndCompact = function (ax) { 
         var rx = []; 
         for (var i = 0; i < ax.length; i++) {
@@ -479,9 +481,9 @@
         return rx;
     };
     
-    Date.Grammar = {};
+    $D.Grammar = {};
 	
-    Date.Translator = {
+    $D.Translator = {
         hour: function (s) { 
             return function () { 
                 this.hour = Number(s); 
@@ -521,14 +523,14 @@
         }, 
         month: function (s) {
             return function () {
-                this.month = ((s.length == 3) ? Date.getMonthNumberFromName(s) : (Number(s) - 1));
+                this.month = ((s.length == 3) ? $D.getMonthNumberFromName(s) : (Number(s) - 1));
             };
         },
         year: function (s) {
             return function () {
                 var n = Number(s);
                 this.year = ((s.length > 2) ? n : 
-                    (n + (((n + 2000) < Date.CultureInfo.twoDigitYearMax) ? 2000 : 1900))); 
+                    (n + (((n + 2000) < $C.twoDigitYearMax) ? 2000 : 1900))); 
             };
         },
         rday: function (s) { 
@@ -571,7 +573,7 @@
 
             this.hour = (this.meridian == "p" && this.hour < 13) ? this.hour + 12 : this.hour;
 
-            if (this.day > Date.getDaysInMonth(this.year, this.month)) {
+            if (this.day > $D.getDaysInMonth(this.year, this.month)) {
                 throw new RangeError(this.day + " is not a valid value for days.");
             }
 
@@ -597,7 +599,7 @@
                 }
             }
             
-            var today = Date.today();
+            var today = $D.tod();
             
             if (this.now && !this.unit && !this.operator) { 
                 return new Date(); 
@@ -620,7 +622,7 @@
             
             if (expression && this.weekday) {
                 this.unit = "day";
-                gap = (Date.getDayNumberFromName(this.weekday) - today.getDay());
+                gap = ($D.getDayNumberFromName(this.weekday) - today.getDay());
                 mod = 7;
                 this.days = gap ? ((gap + (orient * mod)) % mod) : (orient * mod);
             }
@@ -675,14 +677,14 @@
             }
             
             if (!this.orient && !this.operator && this.unit == "week" && this.value && !this.day && !this.month) {
-                return Date.january().first().monday().addWeeks(this.value);
+                return $D.january().first().monday().addWeeks(this.value);
             }
             
             return (expression) ? today.add(this) : today.set(this);
         }
     };
 
-    var _ = Date.Parsing.Operators, g = Date.Grammar, t = Date.Translator, _fn;
+    var _ = $D.Parsing.Operators, g = $D.Grammar, t = $D.Translator, _fn;
 
     g.datePartDelimiter = _.rtoken(/^([\s\-\.\,\/\x27]+)/); 
     g.timePartDelimiter = _.stoken(":");
@@ -693,7 +695,7 @@
     g.ctoken = function (keys) {
         var fn = _C[keys];
         if (! fn) {
-            var c = Date.CultureInfo.regexPatterns;
+            var c = $C.regexPatterns;
             var kx = keys.split(/\s+/), px = []; 
             for (var i = 0; i < kx.length ; i++) {
                 px.push(_.replace(_.rtoken(c[kx[i]]), kx[i]));
@@ -703,7 +705,7 @@
         return fn;
     };
     g.ctoken2 = function (key) { 
-        return _.rtoken(Date.CultureInfo.regexPatterns[key]);
+        return _.rtoken($C.regexPatterns[key]);
     };
 
     // hour, minute, second, meridian, timezone
@@ -796,7 +798,7 @@
     g.ymd = _fn(g.ddd, g.year, g.month, g.day);
     g.dmy = _fn(g.ddd, g.day, g.month, g.year);
     g.date = function (s) { 
-        return ((g[Date.CultureInfo.dateElementOrder] || g.mdy).call(this, s));
+        return ((g[$C.dateElementOrder] || g.mdy).call(this, s));
     }; 
 
     // parsing date format specifiers - ex: "h:m:s tt" 
@@ -811,7 +813,7 @@
         if (g[fmt]) { 
             return g[fmt]; 
         } else { 
-            throw Date.Parsing.Exception(fmt); 
+            throw $D.Parsing.Exception(fmt); 
         }
     }
     ),
@@ -865,6 +867,15 @@
         "yyyy-MM-ddTHH:mm",
         "ddd, MMM dd, yyyy H:mm:ss tt",
         "ddd MMM d yyyy HH:mm:ss zzz",
+        "MMddyyyy",
+        "ddMMyyyy",
+        "Mddyyyy",
+        "ddMyyyy",
+        "Mdyyyy",
+        "dMyyyy",
+        "yyyy",
+        "Mdyy",
+        "dMyy",
         "d"
     ]);
 
@@ -883,160 +894,159 @@
         } catch (e) {}
         return g._start.call({}, s);
     };
-		
-}());
+	
+	$D._parse = $D.parse;
+
+    /**
+     * Converts the specified string value into its JavaScript Date equivalent using CultureInfo specific format information.
+     * 
+     * Example
+    <pre><code>
+    ///////////
+    // Dates //
+    ///////////
+
+    // 15-Oct-2004
+    var d1 = Date.parse("10/15/2004");
+
+    // 15-Oct-2004
+    var d1 = Date.parse("15-Oct-2004");
+
+    // 15-Oct-2004
+    var d1 = Date.parse("2004.10.15");
+
+    //Fri Oct 15, 2004
+    var d1 = Date.parse("Fri Oct 15, 2004");
+
+    ///////////
+    // Times //
+    ///////////
+
+    // Today at 10 PM.
+    var d1 = Date.parse("10 PM");
+
+    // Today at 10:30 PM.
+    var d1 = Date.parse("10:30 P.M.");
+
+    // Today at 6 AM.
+    var d1 = Date.parse("06am");
+
+    /////////////////////
+    // Dates and Times //
+    /////////////////////
+
+    // 8-July-2004 @ 10:30 PM
+    var d1 = Date.parse("July 8th, 2004, 10:30 PM");
+
+    // 1-July-2004 @ 10:30 PM
+    var d1 = Date.parse("2004-07-01T22:30:00");
+
+    ////////////////////
+    // Relative Dates //
+    ////////////////////
+
+    // Returns today's date. The string "today" is culture specific.
+    var d1 = Date.parse("today");
+
+    // Returns yesterday's date. The string "yesterday" is culture specific.
+    var d1 = Date.parse("yesterday");
+
+    // Returns the date of the next thursday.
+    var d1 = Date.parse("Next thursday");
+
+    // Returns the date of the most previous monday.
+    var d1 = Date.parse("last monday");
+
+    // Returns today's day + one year.
+    var d1 = Date.parse("next year");
+
+    ///////////////
+    // Date Math //
+    ///////////////
+
+    // Today + 2 days
+    var d1 = Date.parse("t+2");
+
+    // Today + 2 days
+    var d1 = Date.parse("today + 2 days");
+
+    // Today + 3 months
+    var d1 = Date.parse("t+3m");
+
+    // Today - 1 year
+    var d1 = Date.parse("today - 1 year");
+
+    // Today - 1 year
+    var d1 = Date.parse("t-1y"); 
 
 
-Date._parse = Date.parse;
+    /////////////////////////////
+    // Partial Dates and Times //
+    /////////////////////////////
 
-/**
- * Converts the specified string value into its JavaScript Date equivalent using CultureInfo specific format information.
- * 
- * Example
-<pre><code>
-///////////
-// Dates //
-///////////
+    // July 15th of this year.
+    var d1 = Date.parse("July 15");
 
-// 15-Oct-2004
-var d1 = Date.parse("10/15/2004");
+    // 15th day of current day and year.
+    var d1 = Date.parse("15");
 
-// 15-Oct-2004
-var d1 = Date.parse("15-Oct-2004");
-
-// 15-Oct-2004
-var d1 = Date.parse("2004.10.15");
-
-//Fri Oct 15, 2004
-var d1 = Date.parse("Fri Oct 15, 2004");
-
-///////////
-// Times //
-///////////
-
-// Today at 10 PM.
-var d1 = Date.parse("10 PM");
-
-// Today at 10:30 PM.
-var d1 = Date.parse("10:30 P.M.");
-
-// Today at 6 AM.
-var d1 = Date.parse("06am");
-
-/////////////////////
-// Dates and Times //
-/////////////////////
-
-// 8-July-2004 @ 10:30 PM
-var d1 = Date.parse("July 8th, 2004, 10:30 PM");
-
-// 1-July-2004 @ 10:30 PM
-var d1 = Date.parse("2004-07-01T22:30:00");
-
-////////////////////
-// Relative Dates //
-////////////////////
-
-// Returns today's date. The string "today" is culture specific.
-var d1 = Date.parse("today");
-
-// Returns yesterday's date. The string "yesterday" is culture specific.
-var d1 = Date.parse("yesterday");
-
-// Returns the date of the next thursday.
-var d1 = Date.parse("Next thursday");
-
-// Returns the date of the most previous monday.
-var d1 = Date.parse("last monday");
-
-// Returns today's day + one year.
-var d1 = Date.parse("next year");
-
-///////////////
-// Date Math //
-///////////////
-
-// Today + 2 days
-var d1 = Date.parse("t+2");
-
-// Today + 2 days
-var d1 = Date.parse("today + 2 days");
-
-// Today + 3 months
-var d1 = Date.parse("t+3m");
-
-// Today - 1 year
-var d1 = Date.parse("today - 1 year");
-
-// Today - 1 year
-var d1 = Date.parse("t-1y"); 
-
-
-/////////////////////////////
-// Partial Dates and Times //
-/////////////////////////////
-
-// July 15th of this year.
-var d1 = Date.parse("July 15");
-
-// 15th day of current day and year.
-var d1 = Date.parse("15");
-
-// July 1st of current year at 10pm.
-var d1 = Date.parse("7/1 10pm");
-</code></pre>
- *
- * @param {String}   The string value to convert into a Date object [Required]
- * @return {Date}    A Date object or null if the string cannot be converted into a Date.
- */
-Date.parse = function (s) {
-    var r = null; 
-    if (!s) { 
-        return null; 
-    }
-    try { 
-        r = Date.Grammar.start.call({}, s); 
-    } catch (e) { 
-        return null; 
-    }
-    return ((r[1].length === 0) ? r[0] : null);
-};
-
-Date.getParseFunction = function (fx) {
-    var fn = Date.Grammar.formats(fx);
-    return function (s) {
-        var r = null;
+    // July 1st of current year at 10pm.
+    var d1 = Date.parse("7/1 10pm");
+    </code></pre>
+     *
+     * @param {String}   The string value to convert into a Date object [Required]
+     * @return {Date}    A Date object or null if the string cannot be converted into a Date.
+     */
+    $D.parse = function (s) {
+        var r = null; 
+        if (!s) { 
+            return null; 
+        }
         try { 
-            r = fn.call({}, s); 
+            r = $D.Grammar.start.call({}, s); 
         } catch (e) { 
             return null; 
         }
         return ((r[1].length === 0) ? r[0] : null);
     };
-};
-/**
- * Converts the specified string value into its JavaScript Date equivalent using the specified format {String} or formats {Array} and the CultureInfo specific format information.
- * The format of the string value must match one of the supplied formats exactly.
- * 
- * Example
-<pre><code>
-// 15-Oct-2004
-var d1 = Date.parseExact("10/15/2004", "M/d/yyyy");
 
-// 15-Oct-2004
-var d1 = Date.parse("15-Oct-2004", "M-ddd-yyyy");
+    $D.getParseFunction = function (fx) {
+        var fn = $D.Grammar.formats(fx);
+        return function (s) {
+            var r = null;
+            try { 
+                r = fn.call({}, s); 
+            } catch (e) { 
+                return null; 
+            }
+            return ((r[1].length === 0) ? r[0] : null);
+        };
+    };
+    
+    /**
+     * Converts the specified string value into its JavaScript Date equivalent using the specified format {String} or formats {Array} and the CultureInfo specific format information.
+     * The format of the string value must match one of the supplied formats exactly.
+     * 
+     * Example
+    <pre><code>
+    // 15-Oct-2004
+    var d1 = Date.parseExact("10/15/2004", "M/d/yyyy");
 
-// 15-Oct-2004
-var d1 = Date.parse("2004.10.15", "yyyy.MM.dd");
+    // 15-Oct-2004
+    var d1 = Date.parse("15-Oct-2004", "M-ddd-yyyy");
 
-// Multiple formats
-var d1 = Date.parseExact("10/15/2004", [ "M/d/yyyy" , "MMMM d, yyyy" ]);
-</code></pre>
- *
- * @param {String}   The string value to convert into a Date object [Required].
- * @param {Object}   The expected format {String} or an array of expected formats {Array} of the date string [Required].
- * @return {Date}    A Date object or null if the string cannot be converted into a Date.
- */
-Date.parseExact = function (s, fx) { 
-    return Date.getParseFunction(fx)(s); 
-};
+    // 15-Oct-2004
+    var d1 = Date.parse("2004.10.15", "yyyy.MM.dd");
+
+    // Multiple formats
+    var d1 = Date.parseExact("10/15/2004", [ "M/d/yyyy" , "MMMM d, yyyy" ]);
+    </code></pre>
+     *
+     * @param {String}   The string value to convert into a Date object [Required].
+     * @param {Object}   The expected format {String} or an array of expected formats {Array} of the date string [Required].
+     * @return {Date}    A Date object or null if the string cannot be converted into a Date.
+     */
+    $D.parseExact = function (s, fx) { 
+        return $D.getParseFunction(fx)(s); 
+    };	
+}());

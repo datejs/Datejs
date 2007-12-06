@@ -646,7 +646,7 @@
 
       '1997 : "YYYY"': {
         run: function() { },
-        assert: function() { return Date.today().set({year: 1997}).equals( Date.parse('1997') ) }
+        assert: function() { return Date.today().set({year: 1997, day: 1}).equals( Date.parse('1997') ) }
       },
       '1997-07 : "YYYY-MM"': {
         run: function() { },

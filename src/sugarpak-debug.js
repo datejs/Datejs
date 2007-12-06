@@ -12,119 +12,155 @@
  ** SugarPak - Domain Specific Language -  Syntactical Sugar **
  **************************************************************
  */
- 
-// private
-Date.prototype._orient = +1;
 
-// private
-Date.prototype._nth = null;
-
-// private
-Date.prototype._is = false;
-
-// private
-Number.prototype._dateElement = "day";
-
-/** 
- * Moves the date to the next instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
- * Example
-<pre><code>
-Date.today().next().friday();
-Date.today().next().fri();
-Date.today().next().march();
-Date.today().next().mar();
-Date.today().next().week();
-</code></pre>
- * 
- * @return {Date}    this
- */
-Date.prototype.next = function () {
-    this._orient = +1;
-    return this;
-};
-
-/** 
- * Moves the date to the previous instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
- * Example
-<pre><code>
-Date.today().last().friday();
-Date.today().last().fri();
-Date.today().last().march();
-Date.today().last().mar();
-Date.today().last().week();
-</code></pre>
- *  
- * @return {Date}    this
- */
-Date.prototype.last = Date.prototype.prev = Date.prototype.previous = function () {
-    this._orient = -1;
-    return this;
-};
-
-/** 
- * Performs a equality check when followed by either a month name or day name function.
- * Example
-<pre><code>
-Date.today().is().friday(); // true|false
-Date.today().is().fri();
-Date.today().is().march();
-Date.today().is().mar();
-</code></pre>
- *  
- * @return {Boolean}    true|false
- */
-Date.prototype.is = function () { 
-    this._is = true; 
-    return this; 
-}; 
-
-/** 
- * Creates a new Date() and adds this (Number) to the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
- * Example
-<pre><code>
-// Undeclared Numbers must be wrapped with parentheses. Requirment of JavaScript.
-(3).days().fromNow();
-(6).months().fromNow();
-
-// Declared Number variables do not require parentheses. 
-var n = 6;
-n.months().fromNow();
-</code></pre>
- *  
- * @return {Date}    A new Date instance
- */
-Number.prototype.fromNow = Number.prototype.after = function (date) {
-    var c = {};
-    c[this._dateElement] = this;
-    return ((!date) ? new Date() : date.clone()).add(c);
-};
-
-/** 
- * Creates a new Date() and subtract this (Number) from the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
- * Example
-<pre><code>
-// Undeclared Numbers must be wrapped with parentheses. Requirment of JavaScript.
-(3).days().ago();
-(6).months().ago();
-
-// Declared Number variables do not require parentheses. 
-var n = 6;
-n.months().ago();
-</code></pre>
- *  
- * @return {Date}    A new Date instance
- */
-Number.prototype.ago = Number.prototype.before = function (date) {
-    var c = {};
-    c[this._dateElement] = this * -1;
-    return ((!date) ? new Date() : date.clone()).add(c);
-};
-
-// Build dynamic date element, month name and day name functions.
 (function () {
-    var $D = Date.prototype, $N = Number.prototype, _isSecond = false;
+    var $D = Date, $P = $D.prototype, $C = $D.CultureInfo, $N = Number.prototype, _isSecond = false;
+
+    /** 
+     * Returns yesterdays date. The time is set to the start of the day (00:00 or 12:00 AM).
+     * @return {Date}    date.
+     */
+    $D.yesterday = $D.yes = function () {
+        return $D.tod().addDays(-1);
+    };
+
+    /** 
+     * Returns tomorrows date. The time is set to the start of the day (00:00 or 12:00 AM).
+     * @return {Date}    date.
+     */
+    $D.tomorrow = $D.tom = function () {
+        return $D.tod().addDays(1);
+    };
+     
+    // private
+    $P._orient = +1;
+
+    // private
+    $P._nth = null;
+
+    // private
+    $P._is = false;
+
+    // private
+    $N._dateElement = "day";
+
+    /** 
+     * Moves the date to the next instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Example
+    <pre><code>
+    Date.today().next().friday();
+    Date.today().next().fri();
+    Date.today().next().march();
+    Date.today().next().mar();
+    Date.today().next().week();
+    </code></pre>
+     * 
+     * @return {Date}    date
+     */
+    $P.next = function () {
+        this._orient = +1;
+        return this;
+    };
+
+    /** 
+     * Moves the date to the previous instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Example
+    <pre><code>
+    Date.today().last().friday();
+    Date.today().last().fri();
+    Date.today().last().march();
+    Date.today().last().mar();
+    Date.today().last().week();
+    </code></pre>
+     *  
+     * @return {Date}    date
+     */
+    $P.last = $P.prev = $P.previous = function () {
+        this._orient = -1;
+        return this;
+    };
+
+    /** 
+     * Performs a equality check when followed by either a month name or day name function.
+     * Example
+    <pre><code>
+    Date.today().is().friday(); // true|false
+    Date.today().is().fri();
+    Date.today().is().march();
+    Date.today().is().mar();
+    </code></pre>
+     *  
+     * @return {Boolean}    true|false
+     */
+    $P.is = function () { 
+        this._is = true; 
+        return this; 
+    };
+
+    /** 
+     * Sets the Time of the current Date instance. A string "6:15 pm" or config object {hour:18, minute:15} are accepted.
+     * Example
+    <pre><code>
+    // Set time to 6:15pm with a String
+    Date.today().at("6:15pm");
+
+    // Set time to 6:15pm with a config object
+    Date.today().at({hour:18, minute:15});
+    </code></pre>
+     *  
+     * @return {Date}    date
+     */
+    $P.at = function (time) {
+        if (typeof time === "string") {
+            return $D.parse(this.toShortDateString() + " " + time);
+        }
+        return this.set(time);
+    }; 
+
+    /** 
+     * Creates a new Date() and adds this (Number) to the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
+     * Example
+    <pre><code>
+    // Undeclared Numbers must be wrapped with parentheses. Requirment of JavaScript.
+    (3).days().fromNow();
+    (6).months().fromNow();
+
+    // Declared Number variables do not require parentheses. 
+    var n = 6;
+    n.months().fromNow();
+    </code></pre>
+     *  
+     * @return {Date}    A new Date instance
+     */
+    $N.fromNow = $N.after = function (date) {
+        var c = {};
+        c[this._dateElement] = this;
+        return ((!date) ? new Date() : date.clone()).add(c);
+    };
+
+    /** 
+     * Creates a new Date() and subtract this (Number) from the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
+     * Example
+    <pre><code>
+    // Undeclared Numbers must be wrapped with parentheses. Requirment of JavaScript.
+    (3).days().ago();
+    (6).months().ago();
+
+    // Declared Number variables do not require parentheses. 
+    var n = 6;
+    n.months().ago();
+    </code></pre>
+     *  
+     * @return {Date}    A new Date instance
+     */
+    $N.ago = $N.before = function (date) {
+        var c = {};
+        c[this._dateElement] = this * -1;
+        return ((!date) ? new Date() : date.clone()).add(c);
+    };
 
     // Do NOT modify the following string tokens. These tokens are used to build dynamic functions.
+    // All culture-specific strings can be found in the CultureInfo files. See /trunk/src/globalization/.
     var dx = ("sunday monday tuesday wednesday thursday friday saturday").split(/\s/),
         mx = ("january february march april may june july august september october november december").split(/\s/),
         px = ("Millisecond Second Minute Hour Day Week Month Year").split(/\s/),
@@ -162,7 +198,7 @@ Number.prototype.ago = Number.prototype.before = function (date) {
                 var temp = this.clone().moveToLastDayOfMonth();
                 this.moveToNthOccurrence(n, ntemp);
                 if (this > temp) {
-                    throw new RangeError(Date.getDayName(n) + " does not occur " + ntemp + " times in the month of " + temp.getMonthName() + " " + temp.getFullYear() + ".");
+                    throw new RangeError($D.getDayName(n) + " does not occur " + ntemp + " times in the month of " + temp.getMonthName() + " " + temp.getFullYear() + ".");
                 }
                 return this;
             }			
@@ -172,8 +208,8 @@ Number.prototype.ago = Number.prototype.before = function (date) {
     
     var sdf = function (n) {
         return function () {
-            var t = Date.today(), shift = n - t.getDay();
-            if (n === 0 && Date.CultureInfo.firstDayOfWeek === 1 && t.getDay() !== 0) {
+            var t = $D.tod(), shift = n - t.getDay();
+            if (n === 0 && $C.firstDayOfWeek === 1 && t.getDay() !== 0) {
                 shift = shift + 7;
             }
             return t.addDays(shift);
@@ -188,7 +224,7 @@ Number.prototype.ago = Number.prototype.before = function (date) {
         Date[dx[i]] = Date[dx[i].substring(0, 3)] = sdf(i);
 
         // Cretae Day Name instance functions. Example: Date.today().next().monday()
-        $D[dx[i]] = $D[dx[i].substring(0, 3)] = df(i);
+        $P[dx[i]] = $P[dx[i].substring(0, 3)] = df(i);
     }
     
     // Create month name functions and abbreviated month name functions (eg. january(), march(), mar()).
@@ -204,7 +240,7 @@ Number.prototype.ago = Number.prototype.before = function (date) {
     
     var smf = function (n) {
         return function () {
-            return Date.today().set({ month: n, day: 1 });
+            return $D.tod().set({ month: n, day: 1 });
         };
     };
     
@@ -216,7 +252,7 @@ Number.prototype.ago = Number.prototype.before = function (date) {
         Date[mx[j]] = Date[mx[j].substring(0, 3)] = smf(j);
 
         // Cretae Month Name instance functions. Example: Date.today().next().march()
-        $D[mx[j]] = $D[mx[j].substring(0, 3)] = mf(j);
+        $P[mx[j]] = $P[mx[j].substring(0, 3)] = mf(j);
     }
     
     // Create date element functions and plural date element functions used with Date (eg. day(), days(), months()).
@@ -247,7 +283,7 @@ Number.prototype.ago = Number.prototype.before = function (date) {
         de = px[k].toLowerCase();
     
         // Create date element functions and plural date element functions used with Date (eg. day(), days(), months()).
-        $D[de] = $D[de + "s"] = ef(px[k]);
+        $P[de] = $P[de + "s"] = ef(px[k]);
         
         // Create date element functions and plural date element functions used with Number (eg. day(), days(), months()).
         $N[de] = $N[de + "s"] = nf(de);
@@ -270,67 +306,67 @@ Number.prototype.ago = Number.prototype.before = function (date) {
     };
 
     for (var l = 0 ; l < nth.length ; l++) {
-        $D[nth[l]] = (l === 0) ? nthfn(-1) : nthfn(l);
+        $P[nth[l]] = (l === 0) ? nthfn(-1) : nthfn(l);
     }
+    
+    /**
+     * Converts the current date instance into a JSON string value.
+     * @return {String}  JSON string of date
+     */
+    $P.toJSONString = function () {
+        return this.toString("yyyy-MM-ddThh:mm:ssZ");
+    };
+
+    /**
+     * Converts the current date instance to a string using the culture specific shortDatePattern.
+     * @return {String}  A string formatted as per the culture specific shortDatePattern
+     */
+    $P.toShortDateString = function () {
+        return this.toString($C.formatPatterns.shortDate);
+    };
+
+    /**
+     * Converts the current date instance to a string using the culture specific longDatePattern.
+     * @return {String}  A string formatted as per the culture specific longDatePattern
+     */
+    $P.toLongDateString = function () {
+        return this.toString($C.formatPatterns.longDate);
+    };
+
+    /**
+     * Converts the current date instance to a string using the culture specific shortTimePattern.
+     * @return {String}  A string formatted as per the culture specific shortTimePattern
+     */
+    $P.toShortTimeString = function () {
+        return this.toString($C.formatPatterns.shortTime);
+    };
+
+    /**
+     * Converts the current date instance to a string using the culture specific longTimePattern.
+     * @return {String}  A string formatted as per the culture specific longTimePattern
+     */
+    $P.toLongTimeString = function () {
+        return this.toString($C.formatPatterns.longTime);
+    };
+
+    /**
+     * Get the ordinal suffix of the current day.
+     * @return {String}  "st, "nd", "rd" or "th"
+     */
+    $P.getOrdinal = function () {
+        switch (this.getDate()) {
+        case 1: 
+        case 21: 
+        case 31: 
+            return "st";
+        case 2: 
+        case 22: 
+            return "nd";
+        case 3: 
+        case 23: 
+            return "rd";
+        default: 
+            return "th";
+        }
+    };    
 }());
-
-/**
- * Converts the current date instance into a JSON string value.
- * @return {String}  JSON string of date
- */
-Date.prototype.toJSONString = function () {
-    return this.toString("yyyy-MM-ddThh:mm:ssZ");
-};
-
-/**
- * Converts the current date instance to a string using the culture specific shortDatePattern.
- * @return {String}  A string formatted as per the culture specific shortDatePattern
- */
-Date.prototype.toShortDateString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.shortDate);
-};
-
-/**
- * Converts the current date instance to a string using the culture specific longDatePattern.
- * @return {String}  A string formatted as per the culture specific longDatePattern
- */
-Date.prototype.toLongDateString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.longDate);
-};
-
-/**
- * Converts the current date instance to a string using the culture specific shortTimePattern.
- * @return {String}  A string formatted as per the culture specific shortTimePattern
- */
-Date.prototype.toShortTimeString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.shortTime);
-};
-
-/**
- * Converts the current date instance to a string using the culture specific longTimePattern.
- * @return {String}  A string formatted as per the culture specific longTimePattern
- */
-Date.prototype.toLongTimeString = function () {
-    return this.toString(Date.CultureInfo.formatPatterns.longTime);
-};
-
-/**
- * Get the ordinal suffix of the current day.
- * @return {String}  "st, "nd", "rd" or "th"
- */
-Date.prototype.getOrdinal = function () {
-    switch (this.getDate()) {
-    case 1: 
-    case 21: 
-    case 31: 
-        return "st";
-    case 2: 
-    case 22: 
-        return "nd";
-    case 3: 
-    case 23: 
-        return "rd";
-    default: 
-        return "th";
-    }
-};

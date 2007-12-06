@@ -373,7 +373,7 @@
        assert: function() { return this.baseline2.equals( this.date ) }
      }
    },
-   'Numeric Dates [COMING SOON]': {
+   'Numeric Dates': {
     setup: function() {
         this.baseline = new Date(2004,6,1);
         this.baseline2 = new Date(2004,6,15);

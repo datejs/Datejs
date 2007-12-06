@@ -140,9 +140,9 @@
       run: function() { },
       assert: function() { return Date.today().set({hour: 17}).equals(Date.parse('17:00')) }
     },
-    '0800 : not really sure what this should return? year 800?': {
+    '0800 : not really sure what this should return? Currently returns year 800.': {
       run: function() { },
-      assert: function() { return Date.today().set({year: 800}).equals(Date.parse('0800')) }
+      assert: function() { return Date.today().set({year: 800, day: 1}).equals(Date.parse('0800')) }
     }, 
    '17 april 85': {
       run: function() { },
@@ -151,7 +151,11 @@
     '1979-05-27 05:00': {
       run: function() { },
       assert: function() { return new Date(1979,4,27,5,0,0).equals(Date.parse('1979-05-27 05:00')) }
-    }             
+    },
+    'January 5 at 7pm': {
+      run: function() { },
+      assert: function() { return Date.january().set({day: 5, hour: 19}).equals(Date.parse('January 5 at 7pm')) }
+    }              
   },
 'Failures': {
     setup: function() { 
@@ -237,10 +241,6 @@
    'oct 06': {
       run: function() { },
       assert: function() { return Date.october().set({year: 2006}).equals(Date.parse('oct 06')) }
-    },
-    'January 5 at 7pm': {
-      run: function() { },
-      assert: function() { return Date.january().set({day: 5, hour: 19}).equals(Date.parse('January 5 at 7pm')) }
     }
  }       
 });
