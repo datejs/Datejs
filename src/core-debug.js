@@ -12,9 +12,13 @@
     
     /**
      * Resets the time of this Date object to 12:00 AM (00:00), which is the start of the day.
+     * @param {Boolean}  .clone() this date instance before clearing Time
      * @return {Date}    date
      */
-    $P.clearTime = function () {
+    $P.clearTime = function (clone) {
+        if (clone) {
+            return this.clone().clearTime();
+        }
         this.setHours(0);
         this.setMinutes(0);
         this.setSeconds(0);
@@ -95,7 +99,7 @@
 
     /**
      * Determines if the current date instance is within a LeapYear.
-     * @param {Number}   The year (0-9999).
+     * @param {Number}   The year.
      * @return {Boolean} true if date is within a LeapYear, otherwise false.
      */
     $D.isLeapYear = function (year) { 
@@ -104,7 +108,7 @@
 
     /**
      * Gets the number of days in the month, given a year and month value. Automatically corrects for LeapYear.
-     * @param {Number}   The year (0-9999).
+     * @param {Number}   The year.
      * @param {Number}   The month (0-11).
      * @return {Number}  The number of days in the month.
      */
@@ -356,12 +360,12 @@
     };
 
     /**
-     * Validates the number is within an acceptable range for years [0-9999].
+     * Validates the number is within an acceptable range for years.
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateYear = function (n) {
-        return $D._validate(n, 1, 9999, "seconds");
+        return $D._validate(n, 1, 9999, "years");
     };
 
     /**

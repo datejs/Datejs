@@ -1,12 +1,13 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 5-Dec-2007
+ * @date: 14-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
  */
-(function(){var $D=Date,$P=$D.prototype,$C=$D.CultureInfo;$P.clearTime=function(){this.setHours(0);this.setMinutes(0);this.setSeconds(0);this.setMilliseconds(0);return this;};$P.setTimeToNow=function(config){var n=new Date();this.setHours(n.getHours());this.setMinutes(n.getMinutes());this.setSeconds(n.getSeconds());this.setMilliseconds(n.getMilliseconds());return this;};$D.today=$D.tod=function(){return new Date().clearTime();};$D.getDayName=function(dayOfWeek,abbreviated){return(abbreviated&&typeof abbreviated=="boolean")?$C.abbreviatedDayNames[dayOfWeek]:$C.dayNames[dayOfWeek];};$D.getMonthName=function(month,abbreviated){return(abbreviated&&typeof abbreviated=="boolean")?$C.abbreviatedMonthNames[month]:$C.monthNames[month];};$D.getMonthNumberFromName=function(name){var n=$C.monthNames,m=$C.abbreviatedMonthNames,s=name.toLowerCase();for(var i=0;i<n.length;i++){if(n[i].toLowerCase()==s||m[i].toLowerCase()==s){return i;}}
+(function(){var $D=Date,$P=$D.prototype,$C=$D.CultureInfo;$P.clearTime=function(clone){if(clone){return this.clone().clearTime();}
+this.setHours(0);this.setMinutes(0);this.setSeconds(0);this.setMilliseconds(0);return this;};$P.setTimeToNow=function(config){var n=new Date();this.setHours(n.getHours());this.setMinutes(n.getMinutes());this.setSeconds(n.getSeconds());this.setMilliseconds(n.getMilliseconds());return this;};$D.today=$D.tod=function(){return new Date().clearTime();};$D.getDayName=function(dayOfWeek,abbreviated){return(abbreviated&&typeof abbreviated=="boolean")?$C.abbreviatedDayNames[dayOfWeek]:$C.dayNames[dayOfWeek];};$D.getMonthName=function(month,abbreviated){return(abbreviated&&typeof abbreviated=="boolean")?$C.abbreviatedMonthNames[month]:$C.monthNames[month];};$D.getMonthNumberFromName=function(name){var n=$C.monthNames,m=$C.abbreviatedMonthNames,s=name.toLowerCase();for(var i=0;i<n.length;i++){if(n[i].toLowerCase()==s||m[i].toLowerCase()==s){return i;}}
 return-1;};$D.getDayNumberFromName=function(name){var n=$C.dayNames,m=$C.abbreviatedDayNames,o=$C.shortestDayNames,s=name.toLowerCase();for(var i=0;i<n.length;i++){if(n[i].toLowerCase()==s||m[i].toLowerCase()==s){return i;}}
 return-1;};$D.isLeapYear=function(year){return(((year%4===0)&&(year%100!==0))||(year%400===0));};$D.getDaysInMonth=function(year,month){return[31,($D.isLeapYear(year)?29:28),31,30,31,30,31,31,30,31,30,31][month];};$D.getTimezoneOffset=function(s){return $C.timezones[s.toUpperCase()];};$D.getTimezoneAbbreviation=function(offset){var n=$C.timezones,p;for(var i=0;i<n.length;i++){if(n[i]===offset){return n[i];}}
 return null;};$P.clone=function(){return new Date(this.getTime());};$P.compareTo=function(date){if(isNaN(this)){throw new Error(this);}
@@ -20,7 +21,7 @@ if(x.month||x.months){this.addMonths(x.month||x.months);}
 if(x.year||x.years){this.addYears(x.year||x.years);}
 if(x.day||x.days){this.addDays(x.day||x.days);}
 return this;};$D._validate=function(value,min,max,name){if(typeof value!="number"){throw new TypeError(value+" is not a Number.");}else if(value<min||value>max){throw new RangeError(value+" is not a valid value for "+name+".");}
-return true;};$D.validateMillisecond=function(n){return $D._validate(n,0,999,"milliseconds");};$D.validateSecond=function(n){return $D._validate(n,0,59,"seconds");};$D.validateMinute=function(n){return $D._validate(n,0,59,"minutes");};$D.validateHour=function(n){return $D._validate(n,0,23,"hours");};$D.validateDay=function(n,year,month){return $D._validate(n,1,$D.getDaysInMonth(year,month),"days");};$D.validateMonth=function(n){return $D._validate(n,0,11,"months");};$D.validateYear=function(n){return $D._validate(n,1,9999,"seconds");};$P.set=function(config){var x=config;if(!x.millisecond&&x.millisecond!==0){x.millisecond=-1;}
+return true;};$D.validateMillisecond=function(n){return $D._validate(n,0,999,"milliseconds");};$D.validateSecond=function(n){return $D._validate(n,0,59,"seconds");};$D.validateMinute=function(n){return $D._validate(n,0,59,"minutes");};$D.validateHour=function(n){return $D._validate(n,0,23,"hours");};$D.validateDay=function(n,year,month){return $D._validate(n,1,$D.getDaysInMonth(year,month),"days");};$D.validateMonth=function(n){return $D._validate(n,0,11,"months");};$D.validateYear=function(n){return $D._validate(n,1,9999,"years");};$P.set=function(config){var x=config;if(!x.millisecond&&x.millisecond!==0){x.millisecond=-1;}
 if(!x.second&&x.second!==0){x.second=-1;}
 if(!x.minute&&x.minute!==0){x.minute=-1;}
 if(!x.hour&&x.hour!==0){x.hour=-1;}

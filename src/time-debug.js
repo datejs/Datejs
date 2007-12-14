@@ -36,56 +36,60 @@ var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
     }
 
     if (arguments.length == 4) { 
-        this.days = days; 
-        this.hours = hours; 
-        this.minutes = minutes; 
-        this.seconds = seconds; 
+        this.setDays(days); 
+        this.setHours(hours); 
+        this.setMinutes(minutes); 
+        this.setSeconds(seconds); 
     } else if (arguments.length == 5) { 
-        this.days = days; 
-        this.hours = hours; 
-        this.minutes = minutes; 
-        this.seconds = seconds; 
-        this.milliseconds = milliseconds; 
+        this.setDays(days); 
+        this.setHours(hours); 
+        this.setMinutes(minutes); 
+        this.setSeconds(seconds); 
+        this.setMilliseconds(milliseconds); 
     } else if (arguments.length == 1 && typeof days == "number") {
         var orient = (days < 0) ? -1 : +1;
-        this.milliseconds = Math.abs(days);
+        this.setMilliseconds(Math.abs(days));
         
-        this.days = Math.floor(this.milliseconds / 86400000) * orient;
-        this.milliseconds = this.milliseconds % 86400000;
+        this.setDays(Math.floor(this.getMilliseconds() / 86400000) * orient);
+        this.setMilliseconds(this.getMilliseconds() % 86400000);
 
-        this.hours = Math.floor(this.milliseconds / 3600000) * orient;
-        this.milliseconds = this.milliseconds % 3600000;
+        this.setHours(Math.floor(this.getMilliseconds() / 3600000) * orient);
+        this.setMilliseconds(this.getMilliseconds() % 3600000);
 
-        this.minutes = Math.floor(this.milliseconds / 60000) * orient;
-        this.milliseconds = this.milliseconds % 60000;
+        this.setMinutes(Math.floor(this.getMilliseconds() / 60000) * orient);
+        this.setMilliseconds(this.getMilliseconds() % 60000);
 
-        this.seconds = Math.floor(this.milliseconds / 1000) * orient;
-        this.milliseconds = this.milliseconds % 1000;
+        this.setSeconds(Math.floor(this.getMilliseconds() / 1000) * orient);
+        this.setMilliseconds(this.getMilliseconds() % 1000);
 
-        this.milliseconds = this.milliseconds * orient;
+        this.setMilliseconds(this.getMilliseconds() * orient);
     }
 
-    this.compare = function (timeSpan) {
-        var t1 = new Date(1970, 1, 1, this.hours, this.minutes, this.seconds), t2;
-        if (timeSpan === null) { 
+    this.compareTo = function (time) {
+        var t1 = new Date(1970, 1, 1, this.getHours(), this.getMinutes(), this.getSeconds()), t2;
+        if (time === null) { 
             t2 = new Date(1970, 1, 1, 0, 0, 0); 
         }
-        else { 
-            t2 = new Date(1970, 1, 1, timeSpan.hours(), timeSpan.minutes(), timeSpan.seconds());
+        else {
+            t2 = new Date(1970, 1, 1, time.getHours(), time.getMinutes(), time.getSeconds());
         }
         return (t1 > t2) ? 1 : (t1 < t2) ? -1 : 0;
     };
 
-    this.add = function (timeSpan) { 
-        return (timeSpan === null) ? this : this.addSeconds(timeSpan.getTotalMilliseconds() / 1000); 
+    this.equals = function (time) {
+        return (this.compareTo(time) === 0);
+    };    
+
+    this.add = function (time) { 
+        return (time === null) ? this : this.addSeconds(time.getTotalMilliseconds() / 1000); 
     };
 
-    this.subtract = function (timeSpan) { 
-        return (timeSpan === null) ? this : this.addSeconds(-timeSpan.getTotalMilliseconds() / 1000); 
+    this.subtract = function (time) { 
+        return (time === null) ? this : this.addSeconds(-time.getTotalMilliseconds() / 1000); 
     };
 
     this.getTotalMilliseconds = function () {
-        return (this.days * 86400000) + (this.hours * 3600000) + (this.minutes * 60000) + (this.seconds * 1000); 
+        return (this.getDays() * 86400000) + (this.getHours() * 3600000) + (this.getMinutes() * 60000) + (this.getSeconds() * 1000); 
     };
     
     this.addDays = function (n) { 
@@ -109,20 +113,20 @@ var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
     };
 
     this.get12HourHour = function () {
-        return ((this.hours % 12) ? this.hours : 12); 
+        return (this.getHours() > 12) ? this.getHours() - 12 : (this.getHours() === 0) ? 12 : this.getHours();
     };
 
     this.getDesignator = function () { 
-        return (this.hours < 12) ? Date.CultureInfo.amDesignator : Date.CultureInfo.pmDesignator;
+        return (this.getHours() < 12) ? Date.CultureInfo.amDesignator : Date.CultureInfo.pmDesignator;
     };
 
     this.toString = function (format) {
         this._toString = function () {
-            if (this.days !== null && this.days > 0) {
-                return this.days + "." + this.hours + ":" + this.p(this.minutes) + ":" + this.p(this.seconds);
+            if (this.getDays() !== null && this.getDays() > 0) {
+                return this.getDays() + "." + this.getHours() + ":" + this.p(this.getMinutes()) + ":" + this.p(this.getSeconds());
             }
             else { 
-                return this.hours + ":" + this.p(this.minutes) + ":" + this.p(this.seconds);
+                return this.getHours() + ":" + this.p(this.getMinutes()) + ":" + this.p(this.getSeconds());
             }
         };
         
@@ -130,41 +134,49 @@ var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
             return (s.toString().length < 2) ? "0" + s : s;
         };
         
-        var self = this;
+        var me = this;
         
-        return format ? format.replace(/d|dd|HH|H|hh|h|mm|m|ss|s|tt|t/g, 
+        return format ? format.replace(/dd?|HH?|hh?|mm?|ss?|tt?/g, 
         function (format) {
             switch (format) {
             case "d":	
-                return self.days();
+                return me.getDays();
             case "dd":	
-                return this.p(self.days());
+                return me.p(me.getDays());
             case "H":	
-                return self.hours();
+                return me.getHours();
             case "HH":	
-                return this.p(self.hours());
+                return me.p(me.getHours());
             case "h":	
-                return self.get12HourHour();
+                return me.get12HourHour();
             case "hh":	
-                return this.p(self.get12HourHour());
+                return me.p(me.get12HourHour());
             case "m":	
-                return self.minutes();
+                return me.getMinutes();
             case "mm":	
-                return this.p(self.minutes());
+                return me.p(me.getMinutes());
             case "s":	
-                return self.seconds();
+                return me.getSeconds();
             case "ss":	
-                return this.p(self.seconds());
+                return me.p(me.getSeconds());
             case "t":	
-                return ((this.hours < 12) ? Date.CultureInfo.amDesignator : Date.CultureInfo.pmDesignator).substring(0, 1);
+                return ((me.getHours() < 12) ? Date.CultureInfo.amDesignator : Date.CultureInfo.pmDesignator).substring(0, 1);
             case "tt":	
-                return (this.hours < 12) ? Date.CultureInfo.amDesignator : Date.CultureInfo.pmDesignator;
+                return (me.getHours() < 12) ? Date.CultureInfo.amDesignator : Date.CultureInfo.pmDesignator;
             }
         }
         ) : this._toString();
     };
     return this;
 };    
+
+/**
+ * Gets the time of day for this date instances. 
+ * @return {TimeSpan} TimeSpan
+ */
+Date.prototype.getTimeOfDay = function () {
+    return new TimeSpan(0, this.getHours(), this.getMinutes(), this.getSeconds(), this.getMilliseconds());
+};
 
 /* 
  * TimePeriod(startDate, endDate);
@@ -196,11 +208,11 @@ var TimePeriod = function (years, months, days, hours, minutes, seconds, millise
     if (arguments.length == 7) { 
         this.years = years;
         this.months = months;
-        this.days = days;
-        this.hours = hours; 
-        this.minutes = minutes; 
-        this.seconds = seconds; 
-        this.milliseconds = milliseconds;
+        this.setDays(days);
+        this.setHours(hours); 
+        this.setMinutes(minutes); 
+        this.setSeconds(seconds); 
+        this.setMilliseconds(milliseconds);
     } else if (arguments.length == 2 && arguments[0] instanceof Date && arguments[1] instanceof Date) {
         // startDate and endDate as arguments
     
@@ -247,11 +259,11 @@ var TimePeriod = function (years, months, days, hours, minutes, seconds, millise
         if (diff !== 0) {
             var ts = new TimeSpan(diff);
             
-            this.days = ts.getDays();
-            this.hours = ts.getHours();
-            this.minutes = ts.getMinutes();
-            this.seconds = ts.getSeconds();
-            this.milliseconds = ts.getMilliseconds();
+            this.setDays(ts.getDays());
+            this.setHours(ts.getHours());
+            this.setMinutes(ts.getMinutes());
+            this.setSeconds(ts.getSeconds());
+            this.setMilliseconds(ts.getMilliseconds());
         }
     }
     return this;

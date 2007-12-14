@@ -1002,6 +1002,9 @@
         if (!s) { 
             return null; 
         }
+        if (s instanceof Date) {
+            return s;
+        }
         try { 
             r = $D.Grammar.start.call({}, s); 
         } catch (e) { 

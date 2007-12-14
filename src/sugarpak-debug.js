@@ -145,10 +145,7 @@
      * @return {Date}    date
      */
     $P.at = function (time) {
-        if (typeof time === "string") {
-            return $D.parse(this.toShortDateString() + " " + time);
-        }
-        return this.set(time);
+        return (typeof time === "string") ? $D.parse(this.toShortDateString() + " " + time) : this.set(time);
     }; 
 
     /** 
