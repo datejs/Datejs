@@ -15,10 +15,7 @@
      * @param {Boolean}  .clone() this date instance before clearing Time
      * @return {Date}    date
      */
-    $P.clearTime = function (clone) {
-        if (clone) {
-            return this.clone().clearTime();
-        }
+    $P.clearTime = function () {
         this.setHours(0);
         this.setMinutes(0);
         this.setSeconds(0);
@@ -30,7 +27,7 @@
      * Resets the time of this Date object to the current time ('now').
      * @return {Date}    date
      */
-    $P.setTimeToNow = function (config) {
+    $P.setTimeToNow = function () {
         var n = new Date();
         this.setHours(n.getHours());
         this.setMinutes(n.getMinutes());
