@@ -152,9 +152,9 @@
       run: function() { },
       assert: function() { return new Date(1979,4,27,5,0,0).equals(Date.parse('1979-05-27 05:00')) }
     },
-    'January 5 at 7pm': {
+    'January 5 @ 7pm': {
       run: function() { },
-      assert: function() { return Date.january().set({day: 5, hour: 19}).equals(Date.parse('January 5 at 7pm')) }
+      assert: function() { return Date.january().set({day: 5, hour: 19}).equals(Date.parse('January 5 @ 7pm')) }
     }              
   },
 'Failures': {

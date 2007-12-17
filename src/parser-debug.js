@@ -634,7 +634,9 @@
             
             if (this.month && !this.day && this.value) {
                 today.set({ day: this.value * 1 });
-                this.day = this.value * 1;
+                if (!expression) {
+                    this.day = this.value * 1;
+                }
             }
 
             if (expression && (this.month || this.month === 0)) {
@@ -679,7 +681,6 @@
             if (!this.orient && !this.operator && this.unit == "week" && this.value && !this.day && !this.month) {
                 return $D.january().first().monday().addWeeks(this.value);
             }
-            
             return (expression) ? today.add(this) : today.set(this);
         }
     };
@@ -689,7 +690,7 @@
     g.datePartDelimiter = _.rtoken(/^([\s\-\.\,\/\x27]+)/); 
     g.timePartDelimiter = _.stoken(":");
     g.whiteSpace = _.rtoken(/^\s*/);
-    g.generalDelimiter = _.rtoken(/^(([\s\,]|@|at|on)+)/);
+    g.generalDelimiter = _.rtoken(/^(([\s\,]|at|@|on)+)/);
   
     var _C = {};
     g.ctoken = function (keys) {
