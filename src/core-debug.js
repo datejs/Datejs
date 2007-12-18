@@ -566,7 +566,7 @@
      * @return {String} The abbreviated timezone name (e.g. "EST")
      */
     $P.getTimezone = function () {
-        return $D.getTimezoneAbbreviation(this.getUTCOffset);
+        return $D.getTimezoneAbbreviation(this.getUTCOffset());
     };
 
     $P.setTimezoneOffset = function (s) {
