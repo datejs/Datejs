@@ -420,7 +420,7 @@
         if (x.year != -1 && $D.validateYear(x.year)) {
             this.addYears(x.year - this.getFullYear()); 
         }
-        
+
 	    /* day has to go last because you can't validate the day without first knowing the month */
         if (x.day != -1 && $D.validateDay(x.day, this.getFullYear(), this.getMonth())) {
             this.addDays(x.day - this.getDate()); 

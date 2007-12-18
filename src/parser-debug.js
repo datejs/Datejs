@@ -654,7 +654,7 @@
             if (!this.value && this.operator && this.operator !== null && this[this.unit + "s"] && this[this.unit + "s"] !== null) {
                 this[this.unit + "s"] = this[this.unit + "s"] + ((this.operator == "add") ? 1 : -1) + (this.value||0) * orient;
             } else if (this[this.unit + "s"] == null || this.operator != null) {
-                if (!this.value) { 
+                if (!this.value) {
                     this.value = 1;
                 }
                 this[this.unit + "s"] = this.value * orient;
@@ -667,6 +667,7 @@
                     this.hour = 0;
                 }
             }
+            
             if (this.weekday && !this.day && !this.days) {
                 var temp = Date[this.weekday]();
                 this.day = temp.getDate();
@@ -674,6 +675,7 @@
                     this.month = temp.getMonth();
                 }
             }
+            
             if (this.month && !this.day) { 
                 this.day = 1; 
             }
@@ -681,6 +683,11 @@
             if (!this.orient && !this.operator && this.unit == "week" && this.value && !this.day && !this.month) {
                 return $D.january().first().monday().addWeeks(this.value);
             }
+
+            if (!expression && this.timezone && this.day && this.days) {
+                this.day = this.days;
+            }
+            
             return (expression) ? today.add(this) : today.set(this);
         }
     };
@@ -723,8 +730,8 @@
     // _.min(1, _.set([ g.H, g.m, g.s ], g._t));
     g.t = _.cache(_.process(g.ctoken2("shortMeridian"), t.meridian));
     g.tt = _.cache(_.process(g.ctoken2("longMeridian"), t.meridian));
-    g.z = _.cache(_.process(_.rtoken(/^(\+|\-)?\s*\d\d\d\d?/), t.timezone));
-    g.zz = _.cache(_.process(_.rtoken(/^(\+|\-)\s*\d\d\d\d/), t.timezone));
+    g.z = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d:\d\d)/), t.timezone));
+    g.zz = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d:\d\d)/), t.timezone));
     g.zzz = _.cache(_.process(g.ctoken2("timezone"), t.timezone));
     g.timeSuffix = _.each(_.ignore(g.whiteSpace), _.set([ g.tt, g.zzz ]));
     g.time = _.each(_.optional(_.ignore(_.stoken("T"))), g.hms, g.timeSuffix);
