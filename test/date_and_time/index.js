@@ -5,19 +5,19 @@
       this.d[0] = new Date(2004,6,8,22,30,0,0);
       this.d[1] = this.d[0].clone().setTimezoneOffset('-0400');
     },
-    'July 8th, 2004, 10:30 PM : Standard': {
+    'July 8th, 2004, 10:30 PM': {
       run: function() { this.date = Date.parse('July 8th, 2004, 10:30 PM') },
       assert: function() { return this.d[0].compareTo( this.date ) == 0 }
     },
-    '2004.07.08 22:30 : Numeric': {
+    '2004.07.08 22:30': {
       run: function() { this.date = Date.parse('2004.07.08 22:30') },
       assert: function() { return this.d[0].compareTo( this.date ) == 0 }
     },
-    '10:30pm 08-July-2004 : Time First': {
+    '10:30pm 08-July-2004': {
       run: function() { this.date = Date.parse('10:30pm 08-July-2004') },
       assert: function() { return this.d[0].compareTo( this.date ) == 0 }
     },
-    'Thu Jul 8 2004 22:30:00 GMT-0400 : Native JavaScript .toString()': {
+    'Thu Jul 8 2004 22:30:00 GMT-0400': {
       run: function() { this.date = Date.parse('Thu Jul 8 2004 22:30:00 GMT-0400') },
       assert: function() { return this.d[1].equals( this.date ) }      
     }
@@ -663,21 +663,38 @@
         run: function() { },
         assert: function() { return new Date(1997,6,16,19,20,0).equals( Date.parse('1997-07-16T19:20') ) }
       },
+      '1997-07-16T19:20 : "YYYY-MM-DDThh:mm" : .parseExact': {
+        run: function() { },
+        assert: function() { return new Date(1997,6,16,19,20,0).equals( Date.parseExact('1997-07-16T19:20',"yyyy-MM-ddTHH:mm") ) }
+      },      
       '1997-07-16T19:20:15 : "YYYY-MM-DDThh:mm:ss"': {
         run: function() { },
         assert: function() { return new Date(1997,6,16,19,20,15).equals( Date.parse('1997-07-16T19:20:15') ) }
       },
+      '1997-07-16T19:20:15 : "YYYY-MM-DDThh:mm:ss" : .parseExact': {
+        run: function() { },
+        assert: function() { return new Date(1997,6,16,19,20,15).equals( Date.parseExact('1997-07-16T19:20:15', "yyyy-MM-ddTHH:mm:ss") ) }
+      },
+
       '1997-07-16T19:20+01:00 : "YYYY-MM-DDThh:mmTZD"': {
         run: function() { },
         assert: function() { return new Date(1997,6,16,19,20,0).setTimezoneOffset('+0100').equals( Date.parse('1997-07-16T19:20+01:00') ) }
       },
+      '1997-07-16T19:20+01:00 : "YYYY-MM-DDThh:mmTZD" : parseExact': {
+        run: function() { },
+        assert: function() { return new Date(1997,6,16,19,20,0).setTimezoneOffset('+0100').equals( Date.parseExact('1997-07-16T19:20+01:00', "yyyy-MM-ddTHH:mmz") ) }
+      },
        '1997-07-16T19:20:30+01:00 : "YYYY-MM-DDThh:mm:ssTZD"': {
         run: function() { },
-        assert: function() { return new Date(1997,6,16,7,20,0).equals( Date.parse('1997-07-16T19:20:30+01:00') ) }
+        assert: function() { return new Date(1997,6,16,19,20,30).setTimezoneOffset('+0100').equals( Date.parse('1997-07-16T19:20:30+01:00') ) }
+      },
+       '1997-07-16T19:20:30+01:00 : "YYYY-MM-DDThh:mm:ssTZD" : parseExact': {
+        run: function() { },
+        assert: function() { return new Date(1997,6,16,19,20,30).setTimezoneOffset('+0100').equals( Date.parseExact('1997-07-16T19:20:30+01:00', "yyyy-MM-ddTHH:mm:ssz") ) }
       },
        '1997-07-16T19:20:30.45+01:00 : "YYYY-MM-DDThh:mm:ss.sTZD"': {
         run: function() { },
-        assert: function() { return new Date(1997,6,16,7,20,0).equals( Date.parse('1997-07-16T19:20:30.45+01:00') ) }
+        assert: function() { return new Date(1997,6,16,19,20,30,45).setTimezoneOffset('+0100').equals( Date.parse('1997-07-16T19:20:30.45+01:00') ) }
       }    
   },
 

@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 26-Nov-2007
+ * @date: 20-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -138,14 +138,14 @@
     /**
      * Compares this instance to a Date object and return an number indication of their relative values.  
      * @param {Date}     Date object to compare [Required]
-     * @return {Number}  1 = this is greaterthan date. -1 = this is lessthan date. 0 = values are equal
+     * @return {Number}  -1 = this is lessthan date. 0 = values are equal. 1 = this is greaterthan date.
      */
     $P.compareTo = function (date) {
         if (isNaN(this)) { 
             throw new Error(this); 
         }
         if (date instanceof Date && !isNaN(date)) {
-            return (this > date) ? 1 : (this < date) ? -1 : 0;
+            return (this < date) ? -1 : (this > date) ? 1 : 0;
         } else { 
             throw new TypeError(date); 
         }
@@ -436,15 +436,6 @@
     };
 
     /**
-     * Determines whether or not this instance is in a leap year.
-     * @return {Boolean} true if this instance is in a leap year, otherwise false.
-     */
-    $P.isLeapYear = function () { 
-        var y = this.getFullYear(); 
-        return (((y % 4 === 0) && (y % 100 !== 0)) || (y % 400 === 0)); 
-    };
-
-    /**
      * Determines whether or not this instance is a weekday.
      * @return {Boolean} true if this instance is a weekday, otherwise false.
      */
@@ -553,15 +544,6 @@
     };
 
     /**
-     * Determine whether Daylight Saving Time (DST) is in effect
-     * @return {Boolean} True if DST is in effect.
-     */
-    $P.isDST = function () {
-        /* TODO: not sure if this is portable ... get from Date.CultureInfo? */
-        return this.toString().match(/(E|C|M|P)(S|D)T/)[2] == "D";
-    };
-
-    /**
      * Get the timezone abbreviation of the current date.
      * @return {String} The abbreviated timezone name (e.g. "EST")
      */
@@ -629,29 +611,29 @@
     <pre>
     Format  Description                                                                  Example
     ------  ---------------------------------------------------------------------------  -----------------------
-     s      The seconds of the minute between 1-59.                                      "1" to "59"
-     ss     The seconds of the minute with leading zero if required.                     "01" to "59"
+     s      The seconds of the minute between 0-59.                                      "0" to "59"
+     ss     The seconds of the minute with leading zero if required.                     "00" to "59"
      
-     m      The minute of the hour between 0-59.                                         "1"  or "59"
-     mm     The minute of the hour with leading zero if required.                        "01" or "59"
+     m      The minute of the hour between 0-59.                                         "0"  or "59"
+     mm     The minute of the hour with leading zero if required.                        "00" or "59"
      
      h      The hour of the day between 1-12.                                            "1"  to "12"
      hh     The hour of the day with leading zero if required.                           "01" to "12"
      
-     H      The hour of the day between 1-23.                                            "1"  to "23"
-     HH     The hour of the day with leading zero if required.                           "01" to "23"
+     H      The hour of the day between 0-23.                                            "0"  to "23"
+     HH     The hour of the day with leading zero if required.                           "00" to "23"
      
      d      The day of the month between 1 and 31.                                       "1"  to "31"
      dd     The day of the month with leading zero if required.                          "01" to "31"
-     ddd    Abbreviated day name. $C.abbreviatedDayNames.                  "Mon" to "Sun" 
-     dddd   The full day name. $C.dayNames.                                "Monday" to "Sunday"
+     ddd    Abbreviated day name. $C.abbreviatedDayNames.                                "Mon" to "Sun" 
+     dddd   The full day name. $C.dayNames.                                              "Monday" to "Sunday"
      
      M      The month of the year between 1-12.                                          "1" to "12"
      MM     The month of the year with leading zero if required.                         "01" to "12"
-     MMM    Abbreviated month name. $C.abbreviatedMonthNames.              "Jan" to "Dec"
-     MMMM   The full month name. $C.monthNames.                            "January" to "December"
+     MMM    Abbreviated month name. $C.abbreviatedMonthNames.                            "Jan" to "Dec"
+     MMMM   The full month name. $C.monthNames.                                          "January" to "December"
 
-     yy     Displays the year as a maximum two-digit number.                             "99" or "07"
+     yy     Displays the year as a two-digit number.                                     "99" or "07"
      yyyy   Displays the full four digit year.                                           "1999" or "2007"
      
      t      Displays the first character of the A.M./P.M. designator.                    "A" or "P"

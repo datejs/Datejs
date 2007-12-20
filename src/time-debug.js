@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 26-Nov-2007
+ * @date: 20-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -73,7 +73,7 @@ var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
         else {
             t2 = new Date(1970, 1, 1, time.getHours(), time.getMinutes(), time.getSeconds());
         }
-        return (t1 > t2) ? 1 : (t1 < t2) ? -1 : 0;
+        return (t1 < t2) ? -1 : (t1 > t2) ? 1 : 0;
     };
 
     this.equals = function (time) {
