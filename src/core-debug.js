@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 20-Dec-2007
+ * @date: 21-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -40,28 +40,26 @@
      * Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM).
      * @return {Date}    The current date.
      */
-    $D.today = $D.tod = function () {
+    $D.today = function () {
         return new Date().clearTime();
     };
 
     /**
      * Gets the name of the day given a dayOfWeek number. 0 = Sunday, 6 = Saturday.
      * @param {Number}   The dayOfWeek.
-     * @param {Boolean}  true to return the abbreviated name of the day.
      * @return {String}  The name of the day.
      */
-    $D.getDayName = function (dayOfWeek, abbreviated) {
-        return (abbreviated && typeof abbreviated == "boolean") ? $C.abbreviatedDayNames[dayOfWeek] : $C.dayNames[dayOfWeek];
+    $D.getDayName = function (dayOfWeek) {
+        return $C.dayNames[dayOfWeek];
     };
 
     /**
      * Gets the name of the month given a month number.
      * @param {Number}   The month.
-     * @param {Boolean}  true to return the abbreviated name of the month.
      * @return {String}  The name of the month.
      */
-    $D.getMonthName = function (month, abbreviated) {
-        return (abbreviated && typeof abbreviated == "boolean") ? $C.abbreviatedMonthNames[month] : $C.monthNames[month];
+    $D.getMonthName = function (month) {
+        return $C.monthNames[month];
     };
 
     /**
@@ -235,7 +233,7 @@
         var n = this.getDate();
         this.setDate(1);
         this.setMonth(this.getMonth() + value);
-        this.setDate(Math.min(n, this.getDaysInMonth()));
+        this.setDate(Math.min(n, $D.getDaysInMonth(this.getFullYear(), this.getMonth())));
         return this;
     };
 
@@ -293,11 +291,13 @@
     };
 
     // private
-    $D._validate = function (value, min, max, name) {
-        if (typeof value != "number") {
-            throw new TypeError(value + " is not a Number."); 
-        } else if (value < min || value > max) {
-            throw new RangeError(value + " is not a valid value for " + name + "."); 
+    $D._validate = function (n, min, max, name) {
+        if (typeof n == "undefined") {
+            return false;
+        } else if (typeof n != "number") {
+            throw new TypeError(n + " is not a Number."); 
+        } else if (n < min || n > max) {
+            throw new RangeError(n + " is not a valid value for " + name + "."); 
         }
         return true;
     };
@@ -307,8 +307,8 @@
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
-    $D.validateMillisecond = function (n) {
-        return $D._validate(n, 0, 999, "milliseconds");
+    $D.validateMillisecond = function (value) {
+        return $D._validate(value, 0, 999, "milliseconds");
     };
 
     /**
@@ -316,8 +316,8 @@
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
-    $D.validateSecond = function (n) {
-        return $D._validate(n, 0, 59, "seconds");
+    $D.validateSecond = function (value) {
+        return $D._validate(value, 0, 59, "seconds");
     };
 
     /**
@@ -325,8 +325,8 @@
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
-    $D.validateMinute = function (n) {
-        return $D._validate(n, 0, 59, "minutes");
+    $D.validateMinute = function (value) {
+        return $D._validate(value, 0, 59, "minutes");
     };
 
     /**
@@ -334,8 +334,8 @@
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
-    $D.validateHour = function (n) {
-        return $D._validate(n, 0, 23, "hours");
+    $D.validateHour = function (value) {
+        return $D._validate(value, 0, 23, "hours");
     };
 
     /**
@@ -343,8 +343,8 @@
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
-    $D.validateDay = function (n, year, month) {
-        return $D._validate(n, 1, $D.getDaysInMonth(year, month), "days");
+    $D.validateDay = function (value, year, month) {
+        return $D._validate(value, 1, $D.getDaysInMonth(year, month), "days");
     };
 
     /**
@@ -352,8 +352,8 @@
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
-    $D.validateMonth = function (n) {
-        return $D._validate(n, 0, 11, "months");
+    $D.validateMonth = function (value) {
+        return $D._validate(value, 0, 11, "months");
     };
 
     /**
@@ -361,8 +361,8 @@
      * @param {Number}   The number to check if within range.
      * @return {Boolean} true if within range, otherwise false.
      */
-    $D.validateYear = function (n) {
-        return $D._validate(n, 1, 9999, "years");
+    $D.validateYear = function (value) {
+        return $D._validate(value, 0, 9999, "years");
     };
 
     /**
@@ -378,77 +378,36 @@
      * @return {Date}    date
      */
     $P.set = function (config) {
-        var x = config;
-
-        if (!x.millisecond && x.millisecond !== 0) { 
-            x.millisecond = -1; 
+        if ($D.validateMillisecond(config.millisecond)) {
+            this.addMilliseconds(config.millisecond - this.getMilliseconds()); 
         }
-        if (!x.second && x.second !== 0) { 
-            x.second = -1; 
+        if ($D.validateSecond(config.second)) {
+            this.addSeconds(config.second - this.getSeconds()); 
         }
-        if (!x.minute && x.minute !== 0) { 
-            x.minute = -1; 
+        if ($D.validateMinute(config.minute)) {
+            this.addMinutes(config.minute - this.getMinutes()); 
         }
-        if (!x.hour && x.hour !== 0) { 
-            x.hour = -1; 
+        if ($D.validateHour(config.hour)) {
+            this.addHours(config.hour - this.getHours()); 
         }
-        if (!x.day && x.day !== 0) { 
-            x.day = -1; 
+        if ($D.validateMonth(config.month)) {
+            this.addMonths(config.month - this.getMonth()); 
         }
-        if (!x.month && x.month !== 0) { 
-            x.month = -1; 
+        if ($D.validateYear(config.year)) {
+            this.addYears(config.year - this.getFullYear()); 
         }
-        if (!x.year && x.year !== 0) { 
-            x.year = -1; 
-        }
-
-        if (x.millisecond != -1 && $D.validateMillisecond(x.millisecond)) {
-            this.addMilliseconds(x.millisecond - this.getMilliseconds()); 
-        }
-        if (x.second != -1 && $D.validateSecond(x.second)) {
-            this.addSeconds(x.second - this.getSeconds()); 
-        }
-        if (x.minute != -1 && $D.validateMinute(x.minute)) {
-            this.addMinutes(x.minute - this.getMinutes()); 
-        }
-        if (x.hour != -1 && $D.validateHour(x.hour)) {
-            this.addHours(x.hour - this.getHours()); 
-        }
-        if (x.month !== -1 && $D.validateMonth(x.month)) {
-            this.addMonths(x.month - this.getMonth()); 
-        }
-        if (x.year != -1 && $D.validateYear(x.year)) {
-            this.addYears(x.year - this.getFullYear()); 
-        }
-
 	    /* day has to go last because you can't validate the day without first knowing the month */
-        if (x.day != -1 && $D.validateDay(x.day, this.getFullYear(), this.getMonth())) {
-            this.addDays(x.day - this.getDate()); 
+        if ($D.validateDay(config.day, this.getFullYear(), this.getMonth())) {
+            this.addDays(config.day - this.getDate()); 
         }
-        if (x.timezone) { 
-            this.setTimezone(x.timezone); 
+        if (config.timezone) { 
+            this.setTimezone(config.timezone); 
         }
-        if (x.timezoneOffset) { 
-            this.setTimezoneOffset(x.timezoneOffset); 
+        if (config.timezoneOffset) { 
+            this.setTimezoneOffset(config.timezoneOffset); 
         }
         
         return this;   
-    };
-
-    /**
-     * Determines whether or not this instance is a weekday.
-     * @return {Boolean} true if this instance is a weekday, otherwise false.
-     */
-    $P.isWeekday = function () { 
-        return !(this.is().sat() || this.is().sun());
-    };
-
-    /**
-     * Get the number of days in the current month, adjusted for leap year.
-     * @return {Number}  The number of days in the month
-     */
-    $P.getDaysInMonth = function () { 
-        return $D.getDaysInMonth(this.getFullYear(), this.getMonth());
     };
 
     /**
@@ -464,7 +423,7 @@
      * @return {Date}    date
      */
     $P.moveToLastDayOfMonth = function () { 
-        return this.set({ day: this.getDaysInMonth()});
+        return this.set({ day: $D.getDaysInMonth(this.getFullYear(), this.getMonth())});
     };
 
     /**
@@ -584,24 +543,6 @@
         return (date || new Date()) - this;
     };
 
-    /**
-     * Gets the day name.
-     * @param {Boolean}  true to return the abbreviated name of the day.
-     * @return {String}  The name of the day.
-     */
-    $P.getDayName = function (abbreviated) {
-        return $D.getDayName(this.getDay(), (abbreviated || false));
-    };
-
-    /**
-     * Gets the month name.
-     * @param {Boolean}  true to return the abbreviated name of the month
-     * @return {String}  The name of the month
-     */
-    $P.getMonthName = function (abbreviated) {
-        return $D.getMonthName(this.getMonth(), (abbreviated || false));
-    };
-
     // private
     $P._toString = $P.toString;
 
@@ -645,7 +586,7 @@
      * @return {String}  A string representation of the current Date object.
      */
     $P.toString = function (format) {
-        var me = this;
+        var x = this;
 
         var p = function p(s) {
             return (s.toString().length == 1) ? "0" + s : s;
@@ -655,45 +596,45 @@
         function (format) {
             switch (format) {
             case "hh":
-                return p(me.getHours() < 13 ? me.getHours() : (me.getHours() - 12));
+                return p(x.getHours() < 13 ? (x.getHours() == 0 ? 12 : x.getHours()) : (x.getHours() - 12));
             case "h":
-                return me.getHours() < 13 ? me.getHours() : (me.getHours() - 12);
+                return x.getHours() < 13 ? (x.getHours() == 0 ? 12 : x.getHours()) : (x.getHours() - 12);
             case "HH":
-                return p(me.getHours());
+                return p(x.getHours());
             case "H":
-                return me.getHours();
+                return x.getHours();
             case "mm":
-                return p(me.getMinutes());
+                return p(x.getMinutes());
             case "m":
-                return me.getMinutes();
+                return x.getMinutes();
             case "ss":
-                return p(me.getSeconds());
+                return p(x.getSeconds());
             case "s":
-                return me.getSeconds();
+                return x.getSeconds();
             case "yyyy":
-                return me.getFullYear();
+                return x.getFullYear();
             case "yy":
-                return me.getFullYear().toString().substring(2, 4);
+                return x.getFullYear().toString().substring(2, 4);
             case "dddd":
-                return me.getDayName();
+                return $C.dayNames[x.getDay()];
             case "ddd":
-                return me.getDayName(true);
+                return $C.abbreviatedDayNames[x.getDay()];
             case "dd":
-                return p(me.getDate());
+                return p(x.getDate());
             case "d":
-                return me.getDate().toString();
+                return x.getDate().toString();
             case "MMMM":
-                return me.getMonthName();
+                return $C.monthNames[x.getMonth()];
             case "MMM":
-                return me.getMonthName(true);
+                return $C.abbreviatedMonthNames[x.getMonth()];
             case "MM":
-                return p((me.getMonth() + 1));
+                return p((x.getMonth() + 1));
             case "M":
-                return me.getMonth() + 1;
+                return x.getMonth() + 1;
             case "t":
-                return me.getHours() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
+                return x.getHours() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
             case "tt":
-                return me.getHours() < 12 ? $C.amDesignator : $C.pmDesignator;
+                return x.getHours() < 12 ? $C.amDesignator : $C.pmDesignator;
             case "zzz":
             case "zz":
             case "z":

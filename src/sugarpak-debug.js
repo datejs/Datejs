@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 20-Dec-2007
+ * @date: 21-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -16,22 +16,6 @@
 (function () {
     var $D = Date, $P = $D.prototype, $C = $D.CultureInfo, $N = Number.prototype, _isSecond = false;
 
-    /** 
-     * Returns yesterdays date. The time is set to the start of the day (00:00 or 12:00 AM).
-     * @return {Date}    date.
-     */
-    $D.yesterday = $D.yes = function () {
-        return $D.tod().addDays(-1);
-    };
-
-    /** 
-     * Returns tomorrows date. The time is set to the start of the day (00:00 or 12:00 AM).
-     * @return {Date}    date.
-     */
-    $D.tomorrow = $D.tom = function () {
-        return $D.tod().addDays(1);
-    };
-     
     // private
     $P._orient = +1;
 
@@ -76,7 +60,7 @@
      * @return {Date}    date
      */    
     $D.next = function () {
-        return Date.tod().next();
+        return $D.today().next();
     };
 
     /** 
@@ -111,7 +95,7 @@
      * @return {Date}    date
      */
     $D.last = $D.prev = $D.previous = function () {
-        return Date.tod().last();
+        return $D.today().last();
     };    
 
     /** 
@@ -195,7 +179,7 @@
     var dx = ("sunday monday tuesday wednesday thursday friday saturday").split(/\s/),
         mx = ("january february march april may june july august september october november december").split(/\s/),
         px = ("Millisecond Second Minute Hour Day Week Month Year").split(/\s/),
-		nth = ("final first second third forth fifth").split(/\s/),
+		nth = ("final first second third fourth fifth").split(/\s/),
         de;
     
     // Create day name functions and abbreviated day name functions (eg. monday(), friday(), fri()).
@@ -229,7 +213,7 @@
                 var temp = this.clone().moveToLastDayOfMonth();
                 this.moveToNthOccurrence(n, ntemp);
                 if (this > temp) {
-                    throw new RangeError($D.getDayName(n) + " does not occur " + ntemp + " times in the month of " + temp.getMonthName() + " " + temp.getFullYear() + ".");
+                    throw new RangeError($D.getDayName(n) + " does not occur " + ntemp + " times in the month of " + $D.getMonthName(temp.getMonth()) + " " + temp.getFullYear() + ".");
                 }
                 return this;
             }			
@@ -239,7 +223,7 @@
     
     var sdf = function (n) {
         return function () {
-            var t = $D.tod(), shift = n - t.getDay();
+            var t = $D.today(), shift = n - t.getDay();
             if (n === 0 && $C.firstDayOfWeek === 1 && t.getDay() !== 0) {
                 shift = shift + 7;
             }
@@ -247,14 +231,14 @@
         };
     };
 	
-    for (var i = 0 ; i < dx.length ; i++) {
+    for (var i = 0; i < dx.length; i++) {
         // Create constant static Day Name variables. Example: Date.MONDAY or Date.MON
-        Date[dx[i].toUpperCase()] = Date[dx[i].toUpperCase().substring(0, 3)] = i;
+        $D[dx[i].toUpperCase()] = $D[dx[i].toUpperCase().substring(0, 3)] = i;
 
         // Create Day Name functions. Example: Date.monday() or Date.mon()
-        Date[dx[i]] = Date[dx[i].substring(0, 3)] = sdf(i);
+        $D[dx[i]] = $D[dx[i].substring(0, 3)] = sdf(i);
 
-        // Cretae Day Name instance functions. Example: Date.today().next().monday()
+        // Create Day Name instance functions. Example: Date.today().next().monday()
         $P[dx[i]] = $P[dx[i].substring(0, 3)] = df(i);
     }
     
@@ -271,18 +255,18 @@
     
     var smf = function (n) {
         return function () {
-            return $D.tod().set({ month: n, day: 1 });
+            return $D.today().set({ month: n, day: 1 });
         };
     };
     
-    for (var j = 0 ; j < mx.length ; j++) {
+    for (var j = 0; j < mx.length; j++) {
         // Create constant static Month Name variables. Example: Date.MARCH or Date.MAR
-        Date[mx[j].toUpperCase()] = Date[mx[j].toUpperCase().substring(0, 3)] = j;
+        $D[mx[j].toUpperCase()] = $D[mx[j].toUpperCase().substring(0, 3)] = j;
 
         // Create Month Name functions. Example: Date.march() or Date.mar()
-        Date[mx[j]] = Date[mx[j].substring(0, 3)] = smf(j);
+        $D[mx[j]] = $D[mx[j].substring(0, 3)] = smf(j);
 
-        // Cretae Month Name instance functions. Example: Date.today().next().march()
+        // Create Month Name instance functions. Example: Date.today().next().march()
         $P[mx[j]] = $P[mx[j].substring(0, 3)] = mf(j);
     }
     
@@ -310,7 +294,7 @@
         };
     };
     
-    for (var k = 0 ; k < px.length ; k++) {
+    for (var k = 0; k < px.length; k++) {
         de = px[k].toLowerCase();
     
         // Create date element functions and plural date element functions used with Date (eg. day(), days(), months()).
@@ -336,7 +320,7 @@
         };
     };
 
-    for (var l = 0 ; l < nth.length ; l++) {
+    for (var l = 0; l < nth.length; l++) {
         $P[nth[l]] = (l === 0) ? nthfn(-1) : nthfn(l);
     }
     

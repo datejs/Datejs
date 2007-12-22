@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 20-Dec-2007
+ * @date: 21-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -599,7 +599,7 @@
                 }
             }
             
-            var today = $D.tod();
+            var today = $D.today();
             
             if (this.now && !this.unit && !this.operator) { 
                 return new Date(); 
@@ -681,7 +681,8 @@
             }
             
             if (!this.orient && !this.operator && this.unit == "week" && this.value && !this.day && !this.month) {
-                return $D.january().first().monday().addWeeks(this.value);
+                return $D.jan().first().mon().addWeeks(this.value);
+                //return $D.today().set({month: 0, day: 1}).moveToDayOfWeek(1).addWeeks(this.value);
             }
 
             if (!expression && this.timezone && this.day && this.days) {
@@ -730,9 +731,6 @@
     // _.min(1, _.set([ g.H, g.m, g.s ], g._t));
     g.t = _.cache(_.process(g.ctoken2("shortMeridian"), t.meridian));
     g.tt = _.cache(_.process(g.ctoken2("longMeridian"), t.meridian));
-//    g.z = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d:\d\d)/), t.timezone));
-//    g.zz = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d:\d\d)/), t.timezone));
-
     g.z = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d\:?\d\d)/), t.timezone));    g.zz = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d\:?\d\d)/), t.timezone));
     
     g.zzz = _.cache(_.process(g.ctoken2("timezone"), t.timezone));

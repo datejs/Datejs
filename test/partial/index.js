@@ -306,10 +306,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('29');
-		    if( this.date != null && Date.today().getDaysInMonth() >= 29 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) >= 29 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 29 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 29 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -319,10 +319,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('30');
-		    if( this.date != null && Date.today().getDaysInMonth() >= 30 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) >= 30 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 30 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 30 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -332,10 +332,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('31');
-		    if( this.date != null && Date.today().getDaysInMonth() == 31 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) == 31 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 31 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 31 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -383,10 +383,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('29th');
-		    if( this.date != null && Date.today().getDaysInMonth() >= 29 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) >= 29 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 29 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 29 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -396,10 +396,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('30th');
-		    if( this.date != null && Date.today().getDaysInMonth() >= 30 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) >= 30 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 30 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 30 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -409,10 +409,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('31st');
-		    if( this.date != null && Date.today().getDaysInMonth() == 31 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) == 31 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 31 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 31 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -454,10 +454,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('29 th');
-		    if( this.date != null && Date.today().getDaysInMonth() >= 29 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) >= 29 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 29 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 29 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -467,10 +467,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('30 th');
-		    if( this.date != null && Date.today().getDaysInMonth() >= 30 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) >= 30 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 30 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 30 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
@@ -480,10 +480,10 @@
     run: function() { },
 		assert: function() {
 		    this.date = Date.parse('31 st');
-		    if( this.date != null && Date.today().getDaysInMonth() == 31 ) {
+		    if( this.date != null && Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) == 31 ) {
 		        return true;
 		    }
-		    if( Date.today().getDaysInMonth() < 31 && this.date == null ) {
+		    if( Date.getDaysInMonth(this.today.getFullYear(), this.today.getMonth()) < 31 && this.date == null ) {
 		        return true;
 		    }
 		    return false;
