@@ -1,0 +1,14 @@
+TODO
+-------------------
+1. More work to be done on Timezone, Timezone offsets and DST (Summer Time)
+
+2. Add .getFriendly() to TimeSpan and TimePeriod. Example
+
+	If a date was 3 days and 5 hours away from now, the TimeSpan getFriendly() function would return the following.
+	
+	var future = new Date().add({days: 3, hours: 5});
+	var ts = new TimeSpan(future - new Date());
+	
+	console.log(ts.getFriendly()); // "3 days and 5 hours from now"
+	
+3.	More tests!

@@ -1,0 +1,11 @@
+CHANGE LOG
+-------------------
+
+23-Dec-2008
+1.  Moved all minified files to the /build/ folder. Now all the original source files are 
+    located in the /src/ folder, and all minified files are located in the /build/ folder. 
+2.  Moved todo.txt from /doc/ folder to /src/ folder.
+3.  Removed /doc/ folder. 
+4.  Added changelog.txt file to /src/ folder.
+
+-------------------
