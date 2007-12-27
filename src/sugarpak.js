@@ -213,7 +213,7 @@
                 var temp = this.clone().moveToLastDayOfMonth();
                 this.moveToNthOccurrence(n, ntemp);
                 if (this > temp) {
-                    throw new RangeError($D.getDayName(n) + " does not occur " + ntemp + " times in the month of " + $D.getMonthName(temp.getMonth()) + " " + temp.getFullYear() + ".");
+                    throw new RangeError($C.dayNames[n] + " does not occur " + ntemp + " times in the month of " + $C.monthNames[temp.getMonth()] + " " + temp.getFullYear() + ".");
                 }
                 return this;
             }			

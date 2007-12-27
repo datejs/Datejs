@@ -82,7 +82,7 @@
 	  			return new Date().equals( 0 );
 			}
 			catch(ex) {
-				return (ex instanceof TypeError);
+				return (ex instanceof Error);
 			}
 		}
 	},
@@ -93,7 +93,7 @@
 	  			return new Date().compareTo( new Date("") );
 			}
 			catch(ex) {
-				return (ex instanceof TypeError);
+				return (ex instanceof Error);
 			}
 		}
 	},
@@ -104,7 +104,7 @@
 	  			return new Date().equals( new Date("") );
 			}
 			catch(ex) {
-				return (ex instanceof TypeError);
+				return (ex instanceof Error);
 			}
 		}
 	}

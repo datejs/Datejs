@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 23-Dec-2007
+ * @date: 27-Dec-2007
  * @copyright: Copyright (c) 2006-2007, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -137,7 +137,7 @@ Date.CultureInfo = {
         timeContext: /^\s*(\:|a|p)/i
     },
 
-    timezones: { UTC: "-000", GMT: "-000", EST: "-0400", EDT: "-0500", CST: "-0500", CDT: "-0600", MST: "-0600", MDT: "-0700", PST: "-0700", PDT: "-0800" }
+    timezones: { UTC: "-000", GMT: "-000", EST: "-0500", EDT: "-0400", CST: "-0600", CDT: "-0500", MST: "-0700", MDT: "-0600", PST: "-0800", PDT: "-0700" }
 };
 
 /********************

@@ -1,11 +1,66 @@
 CHANGE LOG
--------------------
+--------------------
 
-23-Dec-2008
+27-Dec-2008 [coolgeoff]
+1.  Modified the offset values of Date.CultureInfo.timezones.
+2.  Added <static> Date.compare(date1, date2).
+        
+        Example
+        
+        var date1 = Date.today();
+        var date2 = Date.today().add(1).day();
+        
+        Date.compare(date1, date2); // returns -1
+
+3.  Added <static> Date.equals(date1, date2).        
+
+        Example
+        
+        var date1 = Date.today();
+        var date2 = Date.today().add(1).day();
+        
+        Date.equals(date1, date2); // returns false
+
+4.  Fixed bug in Date.getDayNumberFromName() where it was not checking against the Date.CultureInfo.shortestDayNames array.
+5.  Removed <static> Date.getDayName(dayOfWeek). Please use Date.CultureInfo.dayNames[dayOfWeek]. Other options include:
+        Date.CultureInfo.dayNames[dayOfWeek]
+        Date.CultureInfo.abbreviatedDayNames[dayOfWeek]
+        Date.CultureInfo.shortestDayNames[dayOfWeek]
+
+    If you have a Date instance, please use .toString().
+        
+        Example
+        
+        Date.today().toString("dddd"); // "Thursday"
+        Date.today().toString("ddd"); // "Thu"
+        
+5.  Removed <static> Date.getMonthName(month). Please use Date.CultureInfo.monthNames[month]. 
+    Other options include:
+        Date.CultureInfo.monthNames[month]
+        Date.CultureInfo.abbreviatedMonthNames[month]
+
+    If you have a Date instance, please use .toString().
+        
+        Example
+        
+        Date.today().toString("MMMM"); // "December"
+        Date.today().toString("MMM"); // "Dec"
+
+6.  Added Date.prototype.hasDaylightSavingTime(). 
+    Returns a boolean value indicating whether Daylight Saving Time is observed in the current time zone.
+7.  Added Date.prototype.isDaylightSavingTime(). 
+    Returns a boolean value indicating whether this Date instance is within the Daylight Saving Time range for the current time zone.
+8.  Verified core.js, sugarpak.js, and time.js are passing JSLint (http://www.jslint/) in "Strict whitespace" mode.
+
+--------------------
+
+23-Dec-2008 [coolgeoff]
 1.  Moved all minified files to the /build/ folder. Now all the original source files are 
     located in the /src/ folder, and all minified files are located in the /build/ folder. 
-2.  Moved todo.txt from /doc/ folder to /src/ folder.
-3.  Removed /doc/ folder. 
-4.  Added changelog.txt file to /src/ folder.
+2.  Removed /trunk/doc/ folder. 
+3.  Added CHANGELOG.txt file to /trunk/ folder.
+4.  Added README.txt file to /trunk/ folder.
+5.  Added LICENSE.txt file to /trunk/ folder.
+6.  Added TODO.txt file to /trunk/ folder.
 
--------------------
+--------------------

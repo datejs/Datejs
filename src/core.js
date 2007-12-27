@@ -45,21 +45,29 @@
     };
 
     /**
-     * Gets the name of the day given a dayOfWeek number. 0 = Sunday, 6 = Saturday.
-     * @param {Number}   The dayOfWeek.
-     * @return {String}  The name of the day.
+     * Compares the first date to the second date and returns an number indication of their relative values.  
+     * @param {Date}     First Date object to compare [Required].
+     * @param {Date}     Second Date object to compare to [Required].
+     * @return {Number}  -1 = date1 is lessthan date2. 0 = values are equal. 1 = date1 is greaterthan date2.
      */
-    $D.getDayName = function (dayOfWeek) {
-        return $C.dayNames[dayOfWeek];
+    $D.compare = function (date1, date2) {
+        if (isNaN(date1) || isNaN(date2)) { 
+            throw new Error(date1 + " - " + date2); 
+        } else if (date1 instanceof Date && date2 instanceof Date) {
+            return (date1 < date2) ? -1 : (date1 > date2) ? 1 : 0;
+        } else { 
+            throw new TypeError(date1 + " - " + date2); 
+        }
     };
-
+    
     /**
-     * Gets the name of the month given a month number.
-     * @param {Number}   The month.
-     * @return {String}  The name of the month.
+     * Compares the first Date object to the second Date object and returns true if they are equal.  
+     * @param {Date}     First Date object to compare [Required]
+     * @param {Date}     Second Date object to compare to [Required]
+     * @return {Boolean} true if dates are equal. false if they are not equal.
      */
-    $D.getMonthName = function (month) {
-        return $C.monthNames[month];
+    $D.equals = function (date1, date2) { 
+        return (date1.compareTo(date2) === 0); 
     };
 
     /**
@@ -85,7 +93,7 @@
     $D.getDayNumberFromName = function (name) {
         var n = $C.dayNames, m = $C.abbreviatedDayNames, o = $C.shortestDayNames, s = name.toLowerCase();
         for (var i = 0; i < n.length; i++) { 
-            if (n[i].toLowerCase() == s || m[i].toLowerCase() == s) { 
+            if (n[i].toLowerCase() == s || m[i].toLowerCase() == s || o[i].toLowerCase() == s) { 
                 return i; 
             }
         }
@@ -134,19 +142,12 @@
     };
 
     /**
-     * Compares this instance to a Date object and return an number indication of their relative values.  
+     * Compares this instance to a Date object and returns an number indication of their relative values.  
      * @param {Date}     Date object to compare [Required]
      * @return {Number}  -1 = this is lessthan date. 0 = values are equal. 1 = this is greaterthan date.
      */
     $P.compareTo = function (date) {
-        if (isNaN(this)) { 
-            throw new Error(this); 
-        }
-        if (date instanceof Date && !isNaN(date)) {
-            return (this < date) ? -1 : (this > date) ? 1 : 0;
-        } else { 
-            throw new TypeError(date); 
-        }
+        return Date.compare(this, date);
     };
 
     /**
@@ -154,8 +155,8 @@
      * @param {Date}     Date object to compare [Required]
      * @return {Boolean} true if dates are equal. false if they are not equal.
      */
-    $P.equals = function (date) { 
-        return (this.compareTo(date) === 0); 
+    $P.equals = function (date) {
+        return Date.equals(this, date);
     };
 
     /**
@@ -503,8 +504,8 @@
     };
 
     /**
-     * Get the timezone abbreviation of the current date.
-     * @return {String} The abbreviated timezone name (e.g. "EST")
+     * Get the time zone abbreviation of the current date.
+     * @return {String} The abbreviated time zone name (e.g. "EST")
      */
     $P.getTimezone = function () {
         return $D.getTimezoneAbbreviation(this.getUTCOffset());
@@ -517,6 +518,22 @@
 
     $P.setTimezone = function (s) { 
         return this.setTimezoneOffset($D.getTimezoneOffset(s)); 
+    };
+
+    /**
+     * Indicates whether Daylight Saving Time is observed in the current time zone.
+     * @return {Boolean} true|false
+     */
+    $P.hasDaylightSavingTime = function () { 
+        return (Date.today().set({month: 0, day: 1}).getTimezoneOffset() !== Date.today().set({month: 6, day: 1}).getTimezoneOffset());
+    };
+    
+    /**
+     * Indicates whether this Date instance is within the Daylight Saving Time range for the current time zone.
+     * @return {Boolean} true|false
+     */
+    $P.isDaylightSavingTime = function () { 
+        return (this.hasDaylightSavingTime() && new Date().getTimezoneOffset() === Date.today().set({month: 6, day: 1}).getTimezoneOffset());
     };
 
     /**
@@ -596,9 +613,9 @@
         function (format) {
             switch (format) {
             case "hh":
-                return p(x.getHours() < 13 ? (x.getHours() == 0 ? 12 : x.getHours()) : (x.getHours() - 12));
+                return p(x.getHours() < 13 ? (x.getHours() === 0 ? 12 : x.getHours()) : (x.getHours() - 12));
             case "h":
-                return x.getHours() < 13 ? (x.getHours() == 0 ? 12 : x.getHours()) : (x.getHours() - 12);
+                return x.getHours() < 13 ? (x.getHours() === 0 ? 12 : x.getHours()) : (x.getHours() - 12);
             case "HH":
                 return p(x.getHours());
             case "H":

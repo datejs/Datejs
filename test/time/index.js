@@ -234,15 +234,15 @@
 'With Timezones': {
     setup: function() { 
       this.d = [];
-      this.d[0] = Date.today().set({hour: 22, minute: 30 }).setTimezoneOffset(-400);
-      this.d[1] = Date.today().set({hour: 22 }).setTimezoneOffset(-400);
+      this.d[0] = Date.today().set({hour: 22, minute: 30 }).setTimezoneOffset(-500);
+      this.d[1] = Date.today().set({hour: 22 }).setTimezoneOffset(-500);
     },
     '10:30 PM EST': {
       run: function() { this.date = Date.parse('10:30 PM EST') },
       assert: function() { return this.d[0].equals( this.date ) }
     },
-    '10:30 PM -0400 : Offset': {
-      run: function() { this.date = Date.parse('10:30 PM -0400') },
+    '10:30 PM -0500 : Offset': {
+      run: function() { this.date = Date.parse('10:30 PM -0500') },
       assert: function() { return this.d[0].equals( this.date ) }
     }
   }  
