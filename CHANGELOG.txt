@@ -1,7 +1,38 @@
 CHANGE LOG
 --------------------
 
-27-Dec-2008 [coolgeoff]
+2008-1-2 [Coolite]
+1.  Added .toISOString() to sugarpak.js. Returns ISO 8601 formatted string of date.
+2.  Changed .toJSONString() to return string value wrapped in double-quotes ("") as per
+    JSON.org spec. 
+   
+    If you want an ISO/JSON date formatted string WITHOUT the double-quotes, please pass 
+    a format to the .toString() function.
+   
+    Example
+   
+    new Date().toString("yyyy-MM-ddTHH:mm:ssZ");
+   
+3.  Fixed bug where Date.parse("monday") was not returning correct year when the current
+    week overlapped the end of year.
+4.  Fixed bug in .parseExact() where day was being initialized to '1' if no day was present in the date string.
+    This was a problem when only parsing a Time.
+5.  New tests added to /test/parseExact/.
+6.  Found and fixed bug where if a string to be parsed was a digit with a trailing space.
+
+    Example
+    
+    // Old
+    Date.parse("5 "); // returned current day at 5 AM. Wrong.
+    
+    // New
+    Date.parse("5 "); // return 5th day of current month. Correct.
+    
+    Just trimming whitespace before sending string into parser fixed the problem.
+
+--------------------
+
+2007-12-27 [Coolite]
 1.  Modified the offset values of Date.CultureInfo.timezones.
 2.  Added <static> Date.compare(date1, date2).
         
@@ -54,7 +85,7 @@ CHANGE LOG
 
 --------------------
 
-23-Dec-2008 [coolgeoff]
+2007-12-23 [Coolite]
 1.  Moved all minified files to the /build/ folder. Now all the original source files are 
     located in the /src/ folder, and all minified files are located in the /build/ folder. 
 2.  Removed /trunk/doc/ folder. 

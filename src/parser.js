@@ -554,25 +554,51 @@
         },
         finishExact: function (x) {  
             x = (x instanceof Array) ? x : [ x ]; 
-	        
-            var now = new Date();
-
-            this.year = now.getFullYear(); 
-            this.month = now.getMonth(); 
-            this.day = 1; 
-
-            this.hour = 0; 
-            this.minute = 0; 
-            this.second = 0;
 
             for (var i = 0 ; i < x.length ; i++) { 
                 if (x[i]) { 
                     x[i].call(this); 
                 }
-            } 
+            }
+            
+            var now = new Date();
+            
+            if ((this.hour || this.minute) && (!this.month && !this.year && !this.day)) {
+                this.day = now.getDate();
+            }
 
-            this.hour = (this.meridian == "p" && this.hour < 13) ? this.hour + 12 : this.hour;
+            if (!this.year) {
+                this.year = now.getFullYear();
+            }
+            
+            if (!this.month) {
+                this.month = now.getMonth();
+            }
+            
+            if (!this.day) {
+                this.day = 1;
+            }
+            
+            if (!this.hour) {
+                this.hour = 0;
+            }
+            
+            if (!this.minute) {
+                this.minute = 0;
+            }
 
+            if (!this.second) {
+                this.second = 0;
+            }
+
+            if (this.meridian && this.hour) {
+                if (this.meridian == "p" && this.hour < 12) {
+                    this.hour = this.hour + 12;
+                } else if (this.meridian == "a" && this.hour == 12) {
+                    this.hour = 0;
+                }
+            }
+            
             if (this.day > $D.getDaysInMonth(this.year, this.month)) {
                 throw new RangeError(this.day + " is not a valid value for days.");
             }
@@ -584,6 +610,7 @@
             } else if (this.timezoneOffset) { 
                 r.set({ timezoneOffset: this.timezoneOffset }); 
             }
+            
             return r;
         },			
         finish: function (x) {
@@ -615,9 +642,10 @@
             if (!expression && this.weekday && !this.day && !this.days) {
                 var temp = Date[this.weekday]();
                 this.day = temp.getDate();
-                if (temp.getMonth() !== today.getMonth()) {
+                if (!this.month) {
                     this.month = temp.getMonth();
                 }
+                this.year = temp.getFullYear();
             }
             
             if (expression && this.weekday) {
@@ -639,7 +667,7 @@
                 }
             }
 
-            if (expression && (this.month || this.month === 0)) {
+            if (expression && (this.month || this.month === 0) && this.unit != "year") {
                 this.unit = "month";
                 gap = (this.month - today.getMonth());
                 mod = 12;
@@ -871,6 +899,7 @@
 
 	// check for these formats first
     g._formats = g.formats([
+        "\"yyyy-MM-ddTHH:mm:ssZ\"",
         "yyyy-MM-ddTHH:mm:ssZ",
         "yyyy-MM-ddTHH:mm:ssz",
         "yyyy-MM-ddTHH:mm:ss",
@@ -1018,7 +1047,7 @@
             return s;
         }
         try { 
-            r = $D.Grammar.start.call({}, s); 
+            r = $D.Grammar.start.call({}, s.replace(/^\s*(\S*(\s+\S+)*)\s*$/, "$1")); 
         } catch (e) { 
             return null; 
         }

@@ -101,10 +101,11 @@
       run: function() { this.date =  Date.parse('11 Aug 2007 7:15:00 am EDT') },
       assert: function() { return new Date(2007,7,11,7,15,0).add(-2).hours().equals( this.date ) }
     },
-    'Tue Nov 20 08:00:00 UTC 2007': {
-      run: function() { this.date =  Date.parse("Tue Nov 20 08:00:00 UTC 2007") },
+    'Tue Nov 20 2007 08:00:00 UTC': {
+      run: function() { this.date = Date.parse("Tue Nov 20 2007 08:00:00 UTC") },
       assert: function() { return new Date(2007,10,20,8,0,0).setTimezone("UTC").equals( this.date ) }
-    }   },
+    }   
+},
     
     'Numeric Variations': {
     setup: function() {

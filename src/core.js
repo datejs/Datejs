@@ -382,28 +382,36 @@
         if ($D.validateMillisecond(config.millisecond)) {
             this.addMilliseconds(config.millisecond - this.getMilliseconds()); 
         }
+        
         if ($D.validateSecond(config.second)) {
             this.addSeconds(config.second - this.getSeconds()); 
         }
+        
         if ($D.validateMinute(config.minute)) {
             this.addMinutes(config.minute - this.getMinutes()); 
         }
+        
         if ($D.validateHour(config.hour)) {
             this.addHours(config.hour - this.getHours()); 
         }
+        
         if ($D.validateMonth(config.month)) {
             this.addMonths(config.month - this.getMonth()); 
         }
+
         if ($D.validateYear(config.year)) {
             this.addYears(config.year - this.getFullYear()); 
         }
+        
 	    /* day has to go last because you can't validate the day without first knowing the month */
         if ($D.validateDay(config.day, this.getFullYear(), this.getMonth())) {
             this.addDays(config.day - this.getDate()); 
         }
+        
         if (config.timezone) { 
             this.setTimezone(config.timezone); 
         }
+        
         if (config.timezoneOffset) { 
             this.setTimezoneOffset(config.timezoneOffset); 
         }
@@ -606,7 +614,7 @@
         var x = this;
 
         var p = function p(s) {
-            return (s.toString().length == 1) ? "0" + s : s;
+            return s < 10 ? '0' + s : s;
         };
 
         return format ? format.replace(/dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|zz?z?/g, 
