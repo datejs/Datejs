@@ -638,7 +638,20 @@
             
             var gap, mod, orient;
             orient = ((this.orient == "past" || this.operator == "subtract") ? -1 : 1);
+            
+            if(!this.now && "hour minute second".indexOf(this.unit) != -1) {
+                today.setTimeToNow();
+            }
 
+            if (this.month || this.month === 0) {
+                if ("year day hour minute second".indexOf(this.unit) != -1) {
+//                if (this.unit == "day" || this.unit == "year" || this.unit == "hour" || this.unit == "minute" || this.unit == "second") {
+                    this.value = this.month + 1;
+                    this.month = null;
+                    expression = true;
+                }
+            }
+            
             if (!expression && this.weekday && !this.day && !this.days) {
                 var temp = Date[this.weekday]();
                 this.day = temp.getDate();
@@ -648,7 +661,7 @@
                 this.year = temp.getFullYear();
             }
             
-            if (expression && this.weekday) {
+            if (expression && this.weekday && this.unit != "month") {
                 this.unit = "day";
                 gap = ($D.getDayNumberFromName(this.weekday) - today.getDay());
                 mod = 7;
@@ -665,6 +678,11 @@
                 if (!expression) {
                     this.day = this.value * 1;
                 }
+            }
+
+            if (!this.month && this.value && this.unit == "month" && !this.now) {
+                this.month = this.value;
+                expression = true;
             }
 
             if (expression && (this.month || this.month === 0) && this.unit != "year") {

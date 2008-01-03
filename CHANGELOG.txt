@@ -30,6 +30,10 @@ CHANGE LOG
     
     Just trimming whitespace before sending string into parser fixed the problem.
 
+7.  Added parser support for... 
+		"3 years ago"
+		"7 hours ago"
+
 --------------------
 
 2007-12-27 [Coolite]

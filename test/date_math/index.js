@@ -722,102 +722,102 @@
     }, 
     '+5 second': {
       run: function() { },
-      assert: function() {  return this.today.add(5).seconds().equals( Date.parse('+5 second') ) }
+      assert: function() {  return new Date().add(5).seconds().set({millisecond: 0}).equals( Date.parse('+5 second').set({millisecond: 0}) ) }
     }, 
     '+5 Second': {
       run: function() { },
-      assert: function() {  return this.today.add(5).seconds().equals( Date.parse('+5 Second') ) }
+      assert: function() {  return new Date().add(5).seconds().set({millisecond: 0}).equals( Date.parse('+5 Second').set({millisecond: 0}) ) }
     }, 
     '-5 second': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).seconds().equals( Date.parse('-5 second') ) }
+      assert: function() {  return new Date().add(-5).seconds().set({millisecond: 0}).equals( Date.parse('-5 second').set({millisecond: 0}) ) }
     }, 
     '-5 Second': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).seconds().equals( Date.parse('-5 Second') ) }
+      assert: function() {  return new Date().add(-5).seconds().set({millisecond: 0}).equals( Date.parse('-5 Second').set({millisecond: 0}) ) }
     }, 
     '+5 seconds': {
       run: function() { },
-      assert: function() {  return this.today.add(5).seconds().equals( Date.parse('+5 seconds') ) }
+      assert: function() {  return new Date().add(5).seconds().set({millisecond: 0}).equals( Date.parse('+5 seconds').set({millisecond: 0}) ) }
     }, 
     '+5 Seconds': {
       run: function() { },
-      assert: function() {  return this.today.add(5).seconds().equals( Date.parse('+5 Seconds') ) }
+      assert: function() {  return new Date().add(5).seconds().set({millisecond: 0}).equals( Date.parse('+5 Seconds').set({millisecond: 0}) ) }
     }, 
     '-5 seconds': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).seconds().equals( Date.parse('-5 seconds') ) }
+      assert: function() {  return new Date().add(-5).seconds().set({millisecond: 0}).equals( Date.parse('-5 seconds').set({millisecond: 0}) ) }
     }, 
     '-5 Seconds': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).seconds().equals( Date.parse('-5 Seconds') ) }
+      assert: function() {  return new Date().add(-5).seconds().set({millisecond: 0}).equals( Date.parse('-5 Seconds').set({millisecond: 0}) ) }
     },
 
 
     '+5 minute': {
       run: function() { },
-      assert: function() {  return this.today.add(5).minutes().equals( Date.parse('+5 minute') ) }
+      assert: function() {  return new Date().add(5).minutes().set({millisecond: 0}).equals( Date.parse('+5 minute').set({millisecond: 0}) ) }
     }, 
     '+5 Minute': {
       run: function() { },
-      assert: function() {  return this.today.add(5).minutes().equals( Date.parse('+5 Minute') ) }
+      assert: function() {  return new Date().add(5).minutes().set({millisecond: 0}).equals( Date.parse('+5 Minute').set({millisecond: 0}) ) }
     }, 
     '-5 minute': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).minutes().equals( Date.parse('-5 minute') ) }
+      assert: function() {  return new Date().add(-5).minutes().set({millisecond: 0}).equals( Date.parse('-5 minute').set({millisecond: 0}) ) }
     }, 
     '-5 Minute': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).minutes().equals( Date.parse('-5 Minute') ) }
-    }, 
+      assert: function() {  return new Date().add(-5).minutes().set({millisecond: 0}).equals( Date.parse('-5 Minute').set({millisecond: 0}) ) }
+    },
     '+5 minutes': {
       run: function() { },
-      assert: function() {  return this.today.add(5).minutes().equals( Date.parse('+5 minutes') ) }
-    }, 
+      assert: function() {  return new Date().add(5).minutes().set({millisecond: 0}).equals( Date.parse('+5 minutes').set({millisecond: 0}) ) }
+    },     
     '+5 Minutes': {
       run: function() { },
-      assert: function() {  return this.today.add(5).minutes().equals( Date.parse('+5 Minutes') ) }
+      assert: function() {  return new Date().add(5).minutes().set({millisecond: 0}).equals( Date.parse('+5 Minutes').set({millisecond: 0}) ) }
     }, 
     '-5 minutes': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).minutes().equals( Date.parse('-5 minutes') ) }
+      assert: function() {  return new Date().add(-5).minutes().set({millisecond: 0}).equals( Date.parse('-5 minutes').set({millisecond: 0}) ) }
     }, 
     '-5 Minutes': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).minutes().equals( Date.parse('-5 Minutes') ) }
+      assert: function() {  return new Date().add(-5).minutes().set({millisecond: 0}).equals( Date.parse('-5 Minutes').set({millisecond: 0}) ) }
     },
     
     '+5 hour': {
       run: function() { },
-      assert: function() {  return this.today.add(5).hours().equals( Date.parse('+5 hour') ) }
+      assert: function() {  return new Date().add(5).hours().set({millisecond: 0}).equals( Date.parse('+5 hour').set({millisecond: 0}) ) }
     }, 
     '+5 Hour': {
       run: function() { },
-      assert: function() {  return this.today.add(5).hours().equals( Date.parse('+5 Hour') ) }
+      assert: function() {  return new Date().add(5).hours().set({millisecond: 0}).equals( Date.parse('+5 Hour').set({millisecond: 0}) ) }
     }, 
     '-5 hour': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).hours().equals( Date.parse('-5 hour') ) }
+      assert: function() {  return new Date().add(-5).hours().set({millisecond: 0}).equals( Date.parse('-5 hour').set({millisecond: 0}) ) }
     }, 
     '-5 Hour': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).hours().equals( Date.parse('-5 Hour') ) }
+      assert: function() {  return new Date().add(-5).hours().set({millisecond: 0}).equals( Date.parse('-5 Hour').set({millisecond: 0}) ) }
     }, 
     '+5 hours': {
       run: function() { },
-      assert: function() {  return this.today.add(5).hours().equals( Date.parse('+5 hours') ) }
+      assert: function() {  return new Date().add(5).hours().set({millisecond: 0}).equals( Date.parse('+5 hours').set({millisecond: 0}) ) }
     }, 
     '+5 Hours': {
       run: function() { },
-      assert: function() {  return this.today.add(5).hours().equals( Date.parse('+5 Hours') ) }
+      assert: function() {  return new Date().add(5).hours().set({millisecond: 0}).equals( Date.parse('+5 Hours').set({millisecond: 0}) ) }
     }, 
     '-5 hours': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).hours().equals( Date.parse('-5 hours') ) }
+      assert: function() {  return new Date().add(-5).hours().set({millisecond: 0}).equals( Date.parse('-5 hours').set({millisecond: 0}) ) }
     }, 
     '-5 Hours': {
       run: function() { },
-      assert: function() {  return this.today.add(-5).hours().equals( Date.parse('-5 Hours') ) }
+      assert: function() {  return new Date().add(-5).hours().set({millisecond: 0}).equals( Date.parse('-5 Hours').set({millisecond: 0}) ) }
     },     
         
     '+5 week': {

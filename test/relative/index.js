@@ -813,39 +813,39 @@
     setup: function() { },
     'last seconds': {
       run: function() { },
-      assert: function() { return Date.today().last().second().equals(Date.parse('last seconds')) }
+      assert: function() { return new Date().last().second().set({millisecond: 0}).equals(Date.parse('last seconds').set({millisecond: 0})) }
     }, 
     'last second': {
       run: function() { },
-      assert: function() { return Date.today().last().second().equals(Date.parse('last second')) }
+      assert: function() { return new Date().last().second().set({millisecond: 0}).equals(Date.parse('last second').set({millisecond: 0})) }
     },
     'last sec': {
       run: function() { },
-      assert: function() { return Date.today().last().second().equals(Date.parse('last sec')) }
+      assert: function() { return new Date().last().second().set({millisecond: 0}).equals(Date.parse('last sec').set({millisecond: 0})) }
     },
     'last minutes': {
       run: function() { },
-      assert: function() { return Date.today().last().minute().equals(Date.parse('last minutes')) }
+      assert: function() { return new Date().last().minute().set({millisecond: 0}).equals(Date.parse('last minutes').set({millisecond: 0})) }
     },
     'last minute': {
       run: function() { },
-      assert: function() { return Date.today().last().minute().equals(Date.parse('last minute')) }
+      assert: function() { return new Date().last().minute().set({millisecond: 0}).equals(Date.parse('last minute').set({millisecond: 0})) }
     },
     'last min': {
       run: function() { },
-      assert: function() { return Date.today().last().minute().equals(Date.parse('last min')) }
+      assert: function() { return new Date().last().minute().set({millisecond: 0}).equals(Date.parse('last min').set({millisecond: 0})) }
     },
     'last mn': {
       run: function() { },
-      assert: function() { return Date.today().last().minute().equals(Date.parse('last mn')) }
+      assert: function() { return new Date().last().minute().set({millisecond: 0}).equals(Date.parse('last mn').set({millisecond: 0})) }
     },    
     'last hours': {
       run: function() { },
-      assert: function() { return Date.today().last().hour().equals(Date.parse('last hours')) }
+      assert: function() { return new Date().last().hour().set({millisecond: 0}).equals(Date.parse('last hours').set({millisecond: 0})) }
     },
     'last hour': {
       run: function() { },
-      assert: function() { return Date.today().last().hour().equals(Date.parse('last hour')) }
+      assert: function() { return new Date().last().hour().set({millisecond: 0}).equals(Date.parse('last hour').set({millisecond: 0})) }
     },
     'last days': {
       run: function() { },
@@ -881,39 +881,39 @@
     },
 'prev seconds': {
       run: function() { },
-      assert: function() { return Date.today().prev().second().equals(Date.parse('prev seconds')) }
+      assert: function() { return new Date().prev().second().set({millisecond: 0}).equals(Date.parse('prev seconds').set({millisecond: 0})) }
     }, 
     'prev second': {
       run: function() { },
-      assert: function() { return Date.today().prev().second().equals(Date.parse('prev second')) }
+      assert: function() { return new Date().prev().second().set({millisecond: 0}).equals(Date.parse('prev second').set({millisecond: 0})) }
     },
     'prev sec': {
       run: function() { },
-      assert: function() { return Date.today().prev().second().equals(Date.parse('prev sec')) }
+      assert: function() { return new Date().prev().second().set({millisecond: 0}).equals(Date.parse('prev sec').set({millisecond: 0})) }
     },
     'prev minutes': {
       run: function() { },
-      assert: function() { return Date.today().prev().minute().equals(Date.parse('prev minutes')) }
+      assert: function() { return new Date().prev().minute().set({millisecond: 0}).equals(Date.parse('prev minutes').set({millisecond: 0})) }
     },
     'prev minute': {
       run: function() { },
-      assert: function() { return Date.today().prev().minute().equals(Date.parse('prev minute')) }
+      assert: function() { return new Date().prev().minute().set({millisecond: 0}).equals(Date.parse('prev minute').set({millisecond: 0})) }
     },
     'prev min': {
       run: function() { },
-      assert: function() { return Date.today().prev().minute().equals(Date.parse('prev min')) }
+      assert: function() { return new Date().prev().minute().set({millisecond: 0}).equals(Date.parse('prev min').set({millisecond: 0})) }
     },
     'prev mn': {
       run: function() { },
-      assert: function() { return Date.today().prev().minute().equals(Date.parse('prev mn')) }
+      assert: function() { return new Date().prev().minute().set({millisecond: 0}).equals(Date.parse('prev mn').set({millisecond: 0})) }
     },    
     'prev hours': {
       run: function() { },
-      assert: function() { return Date.today().prev().hour().equals(Date.parse('prev hours')) }
+      assert: function() { return new Date().prev().hour().set({millisecond: 0}).equals(Date.parse('prev hours').set({millisecond: 0})) }
     },
     'prev hour': {
       run: function() { },
-      assert: function() { return Date.today().prev().hour().equals(Date.parse('prev hour')) }
+      assert: function() { return new Date().prev().hour().set({millisecond: 0}).equals(Date.parse('prev hour').set({millisecond: 0})) }
     },
     'prev days': {
       run: function() { },
@@ -950,39 +950,39 @@
     
 'previous seconds': {
       run: function() { },
-      assert: function() { return Date.today().previous().second().equals(Date.parse('previous seconds')) }
+      assert: function() { return new Date().previous().second().set({millisecond: 0}).equals(Date.parse('previous seconds').set({millisecond: 0})) }
     }, 
     'previous second': {
       run: function() { },
-      assert: function() { return Date.today().previous().second().equals(Date.parse('previous second')) }
+      assert: function() { return new Date().previous().second().set({millisecond: 0}).equals(Date.parse('previous second').set({millisecond: 0})) }
     },
     'previous sec': {
       run: function() { },
-      assert: function() { return Date.today().previous().second().equals(Date.parse('previous sec')) }
+      assert: function() { return new Date().previous().second().set({millisecond: 0}).equals(Date.parse('previous sec').set({millisecond: 0})) }
     },
     'previous minutes': {
       run: function() { },
-      assert: function() { return Date.today().previous().minute().equals(Date.parse('previous minutes')) }
+      assert: function() { return new Date().previous().minute().set({millisecond: 0}).equals(Date.parse('previous minutes').set({millisecond: 0})) }
     },
     'previous minute': {
       run: function() { },
-      assert: function() { return Date.today().previous().minute().equals(Date.parse('previous minute')) }
+      assert: function() { return new Date().previous().minute().set({millisecond: 0}).equals(Date.parse('previous minute').set({millisecond: 0})) }
     },
     'previous min': {
       run: function() { },
-      assert: function() { return Date.today().previous().minute().equals(Date.parse('previous min')) }
+      assert: function() { return new Date().previous().minute().set({millisecond: 0}).equals(Date.parse('previous min').set({millisecond: 0})) }
     },
     'previous mn': {
       run: function() { },
-      assert: function() { return Date.today().previous().minute().equals(Date.parse('previous mn')) }
+      assert: function() { return new Date().previous().minute().set({millisecond: 0}).equals(Date.parse('previous mn').set({millisecond: 0})) }
     },    
     'previous hours': {
       run: function() { },
-      assert: function() { return Date.today().previous().hour().equals(Date.parse('previous hours')) }
+      assert: function() { return new Date().previous().hour().set({millisecond: 0}).equals(Date.parse('previous hours').set({millisecond: 0})) }
     },
     'previous hour': {
       run: function() { },
-      assert: function() { return Date.today().previous().hour().equals(Date.parse('previous hour')) }
+      assert: function() { return new Date().previous().hour().set({millisecond: 0}).equals(Date.parse('previous hour').set({millisecond: 0})) }
     },
     'previous days': {
       run: function() { },
@@ -1019,39 +1019,39 @@
            
     'next seconds': {
       run: function() { },
-      assert: function() { return Date.today().next().second().equals(Date.parse('next seconds')) }
+      assert: function() { return new Date().next().second().set({millisecond: 0}).equals(Date.parse('next seconds').set({millisecond: 0})) }
     }, 
     'next second': {
       run: function() { },
-      assert: function() { return Date.today().next().second().equals(Date.parse('next second')) }
+      assert: function() { return new Date().next().second().set({millisecond: 0}).equals(Date.parse('next second').set({millisecond: 0})) }
     },
     'next sec': {
       run: function() { },
-      assert: function() { return Date.today().next().second().equals(Date.parse('next sec')) }
+      assert: function() { return new Date().next().second().set({millisecond: 0}).equals(Date.parse('next sec').set({millisecond: 0})) }
     },
     'next minutes': {
       run: function() { },
-      assert: function() { return Date.today().next().minute().equals(Date.parse('next minutes')) }
+      assert: function() { return new Date().next().minute().set({millisecond: 0}).equals(Date.parse('next minutes').set({millisecond: 0})) }
     },
     'next minute': {
       run: function() { },
-      assert: function() { return Date.today().next().minute().equals(Date.parse('next minute')) }
+      assert: function() { return new Date().next().minute().set({millisecond: 0}).equals(Date.parse('next minute').set({millisecond: 0})) }
     },
     'next min': {
       run: function() { },
-      assert: function() { return Date.today().next().minute().equals(Date.parse('next min')) }
+      assert: function() { return new Date().next().minute().set({millisecond: 0}).equals(Date.parse('next min').set({millisecond: 0})) }
     },
     'next mn': {
       run: function() { },
-      assert: function() { return Date.today().next().minute().equals(Date.parse('next mn')) }
+      assert: function() { return new Date().next().minute().set({millisecond: 0}).equals(Date.parse('next mn').set({millisecond: 0})) }
     },    
     'next hours': {
       run: function() { },
-      assert: function() { return Date.today().next().hour().equals(Date.parse('next hours')) }
+      assert: function() { return new Date().next().hour().set({millisecond: 0}).equals(Date.parse('next hours').set({millisecond: 0})) }
     },
     'next hour': {
       run: function() { },
-      assert: function() { return Date.today().next().hour().equals(Date.parse('next hour')) }
+      assert: function() { return new Date().next().hour().set({millisecond: 0}).equals(Date.parse('next hour').set({millisecond: 0})) }
     },
     'next days': {
       run: function() { },

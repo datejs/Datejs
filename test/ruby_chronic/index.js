@@ -68,7 +68,15 @@
    '7 days from now': {
       run: function() { },
       assert: function() { return new Date().add(7).days().set({millisecond: 0}).equals(Date.parse('7 days from now').set({millisecond:0})) }
-    }, 
+    },
+   '3 years ago': {
+      run: function() { },
+      assert: function() { return Date.today().add(-3).years().equals( Date.parse('3 years ago') ) }
+    },   
+   '7 hours ago': {
+      run: function() { },
+      assert: function() { return (new Date()).add(-7).hours().set({millisecond: 0}).equals(Date.parse('7 hours ago').set({millisecond: 0})) }
+    },     
    '1 week hence': {
       run: function() { },
       assert: function() { return Date.today().add(7).days().equals(Date.parse('1 week hence')) }
@@ -202,14 +210,6 @@
       run: function() { },
       assert: function() { return Date.today().add(1).day().set({ hour: 12 }).equals( Date.parse('afternoon yesterday') ) }
     },    
-   '3 years ago': {
-      run: function() { },
-      assert: function() { return Date.today().add(-3).years().equals( Date.parse('3 years ago') ) }
-    },   
-   '7 hours ago': {
-      run: function() { },
-      assert: function() { return Date.today().add(-7).hours().equals(Date.parse('7 hours ago')) }
-    },
    'in 3 hours : problem with "in"': {
       run: function() { },
       assert: function() { return new Date().set({millisecond:0}).add(3).hours().equals(Date.parse('in 3 hours').set({millisecond:0})) }
