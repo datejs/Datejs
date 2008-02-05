@@ -1,7 +1,13 @@
 CHANGE LOG
 --------------------
 
-2008-1-2 [Coolite]
+2008-2-4 [geoffrey.mcgill]
+1.  Added .getOrdinal() tests to the new sugarpak (/trunk/test/sugarpak/) test package.
+    See http://www.datejs.com/test/sugarpak/index.html
+
+--------------------
+
+2008-1-2 [geoffrey.mcgill]
 1.  Added .toISOString() to sugarpak.js. Returns ISO 8601 formatted string of date.
 2.  Changed .toJSONString() to return string value wrapped in double-quotes ("") as per
     JSON.org spec. 
@@ -36,7 +42,7 @@ CHANGE LOG
 
 --------------------
 
-2007-12-27 [Coolite]
+2007-12-27 [geoffrey.mcgill]
 1.  Modified the offset values of Date.CultureInfo.timezones.
 2.  Added <static> Date.compare(date1, date2).
         
@@ -89,7 +95,7 @@ CHANGE LOG
 
 --------------------
 
-2007-12-23 [Coolite]
+2007-12-23 [geoffrey.mcgill]
 1.  Moved all minified files to the /build/ folder. Now all the original source files are 
     located in the /src/ folder, and all minified files are located in the /build/ folder. 
 2.  Removed /trunk/doc/ folder. 

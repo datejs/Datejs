@@ -638,8 +638,7 @@
       run: function() { },
       assert: function() { return new Date(2001, 0, 1).add( -5 ).years().equals( new Date(1996, 0, 1) ); }
     }    
-  }
-   
+  }   
 });
 
 $(document).ready( function() { Date.Specification.validate().show() } );
