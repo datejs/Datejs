@@ -1,6 +1,17 @@
 CHANGE LOG
 --------------------
 
+2008-2-5 [geoffrey.mcgill]
+1.  Added .is().weekday() function to sugarpak.js. 
+    The .weekday() function determines if the current date is a weekday. 
+    The function must be preceded by the .is() function.
+    
+    Example
+
+    Date.today().is().weekday(); // true|false    
+
+--------------------
+
 2008-2-4 [geoffrey.mcgill]
 1.  Added .getOrdinal() tests to the new sugarpak (/trunk/test/sugarpak/) test package.
     See http://www.datejs.com/test/sugarpak/index.html

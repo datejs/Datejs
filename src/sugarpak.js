@@ -99,7 +99,7 @@
     };    
 
     /** 
-     * Performs a equality check when followed by either a month name or day name function.
+     * Performs a equality check when followed by either a month name, day name or .weekday() function.
      * Example
     <pre><code>
     Date.today().is().friday(); // true|false
@@ -132,6 +132,22 @@
         return (typeof time === "string") ? $D.parse(this.toShortDateString() + " " + time) : this.set(time);
     }; 
 
+    /** 
+     * Determines if the current date is a weekday. This function must be preceeded by the .is() function.
+     * Example
+    <pre><code>
+    Date.today().is().weekday(); // true|false
+    </code></pre>
+     *  
+     * @return {Boolean}    true|false
+     */
+    $P.weekday = function () {
+        if (this._is) { 
+            this._is = false;
+            return (!this.is().sat() && !this.is().sun());
+        } 
+    };
+    
     /** 
      * Creates a new Date() and adds this (Number) to the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
      * Example
@@ -383,5 +399,5 @@
         default: 
             return "th";
         }
-    };    
+    };   
 }());
