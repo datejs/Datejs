@@ -506,7 +506,6 @@
         },
         timezone: function (s) {
             return function () {
-                //var n = s.replace(/[^\d\+\-]/g, "");
                 var n = s.replace(/[^\d\+\-]/g, "");
                 if (n.length) { 
                     this.timezoneOffset = Number(n); 
@@ -645,7 +644,6 @@
 
             if (this.month || this.month === 0) {
                 if ("year day hour minute second".indexOf(this.unit) != -1) {
-//                if (this.unit == "day" || this.unit == "year" || this.unit == "hour" || this.unit == "minute" || this.unit == "second") {
                     this.value = this.month + 1;
                     this.month = null;
                     expression = true;
@@ -672,7 +670,11 @@
                 this.value = (this.month + 1);
                 this.month = null;
             }
-            
+       
+            if (this.value != null && this.month != null && this.year != null) {
+                this.day = this.value * 1;
+            }
+     
             if (this.month && !this.day && this.value) {
                 today.set({ day: this.value * 1 });
                 if (!expression) {
@@ -696,7 +698,7 @@
             if (!this.unit) { 
                 this.unit = "day"; 
             }
-
+            
             if (!this.value && this.operator && this.operator !== null && this[this.unit + "s"] && this[this.unit + "s"] !== null) {
                 this[this.unit + "s"] = this[this.unit + "s"] + ((this.operator == "add") ? 1 : -1) + (this.value||0) * orient;
             } else if (this[this.unit + "s"] == null || this.operator != null) {

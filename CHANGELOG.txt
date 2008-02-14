@@ -1,6 +1,18 @@
 CHANGE LOG
 --------------------
 
+2008-2-7 [geoffrey.mcgill]
+1.  Fixed bug in parser.js which prevented some strings from parsing when the 'day' of the date string was greater than the last day of the current month.
+
+	Example
+	
+	// Today is 13-Feb-2008
+	Date.parse("30 Apr 2008"); //FAIL
+	
+	Date strings which fall under this scenario should now parse correctly.
+
+--------------------
+
 2008-2-5 [geoffrey.mcgill]
 1.  Added .is().weekday() function to sugarpak.js. 
     The .weekday() function determines if the current date is a weekday. 

@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 5-Feb-2008
+ * @date: 13-Feb-2008
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -61,6 +61,7 @@ if(!expression&&this.weekday&&!this.day&&!this.days){var temp=Date[this.weekday]
 this.year=temp.getFullYear();}
 if(expression&&this.weekday&&this.unit!="month"){this.unit="day";gap=($D.getDayNumberFromName(this.weekday)-today.getDay());mod=7;this.days=gap?((gap+(orient*mod))%mod):(orient*mod);}
 if(this.month&&this.unit=="day"&&this.operator){this.value=(this.month+1);this.month=null;}
+if(this.value!=null&&this.month!=null&&this.year!=null){this.day=this.value*1;}
 if(this.month&&!this.day&&this.value){today.set({day:this.value*1});if(!expression){this.day=this.value*1;}}
 if(!this.month&&this.value&&this.unit=="month"&&!this.now){this.month=this.value;expression=true;}
 if(expression&&(this.month||this.month===0)&&this.unit!="year"){this.unit="month";gap=(this.month-today.getMonth());mod=12;this.months=gap?((gap+(orient*mod))%mod):(orient*mod);this.month=null;}
