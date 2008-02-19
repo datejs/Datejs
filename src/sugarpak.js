@@ -145,7 +145,8 @@
         if (this._is) { 
             this._is = false;
             return (!this.is().sat() && !this.is().sun());
-        } 
+        }
+        return this;
     };
     
     /** 
@@ -340,13 +341,33 @@
         $P[nth[l]] = (l === 0) ? nthfn(-1) : nthfn(l);
     }
     
-    /**
-     * Converts the current date instance into a JSON string value.
-     * @return {String}  JSON string of date
-     */
-    $P.toJSONString = function () {
-        return this.toString("yyyy-MM-ddThh:mm:ssZ");
-    };
+    if (!$D.toISOString) {
+        /**
+         * Converts the current date instance into a string with an ISO 8601 format. See also .toJSONString().
+         * @return {String}  ISO string of date
+         */
+        $P.toISOString = function () {
+            // From http://www.json.org/json.js. Public Domain. 
+            function f(n) {
+                return n < 10 ? '0' + n : n;
+            }
+
+            return '"' + this.getUTCFullYear()   + '-' +
+                f(this.getUTCMonth() + 1) + '-' +
+                f(this.getUTCDate())      + 'T' +
+                f(this.getUTCHours())     + ':' +
+                f(this.getUTCMinutes())   + ':' +
+                f(this.getUTCSeconds())   + 'Z"';
+        };
+    }
+    
+    if (!$D.toJSONString) {
+        /**
+         * Converts the current date instance into a JSON string value. See also .toISOString().
+         * @return {String}  JSON string of date
+         */
+         $P.toJSONString = $P.toISOString;
+    }
 
     /**
      * Converts the current date instance to a string using the culture specific shortDatePattern.

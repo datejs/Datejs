@@ -65,6 +65,10 @@ var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
         this.setMilliseconds(this.getMilliseconds() * orient);
     }
 
+    this.getTotalMilliseconds = function () {
+        return (this.getDays() * 86400000) + (this.getHours() * 3600000) + (this.getMinutes() * 60000) + (this.getSeconds() * 1000); 
+    };
+    
     this.compareTo = function (time) {
         var t1 = new Date(1970, 1, 1, this.getHours(), this.getMinutes(), this.getSeconds()), t2;
         if (time === null) { 
@@ -88,10 +92,6 @@ var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
         return (time === null) ? this : this.addSeconds(-time.getTotalMilliseconds() / 1000); 
     };
 
-    this.getTotalMilliseconds = function () {
-        return (this.getDays() * 86400000) + (this.getHours() * 3600000) + (this.getMinutes() * 60000) + (this.getSeconds() * 1000); 
-    };
-    
     this.addDays = function (n) { 
         return new TimeSpan(this.getTotalMilliseconds() + (n * 86400000)); 
     };
