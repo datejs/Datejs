@@ -1,6 +1,12 @@
 CHANGE LOG
 --------------------
 
+2008-2-21 [geoffrey.mcgill]
+1.  Fixed bug in .parseExact where if the month was January (0) the .finishExact function was resetting to the current month.
+2.  Added several new tests to /trunk/test/parseExact/.
+
+--------------------
+
 2008-2-18 [geoffrey.mcgill]
 1.  Added .toISOString() back to sugarpak.js. Still investigating to figure out why/how this function was removed at Build 130-131.
 2.  Fixed small bug in .is().weekday() where .weekday() was not returning 'this' if the .is() flag had not been set.

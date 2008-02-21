@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 19-Feb-2008
+ * @date: 21-Feb-2008
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -44,7 +44,7 @@ var _vector=function(op){return function(){if(arguments[0]instanceof Array){retu
 return rx;};$D.Grammar={};$D.Translator={hour:function(s){return function(){this.hour=Number(s);};},minute:function(s){return function(){this.minute=Number(s);};},second:function(s){return function(){this.second=Number(s);};},meridian:function(s){return function(){this.meridian=s.slice(0,1).toLowerCase();};},timezone:function(s){return function(){var n=s.replace(/[^\d\+\-]/g,"");if(n.length){this.timezoneOffset=Number(n);}else{this.timezone=s.toLowerCase();}};},day:function(x){var s=x[0];return function(){this.day=Number(s.match(/\d+/)[0]);};},month:function(s){return function(){this.month=((s.length==3)?$D.getMonthNumberFromName(s):(Number(s)-1));};},year:function(s){return function(){var n=Number(s);this.year=((s.length>2)?n:(n+(((n+2000)<$C.twoDigitYearMax)?2000:1900)));};},rday:function(s){return function(){switch(s){case"yesterday":this.days=-1;break;case"tomorrow":this.days=1;break;case"today":this.days=0;break;case"now":this.days=0;this.now=true;break;}};},finishExact:function(x){x=(x instanceof Array)?x:[x];for(var i=0;i<x.length;i++){if(x[i]){x[i].call(this);}}
 var now=new Date();if((this.hour||this.minute)&&(!this.month&&!this.year&&!this.day)){this.day=now.getDate();}
 if(!this.year){this.year=now.getFullYear();}
-if(!this.month){this.month=now.getMonth();}
+if(!this.month&&this.month!==0){this.month=now.getMonth();}
 if(!this.day){this.day=1;}
 if(!this.hour){this.hour=0;}
 if(!this.minute){this.minute=0;}

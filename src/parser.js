@@ -570,7 +570,7 @@
                 this.year = now.getFullYear();
             }
             
-            if (!this.month) {
+            if (!this.month && this.month !== 0) {
                 this.month = now.getMonth();
             }
             
