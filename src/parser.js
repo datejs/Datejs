@@ -779,7 +779,8 @@
     // _.min(1, _.set([ g.H, g.m, g.s ], g._t));
     g.t = _.cache(_.process(g.ctoken2("shortMeridian"), t.meridian));
     g.tt = _.cache(_.process(g.ctoken2("longMeridian"), t.meridian));
-    g.z = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d\:?\d\d)/), t.timezone));    g.zz = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d\:?\d\d)/), t.timezone));
+    g.z = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d\:?\d\d)/), t.timezone));
+    g.zz = _.cache(_.process(_.rtoken(/^((\+|\-)\s*\d\d\d\d)|((\+|\-)\d\d\:?\d\d)/), t.timezone));
     
     g.zzz = _.cache(_.process(g.ctoken2("timezone"), t.timezone));
     g.timeSuffix = _.each(_.ignore(g.whiteSpace), _.set([ g.tt, g.zzz ]));
