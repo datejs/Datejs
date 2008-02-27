@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 21-Feb-2008
+ * @date: 26-Feb-2008
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -134,7 +134,7 @@ Date.CultureInfo = {
         longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
         timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc)/i,
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-        timeContext: /^\s*(\:|a|p)/i
+        timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
     timezones: { UTC: "-000", GMT: "-000", EST: "-0500", EDT: "-0400", CST: "-0600", CDT: "-0500", MST: "-0700", MDT: "-0600", PST: "-0800", PDT: "-0700" }
