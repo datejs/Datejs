@@ -1,6 +1,25 @@
 CHANGE LOG
 --------------------
 
+2008-3-3 [geoffrey.mcgill]
+1.  Fixed .toString() bug where .toString would not return four characters if the year was less than 1000.
+        
+	// Old 
+	console.log(Date.today().set({year: 10}).toString("yyyy"); // "10"
+	
+	// New
+	console.log(Date.today().set({year: 10}).toString("yyyy"); // "0010"
+	
+	The fix also corrected the same issue with .toString("yy") if the year was less than 10.
+	
+	// Old 
+	console.log(Date.today().set({year: 5}).toString("yy"); // "5"
+	
+	// New
+	console.log(Date.today().set({year: 5}).toString("yy"); // "05"
+
+--------------------
+
 2008-2-26 [geoffrey.mcgill]
 1.  Dan Yoder fixed bug with timeContext pattern where if a date included "april" or "august", the parser thought the 'a' was the beginning of a time part (as in am/pm).
        

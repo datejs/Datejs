@@ -104,6 +104,14 @@
     'Tue Nov 20 2007 08:00:00 UTC': {
       run: function() { this.date = Date.parse("Tue Nov 20 2007 08:00:00 UTC") },
       assert: function() { return new Date(2007,10,20,8,0,0).setTimezone("UTC").equals( this.date ) }
+    },
+    '24 Apr 2008 17:00': {
+      run: function() { this.date = Date.parse("24 Apr 2008 17:00") },
+      assert: function() { return new Date(2008,3,24,17,0,0).equals( this.date ) }
+    },
+    '24 April 2008 17:00': {
+      run: function() { this.date = Date.parse("24 April 2008 17:00") },
+      assert: function() { return new Date(2008,3,24,17,0,0).equals( this.date ) }
     }   
 },
     

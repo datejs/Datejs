@@ -637,9 +637,10 @@
             case "s":
                 return x.getSeconds();
             case "yyyy":
-                return x.getFullYear();
+                var y = "000" + x.getFullYear();
+                return y.substring(y.length - 4);
             case "yy":
-                return x.getFullYear().toString().substring(2, 4);
+                return x.toString("yyyy").substring(2);
             case "dddd":
                 return $C.dayNames[x.getDay()];
             case "ddd":
