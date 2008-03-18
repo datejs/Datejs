@@ -37,6 +37,14 @@
     };
 
     /** 
+     * Determines if an object is a Date object.
+     * @return {Boolean} true if object is a Date, otherwise false.
+     */    
+    $D.isDate = function (obj) {
+        return (obj !== null) ? obj.constructor.toString().match(/Date/i) == "Date" : false;
+    };
+
+    /** 
      * Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM).
      * @return {Date}    The current date.
      */
@@ -512,6 +520,14 @@
     };
 
     /**
+     * Get the Year Quarter number for the currect date instance.
+     * @return {Number}  1 to 4
+     */
+    $P.getQuarter = function () {
+        return Math.ceil((this.getMonth() + 1)/3);
+    };     
+     
+    /**
      * Get the time zone abbreviation of the current date.
      * @return {String} The abbreviated time zone name (e.g. "EST")
      */
@@ -599,8 +615,8 @@
      MMM    Abbreviated month name. $C.abbreviatedMonthNames.                            "Jan" to "Dec"
      MMMM   The full month name. $C.monthNames.                                          "January" to "December"
 
-     yy     Displays the year as a two-digit number.                                     "99" or "07"
-     yyyy   Displays the full four digit year.                                           "1999" or "2007"
+     yy     Displays the year as a two-digit number.                                     "99" or "08"
+     yyyy   Displays the full four digit year.                                           "1999" or "2008"
      
      t      Displays the first character of the A.M./P.M. designator.                    "A" or "P"
             $C.amDesignator or $C.pmDesignator
@@ -661,10 +677,6 @@
                 return x.getHours() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
             case "tt":
                 return x.getHours() < 12 ? $C.amDesignator : $C.pmDesignator;
-            case "zzz":
-            case "zz":
-            case "z":
-                return "";
             }
         }
         ) : this._toString();

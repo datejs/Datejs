@@ -48,7 +48,7 @@
       run: function() { },
       assert: function() { return Date.today().set({ day: 25 }).equals( Date.parse('25th') ) }
     },
-    'End of month : Not supported currently, but should be an easy addition.': {
+    'End of month : Not supported currently.': {
       run: function() { },
       assert: function() { return Date.today().moveToLastDayOfMonth().equals( Date.parse('End of month') ) }
     },  
@@ -76,26 +76,26 @@
       run: function() { },
       assert: function() { return Date.today().set({ hour: 18 }).equals( Date.parse('18:00') ) }
     }, 
-    '5 hours : Datejs uses "+5 hours"': {
+    '5 hours': {
       run: function() { 
         this.date = Date.parse('5 hours'); 
         this.date.setMilliseconds(0);
       },
       assert: function() { return this.now.add(5).hours().equals( this.date ) }
     },
-    '2 days : Datejs uses "+2 days"': {
+    '2 days': {
       run: function() { 
         this.date = Date.parse('2 days'); 
         this.date.setMilliseconds(0);
       },
-      assert: function() { return this.now.add(2).days().equals( this.date ) }
+      assert: function() { return Date.today().add(2).days().equals( this.date ) }
     },
-    '3 weeks : Datejs uses "+3 weeks"': {
+    '3 weeks : Datejs uses "+3 weeks."': {
       run: function() { 
         this.date = Date.parse('3 weeks'); 
         this.date.setMilliseconds(0);
       },
-      assert: function() { return this.now.add(3).weeks().equals( this.date ) }
+      assert: function() { return Date.today().add(3).weeks().equals( this.date ) }
     }
   }
 });

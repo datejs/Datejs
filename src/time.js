@@ -216,45 +216,45 @@ var TimePeriod = function (years, months, days, hours, minutes, seconds, millise
     } else if (arguments.length == 2 && arguments[0] instanceof Date && arguments[1] instanceof Date) {
         // startDate and endDate as arguments
     
-        var date1 = years.clone();
-        var date2 = months.clone();
+        var d1 = years.clone();
+        var d2 = months.clone();
     
-        var temp = date1.clone();
-        var orient = (date1 > date2) ? -1 : +1;
+        var temp = d1.clone();
+        var orient = (d1 > d2) ? -1 : +1;
         
-        this.years = date2.getFullYear() - date1.getFullYear();
+        this.years = d2.getFullYear() - d1.getFullYear();
         temp.addYears(this.years);
         
         if (orient == +1) {
-            if (temp > date2) {
+            if (temp > d2) {
                 if (this.years !== 0) {
                     this.years--;
                 }
             }
         } else {
-            if (temp < date2) {
+            if (temp < d2) {
                 if (this.years !== 0) {
                     this.years++;
                 }
             }
         }
         
-        date1.addYears(this.years);
+        d1.addYears(this.years);
 
         if (orient == +1) {
-            while (date1 < date2 && date1.clone().addDays(date1.getDaysInMonth()) < date2) {
-                date1.addMonths(1);
+            while (d1 < d2 && d1.clone().addDays(d1.getDaysInMonth()) < d2) {
+                d1.addMonths(1);
                 this.months++;
             }
         }
         else {
-            while (date1 > date2 && date1.clone().addDays(-date1.getDaysInMonth()) > date2) {
-                date1.addMonths(-1);
+            while (d1 > d2 && d1.clone().addDays(-d1.getDaysInMonth()) > d2) {
+                d1.addMonths(-1);
                 this.months--;
             }
         }
         
-        var diff = date2 - date1;
+        var diff = d2 - d1;
 
         if (diff !== 0) {
             var ts = new TimeSpan(diff);
