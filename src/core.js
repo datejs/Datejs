@@ -37,14 +37,6 @@
     };
 
     /** 
-     * Determines if an object is a Date object.
-     * @return {Boolean} true if object is a Date, otherwise false.
-     */    
-    $D.isDate = function (obj) {
-        return (obj !== null) ? obj.constructor.toString().match(/Date/i) == "Date" : false;
-    };
-
-    /** 
      * Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM).
      * @return {Date}    The current date.
      */
@@ -220,8 +212,9 @@
      * @param {Number}   The number of days to add. The number can be positive or negative [Required]
      * @return {Date}    date
      */
-    $P.addDays = function (value) { 
-        return this.addMilliseconds(value * 86400000); /* 60*60*24*1000 */
+    $P.addDays = function (value) {
+        this.setDate(this.getDate() + value);
+        return this;
     };
 
     /**
@@ -518,14 +511,6 @@
         }
         return w;
     };
-
-    /**
-     * Get the Year Quarter number for the currect date instance.
-     * @return {Number}  1 to 4
-     */
-    $P.getQuarter = function () {
-        return Math.ceil((this.getMonth() + 1)/3);
-    };     
      
     /**
      * Get the time zone abbreviation of the current date.

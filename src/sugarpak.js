@@ -420,5 +420,5 @@
         default: 
             return "th";
         }
-    };   
+    };
 }());

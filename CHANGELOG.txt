@@ -2,40 +2,8 @@ CHANGE LOG
 --------------------
 
 2008-3-18 [geoffrey.mcgill]
-1.  Added Date.isDate(obj) function which will determine if an object is a Date object. 
-
-	The following example demonstrates a scenario where a simple "typeof" test will not return the expected result.
-    
-    Example
-    
-	var doSomething = function (value) {
-		var temp = null;
-		if (value == "now") {
-			temp = new Date();
-		}
-		return temp;
-	};
-
-	var myfunction = function (value) {
-		var temp = doSomething(value);
-		
-		// The value returned by doSomething.
-		console.log("doSomething: ", temp);
-		
-		// Simple typeof check, but "temp" is a typeof "object". But we know it's a Date.
-		console.log("type: ", typeof temp);
-		
-		// The isDate function will correctly determine if "temp" is a Date object or not.
-		console.log("isDate: ", Date.isDate(temp));
-	}
-	
-	myfunction("now");
-
-2.  Add .getQuarter() function which will return a Number representing the Year Quarter value for the current Date instance.
-
-	Example
-	
-	console.log(Date.today().getQuarter()); // 1 to 4
+1.  Made small revision to .addDays() which should avoid addition/subtraction issues when 
+    spanning over a Daylight Saving Time (Summer Time) change.
 
 --------------------
 
