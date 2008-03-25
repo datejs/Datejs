@@ -21,7 +21,13 @@ CUTTING ROOM FLOOR
 The following items were at one time tested for inclusion into the library, but were cut.
 They are documented here for reference. 
 
-1.  Date.prototype.getQuarter()
+1.  Removed <static> Date.now() because of potential collision with the future ECMA 4 spec, which will include a Date.now() function.
+
+2.  Removed <static> Date.getDayName(dayOfWeek). Please use Date.CultureInfo.dayNames[dayOfWeek]. 
+
+3.  Removed <static> Date.getMonthName(month). Please use Date.CultureInfo.monthNames[month]. 
+	
+2.  Date.prototype.getQuarter()
 
     /**
      * Get the Year Quarter number for the currect date instance.
@@ -31,7 +37,13 @@ They are documented here for reference.
         return Math.ceil((this.getMonth() + 1)/3);
     }; 
 
-2.  Date.isDate()
+3.  Date.isDate(). Please use "instanceof".
+
+	Example
+	
+	var d1 = null;
+	d1 = Date.today();
+	console.log(d1 instanceof Date);
 
     /** 
      * Determines if an object is a Date object.

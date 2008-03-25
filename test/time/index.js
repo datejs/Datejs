@@ -245,8 +245,20 @@
       run: function() { this.date = Date.parse('10:30 PM -0500') },
       assert: function() { return this.d[0].equals( this.date ) }
     }
+  } ,
+  
+'Misc': {
+    setup: function() { 
+    },
+    '10:2 == 10:02': {
+      run: function() { this.date = Date.parse('10:2') },
+      assert: function() { return Date.today().set({hour: 10, minute: 2}).equals( this.date ) }
+    },
+    '10:2:5 == 10:02:05': {
+      run: function() { this.date = Date.parse('10:2:5') },
+      assert: function() { return Date.today().set({hour: 10, minute: 2, second: 5}).equals( this.date ) }
+    }
   }  
-    
 });
 
 $(document).ready( function() { Date.Specification.validate().show() } );

@@ -1,13 +1,29 @@
 CHANGE LOG
 --------------------
 
-2008-3-18 [geoffrey.mcgill]
+2008-03-24 [geoffrey.mcgill]
+1.  Fixed bug where a single digit minute or second value would not parse correctly. 
+	See forum post http://tinyurl.com/3d8b57.
+	
+	Made the following revision:
+
+	// Old
+	g.hms = _.cache(_.sequence([g.H, g.mm, g.ss], g.timePartDelimiter));
+		
+	// New
+	g.hms = _.cache(_.sequence([g.H, g.m, g.s], g.timePartDelimiter));
+	
+2.  Added a few tests to /trunk/test/time/ relating to above fix.
+
+--------------------
+
+2008-03-18 [geoffrey.mcgill]
 1.  Made small revision to .addDays() which should avoid addition/subtraction issues when 
     spanning over a Daylight Saving Time (Summer Time) change.
 
 --------------------
 
-2008-3-3 [geoffrey.mcgill]
+2008-03-03 [geoffrey.mcgill]
 1.  Fixed .toString() bug where .toString would not return four characters if the year was less than 1000.
         
 	// Old 
@@ -26,7 +42,7 @@ CHANGE LOG
 
 --------------------
 
-2008-2-26 [geoffrey.mcgill]
+2008-02-26 [geoffrey.mcgill]
 1.  Dan Yoder fixed bug with timeContext pattern where if a date included "april" or "august", the parser thought the 'a' was the beginning of a time part (as in am/pm).
        
         "added a quick negative lookahead to the regexp to make sure the 'a' isn't followed by a 'u' or a 'p'."
@@ -41,19 +57,19 @@ CHANGE LOG
 
 --------------------
 
-2008-2-21 [geoffrey.mcgill]
+2008-02-21 [geoffrey.mcgill]
 1.  Fixed bug in .parseExact where if the month was January ('0') the Parser.finishExact function was resetting to the current month.
 2.  Added several new tests to /trunk/test/parseExact/.
 
 --------------------
 
-2008-2-18 [geoffrey.mcgill]
+2008-02-18 [geoffrey.mcgill]
 1.  Added .toISOString() back to sugarpak.js. Still investigating to figure out why/how this function was removed at Build 130-131.
 2.  Fixed small bug in .is().weekday() where .weekday() was not returning 'this' if the .is() flag had not been set.
 
 --------------------
 
-2008-2-7 [geoffrey.mcgill]
+2008-02-07 [geoffrey.mcgill]
 1.  Fixed bug in parser.js which prevented some strings from parsing when the 'day' of the date string was greater than the last day of the current month.
 
 	Example
@@ -65,7 +81,7 @@ CHANGE LOG
 
 --------------------
 
-2008-2-5 [geoffrey.mcgill]
+2008-02-05 [geoffrey.mcgill]
 1.  Added .is().weekday() function to sugarpak.js. 
     The .weekday() function determines if the current date is a weekday. 
     The function must be preceded by the .is() function.
@@ -76,13 +92,13 @@ CHANGE LOG
 
 --------------------
 
-2008-2-4 [geoffrey.mcgill]
+2008-02-04 [geoffrey.mcgill]
 1.  Added .getOrdinal() tests to the new sugarpak (/trunk/test/sugarpak/) test package.
     See http://www.datejs.com/test/sugarpak/index.html
 
 --------------------
 
-2008-1-2 [geoffrey.mcgill]
+2008-01-02 [geoffrey.mcgill]
 1.  Added .toISOString() to sugarpak.js. Returns ISO 8601 formatted string of date.
 2.  Changed .toJSONString() to return string value wrapped in double-quotes ("") as per
     JSON.org spec. 

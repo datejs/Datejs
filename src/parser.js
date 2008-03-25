@@ -774,7 +774,7 @@
     g.mm = _.cache(_.process(_.rtoken(/^[0-5][0-9]/), t.minute));
     g.s = _.cache(_.process(_.rtoken(/^([0-5][0-9]|[0-9])/), t.second));
     g.ss = _.cache(_.process(_.rtoken(/^[0-5][0-9]/), t.second));
-    g.hms = _.cache(_.sequence([g.H, g.mm, g.ss], g.timePartDelimiter));
+    g.hms = _.cache(_.sequence([g.H, g.m, g.s], g.timePartDelimiter));
   
     // _.min(1, _.set([ g.H, g.m, g.s ], g._t));
     g.t = _.cache(_.process(g.ctoken2("shortMeridian"), t.meridian));
