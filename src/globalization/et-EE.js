@@ -186,4 +186,6 @@ Date.CultureInfo = {
  * summer              summer
  * fall                fall
  * winter              winter
+ * end of              end of
+ * end                 end
  */

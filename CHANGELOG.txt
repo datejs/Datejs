@@ -1,6 +1,30 @@
 CHANGE LOG
 --------------------
 
+2008-03-27 [geoffrey.mcgill]
+1.  Fixed bug which caused the string "Jan 2008" to not be parsed correctly. The 'Day' value would be
+	set to "today's" Day. For example, if Today is the 27th day of the month, Date.parse("Jan 2008")
+	would return "27-Jan-2008", although "1-Jan-2008" was expected.
+	 
+	The bug was caused by a check to see if the value of this.month was existed within Parser.finish.
+	If a variable is set to the Number "0", JavaScript appears to treat that as null or undefined 
+	even though the Number "0" is valid.
+	
+	Required an explicit check for the Number "0" in addition to the variable existence check.
+	
+	Example
+	
+	// Old (line 727 in parser.js)
+	if (this.month && !this.day) { 
+	
+	// New (line 727 in parser.js)
+	if ((this.month || this.month === 0) && !this.day) { 
+	
+2.  Added about 100 new tests to /trunk/test/partial/ which test for vaiations on date strings 
+	with no Day value and No Year-or-Month value. View online at http://www.datejs.com/test/partial/
+
+--------------------
+
 2008-03-24 [geoffrey.mcgill]
 1.  Fixed bug where a single digit minute or second value would not parse correctly. 
 	See forum post http://tinyurl.com/3d8b57.
