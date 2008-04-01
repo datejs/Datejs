@@ -444,12 +444,15 @@
      */
     $P.moveToNthOccurrence = function (dayOfWeek, occurrence) {
         var shift = 0;
-        if (occurrence) {
-            if (occurrence > 0) {
-                shift = occurrence - 1;
-            } else if (occurrence == -1) {
-                return this.moveToLastDayOfMonth().moveToDayOfWeek(dayOfWeek, -1);
+        if (occurrence > 0) {
+            shift = occurrence - 1;
+        }
+        else if (occurrence === -1) {
+            this.moveToLastDayOfMonth();
+            if (this.getDay() !== dayOfWeek) {
+                this.moveToDayOfWeek(dayOfWeek, -1);
             }
+            return this;
         }
         return this.moveToFirstDayOfMonth().addDays(-1).moveToDayOfWeek(dayOfWeek, +1).addWeeks(shift);
     };

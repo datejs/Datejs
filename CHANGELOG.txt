@@ -1,6 +1,23 @@
 CHANGE LOG
 --------------------
 
+2008-04-01 [geoffrey.mcgill]
+1.  Fixed bug where Date.nov().final().sunday() would return the second to last sunday.
+	
+	The bug was in the function moveToNthOccurrence (core.js). If the final day of the month
+	matched the final day required, then the second-to-last instance of the day required 
+	would be returned. 
+	
+	Example
+	
+	// Old - Final day of month is a Sunday
+	Date.nov().final().sunday() // return 23-Nov-2008
+	
+	// New
+	Date.nov().final().sunday() // return 30-Nov-2008
+
+--------------------
+
 2008-03-27 [geoffrey.mcgill]
 1.  Fixed bug which caused the string "Jan 2008" to not be parsed correctly. The 'Day' value would be
 	set to "today's" Day. For example, if Today is the 27th day of the month, Date.parse("Jan 2008")
