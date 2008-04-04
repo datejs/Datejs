@@ -522,7 +522,7 @@
         }, 
         month: function (s) {
             return function () {
-                this.month = ((s.length == 3) ? $D.getMonthNumberFromName(s) : (Number(s) - 1));
+                this.month = (s.length == 3) ? "jan feb mar apr may jun jul aug sep oct nov dec".indexOf(s)/4 : Number(s) - 1;
             };
         },
         year: function (s) {
