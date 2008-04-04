@@ -1,6 +1,27 @@
 CHANGE LOG
 --------------------
 
+2008-04-04 [geoffrey.mcgill]
+1.  Fixed Parser.js bug where the parser was using the static month token to match against the 
+    abbreviatedMonthNames array in the CultureInfo file. This was causing problems when the
+    abbreviatedMonthNames strings were not English.
+
+    Example
+    
+    // CultureInfo = "de-DE.js"
+    Date.parse("mai"); // "May", but returns null
+    
+    
+    The fix required changing the following (approx line #525) in Parser.js.
+
+    // Old
+    this.month = ((s.length == 3) ? $D.getMonthNumberFromName(s) : (Number(s) - 1));
+
+    // New
+    this.month = (s.length == 3) ? "jan feb mar apr may jun jul aug sep oct nov dec".indexOf(s)/4 : Number(s) - 1;
+    
+--------------------
+
 2008-04-01 [geoffrey.mcgill]
 1.  Fixed bug where Date.nov().final().sunday() would return the second to last sunday.
 	
@@ -31,10 +52,10 @@ CHANGE LOG
 	
 	Example
 	
-	// Old (line 727 in parser.js)
+	// Old (line #727 in parser.js)
 	if (this.month && !this.day) { 
 	
-	// New (line 727 in parser.js)
+	// New (line #727 in parser.js)
 	if ((this.month || this.month === 0) && !this.day) { 
 	
 2.  Added about 100 new tests to /trunk/test/partial/ which test for vaiations on date strings 
