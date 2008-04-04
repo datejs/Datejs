@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 2008-03-27
+ * @date: 2008-04-04
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -13,7 +13,7 @@
  * TimeSpan(days, hours, minutes, seconds, milliseconds);
  */
 var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
-    var attributes = 'days hours minutes seconds milliseconds'.split(/\s+/);
+    var attrs = "days hours minutes seconds milliseconds".split(/\s+/);
     
     var gFn = function (attr) { 
         return function () { 
@@ -28,11 +28,11 @@ var TimeSpan = function (days, hours, minutes, seconds, milliseconds) {
         }; 
     };
 	
-    for (var i = 0; i < attributes.length ; i++) {
-        var a = attributes[i], A = a.slice(0, 1).toUpperCase() + a.slice(1);
-        TimeSpan.prototype[a] = 0;
-        TimeSpan.prototype['get' + A] = gFn(a);
-        TimeSpan.prototype['set' + A] = sFn(a);
+    for (var i = 0; i < attrs.length ; i++) {
+        var $a = attrs[i], $b = $a.slice(0, 1).toUpperCase() + $a.slice(1);
+        TimeSpan.prototype[$a] = 0;
+        TimeSpan.prototype["get" + $b] = gFn($a);
+        TimeSpan.prototype["set" + $b] = sFn($a);
     }
 
     if (arguments.length == 4) { 
@@ -183,7 +183,7 @@ Date.prototype.getTimeOfDay = function () {
  * TimePeriod(years, months, days, hours, minutes, seconds, milliseconds);
  */
 var TimePeriod = function (years, months, days, hours, minutes, seconds, milliseconds) {
-    var attributes = 'years months days hours minutes seconds milliseconds'.split(/\s+/);
+    var attrs = "years months days hours minutes seconds milliseconds".split(/\s+/);
     
     var gFn = function (attr) { 
         return function () { 
@@ -198,11 +198,11 @@ var TimePeriod = function (years, months, days, hours, minutes, seconds, millise
         }; 
     };
 	
-    for (var i = 0; i < attributes.length ; i++) {
-        var a = attributes[i], A = a.slice(0, 1).toUpperCase() + a.slice(1);
-        TimeSpan.prototype[a] = 0;
-        TimeSpan.prototype['get' + A] = gFn(a);
-        TimeSpan.prototype['set' + A] = sFn(a);
+    for (var i = 0; i < attrs.length ; i++) {
+        var $a = attrs[i], $b = $a.slice(0, 1).toUpperCase() + $a.slice(1);
+        TimePeriod.prototype[$a] = 0;
+        TimePeriod.prototype["get" + $b] = gFn($a);
+        TimePeriod.prototype["set" + $b] = sFn($a);
     }
     
     if (arguments.length == 7) { 

@@ -19,6 +19,25 @@ CHANGE LOG
 
     // New
     this.month = (s.length == 3) ? "jan feb mar apr may jun jul aug sep oct nov dec".indexOf(s)/4 : Number(s) - 1;
+
+2.  Fixed bug in time.js inside the TimePeriod class. A prototype of TimeSpan was mistakingly being set 
+	from within the TimePeriod class. 
+	
+	The following demonstrates using the TimePeriod class to get the difference between two dates.
+	
+	Example
+	
+	var future = new Date().add({months: 5, days: 4, hours: 3, minutes: 2, seconds: 1});
+	var now = new Date();
+
+	var tp = new TimePeriod(future, now);
+
+	console.log(tp.getYears());
+	console.log(tp.getMonths());
+	console.log(tp.getDays());
+	console.log(tp.getHours());
+	console.log(tp.getMinutes());
+	console.log(tp.getSeconds());
     
 --------------------
 
@@ -36,6 +55,8 @@ CHANGE LOG
 	
 	// New
 	Date.nov().final().sunday() // return 30-Nov-2008
+	
+2.  Added several tests to /trunk/test/core/ to test for this scenario.	
 
 --------------------
 
