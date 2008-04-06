@@ -13,7 +13,7 @@
     /**
      * Resets the time of this Date object to 12:00 AM (00:00), which is the start of the day.
      * @param {Boolean}  .clone() this date instance before clearing Time
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.clearTime = function () {
         this.setHours(0);
@@ -25,7 +25,7 @@
 
     /**
      * Resets the time of this Date object to the current time ('now').
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.setTimeToNow = function () {
         var n = new Date();
@@ -173,7 +173,7 @@
     /**
      * Adds the specified number of milliseconds to this instance. 
      * @param {Number}   The number of milliseconds to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addMilliseconds = function (value) {
         this.setMilliseconds(this.getMilliseconds() + value);
@@ -183,7 +183,7 @@
     /**
      * Adds the specified number of seconds to this instance. 
      * @param {Number}   The number of seconds to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addSeconds = function (value) { 
         return this.addMilliseconds(value * 1000); 
@@ -192,7 +192,7 @@
     /**
      * Adds the specified number of seconds to this instance. 
      * @param {Number}   The number of seconds to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addMinutes = function (value) { 
         return this.addMilliseconds(value * 60000); /* 60*1000 */
@@ -201,7 +201,7 @@
     /**
      * Adds the specified number of hours to this instance. 
      * @param {Number}   The number of hours to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addHours = function (value) { 
         return this.addMilliseconds(value * 3600000); /* 60*60*1000 */
@@ -210,7 +210,7 @@
     /**
      * Adds the specified number of days to this instance. 
      * @param {Number}   The number of days to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addDays = function (value) {
         this.setDate(this.getDate() + value);
@@ -220,7 +220,7 @@
     /**
      * Adds the specified number of weeks to this instance. 
      * @param {Number}   The number of weeks to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addWeeks = function (value) { 
         return this.addDays(value * 7);
@@ -229,7 +229,7 @@
     /**
      * Adds the specified number of months to this instance. 
      * @param {Number}   The number of months to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addMonths = function (value) {
         var n = this.getDate();
@@ -242,54 +242,127 @@
     /**
      * Adds the specified number of years to this instance. 
      * @param {Number}   The number of years to add. The number can be positive or negative [Required]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.addYears = function (value) {
         return this.addMonths(value * 12);
     };
 
     /**
-     * Adds (or subtracts) to the value of the year, month, day, hour, minute, second, millisecond of the date instance using given configuration object. Positive and Negative values allowed.
+     * Adds (or subtracts) to the value of the years, months, weeks, days, hours, minutes, seconds, milliseconds of the date instance using given configuration object. Positive and Negative values allowed.
      * Example
     <pre><code>
-    Date.today().add( { day: 1, month: 1 } )
+    Date.today().add( { days: 1, months: 1 } )
      
-    new Date().add( { year: -1 } )
+    new Date().add( { years: -1 } )
     </code></pre> 
-     * @param {Object}   Configuration object containing attributes (month, day, etc.)
-     * @return {Date}    date
+     * @param {Object}   Configuration object containing attributes (months, days, etc.)
+     * @return {Date}    this
      */
     $P.add = function (config) {
         if (typeof config == "number") {
             this._orient = config;
             return this;    
         }
+        
         var x = config;
-        if (x.millisecond || x.milliseconds) { 
-            this.addMilliseconds(x.millisecond || x.milliseconds); 
+        
+        if (x.milliseconds) { 
+            this.addMilliseconds(x.milliseconds); 
         }
-        if (x.second || x.seconds) { 
-            this.addSeconds(x.second || x.seconds); 
+        if (x.seconds) { 
+            this.addSeconds(x.seconds); 
         }
-        if (x.minute || x.minutes) { 
-            this.addMinutes(x.minute || x.minutes); 
+        if (x.minutes) { 
+            this.addMinutes(x.minutes); 
         }
-        if (x.hour || x.hours) { 
-            this.addHours(x.hour || x.hours); 
+        if (x.hours) { 
+            this.addHours(x.hours); 
         }
-        if (x.week || x.weeks) { 
-            this.addWeeks(x.week || x.weeks); 
+        if (x.weeks) { 
+            this.addWeeks(x.weeks); 
         }    
-        if (x.month || x.months) { 
-            this.addMonths(x.month || x.months); 
+        if (x.months) { 
+            this.addMonths(x.months); 
         }
-        if (x.year || x.years) { 
-            this.addYears(x.year || x.years); 
+        if (x.years) { 
+            this.addYears(x.years); 
         }
-        if (x.day || x.days) {
-            this.addDays(x.day || x.days); 
+        if (x.days) {
+            this.addDays(x.days); 
         }
         return this;
+    };
+    
+    var $y, $m, $d;
+    
+    /**
+     * Get the week number. Week one (1) is the week which contains the first Thursday of the year. Monday is considered the first day of the week.
+     * This algorithm is a JavaScript port of the work presented by Claus Tøndering at http://www.tondering.dk/claus/cal/node8.html#SECTION00880000000000000000
+     * .getWeek() Algorithm Copyright (c) 2008 Claus Tondering.
+     * The .getWeek() function does NOT convert the date to UTC. The local datetime is used. Please use .getISOWeek() to get the week of the UTC converted date.
+     * @return {Number}  1 to 53
+     */
+    $P.getWeek = function() {
+        var a, b, c, d, e, f, g, n, s, w;
+        
+        $y = (!$y) ? this.getFullYear() : $y;
+        $m = (!$m) ? this.getMonth() + 1 : $m;
+        $d = (!$d) ? this.getDate() : $d;
+
+        if ($m <= 2) {
+            a = $y - 1;
+            b = (a / 4 | 0) - (a / 100 | 0) + (a / 400 | 0);
+            c = ((a - 1) / 4 | 0) - ((a - 1) / 100 | 0) + ((a - 1) / 400 | 0);
+            s = b - c;
+            e = 0;
+            f = $d - 1 + (31 * ($m - 1));
+        } else {
+            a = $y;
+            b = (a / 4 | 0) - (a / 100 | 0) + (a / 400 | 0);
+            c = ((a - 1) / 4 | 0) - ((a - 1) / 100 | 0) + ((a - 1) / 400 | 0);
+            s = b - c;
+            e = s + 1;
+            f = $d + ((153 * ($m - 3) + 2) / 5) + 58 + s;
+        }
+        
+        g = (a + b) % 7;
+        d = (f + g - e) % 7;
+        n = (f + 3 - d) | 0;
+
+        if (n < 0) {
+            w = 53 - ((g - s) / 5 | 0);
+        } else if (n > 364 + s) {
+            w = 1;
+        } else {
+            w = (n / 7 | 0) + 1;
+        }
+        
+        $y = $m = $d = null;
+        
+        return w;
+    };
+    
+    /**
+     * Get the ISO 8601 week number. Week one (1) is the week which contains the first Thursday of the year. Monday is considered the first day of the week.
+     * The .getISOWeek() function does convert the date to it's UTC value. Please use .getWeek() to get the week of the local date.
+     * @return {Number}  1 to 53
+     */
+    $P.getISOWeek = function() {
+        $y = this.getUTCFullYear();
+        $m = this.getUTCMonth() + 1;
+        $d = this.getUTCDate();
+        
+        return this.getWeek();
+    };
+
+    /**
+     * Moves the date to Monday of the week set. Week one (1) is the week which contains the first Thursday of the year.
+     * @param {Number}   A Number (1 to 53) that represents the week of the year.
+     * @return {Date}    this
+     */    
+    $P.setWeek = function(n) {
+        return this.moveToDayOfWeek(1).addWeeks(n - this.getWeek());
     };
 
     // private
@@ -310,7 +383,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateMillisecond = function (value) {
-        return $D._validate(value, 0, 999, "milliseconds");
+        return $D._validate(value, 0, 999, "millisecond");
     };
 
     /**
@@ -319,7 +392,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateSecond = function (value) {
-        return $D._validate(value, 0, 59, "seconds");
+        return $D._validate(value, 0, 59, "second");
     };
 
     /**
@@ -328,7 +401,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateMinute = function (value) {
-        return $D._validate(value, 0, 59, "minutes");
+        return $D._validate(value, 0, 59, "minute");
     };
 
     /**
@@ -337,7 +410,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateHour = function (value) {
-        return $D._validate(value, 0, 23, "hours");
+        return $D._validate(value, 0, 23, "hour");
     };
 
     /**
@@ -346,7 +419,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateDay = function (value, year, month) {
-        return $D._validate(value, 1, $D.getDaysInMonth(year, month), "days");
+        return $D._validate(value, 1, $D.getDaysInMonth(year, month), "day");
     };
 
     /**
@@ -355,7 +428,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateMonth = function (value) {
-        return $D._validate(value, 0, 11, "months");
+        return $D._validate(value, 0, 11, "month");
     };
 
     /**
@@ -364,7 +437,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateYear = function (value) {
-        return $D._validate(value, 0, 9999, "years");
+        return $D._validate(value, 0, 9999, "year");
     };
 
     /**
@@ -377,7 +450,7 @@
     </code></pre>
      * 
      * @param {Object}   Configuration object containing attributes (month, day, etc.)
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.set = function (config) {
         if ($D.validateMillisecond(config.millisecond)) {
@@ -416,13 +489,17 @@
         if (config.timezoneOffset) { 
             this.setTimezoneOffset(config.timezoneOffset); 
         }
+
+        if ($D._validate(config.week, 0, 53, "week")) {
+            this.setWeek(config.week);
+        }
         
         return this;   
     };
 
     /**
      * Moves the date to the first day of the month.
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.moveToFirstDayOfMonth = function () {
         return this.set({ day: 1 });
@@ -430,7 +507,7 @@
 
     /**
      * Moves the date to the last day of the month.
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.moveToLastDayOfMonth = function () { 
         return this.set({ day: $D.getDaysInMonth(this.getFullYear(), this.getMonth())});
@@ -440,7 +517,7 @@
      * Moves the date to the next n'th occurrence of the dayOfWeek starting from the beginning of the month. The number (-1) is a magic number and will return the last occurrence of the dayOfWeek in the month.
      * @param {Number}   The dayOfWeek to move to.
      * @param {Number}   The n'th occurrence to move to. Use (-1) to return the last occurrence in the month.
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.moveToNthOccurrence = function (dayOfWeek, occurrence) {
         var shift = 0;
@@ -461,7 +538,7 @@
      * Move to the next or last dayOfWeek based on the orient value.
      * @param {Number}   The dayOfWeek to move to.
      * @param {Number}   Forward (+1) or Back (-1). Defaults to +1. [Optional]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.moveToDayOfWeek = function (dayOfWeek, orient) {
         var diff = (dayOfWeek - this.getDay() + 7 * (orient || +1)) % 7;
@@ -472,7 +549,7 @@
      * Move to the next or last month based on the orient value.
      * @param {Number}   The month to move to. 0 = January, 11 = December.
      * @param {Number}   Forward (+1) or Back (-1). Defaults to +1. [Optional]
-     * @return {Date}    date
+     * @return {Date}    this
      */
     $P.moveToMonth = function (month, orient) {
         var diff = (month - this.getMonth() + 12 * (orient || +1)) % 12;
@@ -487,34 +564,6 @@
         return Math.floor((this - new Date(this.getFullYear(), 0, 1)) / 86400000);
     };
 
-    /**
-     * Get the week of the year for the current date instance.
-     * @param {Number}   A Number that represents the first day of the week (0-6) [Optional]
-     * @return {Number}  0 through 53
-     */
-    $P.getWeekOfYear = function (firstDayOfWeek) {
-        var y = this.getFullYear(), m = this.getMonth(), d = this.getDate();
-        
-        var dow = firstDayOfWeek || $C.firstDayOfWeek;
-    	
-        var offset = 7 + 1 - new Date(y, 0, 1).getDay();
-        if (offset == 8) {
-            offset = 1;
-        }
-        var daynum = (($D.UTC(y, m, d, 0, 0, 0) - $D.UTC(y, 0, 1, 0, 0, 0)) / 86400000) + 1;
-        var w = Math.floor((daynum - offset + 7) / 7);
-        if (w === dow) {
-            y--;
-            var prevOffset = 7 + 1 - new Date(y, 0, 1).getDay();
-            if (prevOffset == 2 || prevOffset == 8) { 
-                w = 53; 
-            } else { 
-                w = 52; 
-            }
-        }
-        return w;
-    };
-     
     /**
      * Get the time zone abbreviation of the current date.
      * @return {String} The abbreviated time zone name (e.g. "EST")

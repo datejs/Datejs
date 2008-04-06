@@ -1,15 +1,94 @@
 CHANGE LOG
 --------------------
 
-2008-04-04 [geoffrey.mcgill]
-1.  Fixed Parser.js bug where the parser was using the static month token to match against the 
+2008-04-06 [geoffrey.mcgill] 
+Revision #152
+
+1.  Added Date.prototype.getWeek(). Gets the week number. 
+	The first week of the year is the week which contains the first Thursday. 
+	Monday is considered the first day of the week.
+
+	The .getWeek algorithm is a JavaScript port of the work presented by 
+	Claus Tøndering at http://www.tonderingdk/claus/cal/node8.html#SECTION00880000000000000000
+    .getWeek() Algorithm Copyright (c) Claus Tondering.
+    
+    The .getWeek() function does NOT convert the date to UTC. The local datetime is used. 
+    Please use .getISOWeek() to get the week of the UTC converted date.
+        
+    Returns a number from 1 to (52 or 53) depending on the year.
+    
+	Example
+	
+	Date.today().getWeek();
+	
+3.  Added Date.prototype.getISOWeek(). Get the ISO 8601 week number. 
+	Week one (1) is the week which contains the first Thursday of the year. 
+	Monday is considered the first day of the week.	
+	
+	The .getISOWeek() function does convert the date to it's UTC value. 
+	Please use .getWeek() to get the week of the local date.
+
+4.  Added Date.prototype.setWeek(). Moves the date of the current instance to Monday of the week set.
+    Accepts a number (1 to 53) that represents the week of the year to move to. Returns the date instance (this). 
+
+	Example
+	
+	Date.today().setWeek(1); // 1st week of year
+
+5.  Added a series of tests to /trunk/test/core/ to test for new .getWeek() and .setWeek() functions.
+
+6.  Removed non-plural config options from Date.prototype.add().
+
+	Example 
+	
+	// Old
+	
+	Date.today().add({month: 1, day: 1, hours: 1}); // mixed pluralization was acceptable
+	
+	// New
+	Date.today().add({months: 1, days: 1, hours: 1}); // Only plural config options now accepted.
+	
+7.  Added 'week' as config option to .set().
+
+	Example
+	
+	Date.today().set({week: 26});
+
+8.  Fixed bug where Date.parse("week 1") was not returning the correct date.
+
+9.  Removed final sugarpak.js dependency from within parser.js. Now the modules can be included in the following
+	order, with the preceding module required by the next. 
+	
+		1. CultureInfo
+		2. core.js
+		3. parser.js
+		4. sugarpak.js 
+
+10. Removed .toJSONString() from sugarpak.js. Please use .toISOString(). The .toISOString() function will return
+	an ISO 8601 string of the date that has been converted to it's UTC value. 
+	
+	The following example demonstrates passing a format to the .toString() function to return a string 
+	whose date has NOT been converted to it's UTC value and does not include the wrapping double-quotes of .toISOString().
+	
+	Example
+	
+	new Date().toString("yyyy-MM-ddTHH:mm:ssZ");
+
+11. Confirmed core.js and sugarpak.js modules still validate JSLint (http://www.jslint.com) 100% in whitespace strict mode.
+
+--------------------
+
+2008-04-04 [geoffrey.mcgill] 
+Revision #150
+
+1.  Fixed Parser.js bug where the parser was using the static month token to compare against the 
     abbreviatedMonthNames array in the CultureInfo file. This was causing problems when the
-    abbreviatedMonthNames strings were not English.
+    abbreviatedMonthNames strings were not en-US based.
 
     Example
     
     // CultureInfo = "de-DE.js"
-    Date.parse("mai"); // "May", but returns null
+    Date.parse("mai"); // should return May 1st of current year, but was returning null
     
     
     The fix required changing the following (approx line #525) in Parser.js.
@@ -42,6 +121,7 @@ CHANGE LOG
 --------------------
 
 2008-04-01 [geoffrey.mcgill]
+
 1.  Fixed bug where Date.nov().final().sunday() would return the second to last sunday.
 	
 	The bug was in the function moveToNthOccurrence (core.js). If the final day of the month
@@ -61,6 +141,7 @@ CHANGE LOG
 --------------------
 
 2008-03-27 [geoffrey.mcgill]
+
 1.  Fixed bug which caused the string "Jan 2008" to not be parsed correctly. The 'Day' value would be
 	set to "today's" Day. For example, if Today is the 27th day of the month, Date.parse("Jan 2008")
 	would return "27-Jan-2008", although "1-Jan-2008" was expected.
@@ -85,6 +166,7 @@ CHANGE LOG
 --------------------
 
 2008-03-24 [geoffrey.mcgill]
+
 1.  Fixed bug where a single digit minute or second value would not parse correctly. 
 	See forum post http://tinyurl.com/3d8b57.
 	
@@ -101,12 +183,14 @@ CHANGE LOG
 --------------------
 
 2008-03-18 [geoffrey.mcgill]
+
 1.  Made small revision to .addDays() which should avoid addition/subtraction issues when 
     spanning over a Daylight Saving Time (Summer Time) change.
 
 --------------------
 
 2008-03-03 [geoffrey.mcgill]
+
 1.  Fixed .toString() bug where .toString would not return four characters if the year was less than 1000.
         
 	// Old 
@@ -126,6 +210,7 @@ CHANGE LOG
 --------------------
 
 2008-02-26 [geoffrey.mcgill]
+
 1.  Dan Yoder fixed bug with timeContext pattern where if a date included "april" or "august", the parser thought the 'a' was the beginning of a time part (as in am/pm).
        
         "added a quick negative lookahead to the regexp to make sure the 'a' isn't followed by a 'u' or a 'p'."
@@ -141,18 +226,21 @@ CHANGE LOG
 --------------------
 
 2008-02-21 [geoffrey.mcgill]
+
 1.  Fixed bug in .parseExact where if the month was January ('0') the Parser.finishExact function was resetting to the current month.
 2.  Added several new tests to /trunk/test/parseExact/.
 
 --------------------
 
 2008-02-18 [geoffrey.mcgill]
+
 1.  Added .toISOString() back to sugarpak.js. Still investigating to figure out why/how this function was removed at Build 130-131.
 2.  Fixed small bug in .is().weekday() where .weekday() was not returning 'this' if the .is() flag had not been set.
 
 --------------------
 
 2008-02-07 [geoffrey.mcgill]
+
 1.  Fixed bug in parser.js which prevented some strings from parsing when the 'day' of the date string was greater than the last day of the current month.
 
 	Example
@@ -165,6 +253,7 @@ CHANGE LOG
 --------------------
 
 2008-02-05 [geoffrey.mcgill]
+
 1.  Added .is().weekday() function to sugarpak.js. 
     The .weekday() function determines if the current date is a weekday. 
     The function must be preceded by the .is() function.
@@ -176,12 +265,14 @@ CHANGE LOG
 --------------------
 
 2008-02-04 [geoffrey.mcgill]
+
 1.  Added .getOrdinal() tests to the new sugarpak (/trunk/test/sugarpak/) test package.
     See http://www.datejs.com/test/sugarpak/index.html
 
 --------------------
 
 2008-01-02 [geoffrey.mcgill]
+
 1.  Added .toISOString() to sugarpak.js. Returns ISO 8601 formatted string of date.
 2.  Changed .toJSONString() to return string value wrapped in double-quotes ("") as per
     JSON.org spec. 
@@ -217,6 +308,7 @@ CHANGE LOG
 --------------------
 
 2007-12-27 [geoffrey.mcgill]
+
 1.  Modified the offset values of Date.CultureInfo.timezones.
 2.  Added <static> Date.compare(date1, date2).
         
@@ -270,6 +362,7 @@ CHANGE LOG
 --------------------
 
 2007-12-23 [geoffrey.mcgill]
+
 1.  Moved all minified files to the /build/ folder. Now all the original source files are 
     located in the /src/ folder, and all minified files are located in the /build/ folder. 
 2.  Removed /trunk/doc/ folder. 

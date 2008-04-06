@@ -729,8 +729,7 @@
             }
             
             if (!this.orient && !this.operator && this.unit == "week" && this.value && !this.day && !this.month) {
-                return $D.jan().first().mon().addWeeks(this.value);
-                //return $D.today().set({month: 0, day: 1}).moveToDayOfWeek(1).addWeeks(this.value);
+                return Date.today().setWeek(this.value);
             }
 
             if (expression && this.timezone && this.day && this.days) {

@@ -148,7 +148,7 @@
       run: function() { },
       assert: function() { return Date.today().set({hour: 17}).equals(Date.parse('17:00')) }
     },
-    '0800 : not really sure what this should return? Currently returns year 800.': {
+    '0800': {
       run: function() { },
       assert: function() { return Date.today().set({year: 800, day: 1}).equals(Date.parse('0800')) }
     }, 
@@ -174,7 +174,7 @@
       run: function() { },
       assert: function() { return Date.july().equals( Date.parse('summer') ) }
     },    
-    'friday 13:00 : This should be working shortly. Both "friday 1pm" and "13:00" pass, so this should be an easy fix.': {
+    'friday 13:00 : Both "friday 1pm" and "13:00" pass.': {
       run: function() { },
       assert: function() { return Date.friday().set({hour:13}).equals( Date.parse('friday 13:00') ) }
     },
@@ -238,7 +238,7 @@
       run: function() { },
       assert: function() { return Date.sunday().add(3).days().equals(Date.parse('4th day last week')) }
     },  
-   'oct 06': {
+   'oct 06 : Currently returns 6th of October, not October 2006': {
       run: function() { },
       assert: function() { return Date.october().set({year: 2006}).equals(Date.parse('oct 06')) }
     }

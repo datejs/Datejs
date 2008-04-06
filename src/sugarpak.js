@@ -343,8 +343,8 @@
     
     if (!$D.toISOString) {
         /**
-         * Converts the current date instance into a string with an ISO 8601 format. See also .toJSONString().
-         * @return {String}  ISO string of date
+         * Converts the current date instance into a string with an ISO 8601 format. The date is converted to it's UTC value.
+         * @return {String}  ISO 8601 string of date
          */
         $P.toISOString = function () {
             // From http://www.json.org/json.js. Public Domain. 
@@ -359,14 +359,6 @@
                 f(this.getUTCMinutes())   + ':' +
                 f(this.getUTCSeconds())   + 'Z"';
         };
-    }
-    
-    if (!$D.toJSONString) {
-        /**
-         * Converts the current date instance into a JSON string value. See also .toISOString().
-         * @return {String}  JSON string of date
-         */
-         $P.toJSONString = $P.toISOString;
     }
 
     /**

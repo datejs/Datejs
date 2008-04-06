@@ -20,7 +20,7 @@
       run: function() { },
       assert: function() { return Date.today().add(1).day().equals( Date.parse('tom') ) }
     },
-    '25 Apr : Not sure whats up with this one, but we are looking into it.': {
+    '25 Apr': {
       run: function() { },
       assert: function() { return Date.april().set({ day: 25 }).equals( Date.parse('25 Apr') ) }
     },

@@ -690,7 +690,545 @@
       run: function() {},
       assert: function() { return new Date(2008, 11, 28).equals(Date.today().set({year: 2008, month: 11}).final().sunday()); }
     }
+  },
+  
+  '.getWeek()': {
+    setup: function() {
+        this.d = new Date(1969, 0, 1);
+    },
+    '1969': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(0).getWeek() == 1); }
+    },
+    '1970': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(1).getWeek() == 1); }
+    },
+    '1971': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(2).getWeek() == 53); }
+    },
+    '1972': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(3).getWeek() == 52); }
+    },
+    '1973': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(4).getWeek() == 1); }
+    },
+    '1974': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(5).getWeek() == 1); }
+    },
+    '1975': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(6).getWeek() == 1); }
+    },
+    '1976': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(7).getWeek() == 1); }
+    },
+    '1977': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(8).getWeek() == 53); }
+    },
+    '1978': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(9).getWeek() == 52); }
+    },
+    '1979': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(10).getWeek() == 1); }
+    },
+    '1980': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(11).getWeek() == 1); }
+    },
+    '1981': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(12).getWeek() == 1); }
+    },
+    '1982': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(13).getWeek() == 53); }
+    },
+    '1983': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(14).getWeek() == 52); }
+    },
+    '1984': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(15).getWeek() == 52); }
+    },
+    '1985': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(16).getWeek() == 1); }
+    },
+    '1986': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(17).getWeek() == 1); }
+    },
+    '1987': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(18).getWeek() == 1); }
+    },
+    '1988': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(19).getWeek() == 53); }
+    },
+    '1989': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(20).getWeek() == 52); }
+    },
+    '1990': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(21).getWeek() == 1); }
+    },
+    '1991': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(22).getWeek() == 1); }
+    },
+    '1992': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(23).getWeek() == 1); }
+    },
+    '1993': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(24).getWeek() == 53); }
+    },
+    '1994': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(25).getWeek() == 52); }
+    },
+    '1995': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(26).getWeek() == 52); }
+    },
+    '1996': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(27).getWeek() == 1); }
+    },
+    '1997': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(28).getWeek() == 1); }
+    },
+    '1998': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(29).getWeek() == 1); }
+    },
+    '1999': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(30).getWeek() == 53); }
+    },
+    '2000': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(31).getWeek() == 52); }
+    },
+    '2001': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(32).getWeek() == 1); }
+    },
+    '2002': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(33).getWeek() == 1); }
+    },
+    '2003': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(34).getWeek() == 1); }
+    },
+    '2004': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(35).getWeek() == 1); }
+    },
+    '2005': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(36).getWeek() == 53); }
+    },
+    '2006': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(37).getWeek() == 52); }
+    },
+    '2007': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(38).getWeek() == 1); }
+    },
+    '2008': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(39).getWeek() == 1); }
+    },
+    '2009': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(40).getWeek() == 1); }
+    },
+    '2010': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(41).getWeek() == 53); }
+    },
+    '2011': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(42).getWeek() == 52); }
+    },
+    '2012': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(43).getWeek() == 52); }
+    },
+    '2013': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(44).getWeek() == 1); }
+    },
+    '2014': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(45).getWeek() == 1); }
+    },
+    '2015': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(46).getWeek() == 1); }
+    },
+    '2016': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(47).getWeek() == 53); }
+    },
+    '2017': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(48).getWeek() == 52); }
+    },
+    '2018': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(49).getWeek() == 1); }
+    },
+    '2019': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(50).getWeek() == 1); }
+    },
+    '2020': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(51).getWeek() == 1); }
+    },
+    '2021': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(52).getWeek() == 53); }
+    },
+    '2022': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(53).getWeek() == 52); }
+    },
+    '2023': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(54).getWeek() == 52); }
+    },
+    '2024': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(55).getWeek() == 1); }
+    },
+    '2025': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(56).getWeek() == 1); }
+    },
+    '2026': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(57).getWeek() == 1); }
+    },
+    '2027': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(58).getWeek() == 53); }
+    },
+    '2028': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(59).getWeek() == 52); }
+    },
+    '2029': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(60).getWeek() == 1); }
+    },
+    '2030': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(61).getWeek() == 1); }
+    },
+    '2031': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(62).getWeek() == 1); }
+    },
+    '2032': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(63).getWeek() == 1); }
+    },
+    '2033': {
+      run: function() {},
+      assert: function() { return (this.d.addYears(64).getWeek() == 53); }
+    }
+    
   }
+  
+  
+  ,
+  
+  '.setWeek()': {
+    setup: function() {
+        this.d = Date.today().set({year: 1969});
+    },
+    '1969': {
+      run: function() {},
+      assert: function() { return this.d.addYears(0).setWeek(1).equals(new Date(1968, 11, 30)); }
+    },
+    '1970': {
+      run: function() {},
+      assert: function() { return this.d.addYears(1).setWeek(1).equals(new Date(1969, 11, 29)); }
+    },
+    '1971': {
+      run: function() {},
+      assert: function() { return this.d.addYears(2).setWeek(1).equals(new Date(1971, 0, 4)); }
+    },
+    '1972': {
+      run: function() {},
+      assert: function() { return this.d.addYears(3).setWeek(1).equals(new Date(1972, 0, 3)); }
+    },
+    '1973': {
+      run: function() {},
+      assert: function() { return this.d.addYears(4).setWeek(1).equals(new Date(1973, 0, 1)); }
+    },
+    '1974': {
+      run: function() {},
+      assert: function() { return this.d.addYears(5).setWeek(1).equals(new Date(1973, 11, 31)); }
+    },
+    '1975': {
+      run: function() {},
+      assert: function() { return this.d.addYears(6).setWeek(1).equals(new Date(1974, 11, 30)); }
+    },
+    '1976': {
+      run: function() {},
+      assert: function() { return this.d.addYears(7).setWeek(1).equals(new Date(1975, 11, 29)); }
+    },
+    '1977': {
+      run: function() {},
+      assert: function() { return this.d.addYears(8).setWeek(1).equals(new Date(1977, 0, 3)); }
+    },
+    '1978': {
+      run: function() {},
+      assert: function() { return this.d.addYears(9).setWeek(1).equals(new Date(1978, 0, 2)); }
+    },
+    '1979': {
+      run: function() {},
+      assert: function() { return this.d.addYears(10).setWeek(1).equals(new Date(1979, 0, 1)); }
+    },
+    '1980': {
+      run: function() {},
+      assert: function() { return this.d.addYears(11).setWeek(1).equals(new Date(1979, 11, 31)); }
+    },
+    '1981': {
+      run: function() {},
+      assert: function() { return this.d.addYears(12).setWeek(1).equals(new Date(1980, 11, 29)); }
+    },
+    '1982': {
+      run: function() {},
+      assert: function() { return this.d.addYears(13).setWeek(1).equals(new Date(1982, 0, 4)); }
+    },
+    '1983': {
+      run: function() {},
+      assert: function() { return this.d.addYears(14).setWeek(1).equals(new Date(1983, 0, 3)); }
+    },
+    '1984': {
+      run: function() {},
+      assert: function() { return this.d.addYears(15).setWeek(1).equals(new Date(1984, 0, 2)); }
+    },
+    '1985': {
+      run: function() {},
+      assert: function() { return this.d.addYears(16).setWeek(1).equals(new Date(1984, 11, 31)); }
+    },
+    '1986': {
+      run: function() {},
+      assert: function() { return this.d.addYears(17).setWeek(1).equals(new Date(1985, 11, 30)); }
+    },
+    '1987': {
+      run: function() {},
+      assert: function() { return this.d.addYears(18).setWeek(1).equals(new Date(1986, 11, 29)); }
+    },
+    '1988': {
+      run: function() {},
+      assert: function() { return this.d.addYears(19).setWeek(1).equals(new Date(1988, 0, 4)); }
+    },
+    '1989': {
+      run: function() {},
+      assert: function() { return this.d.addYears(20).setWeek(1).equals(new Date(1989, 0, 2)); }
+    },
+    '1990': {
+      run: function() {},
+      assert: function() { return this.d.addYears(21).setWeek(1).equals(new Date(1990, 0, 1)); }
+    },
+    '1991': {
+      run: function() {},
+      assert: function() { return this.d.addYears(22).setWeek(1).equals(new Date(1990, 11, 31)); }
+    },
+    '1992': {
+      run: function() {},
+      assert: function() { return this.d.addYears(23).setWeek(1).equals(new Date(1991, 11, 30)); }
+    },
+    '1993': {
+      run: function() {},
+      assert: function() { return this.d.addYears(24).setWeek(1).equals(new Date(1993, 0, 4)); }
+    },
+    '1994': {
+      run: function() {},
+      assert: function() { return this.d.addYears(25).setWeek(1).equals(new Date(1994, 0, 3)); }
+    },
+    '1995': {
+      run: function() {},
+      assert: function() { return this.d.addYears(26).setWeek(1).equals(new Date(1995, 0, 2)); }
+    },
+    '1996': {
+      run: function() {},
+      assert: function() { return this.d.addYears(27).setWeek(1).equals(new Date(1996, 0, 1)); }
+    },
+    '1997': {
+      run: function() {},
+      assert: function() { return this.d.addYears(28).setWeek(1).equals(new Date(1996, 11, 30)); }
+    },
+    '1998': {
+      run: function() {},
+      assert: function() { return this.d.addYears(29).setWeek(1).equals(new Date(1997, 11, 29)); }
+    },
+    '1999': {
+      run: function() {},
+      assert: function() { return this.d.addYears(30).setWeek(1).equals(new Date(1999, 0, 4)); }
+    },
+    '2000': {
+      run: function() {},
+      assert: function() { return this.d.addYears(31).setWeek(1).equals(new Date(2000, 0, 3)); }
+    },
+    '2001': {
+      run: function() {},
+      assert: function() { return this.d.addYears(32).setWeek(1).equals(new Date(2001, 0, 1)); }
+    },
+    '2002': {
+      run: function() {},
+      assert: function() { return this.d.addYears(33).setWeek(1).equals(new Date(2001, 11, 31)); }
+    },
+    '2003': {
+      run: function() {},
+      assert: function() { return this.d.addYears(34).setWeek(1).equals(new Date(2002, 11, 30)); }
+    },
+    '2004': {
+      run: function() {},
+      assert: function() { return this.d.addYears(35).setWeek(1).equals(new Date(2003, 11, 29)); }
+    },
+    '2005': {
+      run: function() {},
+      assert: function() { return this.d.addYears(36).setWeek(1).equals(new Date(2005, 0, 3)); }
+    },
+    '2006': {
+      run: function() {},
+      assert: function() { return this.d.addYears(37).setWeek(1).equals(new Date(2006, 0, 2)); }
+    },
+    '2007': {
+      run: function() {},
+      assert: function() { return this.d.addYears(38).setWeek(1).equals(new Date(2007, 0, 1)); }
+    },
+    '2008': {
+      run: function() {},
+      assert: function() { return this.d.addYears(39).setWeek(1).equals(new Date(2007, 11, 31)); }
+    },
+    '2009': {
+      run: function() {},
+      assert: function() { return this.d.addYears(40).setWeek(1).equals(new Date(2008, 11, 29)); }
+    },
+    '2010': {
+      run: function() {},
+      assert: function() { return this.d.addYears(41).setWeek(1).equals(new Date(2010, 0, 4)); }
+    },
+    '2011': {
+      run: function() {},
+      assert: function() { return this.d.addYears(42).setWeek(1).equals(new Date(2011, 0, 3)); }
+    },
+    '2012': {
+      run: function() {},
+      assert: function() { return this.d.addYears(43).setWeek(1).equals(new Date(2012, 0, 2)); }
+    },
+    '2013': {
+      run: function() {},
+      assert: function() { return this.d.addYears(44).setWeek(1).equals(new Date(2012, 11, 31)); }
+    },
+    '2014': {
+      run: function() {},
+      assert: function() { return this.d.addYears(45).setWeek(1).equals(new Date(2013, 11, 30)); }
+    },
+    '2015': {
+      run: function() {},
+      assert: function() { return this.d.addYears(46).setWeek(1).equals(new Date(2014, 11, 29)); }
+    },
+    '2016': {
+      run: function() {},
+      assert: function() { return this.d.addYears(47).setWeek(1).equals(new Date(2016, 0, 4)); }
+    },
+    '2017': {
+      run: function() {},
+      assert: function() { return this.d.addYears(48).setWeek(1).equals(new Date(2017, 0, 2)); }
+    },
+    '2018': {
+      run: function() {},
+      assert: function() { return this.d.addYears(49).setWeek(1).equals(new Date(2018, 0, 1)); }
+    },
+    '2019': {
+      run: function() {},
+      assert: function() { return this.d.addYears(50).setWeek(1).equals(new Date(2018, 11, 31)); }
+    },
+    '2020': {
+      run: function() {},
+      assert: function() { return this.d.addYears(51).setWeek(1).equals(new Date(2019, 11, 30)); }
+    },
+    '2021': {
+      run: function() {},
+      assert: function() { return this.d.addYears(52).setWeek(1).equals(new Date(2021, 0, 4)); }
+    },
+    '2022': {
+      run: function() {},
+      assert: function() { return this.d.addYears(53).setWeek(1).equals(new Date(2022, 0, 3)); }
+    },
+    '2023': {
+      run: function() {},
+      assert: function() { return this.d.addYears(54).setWeek(1).equals(new Date(2023, 0, 2)); }
+    },
+    '2024': {
+      run: function() {},
+      assert: function() { return this.d.addYears(55).setWeek(1).equals(new Date(2024, 0, 1)); }
+    },
+    '2025': {
+      run: function() {},
+      assert: function() { return this.d.addYears(56).setWeek(1).equals(new Date(2024, 11, 30)); }
+    },
+    '2026': {
+      run: function() {},
+      assert: function() { return this.d.addYears(57).setWeek(1).equals(new Date(2025, 11, 29)); }
+    },
+    '2027': {
+      run: function() {},
+      assert: function() { return this.d.addYears(58).setWeek(1).equals(new Date(2027, 0, 4)); }
+    },
+    '2028': {
+      run: function() {},
+      assert: function() { return this.d.addYears(59).setWeek(1).equals(new Date(2028, 0, 3)); }
+    },
+    '2029': {
+      run: function() {},
+      assert: function() { return this.d.addYears(60).setWeek(1).equals(new Date(2029, 0, 1)); }
+    },
+    '2030': {
+      run: function() {},
+      assert: function() { return this.d.addYears(61).setWeek(1).equals(new Date(2029, 11, 31)); }
+    },
+    '2031': {
+      run: function() {},
+      assert: function() { return this.d.addYears(62).setWeek(1).equals(new Date(2030, 11, 30)); }
+    },
+    '2032': {
+      run: function() {},
+      assert: function() { return this.d.addYears(63).setWeek(1).equals(new Date(2031, 11, 29)); }
+    },
+    '2033': {
+      run: function() {},
+      assert: function() { return this.d.addYears(64).setWeek(1).equals(new Date(2033, 0, 3)); }
+    }
+    
+  }
+  
 });
 
 $(document).ready(function() { Date.Specification.validate().show() });
