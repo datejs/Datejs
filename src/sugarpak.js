@@ -341,7 +341,7 @@
         $P[nth[l]] = (l === 0) ? nthfn(-1) : nthfn(l);
     }
     
-    if (!$D.toISOString) {
+    if (!$P.toISOString) {
         /**
          * Converts the current date instance into a string with an ISO 8601 format. The date is converted to it's UTC value.
          * @return {String}  ISO 8601 string of date
