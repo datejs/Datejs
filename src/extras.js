@@ -9,7 +9,8 @@
  
 (function () {
     var $D = Date, $P = $D.prototype, $C = $D.CultureInfo;
-
+//  NOT SUPPORTED
+//  %U - week number of the current year as a decimal number, starting with the first Sunday as the first day of the first week
     /**
      * Converts the value of the current Date object to its equivalent string representation using a PHP/Unix style of date format specifiers.
      *
@@ -17,90 +18,146 @@
     <pre>
     Format  Description                                                                  Example
     ------  ---------------------------------------------------------------------------  -----------------------
-     s      The seconds of the minute between 0-59.                                      "0" to "59"
-     ss     The seconds of the minute with leading zero if required.                     "00" to "59"
-     
-     m      The minute of the hour between 0-59.                                         "0"  or "59"
-     mm     The minute of the hour with leading zero if required.                        "00" or "59"
-     
-     h      The hour of the day between 1-12.                                            "1"  to "12"
-     hh     The hour of the day with leading zero if required.                           "01" to "12"
-     
-     H      The hour of the day between 0-23.                                            "0"  to "23"
-     HH     The hour of the day with leading zero if required.                           "00" to "23"
-     
-     d      The day of the month between 1 and 31.                                       "1"  to "31"
-     dd     The day of the month with leading zero if required.                          "01" to "31"
-     ddd    Abbreviated day name. $C.abbreviatedDayNames.                                "Mon" to "Sun" 
-     dddd   The full day name. $C.dayNames.                                              "Monday" to "Sunday"
-     
-     M      The month of the year between 1-12.                                          "1" to "12"
-     MM     The month of the year with leading zero if required.                         "01" to "12"
-     MMM    Abbreviated month name. $C.abbreviatedMonthNames.                            "Jan" to "Dec"
-     MMMM   The full month name. $C.monthNames.                                          "January" to "December"
-
-     yy     Displays the year as a two-digit number.                                     "99" or "08"
-     yyyy   Displays the full four digit year.                                           "1999" or "2008"
-     
-     t      Displays the first character of the A.M./P.M. designator.                    "A" or "P"
-            $C.amDesignator or $C.pmDesignator
-     tt     Displays the A.M./P.M. designator.                                           "AM" or "PM"
-            $C.amDesignator or $C.pmDesignator
+      d     Day of the month, 2 digits with leading zeros                                01 to 31
     </pre>
      * @param {String}   A format string consisting of one or more format spcifiers [Optional].
      * @return {String}  A string representation of the current Date object.
      */
     $P["$format"] = function(format) { 
-        var x = this;
+        var x = this, temp;
+        
+        x.t = x.toString;
 
         var p = function p(s) {
             return s < 10 ? '0' + s : s;
         };
-
-        return format ? format.replace(/dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|zz?z?/g, 
+        
+        return format ? format.replace(/(%|\\|%%)?[a-zA-Z]/g, 
         function (format) {
+            temp = format.charAt(0)
+            if (format.charAt(0) === "\\" || format.substring(0, 2) === "%%") {
+                return format.replace("\\", "").replace("%%", "%");
+            }
             switch (format) {
-            case "hh":
-                return p(x.getHours() < 13 ? (x.getHours() === 0 ? 12 : x.getHours()) : (x.getHours() - 12));
-            case "h":
-                return x.getHours() < 13 ? (x.getHours() === 0 ? 12 : x.getHours()) : (x.getHours() - 12);
-            case "HH":
-                return p(x.getHours());
-            case "H":
-                return x.getHours();
-            case "mm":
-                return p(x.getMinutes());
-            case "m":
-                return x.getMinutes();
-            case "ss":
-                return p(x.getSeconds());
-            case "s":
-                return x.getSeconds();
-            case "yyyy":
-                var y = "000" + x.getFullYear();
-                return y.substring(y.length - 4);
-            case "yy":
-                return x.toString("yyyy").substring(2);
-            case "dddd":
-                return $C.dayNames[x.getDay()];
-            case "ddd":
-                return $C.abbreviatedDayNames[x.getDay()];
-            case "dd":
-                return p(x.getDate());
             case "d":
-                return x.getDate().toString();
-            case "MMMM":
-                return $C.monthNames[x.getMonth()];
-            case "MMM":
-                return $C.abbreviatedMonthNames[x.getMonth()];
-            case "MM":
-                return p((x.getMonth() + 1));
+            case "%d":
+                return x.t("dd");
+            case "D":
+            case "%a":
+                return x.t("ddd");
+            case "j":
+            case "%e":
+                return x.t("d");
+            case "l":
+            case "%A":
+                return x.t("dddd");
+            case "N":
+            case "%u":
+                return x.getDay() + 1;
+            case "S":
+                return x.getOrdinal();
+            case "w":
+            case "%w":
+                return x.getDay();
+            case "z":
+                return x.getDayOfYear();
+            case "%j":
+                temp = "00" + x.getDayOfYear();
+                return temp.substring(temp.length - 3);
+            case "W":
+            case "%V":
+                return x.getISOWeek();
+            case "%W":
+                return p(x.getWeek());
+            case "F":
+            case "%B":
+                return x.t("MMMM");
+            case "m":
+            case "%m":            
+                return x.t("MM");
             case "M":
-                return x.getMonth() + 1;
+            case "%b":
+            case "%h":
+                return x.t("MMM");
+            case "n":
+                return x.t("M");
             case "t":
-                return x.getHours() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
-            case "tt":
-                return x.getHours() < 12 ? $C.amDesignator : $C.pmDesignator;
+                return $D.getDaysInMonth(x.getFullYear(), x.getMonth());
+            case "n":
+                return x.t("M");
+            case "L":
+                return ($D.isLeapYear(x.getFullYear())) ? 1 : 0;
+            case "o":
+            case "%G":
+                return x.setWeek(x.getISOWeek()).t("yyyy");
+            case "%g":
+                var g = x.$format("%G");
+                return g.substring(g.length - 2);
+            case "Y":
+            case "%Y":
+                return x.t("yyyy");
+            case "y":
+            case "%y":
+                return x.t("yy");
+            case "a":
+            case "%p":
+                return x.t("tt").toLowerCase();
+            case "%r":
+                temp = x.$format("%p");
+                return (temp.indexOf(".") > -1) ? temp : temp.charAt(0) + "." + temp.charAt(1) + ".";
+            case "A":
+                return x.t("tt").toUpperCase();
+            case "g":
+            case "%I":
+                return x.t("h");
+            case "G":
+                return x.t("H");
+            case "h":
+                return x.t("hh");
+            case "H":
+            case "%H":
+                return x.t("HH");
+            case "i":
+            case "%M":
+                return x.t("mm");
+            case "s":
+            case "%S":
+                return x.t("ss");
+            case "u":
+                return x.t("fff");
+            case "O":
+                return x.getUTCOffset().toString();
+            case "P":
+                var o = x.getUTCOffset();
+                return o.substring(0, o.length - 2) + ":" + o.substring(o.length - 2);
+            case "T":
+                return x.getTimezone();
+            case "Z":
+                return x.getTimezoneOffset() * -60;
+            case "c":
+                return x.toISOString();
+            case "U":
+                return Math.round(x.getTime()/1000)
+            case "%c":
+                return x.toShortDateString() + " " + x.toShortTimeString();
+            case "%C":
+                return Math.floor(x.getFullYear() / 100 + 1);
+            case "%D":
+                return x.$format("%m/%d/%y");
+            case "%n":
+                return "\\n";
+            case "%t":
+                return "\\t";
+            case "%R":
+                return x.toString("HH:mm");
+            case "%T":
+                return x.$format("%H:%M:%S");
+            case "%x":
+                return x.toShortDateString();
+            case "%X":
+                return x.toShortTimeString();
+			default:
+				return format;
             }
         }
         ) : this._toString();

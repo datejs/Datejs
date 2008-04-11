@@ -670,7 +670,7 @@
             return s < 10 ? '0' + s : s;
         };
 
-        return format ? format.replace(/dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|zz?z?/g, 
+        return format ? format.replace(/dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|zz?z?|fff?/g, 
         function (format) {
             switch (format) {
             case "hh":
@@ -714,6 +714,9 @@
                 return x.getHours() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
             case "tt":
                 return x.getHours() < 12 ? $C.amDesignator : $C.pmDesignator;
+            case "fff":
+                var y = "00" + x.getMilliseconds();
+                return y.substring(y.length - 3);
             }
         }
         ) : this._toString();
