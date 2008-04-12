@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 2008-04-06
+ * @date: 2008-04-12
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -21,11 +21,11 @@ return this["add"+j](this._orient);};};var nf=function(n){return function(){this
 var nthfn=function(n){return function(dayOfWeek){if(dayOfWeek||dayOfWeek===0){return this.moveToNthOccurrence(dayOfWeek,n);}
 this._nth=n;if(n===2&&(dayOfWeek===undefined||dayOfWeek===null)){this._isSecond=true;return this.addSeconds(this._orient);}
 return this;};};for(var l=0;l<nth.length;l++){$P[nth[l]]=(l===0)?nthfn(-1):nthfn(l);}
-if(!$D.toISOString){$P.toISOString=function(){function f(n){return n<10?'0'+n:n;}
+if(!$P.toISOString){$P.toISOString=function(){function f(n){return n<10?'0'+n:n;}
 return'"'+this.getUTCFullYear()+'-'+
 f(this.getUTCMonth()+1)+'-'+
 f(this.getUTCDate())+'T'+
 f(this.getUTCHours())+':'+
 f(this.getUTCMinutes())+':'+
 f(this.getUTCSeconds())+'Z"';};}
-$P.toShortDateString=function(){return this.toString($C.formatPatterns.shortDate);};$P.toLongDateString=function(){return this.toString($C.formatPatterns.longDate);};$P.toShortTimeString=function(){return this.toString($C.formatPatterns.shortTime);};$P.toLongTimeString=function(){return this.toString($C.formatPatterns.longTime);};$P.getOrdinal=function(){switch(this.getDate()){case 1:case 21:case 31:return"st";case 2:case 22:return"nd";case 3:case 23:return"rd";default:return"th";}};}());
+$P.toShortDateString=function(){return this.toString($C.formatPatterns.shortDate);};$P.toLongDateString=function(){return this.toString($C.formatPatterns.longDate);};$P.toShortTimeString=function(){return this.toString($C.formatPatterns.shortTime);};$P.toLongTimeString=function(){return this.toString($C.formatPatterns.longTime);};}());

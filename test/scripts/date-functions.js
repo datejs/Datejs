@@ -288,24 +288,44 @@ Date.prototype.getGMTOffset = function() {
         + String.leftPad(this.getTimezoneOffset() % 60, 2, "0");
 }
 
-Date.prototype.getDayOfYear = function() {
+//Date.prototype.getDayOfYear2 = function() {
+//    var num = 0;
+//    Date.daysInMonth[1] = this.isLeapYear() ? 29 : 28;
+//    for (var i = 0; i < this.getMonth(); ++i) {
+//        num += Date.daysInMonth[i];
+//    }
+//    return num + this.getDate() - 1;
+//}
+
+Date.prototype.getDayOfYear2 = function() {
     var num = 0;
     Date.daysInMonth[1] = this.isLeapYear() ? 29 : 28;
     for (var i = 0; i < this.getMonth(); ++i) {
         num += Date.daysInMonth[i];
     }
     return num + this.getDate() - 1;
-}
+};
+
+
+//Date.prototype.getWeekOfYear = function() {
+//    // Skip to Thursday of this week
+//    var now = this.getDayOfYear() + (4 - this.getDay());
+//    // Find the first Thursday of the year
+//    var jan1 = new Date(this.getFullYear(), 0, 1);
+//    var then = (7 - jan1.getDay() + 4);
+//    return String.leftPad(((now - then) / 7) + 1, 2, "0");
+//}
 
 Date.prototype.getWeekOfYear = function() {
-    // Skip to Thursday of this week
-    var now = this.getDayOfYear() + (4 - this.getDay());
-    // Find the first Thursday of the year
-    var jan1 = new Date(this.getFullYear(), 0, 1);
-    var then = (7 - jan1.getDay() + 4);
-    document.write(then);
-    return String.leftPad(((now - then) / 7) + 1, 2, "0");
-}
+    // adapted from http://www.merlyn.demon.co.uk/weekcalc.htm
+    var ms1d = 864e5; // milliseconds in a day
+    var ms7d = 7 * ms1d; // milliseconds in a week
+    var DC3 = Date.UTC(this.getFullYear(), this.getMonth(), this.getDate() + 3) / ms1d; // an Absolute Day Number
+    var AWN = Math.floor(DC3 / 7); // an Absolute Week Number
+    var Wyr = new Date(AWN * ms7d).getUTCFullYear();
+    return AWN - Math.floor(Date.UTC(Wyr, 0, 7) / ms7d) + 1;
+};
+
 
 Date.prototype.isLeapYear = function() {
     var year = this.getFullYear();

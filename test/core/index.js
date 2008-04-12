@@ -1229,6 +1229,148 @@
     
   }
   
+  ,
+  
+  '.getOrdinalNumber() at 00:00': {
+    setup: function() { },
+    '1-Jan-2008 (Ordinal Day: 1)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 0, 1).getOrdinalNumber() === 1); }
+    },
+    '15-Jan-2008 (Ordinal Day: 15)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 0, 15).getOrdinalNumber() === 15); }
+    },
+    '1-Feb-2008 (Ordinal Day: 32)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 1, 1).getOrdinalNumber() === 32); }
+    },
+    '28-Feb-2007 (Ordinal Day: 59)': {
+      run: function() {},
+      assert: function() { return (new Date(2007, 1, 28).getOrdinalNumber() === 59); }
+    },
+    '29-Feb-2008 (Ordinal Day: 60)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 1, 29).getOrdinalNumber() === 60); }
+    },
+    '1-Mar-2008 (Ordinal Day: 61)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 2, 1).getOrdinalNumber() === 61); }
+    },
+    '1-Apr-2008 (Ordinal Day: 92)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 3, 1).getOrdinalNumber() === 92); }
+    },
+    '1-May-2008 (Ordinal Day: 122)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 4, 1).getOrdinalNumber() === 122); }
+    },
+    '1-Jun-2008 (Ordinal Day: 153)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 5, 1).getOrdinalNumber() === 153); }
+    },
+    '1-Jul-2008 (Ordinal Day: 183)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 6, 1).getOrdinalNumber() === 183); }
+    },
+    '1-Aug-2008 (Ordinal Day: 214)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 7, 1).getOrdinalNumber() === 214); }
+    },
+    '1-Sep-2008 (Ordinal Day: 245)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 8, 1).getOrdinalNumber() === 245); }
+    },
+    '1-Oct-2008 (Ordinal Day: 275)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 9, 1).getOrdinalNumber() === 275); }
+    },
+    '1-Nov-2008 (Ordinal Day: 306)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 10, 1).getOrdinalNumber() === 306); }
+    },
+    '1-Dec-2008 (Ordinal Day: 336)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 11, 1).getOrdinalNumber() === 336); }
+    },
+    '31-Dec-2008 (Ordinal Day: 366)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 11, 31).getOrdinalNumber() === 366); }
+    }
+    
+  }
+  
+  ,
+  
+  '.getOrdinalNumber() with time set to now': {
+    setup: function() { },
+    '1-Jan-2008 (Ordinal Day: 1)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 0, 1).setTimeToNow().getOrdinalNumber() === 1); }
+    },
+    '15-Jan-2008 (Ordinal Day: 15)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 0, 15).setTimeToNow().getOrdinalNumber() === 15); }
+    },
+    '1-Feb-2008 (Ordinal Day: 32)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 1, 1).setTimeToNow().getOrdinalNumber() === 32); }
+    },
+    '28-Feb-2007 (Ordinal Day: 59)': {
+      run: function() {},
+      assert: function() { return (new Date(2007, 1, 28).setTimeToNow().getOrdinalNumber() === 59); }
+    },
+    '29-Feb-2008 (Ordinal Day: 60)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 1, 29).setTimeToNow().getOrdinalNumber() === 60); }
+    },
+    '1-Mar-2008 (Ordinal Day: 61)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 2, 1).setTimeToNow().getOrdinalNumber() === 61); }
+    },
+    '1-Apr-2008 (Ordinal Day: 92)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 3, 1).setTimeToNow().getOrdinalNumber() === 92); }
+    },
+    '1-May-2008 (Ordinal Day: 122)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 4, 1).setTimeToNow().getOrdinalNumber() === 122); }
+    },
+    '1-Jun-2008 (Ordinal Day: 153)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 5, 1).setTimeToNow().getOrdinalNumber() === 153); }
+    },
+    '1-Jul-2008 (Ordinal Day: 183)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 6, 1).setTimeToNow().getOrdinalNumber() === 183); }
+    },
+    '1-Aug-2008 (Ordinal Day: 214)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 7, 1).setTimeToNow().getOrdinalNumber() === 214); }
+    },
+    '1-Sep-2008 (Ordinal Day: 245)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 8, 1).setTimeToNow().getOrdinalNumber() === 245); }
+    },
+    '1-Oct-2008 (Ordinal Day:275 )': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 9, 1).setTimeToNow().getOrdinalNumber() === 275); }
+    },
+    '1-Nov-2008 (Ordinal Day: 306)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 10, 1).setTimeToNow().getOrdinalNumber() === 306); }
+    },
+    '1-Dec-2008 (Ordinal Day: 336)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 11, 1).setTimeToNow().getOrdinalNumber() === 336); }
+    },
+    '31-Dec-2008 (Ordinal Day: 366)': {
+      run: function() {},
+      assert: function() { return (new Date(2008, 11, 31).setTimeToNow().getOrdinalNumber() === 366); }
+    }
+    
+  }
+  
 });
 
 $(document).ready(function() { Date.Specification.validate().show() });

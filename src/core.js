@@ -8,8 +8,16 @@
  */
  
 (function () {
-    var $D = Date, $P = $D.prototype, $C = $D.CultureInfo;
-    
+    var $D = Date, 
+        $P = $D.prototype, 
+        $C = $D.CultureInfo,
+        p = function(s, l) {
+            if (!l) {
+                l = 2;
+            }
+            return ("000" + s).slice(l * -1);
+        };
+            
     /**
      * Resets the time of this Date object to 12:00 AM (00:00), which is the start of the day.
      * @param {Boolean}  .clone() this date instance before clearing Time
@@ -344,16 +352,15 @@
     };
     
     /**
-     * Get the ISO 8601 week number. Week one (1) is the week which contains the first Thursday of the year. Monday is considered the first day of the week.
+     * Get the ISO 8601 week number. Week one (01) is the week which contains the first Thursday of the year. Monday is considered the first day of the week.
      * The .getISOWeek() function does convert the date to it's UTC value. Please use .getWeek() to get the week of the local date.
-     * @return {Number}  1 to 53
+     * @return {String}  "01" to "53"
      */
     $P.getISOWeek = function() {
         $y = this.getUTCFullYear();
         $m = this.getUTCMonth() + 1;
         $d = this.getUTCDate();
-        
-        return this.getWeek();
+        return p(this.getWeek());
     };
 
     /**
@@ -515,8 +522,8 @@
 
     /**
      * Moves the date to the next n'th occurrence of the dayOfWeek starting from the beginning of the month. The number (-1) is a magic number and will return the last occurrence of the dayOfWeek in the month.
-     * @param {Number}   The dayOfWeek to move to.
-     * @param {Number}   The n'th occurrence to move to. Use (-1) to return the last occurrence in the month.
+     * @param {Number}   The dayOfWeek to move to
+     * @param {Number}   The n'th occurrence to move to. Use (-1) to return the last occurrence in the month
      * @return {Date}    this
      */
     $P.moveToNthOccurrence = function (dayOfWeek, occurrence) {
@@ -536,7 +543,7 @@
 
     /**
      * Move to the next or last dayOfWeek based on the orient value.
-     * @param {Number}   The dayOfWeek to move to.
+     * @param {Number}   The dayOfWeek to move to
      * @param {Number}   Forward (+1) or Back (-1). Defaults to +1. [Optional]
      * @return {Date}    this
      */
@@ -547,7 +554,7 @@
 
     /**
      * Move to the next or last month based on the orient value.
-     * @param {Number}   The month to move to. 0 = January, 11 = December.
+     * @param {Number}   The month to move to. 0 = January, 11 = December
      * @param {Number}   Forward (+1) or Back (-1). Defaults to +1. [Optional]
      * @return {Date}    this
      */
@@ -557,11 +564,11 @@
     };
 
     /**
-     * Get the numeric day number of the year, adjusted for leap year.
-     * @return {Number} 0 through 364 (365 in leap years)
+     * Get the Ordinal day (numeric day number) of the year, adjusted for leap year.
+     * @return {Number} 1 through 365 (366 in leap years)
      */
-    $P.getDayOfYear = function () {
-        return Math.floor((this - new Date(this.getFullYear(), 0, 1)) / 86400000);
+    $P.getOrdinalNumber = function () {
+        return Math.ceil((this.clone().clearTime() - new Date(this.getFullYear(), 0, 1)) / 86400000) + 1
     };
 
     /**
@@ -652,27 +659,44 @@
      MMM    Abbreviated month name. $C.abbreviatedMonthNames.                            "Jan" to "Dec"
      MMMM   The full month name. $C.monthNames.                                          "January" to "December"
 
-     yy     Displays the year as a two-digit number.                                     "99" or "08"
-     yyyy   Displays the full four digit year.                                           "1999" or "2008"
+     yy     The year as a two-digit number.                                              "99" or "08"
+     yyyy   The full four digit year.                                                    "1999" or "2008"
      
      t      Displays the first character of the A.M./P.M. designator.                    "A" or "P"
             $C.amDesignator or $C.pmDesignator
      tt     Displays the A.M./P.M. designator.                                           "AM" or "PM"
             $C.amDesignator or $C.pmDesignator
+     
+     S      The ordinal suffix ("st, "nd", "rd" or "th") of the current day.            "st, "nd", "rd" or "th"
     </pre>
      * @param {String}   A format string consisting of one or more format spcifiers [Optional].
      * @return {String}  A string representation of the current Date object.
      */
     $P.toString = function (format) {
-        var x = this;
-
-        var p = function p(s) {
-            return s < 10 ? '0' + s : s;
-        };
-
-        return format ? format.replace(/dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|zz?z?|fff?/g, 
-        function (format) {
-            switch (format) {
+        var x = this, 
+            ord = function (n) {
+                switch (n * 1) {
+                case 1: 
+                case 21: 
+                case 31: 
+                    return "st";
+                case 2: 
+                case 22: 
+                    return "nd";
+                case 3: 
+                case 23: 
+                    return "rd";
+                default: 
+                    return "th";
+                }
+            };
+        
+        return format ? format.replace(/(\\)?(dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|fff?|S)/g, 
+        function (m) {
+            if (m.charAt(0) === "\\") {
+                return m.replace("\\", "");
+            }
+            switch (m) {
             case "hh":
                 return p(x.getHours() < 13 ? (x.getHours() === 0 ? 12 : x.getHours()) : (x.getHours() - 12));
             case "h":
@@ -690,10 +714,9 @@
             case "s":
                 return x.getSeconds();
             case "yyyy":
-                var y = "000" + x.getFullYear();
-                return y.substring(y.length - 4);
+                return p(x.getFullYear(), 4);
             case "yy":
-                return x.toString("yyyy").substring(2);
+                return p(x.getFullYear());
             case "dddd":
                 return $C.dayNames[x.getDay()];
             case "ddd":
@@ -714,9 +737,10 @@
                 return x.getHours() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
             case "tt":
                 return x.getHours() < 12 ? $C.amDesignator : $C.pmDesignator;
-            case "fff":
-                var y = "00" + x.getMilliseconds();
-                return y.substring(y.length - 3);
+            case "S":
+                return ord(x.getDate());
+            default: 
+                return m;
             }
         }
         ) : this._toString();

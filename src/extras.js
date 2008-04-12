@@ -8,37 +8,46 @@
  */
  
 (function () {
-    var $D = Date, $P = $D.prototype, $C = $D.CultureInfo;
-//  NOT SUPPORTED
-//  %U - week number of the current year as a decimal number, starting with the first Sunday as the first day of the first week
+    var $D = Date, 
+        $P = $D.prototype, 
+        $C = $D.CultureInfo,
+        p = function(s, l) {
+            if (!l) {
+                l = 2;
+            }
+            return ("000" + s).slice(l * -1);
+        };
+        
     /**
      * Converts the value of the current Date object to its equivalent string representation using a PHP/Unix style of date format specifiers.
      *
      * Format Specifiers
-    <pre>
-    Format  Description                                                                  Example
-    ------  ---------------------------------------------------------------------------  -----------------------
-      d     Day of the month, 2 digits with leading zeros                                01 to 31
-    </pre>
+     <pre>
+     Format  Description                                                                  Example
+     ------  ---------------------------------------------------------------------------  -----------------------
+       d     Day of the month, 2 digits with leading zeros                                01 to 31
+     </pre>
+    
+     *  NOT SUPPORTED
+     *  e  	Timezone identifier Examples: UTC, GMT, Atlantic/Azores
      * @param {String}   A format string consisting of one or more format spcifiers [Optional].
      * @return {String}  A string representation of the current Date object.
      */
-    $P["$format"] = function(format) { 
-        var x = this, temp;
+    $P.$format = function(format) { 
+        var x = this, 
+            y,
+            p = function p(s) {
+                return s < 10 ? '0' + s : s;
+            };
         
         x.t = x.toString;
 
-        var p = function p(s) {
-            return s < 10 ? '0' + s : s;
-        };
-        
-        return format ? format.replace(/(%|\\|%%)?[a-zA-Z]/g, 
-        function (format) {
-            temp = format.charAt(0)
-            if (format.charAt(0) === "\\" || format.substring(0, 2) === "%%") {
-                return format.replace("\\", "").replace("%%", "%");
+        return format ? format.replace(/(%|\\)?[a-zA-Z]|%%/g, 
+        function (m) {
+            if (m.charAt(0) === "\\" || m.substring(0, 2) === "%%") {
+                return m.replace("\\", "").replace("%%", "%");
             }
-            switch (format) {
+            switch (m) {
             case "d":
             case "%d":
                 return x.t("dd");
@@ -55,15 +64,18 @@
             case "%u":
                 return x.getDay() + 1;
             case "S":
-                return x.getOrdinal();
+                return x.t("S");
             case "w":
             case "%w":
                 return x.getDay();
             case "z":
-                return x.getDayOfYear();
+                return x.getOrdinalNumber();
             case "%j":
-                temp = "00" + x.getDayOfYear();
-                return temp.substring(temp.length - 3);
+                return p(x.getOrdinalNumber(), 3);
+            case "%U":
+                var d1 = x.clone().set({month: 0, day: 1}).addDays(-1).moveToDayOfWeek(0);
+                var d2 = x.clone().addDays(1).moveToDayOfWeek(0, -1);
+                return (d2 < d1) ? "00" : p((d2.getOrdinalNumber() - d1.getOrdinalNumber()) / 7 + 1);                
             case "W":
             case "%V":
                 return x.getISOWeek();
@@ -91,8 +103,7 @@
             case "%G":
                 return x.setWeek(x.getISOWeek()).t("yyyy");
             case "%g":
-                var g = x.$format("%G");
-                return g.substring(g.length - 2);
+                return x.$format("%G").slice(-2);
             case "Y":
             case "%Y":
                 return x.t("yyyy");
@@ -103,8 +114,8 @@
             case "%p":
                 return x.t("tt").toLowerCase();
             case "%r":
-                temp = x.$format("%p");
-                return (temp.indexOf(".") > -1) ? temp : temp.charAt(0) + "." + temp.charAt(1) + ".";
+                y = x.$format("%p");
+                return (y.indexOf(".") > -1) ? y : y.charAt(0) + "." + y.charAt(1) + ".";
             case "A":
                 return x.t("tt").toUpperCase();
             case "g":
@@ -124,12 +135,14 @@
             case "%S":
                 return x.t("ss");
             case "u":
-                return x.t("fff");
+                return p(x.getMilliseconds(), 3);
+            case "I":
+                return (x.isDaylightSavingTime()) ? 1 : 0;
             case "O":
-                return x.getUTCOffset().toString();
+                return x.getUTCOffset();
             case "P":
-                var o = x.getUTCOffset();
-                return o.substring(0, o.length - 2) + ":" + o.substring(o.length - 2);
+                y = x.getUTCOffset();
+                return y.substring(0, y.length - 2) + ":" + y.substring(y.length - 2);
             case "T":
                 return x.getTimezone();
             case "Z":
@@ -137,7 +150,7 @@
             case "c":
                 return x.toISOString();
             case "U":
-                return Math.round(x.getTime()/1000)
+                return Math.round(x.getTime()/1000);
             case "%c":
                 return x.toShortDateString() + " " + x.toShortTimeString();
             case "%C":
@@ -149,7 +162,7 @@
             case "%t":
                 return "\\t";
             case "%R":
-                return x.toString("HH:mm");
+                return x.t("HH:mm");
             case "%T":
                 return x.$format("%H:%M:%S");
             case "%x":
@@ -157,7 +170,7 @@
             case "%X":
                 return x.toShortTimeString();
 			default:
-				return format;
+				return m;
             }
         }
         ) : this._toString();
