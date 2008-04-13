@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 2008-04-04
+ * @date: 2008-04-13
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -79,6 +79,21 @@
     };
 
     /**
+     * Gets the day number (0-6) if given a CultureInfo specific string which is a valid dayName, abbreviatedDayName or shortestDayName (two char).
+     * @param {String}   The name of the day (eg. "Monday, "Mon", "tuesday", "tue", "We", "we").
+     * @return {Number}  The day number
+     */
+    $D.getDayNumberFromName = function (name) {
+        var n = $C.dayNames, m = $C.abbreviatedDayNames, o = $C.shortestDayNames, s = name.toLowerCase();
+        for (var i = 0; i < n.length; i++) { 
+            if (n[i].toLowerCase() == s || m[i].toLowerCase() == s || o[i].toLowerCase() == s) { 
+                return i; 
+            }
+        }
+        return -1;  
+    };
+    
+    /**
      * Gets the month number (0-11) if given a Culture Info specific string which is a valid monthName or abbreviatedMonthName.
      * @param {String}   The name of the month (eg. "February, "Feb", "october", "oct").
      * @return {Number}  The day number
@@ -94,27 +109,12 @@
     };
 
     /**
-     * Gets the day number (0-6) if given a CultureInfo specific string which is a valid dayName, abbreviatedDayName or shortestDayName (two char).
-     * @param {String}   The name of the day (eg. "Monday, "Mon", "tuesday", "tue", "We", "we").
-     * @return {Number}  The day number
-     */
-    $D.getDayNumberFromName = function (name) {
-        var n = $C.dayNames, m = $C.abbreviatedDayNames, o = $C.shortestDayNames, s = name.toLowerCase();
-        for (var i = 0; i < n.length; i++) { 
-            if (n[i].toLowerCase() == s || m[i].toLowerCase() == s || o[i].toLowerCase() == s) { 
-                return i; 
-            }
-        }
-        return -1;  
-    };
-
-    /**
      * Determines if the current date instance is within a LeapYear.
      * @param {Number}   The year.
      * @return {Boolean} true if date is within a LeapYear, otherwise false.
      */
     $D.isLeapYear = function (year) { 
-        return (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)); 
+        return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0); 
     };
 
     /**
@@ -126,16 +126,22 @@
     $D.getDaysInMonth = function (year, month) {
         return [31, ($D.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
     };
-
-    $D.getTimezoneOffset = function (s) {
-        return $C.timezones[s.toUpperCase()];
-    };
-
+ 
     $D.getTimezoneAbbreviation = function (offset) {
-        var n = $C.timezones, p;
-        for (var i = 0; i < n.length; i++) {
-            if (n[i] === offset) {
-                return n[i];
+        var z = $C.timezones, p;
+        for (var i = 0; i < z.length; i++) {
+            if (z[i].offset === offset) {
+                return z[i].name;
+            }
+        }
+        return null;
+    };
+    
+    $D.getTimezoneOffset = function (name) {
+        var z = $C.timezones, p;
+        for (var i = 0; i < z.length; i++) {
+            if (z[i].name === name.toUpperCase()) {
+                return z[i].offset;
             }
         }
         return null;
@@ -173,9 +179,9 @@
      * @param {Date}     End of range [Required]
      * @return {Boolean} true is this is between or equal to the start and end dates, else false
      */
-$P.between = function (start, end) {
-    return this.getTime() >= start.getTime() && this.getTime() <= end.getTime();
-};
+    $P.between = function (start, end) {
+        return this.getTime() >= start.getTime() && this.getTime() <= end.getTime();
+    };
 
     /**
      * Adds the specified number of milliseconds to this instance. 
@@ -351,7 +357,7 @@ $P.between = function (start, end) {
     };
     
     /**
-     * Get the ISO 8601 week number. Week one (01) is the week which contains the first Thursday of the year. Monday is considered the first day of the week.
+     * Get the ISO 8601 week number. Week one ("01") is the week which contains the first Thursday of the year. Monday is considered the first day of the week.
      * The .getISOWeek() function does convert the date to it's UTC value. Please use .getWeek() to get the week of the local date.
      * @return {String}  "01" to "53"
      */
@@ -578,13 +584,13 @@ $P.between = function (start, end) {
         return $D.getTimezoneAbbreviation(this.getUTCOffset());
     };
 
-    $P.setTimezoneOffset = function (s) {
-        var here = this.getTimezoneOffset(), there = Number(s) * -6 / 10;
+    $P.setTimezoneOffset = function (offset) {
+        var here = this.getTimezoneOffset(), there = Number(offset) * -6 / 10;
         return this.addMinutes(there - here); 
     };
 
-    $P.setTimezone = function (s) { 
-        return this.setTimezoneOffset($D.getTimezoneOffset(s)); 
+    $P.setTimezone = function (offset) { 
+        return this.setTimezoneOffset($D.getTimezoneOffset(offset)); 
     };
 
     /**
@@ -611,7 +617,7 @@ $P.between = function (start, end) {
         var n = this.getTimezoneOffset() * -10 / 6, r;
         if (n < 0) { 
             r = (n - 10000).toString(); 
-            return r[0] + r.substr(2); 
+            return r.charAt(0) + r.substr(2); 
         } else { 
             r = (n + 10000).toString();  
             return "+" + r.substr(1); 
@@ -654,6 +660,7 @@ $P.between = function (start, end) {
      * Converts the value of the current Date object to its equivalent string representation.
      * Format Specifiers
     <pre>
+    CUSTOM DATE AND TIME FORMAT STRINGS
     Format  Description                                                                  Example
     ------  ---------------------------------------------------------------------------  -----------------------
      s      The seconds of the minute between 0-59.                                      "0" to "59"
@@ -687,17 +694,34 @@ $P.between = function (start, end) {
             $C.amDesignator or $C.pmDesignator
      
      S      The ordinal suffix ("st, "nd", "rd" or "th") of the current day.            "st, "nd", "rd" or "th"
+
+
+    STANDARD DATE AND TIME FORMAT STRINGS
+    Format  Description                                                                  Example ("en-US")
+    ------  ---------------------------------------------------------------------------  -----------------------
+     d      The CultureInfo shortDate Format Pattern                                     "M/d/yyyy"
+     D      The CultureInfo longDate Format Pattern                                      "dddd, MMMM dd, yyyy"
+     F      The CultureInfo fullDateTime Format Pattern                                  "dddd, MMMM dd, yyyy h:mm:ss tt"
+     m      The CultureInfo monthDay Format Pattern                                      "MMMM dd"
+     r      The CultureInfo rfc1123 Format Pattern                                       "ddd, dd MMM yyyy HH:mm:ss GMT"
+     s      The CultureInfo sortableDateTime Format Pattern                              "yyyy-MM-ddTHH:mm:ss"
+     t      The CultureInfo shortTime Format Pattern                                     "h:mm tt"
+     T      The CultureInfo longTime Format Pattern                                      "h:mm:ss tt"
+     u      The CultureInfo universalSortableDateTime Format Pattern                     "yyyy-MM-dd HH:mm:ssZ"
+     y      The CultureInfo yearMonth Format Pattern                                     "MMMM, yyyy"
     </pre>
      * @param {String}   A format string consisting of one or more format spcifiers [Optional].
      * @return {String}  A string representation of the current Date object.
      */
     $P.toString = function (format) {
-        var x = this, f = format;
+        var x = this;
         
-        if (f.length == 1) {
+        // Standard Date and Time Format Strings. Formats pulled from CultureInfo file and
+        // may vary by culture. 
+        if (format && format.length == 1) {
             var c = $C.formatPatterns;
             x.t = x.toString;
-            switch (f) {
+            switch (format) {
             case "d": 
                 return x.t(c.shortDate);
             case "D":
@@ -713,7 +737,7 @@ $P.between = function (start, end) {
             case "t":
                 return x.t(c.shortTime);
             case "T":
-                return x.t(c.shortTime);
+                return x.t(c.longTime);
             case "u":
                 return x.t(c.universalSortableDateTime);
             case "y":
@@ -738,7 +762,7 @@ $P.between = function (start, end) {
                 }
             };
         
-        return f ? f.replace(/(\\)?(dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|S)/g, 
+        return format ? format.replace(/(\\)?(dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|S)/g, 
         function (m) {
             if (m.charAt(0) === "\\") {
                 return m.replace("\\", "");

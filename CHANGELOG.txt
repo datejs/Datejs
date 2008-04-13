@@ -1,13 +1,15 @@
 CHANGE LOG
 --------------------
 
-2008-04-12 [geoffrey.mcgill]
-Revision #
+2008-04-13 [geoffrey.mcgill]
+Revision #162
 
 1.  Fixed bug in sugarpak.js where .toISOString was not correctly checking the Date.prototype
     if an instance of .toISOString was already in the dom.
 
-2.  Renamed .getDayOfYear() function to the proper name of .getOrdinalNumber().
+2.  Moved .toISOString() from sugarpak.js to core.js. Function remains otherwise unchanged.
+
+3.  Renamed .getDayOfYear() function to the proper name of .getOrdinalNumber().
 
 	Example
 	
@@ -17,7 +19,7 @@ Revision #
 	// New
 	Date.today().getOrdinalNumber(); // 103
 	
-2.  Fixed bug in core.js where .getOrdinalNumber() was not including the current day in the calculation.
+4.  Fixed bug in core.js where .getOrdinalNumber() was not including the current day in the calculation.
 	For example 1-Jan-2008 would return '0', although it is the 'first' day of the year. 
 	The .getOrdinalNumber() function now includes the current day in the calculation.
 
@@ -29,7 +31,7 @@ Revision #
 	// New
 	new Date(2008, 0, 15).getOrdinalNumber(); // 15
 
-3.  Added new "S" format specifier as option in .toString(). The "S" format specifier will return 
+5.  Added new "S" format specifier as option in .toString(). The "S" format specifier will return 
 	the ordinal suffix ("st, "nd", "rd" or "th") value of the Day.
 	
 	Example
@@ -46,9 +48,9 @@ Revision #
 	
 	Date.today().toString("MMMM dS, yyyy"); // "April 12th, 2008"
 	
-3.  Removed .getOrdinal function from sugarpak.js. Please use .toString("S").
+6.  Removed .getOrdinal function from sugarpak.js. Please use .toString("S").
 
-4.  Contemplated adding "z", "zz" and "zzz" as format specifiers, but changed my mind.
+7.  Contemplated adding "z", "zz" and "zzz" as format specifiers, but changed my mind.
 	For future reference here's the code required if adding "z*" support to .toString().
 	
 	// Add to .toString()
@@ -64,7 +66,7 @@ Revision #
     zz     The offset time zone from UTC in hours with leading zero.                    "–12" through "+13", "-06"
     zzz    The offset time zone from UTC in hours and minutes.                          "–12:00" through "+13:00", "-06:00"    
 
-5.  Contemplated add "fff" as format specifier option of .toString() but changed my mind. 
+8.  Contemplated add "fff" as format specifier option of .toString() but changed my mind. 
 	For future reference, here's the code required if adding "fff" support to .toString().
 	
 	// Add to .toString()
@@ -75,9 +77,9 @@ Revision #
     // Documentation
     fff    The milliseconds between 000-999.                                            "000" to "999"    
 
-6.  Changed return type of .getISOWeek to String from Number. Returns values from "01" to "53".
+9.  Changed return type of .getISOWeek to String from Number. Returns values from "01" to "53".
 
-7.  Corrected bug where .getISOWeek() was not returning a string with a leading zero if the week was < 10.
+10. Corrected bug where .getISOWeek() was not returning a string with a leading zero if the week was < 10.
 
 	Example
 	
@@ -87,41 +89,96 @@ Revision #
 	// New
 	Date.today().getISOWeek(); // "07"
 
-8.  Added support for escaping ("\\") characters in a format specifier string.
+11. Added support for escaping ("\\") characters in a format specifier string.
 
 	Example
 	
 	new Date().toString("\\da\\te: MMMM dS, yyyy"); // "date: April 12th, 2008"
 	
-9.  Removed .toShortDateString() from sugarpak.js. Please use .toString("d").
+12. Removed .toShortDateString() from sugarpak.js. Please use .toString("d").
 
-10. Removed .toLongDateString() from sugarpak.js. Please use .toString("D").
+13. Removed .toLongDateString() from sugarpak.js. Please use .toString("D").
 
-11. Removed .toShortTimeString() from sugarpak.js. Please use .toString("t").
+14. Removed .toShortTimeString() from sugarpak.js. Please use .toString("t").
 
-12. Removed .toLongTimeString() from sugarpak.js. Please use .toString("T").
+15. Removed .toLongTimeString() from sugarpak.js. Please use .toString("T").
 
-13. Moved .toISOString() from sugarpak.js to core.js. Function remains otherwise unchanged.
+16. Added support in .toString() for the following Standard Date and Time Format Specifiers. 
+	The format pattern for each standard pattern is pulled from the CultureInfo file. 
+	The pattern is culture specific and *may* be different for each CultureInfo class. 
 
-2.  Added Date.prototype.format(format). The .format function is similar to the .toString() function,
-    but will accept a PHP/Unix style format string.
+    STANDARD DATE AND TIME FORMAT STRINGS
+    Format  Description                                                                  Example ("en-US")
+    ------  ---------------------------------------------------------------------------  -----------------------
+     d      The CultureInfo shortDate Format Pattern                                     "M/d/yyyy"
+     D      The CultureInfo longDate Format Pattern                                      "dddd, MMMM dd, yyyy"
+     F      The CultureInfo fullDateTime Format Pattern                                  "dddd, MMMM dd, yyyy h:mm:ss tt"
+     m      The CultureInfo monthDay Format Pattern                                      "MMMM dd"
+     r      The CultureInfo rfc1123 Format Pattern                                       "ddd, dd MMM yyyy HH:mm:ss GMT"
+     s      The CultureInfo sortableDateTime Format Pattern                              "yyyy-MM-ddTHH:mm:ss"
+     t      The CultureInfo shortTime Format Pattern                                     "h:mm tt"
+     T      The CultureInfo longTime Format Pattern                                      "h:mm:ss tt"
+     u      The CultureInfo universalSortableDateTime Format Pattern                     "yyyy-MM-dd HH:mm:ssZ"
+     y      The CultureInfo yearMonth Format Pattern                                     "MMMM, yyyy"
 
-    If .format is already in the dom when Datejs loads, the .format function will not be created. A
-    secondary .$format function is always available.
+17. Fixed bug in .getUTCOffset().
 
-    Example
+18. Updated APIDocuemtation to ensure all core.js functions were documented. 
 
+19. Added parameter information to APIDocumentation (http://code.google.com/p/datejs/wiki/APIDocumentation).
 
-    If a PHP/Unix style of format specifier is passed to .toString, the .toString function will
-    internally call the .$format function. Datejs considers a PHP/Unix format specifer to be one
-    that contains a Percent ('%') character. The '%' can be contained at any point within the
-    format string.
+20. Added Date.prototype.format(format). The .format function is similar to the .toString() function,
+    but will accept a PHP/Unix style format string. See the following PHP documentation for reference.
+    
+	http://www.php.net/strftime
+	http://www.php.net/manual/en/function.date.php
 
-    Example
+	Example
+	
+	Date.today().format("%m/%d/%y"); // "04/13/08"
+	Date.today().format("c");        // "2008-04-13T06:00:00Z"
+	
+    If .format is already in the dom when the Datejs libary loads, the .format function will not be created. 
+    A secondary .$format function is always created and available.
+
+21. Added .normalizeFormat() to extras.js. The .normalizeFormat function will converts a PHP format 
+	string to Java/.NET format string. 
+	A PHP format string can be used with .$format or .format.
+	A Java/.NET format string can be used with .toString().
+    The .parseExact function will only accept a Java/.NET format string	
+
+	Example
+	
+	Date.normalizeFormat("%m/%d/%y"); // "MM/dd/yy"
+	
+	var f1 = "%m/%d/%y"
+	var f2 = Date.normalizeFormat(f1); // "MM/dd/yy"
+
+	new Date().format(f1);    // "04/13/08"
+	new Date().$format(f1);   // "04/13/08"
+	new Date().toString(f2);  // "04/13/08"
+
+	var date = Date.parseExact("04/13/08", f2); // Sun Apr 13 2008
+	
+22. Added .strftime() to extras.js. The .strftime() function will format a local Unix timestamp according 
+	to locale settings.
+	
+	Example
+	
+	Date.strftime("%m/%d/%y", new Date());       // "04/13/08"
+	Date.strftime("c", "2008-04-13T17:52:03Z");  // "04/13/08"
+
+23. Added .strtotime() to extras.js. The .strotime() function will parse any textual datetime description 
+	into a Unix timestamp. 
+	A Unix timestamp is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT).
+	
+	Example
+	
+	Date.strtotime("04/13/08");              // 1208044800
+	Date.strtotime("1970-01-01T00:00:00Z");  // 0	
 
 --------------------    
     
->>>>>>> .r160
 2008-04-06 [geoffrey.mcgill] 
 Revision #152
 
@@ -148,6 +205,10 @@ Revision #152
 	
 	The .getISOWeek() function converts the date to it's UTC value. 
 	Please use .getWeek() to get the week of the local date.
+	
+	Example
+	
+	Date.today().getISOWeek(); // "01" to "53"
 
 4.  Added Date.prototype.setWeek(). Moves the date to Monday of the week set.
     Accepts a number (1 to 53) that represents the week of the year to move to. Returns the date instance (this). 

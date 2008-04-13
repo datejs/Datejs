@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 2008-04-04
+ * @date: 2008-04-13
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -29,7 +29,7 @@
     $N._dateElement = "day";
 
     /** 
-     * Moves the date to the next instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Moves the date to the next instance of a date as specified by the subsequent date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
      * Example
     <pre><code>
     Date.today().next().friday();
@@ -47,7 +47,7 @@
     };
 
     /** 
-     * Creates a new Date (Date.today()) and moves the date to the next instance of the date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Creates a new Date (Date.today()) and moves the date to the next instance of the date as specified by the subsequent date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
      * Example
     <pre><code>
     Date.next().friday();
@@ -64,7 +64,7 @@
     };
 
     /** 
-     * Moves the date to the previous instance of a date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Moves the date to the previous instance of a date as specified by the subsequent date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
      * Example
     <pre><code>
     Date.today().last().friday();
@@ -82,7 +82,7 @@
     };
 
     /** 
-     * Creates a new Date (Date.today()) and moves the date to the previous instance of the date as specified by a trailing date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
+     * Creates a new Date (Date.today()) and moves the date to the previous instance of the date as specified by the subsequent date element function (eg. .day(), .month()), month name function (eg. .january(), .jan()) or day name function (eg. .friday(), fri()).
      * Example
     <pre><code>
     Date.last().friday();
@@ -209,7 +209,7 @@
             if (this._nth !== null) {
                 // If the .second() function was called earlier, remove the _orient 
                 // from the date, and then continue.
-                // The problem happens because 'second' can be used in two different context.
+                // This is required because 'second' can be used in two different context.
                 // 
                 // Example
                 //

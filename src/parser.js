@@ -1,7 +1,7 @@
 /**
  * @version: 1.0 Alpha-1
  * @author: Coolite Inc. http://www.coolite.com/
- * @date: 2008-04-04
+ * @date: 2008-04-13
  * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
  * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
  * @website: http://www.datejs.com/
@@ -1103,7 +1103,7 @@
     var d1 = Date.parse("2004.10.15", "yyyy.MM.dd");
 
     // Multiple formats
-    var d1 = Date.parseExact("10/15/2004", [ "M/d/yyyy" , "MMMM d, yyyy" ]);
+    var d1 = Date.parseExact("10/15/2004", ["M/d/yyyy", "MMMM d, yyyy"]);
     </code></pre>
      *
      * @param {String}   The string value to convert into a Date object [Required].
