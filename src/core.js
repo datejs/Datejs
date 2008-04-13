@@ -173,10 +173,9 @@
      * @param {Date}     End of range [Required]
      * @return {Boolean} true is this is between or equal to the start and end dates, else false
      */
-    $P.between = function (start, end) {
-        var t = this.getTime();
-        return t >= start.getTime() && t <= end.getTime();
-    };
+$P.between = function (start, end) {
+    return this.getTime() >= start.getTime() && this.getTime() <= end.getTime();
+};
 
     /**
      * Adds the specified number of milliseconds to this instance. 
@@ -568,7 +567,7 @@
      * @return {Number} 1 through 365 (366 in leap years)
      */
     $P.getOrdinalNumber = function () {
-        return Math.ceil((this.clone().clearTime() - new Date(this.getFullYear(), 0, 1)) / 86400000) + 1
+        return Math.ceil((this.clone().clearTime() - new Date(this.getFullYear(), 0, 1)) / 86400000) + 1;
     };
 
     /**
@@ -628,6 +627,26 @@
         return (date || new Date()) - this;
     };
 
+    if (!$P.toISOString) {
+        /**
+         * Converts the current date instance into a string with an ISO 8601 format. The date is converted to it's UTC value.
+         * @return {String}  ISO 8601 string of date
+         */
+        $P.toISOString = function () {
+            // From http://www.json.org/json.js. Public Domain. 
+            function f(n) {
+                return n < 10 ? '0' + n : n;
+            }
+
+            return '"' + this.getUTCFullYear()   + '-' +
+                f(this.getUTCMonth() + 1) + '-' +
+                f(this.getUTCDate())      + 'T' +
+                f(this.getUTCHours())     + ':' +
+                f(this.getUTCMinutes())   + ':' +
+                f(this.getUTCSeconds())   + 'Z"';
+        };
+    }
+    
     // private
     $P._toString = $P.toString;
 
@@ -673,8 +692,36 @@
      * @return {String}  A string representation of the current Date object.
      */
     $P.toString = function (format) {
-        var x = this, 
-            ord = function (n) {
+        var x = this, f = format;
+        
+        if (f.length == 1) {
+            var c = $C.formatPatterns;
+            x.t = x.toString;
+            switch (f) {
+            case "d": 
+                return x.t(c.shortDate);
+            case "D":
+                return x.t(c.longDate);
+            case "F":
+                return x.t(c.fullDateTime);
+            case "m":
+                return x.t(c.monthDay);
+            case "r":
+                return x.t(c.rfc1123);
+            case "s":
+                return x.t(c.sortableDateTime);
+            case "t":
+                return x.t(c.shortTime);
+            case "T":
+                return x.t(c.shortTime);
+            case "u":
+                return x.t(c.universalSortableDateTime);
+            case "y":
+                return x.t(c.yearMonth);
+            }    
+        }
+        
+        var ord = function (n) {
                 switch (n * 1) {
                 case 1: 
                 case 21: 
@@ -691,20 +738,21 @@
                 }
             };
         
-        return format ? format.replace(/(\\)?(dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|fff?|S)/g, 
+        return f ? f.replace(/(\\)?(dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|S)/g, 
         function (m) {
             if (m.charAt(0) === "\\") {
                 return m.replace("\\", "");
             }
+            x.h = x.getHours;
             switch (m) {
             case "hh":
-                return p(x.getHours() < 13 ? (x.getHours() === 0 ? 12 : x.getHours()) : (x.getHours() - 12));
+                return p(x.h() < 13 ? (x.h() === 0 ? 12 : x.h()) : (x.h() - 12));
             case "h":
-                return x.getHours() < 13 ? (x.getHours() === 0 ? 12 : x.getHours()) : (x.getHours() - 12);
+                return x.h() < 13 ? (x.h() === 0 ? 12 : x.h()) : (x.h() - 12);
             case "HH":
-                return p(x.getHours());
+                return p(x.h());
             case "H":
-                return x.getHours();
+                return x.h();
             case "mm":
                 return p(x.getMinutes());
             case "m":
@@ -724,7 +772,7 @@
             case "dd":
                 return p(x.getDate());
             case "d":
-                return x.getDate().toString();
+                return x.getDate();
             case "MMMM":
                 return $C.monthNames[x.getMonth()];
             case "MMM":
@@ -734,9 +782,9 @@
             case "M":
                 return x.getMonth() + 1;
             case "t":
-                return x.getHours() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
+                return x.h() < 12 ? $C.amDesignator.substring(0, 1) : $C.pmDesignator.substring(0, 1);
             case "tt":
-                return x.getHours() < 12 ? $C.amDesignator : $C.pmDesignator;
+                return x.h() < 12 ? $C.amDesignator : $C.pmDesignator;
             case "S":
                 return ord(x.getDate());
             default: 

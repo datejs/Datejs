@@ -92,6 +92,16 @@ Revision #
 	Example
 	
 	new Date().toString("\\da\\te: MMMM dS, yyyy"); // "date: April 12th, 2008"
+	
+9.  Removed .toShortDateString() from sugarpak.js. Please use .toString("d").
+
+10. Removed .toLongDateString() from sugarpak.js. Please use .toString("D").
+
+11. Removed .toShortTimeString() from sugarpak.js. Please use .toString("t").
+
+12. Removed .toLongTimeString() from sugarpak.js. Please use .toString("T").
+
+13. Moved .toISOString() from sugarpak.js to core.js. Function remains otherwise unchanged.
 
 2.  Added Date.prototype.format(format). The .format function is similar to the .toString() function,
     but will accept a PHP/Unix style format string.
@@ -111,6 +121,7 @@ Revision #
 
 --------------------    
     
+>>>>>>> .r160
 2008-04-06 [geoffrey.mcgill] 
 Revision #152
 

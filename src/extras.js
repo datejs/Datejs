@@ -152,11 +152,11 @@
             case "U":
                 return Math.round(x.getTime()/1000);
             case "%c":
-                return x.toShortDateString() + " " + x.toShortTimeString();
+                return x.t("d") + " " + x.t("t");
             case "%C":
                 return Math.floor(x.getFullYear() / 100 + 1);
             case "%D":
-                return x.$format("%m/%d/%y");
+                return x.t("mm/dd/yy");
             case "%n":
                 return "\\n";
             case "%t":
@@ -164,11 +164,11 @@
             case "%R":
                 return x.t("HH:mm");
             case "%T":
-                return x.$format("%H:%M:%S");
+                return x.t("HH:mm:ss");
             case "%x":
-                return x.toShortDateString();
+                return x.t("d");
             case "%X":
-                return x.toShortTimeString();
+                return x.t("t");
 			default:
 				return m;
             }
