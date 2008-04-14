@@ -123,7 +123,8 @@ Revision #162
 
 17. Fixed bug in .getUTCOffset().
 
-18. Updated APIDocuemtation to ensure all core.js functions were documented. 
+18. Updated APIDocuemtation to ensure all core.js functions were documented. Enhanced GoogleCode wiki documentation 
+	listing Parameters and Return Value.
 
 19. Added parameter information to APIDocumentation (http://code.google.com/p/datejs/wiki/APIDocumentation).
 

@@ -145,10 +145,12 @@ Date.CultureInfo = {
  * to the Datejs Forum located at http://www.datejs.com/forums/.
  *
  * Please mark the subject of the post with [CultureInfo]. Example:
- *    Subject: [CultureInfo] Translated "da-DK" Danish(Denmark)
+ *    Subject: [CultureInfo] Translated "da-DK" Danish(Denmark)b
  *
  * English Name        Translated
  * ------------------  -----------------
+ * about               about
+ * ago                 ago
  * date                date
  * time                time
  * calendar            calendar
