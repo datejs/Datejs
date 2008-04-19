@@ -1,5 +1,11 @@
 CHANGE LOG
 --------------------
+2008-04-13 [geoffrey.mcgill]
+Revision #169
+
+1.  Made correction to APIDocumentation.wiki. getDayNumberFromName and getMonthNumberFromName.
+
+--------------------
 
 2008-04-13 [geoffrey.mcgill]
 Revision #162
