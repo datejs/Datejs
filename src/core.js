@@ -11,7 +11,7 @@
     var $D = Date, 
         $P = $D.prototype, 
         $C = $D.CultureInfo,
-        p = function(s, l) {
+        p = function (s, l) {
             if (!l) {
                 l = 2;
             }
@@ -166,21 +166,39 @@
 
     /**
      * Compares this instance to another Date object and returns true if they are equal.  
-     * @param {Date}     Date object to compare [Required]
+     * @param {Date}     Date object to compare. If no date to compare, new Date() [now] is used.
      * @return {Boolean} true if dates are equal. false if they are not equal.
      */
     $P.equals = function (date) {
-        return Date.equals(this, date);
+        return Date.equals(this, date || new Date());
     };
 
     /**
-     * Determines is this instance is between a range of two dates or equal to either the start or end dates.
+     * Determines if this instance is between a range of two dates or equal to either the start or end dates.
      * @param {Date}     Start of range [Required]
      * @param {Date}     End of range [Required]
      * @return {Boolean} true is this is between or equal to the start and end dates, else false
      */
     $P.between = function (start, end) {
         return this.getTime() >= start.getTime() && this.getTime() <= end.getTime();
+    };
+
+    /**
+     * Determines if this date occurs after the date to compare to.
+     * @param {Date}     Date object to compare. If no date to compare, new Date() ("now") is used.
+     * @return {Boolean} true if this date instance is greater than the date to compare to (or "now"), otherwise false.
+     */
+    $P.isAfter = function (date) {
+        return this.compareTo(date || new Date()) === 1;
+    };
+
+    /**
+     * Determines if this date occurs before the date to compare to.
+     * @param {Date}     Date object to compare. If no date to compare, new Date() ("now") is used.
+     * @return {Boolean} true if this date instance is less than the date to compare to (or "now").
+     */
+    $P.isBefore = function (date) {
+        return (this.compareTo(date || new Date()) === -1);
     };
 
     /**
@@ -316,7 +334,7 @@
      * The .getWeek() function does NOT convert the date to UTC. The local datetime is used. Please use .getISOWeek() to get the week of the UTC converted date.
      * @return {Number}  1 to 53
      */
-    $P.getWeek = function() {
+    $P.getWeek = function () {
         var a, b, c, d, e, f, g, n, s, w;
         
         $y = (!$y) ? this.getFullYear() : $y;
@@ -361,7 +379,7 @@
      * The .getISOWeek() function does convert the date to it's UTC value. Please use .getWeek() to get the week of the local date.
      * @return {String}  "01" to "53"
      */
-    $P.getISOWeek = function() {
+    $P.getISOWeek = function () {
         $y = this.getUTCFullYear();
         $m = this.getUTCMonth() + 1;
         $d = this.getUTCDate();
@@ -373,7 +391,7 @@
      * @param {Number}   A Number (1 to 53) that represents the week of the year.
      * @return {Date}    this
      */    
-    $P.setWeek = function(n) {
+    $P.setWeek = function (n) {
         return this.moveToDayOfWeek(1).addWeeks(n - this.getWeek());
     };
 

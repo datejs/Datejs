@@ -12,7 +12,7 @@
         $P = $D.prototype, 
         $C = $D.CultureInfo,
         $f = [],
-        p = function(s, l) {
+        p = function (s, l) {
             if (!l) {
                 l = 2;
             }
@@ -77,7 +77,7 @@
     $D.strtotime = function (time) {
         var d = $D.parse(time);
         d.addMinutes(d.getTimezoneOffset() * -1);
-        return Math.round($D.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds())/1000);
+        return Math.round($D.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds()) / 1000);
     };
 
     /**
@@ -180,7 +180,7 @@
      * @param {String}   A format string consisting of one or more format spcifiers [Optional].
      * @return {String}  A string representation of the current Date object.
      */
-    $P.$format = function(format) { 
+    $P.$format = function (format) { 
         var x = this, 
             y,
             t = function (v) {
