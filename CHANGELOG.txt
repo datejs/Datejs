@@ -66,18 +66,7 @@ Revision #182
 	new Date().equals(); // true (should be true, unless it takes more than one millisecond to compare)
 	Date.today().equals(Date.today().add(1).day()); // false
 	
-8.  All individual CultureInfo files and all compiled files within the /build/ folder now have full 
-	lowercase file names.
-
-	Example
-	
-	// Old
-	date-en-US.js
-
-	// New
-	date-en-us.js
-
-9.  Added new "Release Notes" RSS feed. http://feeds.feedburner.com/DatejsReleaseNotes
+8.  Added new "Release Notes" RSS feed. http://feeds.feedburner.com/DatejsReleaseNotes
 	
 --------------------
 
