@@ -242,7 +242,7 @@ var TimePeriod = function (years, months, days, hours, minutes, seconds, millise
         d1.addYears(this.years);
 
         if (orient == +1) {
-            while (d1 < d2 && d1.clone().addDays(d1.getDaysInMonth()) < d2) {
+            while (d1 < d2 && d1.clone().addDays(Date.getDaysInMonth(d1.getYear(), d1.getMonth()) ) < d2) {
                 d1.addMonths(1);
                 this.months++;
             }
@@ -258,7 +258,6 @@ var TimePeriod = function (years, months, days, hours, minutes, seconds, millise
 
         if (diff !== 0) {
             var ts = new TimeSpan(diff);
-            
             this.setDays(ts.getDays());
             this.setHours(ts.getHours());
             this.setMinutes(ts.getMinutes());

@@ -1,5 +1,19 @@
 CHANGE LOG
 --------------------
+2008-05-07 [geoffrey.mcgill]
+Revision #182
+
+1.  Fixed bug in TimePeriod. See http://code.google.com/p/datejs/issues/detail?id=39
+
+	Example
+	
+	var start = new Date();
+	var end = Date.today().add(15).days();
+	var ts = new TimePeriod(start, end);
+
+	ts.getDays(); // 14
+
+--------------------
 2008-04-25 [geoffrey.mcgill]
 Revision #182
 
