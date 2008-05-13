@@ -116,6 +116,43 @@
     };
 
     /** 
+     * Determines if the current date/time occurs during Today. Must be preceded by the .is() function.
+     * Example
+    <pre><code>
+    someDate.is().today();    // true|false
+    new Date().is().today();  // true
+    Date.today().is().today();// true
+    Date.today().add(-1).day().is().today(); // false
+    </code></pre>
+     *  
+     * @return {Boolean}    true|false
+     */    
+    $P.today = function () { 
+        if (this._is) { 
+            this._is = false;
+            return Date.today().equals(this.clone().clearTime());
+        }
+        return false;
+    };
+
+    /** 
+     * Determines if the current date is a weekday. This function must be preceded by the .is() function.
+     * Example
+    <pre><code>
+    Date.today().is().weekday(); // true|false
+    </code></pre>
+     *  
+     * @return {Boolean}    true|false
+     */
+    $P.weekday = function () {
+        if (this._is) { 
+            this._is = false;
+            return (!this.is().sat() && !this.is().sun());
+        }
+        return false;
+    };
+
+    /** 
      * Sets the Time of the current Date instance. A string "6:15 pm" or config object {hour:18, minute:15} are accepted.
      * Example
     <pre><code>
@@ -131,24 +168,7 @@
     $P.at = function (time) {
         return (typeof time === "string") ? $D.parse(this.toShortDateString() + " " + time) : this.set(time);
     }; 
-
-    /** 
-     * Determines if the current date is a weekday. This function must be preceeded by the .is() function.
-     * Example
-    <pre><code>
-    Date.today().is().weekday(); // true|false
-    </code></pre>
-     *  
-     * @return {Boolean}    true|false
-     */
-    $P.weekday = function () {
-        if (this._is) { 
-            this._is = false;
-            return (!this.is().sat() && !this.is().sun());
-        }
-        return this;
-    };
-    
+        
     /** 
      * Creates a new Date() and adds this (Number) to the date based on the preceding date element function (eg. second|minute|hour|day|month|year).
      * Example

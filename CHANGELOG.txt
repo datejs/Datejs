@@ -1,5 +1,19 @@
 CHANGE LOG
 --------------------
+2008-05-12 [geoffrey.mcgill]
+Revision #190
+
+1.  Added .today() equality check function. Checks to determine if the current date instance occurs 
+    during Today. Must be preceeded by the .is() function.
+
+	Example
+	
+    someDate.is().today();    // true|false
+    new Date().is().today();  // true
+    Date.today().is().today();// true
+    Date.today().add(-1).day().is().today(); // false
+	
+--------------------
 2008-05-07 [geoffrey.mcgill]
 Revision #182
 
