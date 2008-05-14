@@ -14,7 +14,7 @@
  */
  
 (function () {
-    var $D = Date, $P = $D.prototype, $C = $D.CultureInfo, $N = Number.prototype, _isSecond = false;
+    var $D = Date, $P = $D.prototype, $C = $D.CultureInfo, $N = Number.prototype;
 
     // private
     $P._orient = +1;
@@ -24,6 +24,12 @@
 
     // private
     $P._is = false;
+
+    // private
+    $P._same = false;
+    
+    // private
+    $P._isSecond = false;
 
     // private
     $N._dateElement = "day";
@@ -116,6 +122,47 @@
     };
 
     /** 
+     * Determines if two date objects occur on/in exactly the same instance of the subsequent date part function.
+     * The function .same() must be followed by a date part function (example: .day(), .month(), .year(), etc).
+     *
+     * An optional Date can be passed in the date part function. If now date is passed as a parameter, 'Now' is used. 
+     *
+     * The following example demonstrates how to determine if two dates fall on the exact same day.
+     *
+     * Example
+    <pre><code>
+    var d1 = Date.today(); // today at 00:00
+    var d2 = new Date();   // exactly now.
+
+    // Do they occur on the same day?
+    d1.same().day(d2); // true
+    
+     // Do they occur on the same hour?
+    d1.same().hour(d2); // false, unless d2 hour is '00' (midnight).
+    
+    // What if it's the same day, but one year apart?
+    var nextYear = Date.today().add(1).year();
+
+    d1.same().day(nextYear); // false, because the dates must occur on the exact same day. 
+    </code></pre>
+     *
+     * Scenario: Determine if a given date occurs during some week period 2 months from now. 
+     *
+     * Example
+    <pre><code>
+    var future = Date.today().add(2).months();
+    return someDate.same().week(future); // true|false;
+    </code></pre>
+     *  
+     * @return {Boolean}    true|false
+     */    
+    $P.same = function () { 
+        this._same = true;
+        this._isSecond = false;
+        return this; 
+    };
+
+    /** 
      * Determines if the current date/time occurs during Today. Must be preceded by the .is() function.
      * Example
     <pre><code>
@@ -127,12 +174,8 @@
      *  
      * @return {Boolean}    true|false
      */    
-    $P.today = function () { 
-        if (this._is) { 
-            this._is = false;
-            return Date.today().equals(this.clone().clearTime());
-        }
-        return false;
+    $P.today = function () {
+        return this.same().day();
     };
 
     /** 
@@ -166,7 +209,7 @@
      * @return {Date}    date
      */
     $P.at = function (time) {
-        return (typeof time === "string") ? $D.parse(this.toShortDateString() + " " + time) : this.set(time);
+        return (typeof time === "string") ? $D.parse(this.toString("d") + " " + time) : this.set(time);
     }; 
         
     /** 
@@ -216,9 +259,53 @@
     var dx = ("sunday monday tuesday wednesday thursday friday saturday").split(/\s/),
         mx = ("january february march april may june july august september october november december").split(/\s/),
         px = ("Millisecond Second Minute Hour Day Week Month Year").split(/\s/),
+        pxf = ("Milliseconds Seconds Minutes Hours Date Week Month FullYear").split(/\s/),
 		nth = ("final first second third fourth fifth").split(/\s/),
         de;
-    
+
+   /** 
+     * Returns an object literal of all the date parts.
+     * Example
+    <pre><code>
+	var o = new Date().toObject();
+	
+	// { year: 2008, month: 4, week: 20, day: 13, hour: 18, minute: 9, second: 32, millisecond: 812 }
+	
+	// The object properties can be referenced directly from the object.
+	
+	alert(o.day);  // alerts "13"
+	alert(o.year); // alerts "2008"
+    </code></pre>
+     *  
+     * @return {Date}    An object literal representing the original date object.
+     */
+    $P.toObject = function () {
+        var o = {};
+        for (var i = 0; i < px.length; i++) {
+            o[px[i].toLowerCase()] = this["get" + pxf[i]]();
+        }
+        return o;
+    }; 
+   
+   /** 
+     * Returns a date created from an object literal. Ignores the .week property if set in the config. 
+     * Example
+    <pre><code>
+	var o = new Date().toObject();
+	
+	return Date.fromObject(o); // will return the same date. 
+
+    var o2 = {month: 1, day: 20, hour: 18}; // birthday party!
+    Date.fromObject(o2);
+    </code></pre>
+     *  
+     * @return {Date}    An object literal representing the original date object.
+     */    
+    $D.fromObject = function(config) {
+        config.week = null;
+        return Date.today().set(config);
+    };
+        
     // Create day name functions and abbreviated day name functions (eg. monday(), friday(), fri()).
     var df = function (n) {
         return function () { 
@@ -316,6 +403,26 @@
                 this._isSecond = false;
                 return this;
             }
+
+            if (this._same) {
+                this._same = this._is = false; 
+                var o1 = this.toObject(),
+                    o2 = (arguments[0] || new Date()).toObject(),
+                    v = "",
+                    k = j.toLowerCase();
+                    
+                for (var m = (px.length - 1); m > -1; m--) {
+                    v = px[m].toLowerCase();
+                    if (o1[v] != o2[v]) {
+                        return false;
+                    }
+                    if (k == v) {
+                        break;
+                    }
+                }
+                return true;
+            }
+            
             if (j.substring(j.length - 1) != "s") {
                 j += "s"; 
             }
@@ -330,7 +437,7 @@
             return this;
         };
     };
-    
+   
     for (var k = 0; k < px.length; k++) {
         de = px[k].toLowerCase();
     
@@ -340,9 +447,14 @@
         // Create date element functions and plural date element functions used with Number (eg. day(), days(), months()).
         $N[de] = $N[de + "s"] = nf(de);
     }
+    
+    $P._ss = ef("Second");
 	
     var nthfn = function (n) {
         return function (dayOfWeek) {
+            if (this._same) {
+                return this._ss(arguments[0]);
+            }
             if (dayOfWeek || dayOfWeek === 0) {
                 return this.moveToNthOccurrence(dayOfWeek, n);
             }

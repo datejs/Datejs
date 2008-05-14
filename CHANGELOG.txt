@@ -1,5 +1,67 @@
 CHANGE LOG
 --------------------
+
+2008-05-12 [geoffrey.mcgill]
+Revision #191
+
+1.  Added .same() function to sugarpak.js. The new .same() function will compare two date objects to 
+	determine if they occur on/in exactly the same instance of the given date part.
+	
+	The function .same() must be followed by a date part function (example: .day(), .month(), .year(), etc).
+	
+	An optional Date can be passed in the date part function. If now date is passed as a parameter, 'Now' is used. 
+	
+	Scenario: Determine if two dates fall on the exact same day.
+    
+    Example
+    
+    var d1 = Date.today(); // today at 00:00
+    var d2 = new Date();   // exactly now.
+
+    // Do they occur on the same day?
+    d1.same().day(d2); // true
+    
+     // Do they occur on the same hour?
+    d1.same().hour(d2); // false, unless d2 hour is '00' (midnight).
+    
+    // What if it's the same day, but one year apart?
+    var nextYear = Date.today().add(1).year();
+
+    d1.same().day(nextYear); // false, because the dates must occur on the exact same day. 
+    
+    
+    Scenario: Determine if a given date occurs during some week period 2 months from now. 
+     
+    Example
+    
+    var future = Date.today().add(2).months();
+    return someDate.same().week(future); // true|false;
+    
+2.  Added Date.prototype.toObject() function to sugarpak.js. The .toObject will return an object literal of all the date parts.
+	
+	Example
+	
+	var o = new Date().toObject();
+	
+	// { year: 2008, month: 4, week: 20, day: 13, hour: 18, minute: 9, second: 32, millisecond: 812 }
+	
+	The object properties can be referenced directly from the object.
+	
+	alert(o.day);  // alerts "13"
+	alert(o.year); // alerts "2008"
+
+3.  Added Date.fromObject(config) to sugarpak.js. The .fromObject will return a new Date based on the config properties.
+
+	Example
+	
+	var o = someDate.toObject();
+	return Date.fromObject(o); // will return the same date as "someDate"
+
+    var o2 = {month: 1, day: 20, hour: 18}; // birthday party!
+    Date.fromObject(o2);
+    
+--------------------
+
 2008-05-12 [geoffrey.mcgill]
 Revision #190
 
@@ -14,20 +76,22 @@ Revision #190
     Date.today().add(-1).day().is().today(); // false
 	
 --------------------
+
 2008-05-07 [geoffrey.mcgill]
-Revision #182
+Revision #189
 
 1.  Fixed bug in TimePeriod. See http://code.google.com/p/datejs/issues/detail?id=39
 
 	Example
 	
-	var start = new Date();
-	var end = Date.today().add(15).days();
-	var ts = new TimePeriod(start, end);
+var start = new Date();
+var end = Date.today().add(15).days();
+var ts = new TimePeriod(start, end);
 
-	ts.getDays(); // 14
+ts.getDays(); // 14
 
 --------------------
+
 2008-04-25 [geoffrey.mcgill]
 Revision #182
 

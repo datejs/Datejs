@@ -200,6 +200,14 @@
     $P.isBefore = function (date) {
         return (this.compareTo(date || new Date()) === -1);
     };
+    
+    $P.isToday = function () {
+        return this.isSameDay(new Date());
+    };
+    
+    $P.isSameDay = function (date) {
+        return this.clone().clearTime().equals(date.clone().clearTime());
+    };
 
     /**
      * Adds the specified number of milliseconds to this instance. 
@@ -520,7 +528,7 @@
             this.setTimezoneOffset(config.timezoneOffset); 
         }
 
-        if ($D._validate(config.week, 0, 53, "week")) {
+        if (config.week && $D._validate(config.week, 0, 53, "week")) {
             this.setWeek(config.week);
         }
         
