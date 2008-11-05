@@ -200,22 +200,29 @@
     $P.isBefore = function (date) {
         return (this.compareTo(date || new Date()) === -1);
     };
-    
-    $P.isToday = function () {
-        return this.isSameDay(new Date());
-    };
-    
-    $P.isSameDay = function (date) {
-        return this.clone().clearTime().equals(date.clone().clearTime());
-    };
 
+    /**
+     * Determines if the current Date instance occurs today.
+     * @return {Boolean} true if this date instance is 'today', otherwise false.
+     */
+    
+    /**
+     * Determines if the current Date instance occurs on the same Date as the supplied 'date'. 
+     * If no 'date' to compare to is provided, the current Date instance is compared to 'today'. 
+     * @param {date}     Date object to compare. If no date to compare, the current Date ("now") is used.
+     * @return {Boolean} true if this Date instance occurs on the same Day as the supplied 'date'.
+     */
+    $P.isToday = $P.isSameDay = function (date) {
+        return this.clone().clearTime().equals((date || new Date()).clone().clearTime());
+    };
+    
     /**
      * Adds the specified number of milliseconds to this instance. 
      * @param {Number}   The number of milliseconds to add. The number can be positive or negative [Required]
      * @return {Date}    this
      */
     $P.addMilliseconds = function (value) {
-        this.setMilliseconds(this.getMilliseconds() + value);
+        this.setMilliseconds(this.getMilliseconds() + value * 1);
         return this;
     };
 
@@ -252,7 +259,7 @@
      * @return {Date}    this
      */
     $P.addDays = function (value) {
-        this.setDate(this.getDate() + value);
+        this.setDate(this.getDate() + value * 1);
         return this;
     };
 
@@ -273,7 +280,7 @@
     $P.addMonths = function (value) {
         var n = this.getDate();
         this.setDate(1);
-        this.setMonth(this.getMonth() + value);
+        this.setMonth(this.getMonth() + value * 1);
         this.setDate(Math.min(n, $D.getDaysInMonth(this.getFullYear(), this.getMonth())));
         return this;
     };
@@ -404,7 +411,7 @@
     };
 
     // private
-    $D._validate = function (n, min, max, name) {
+    var validate = function (n, min, max, name) {
         if (typeof n == "undefined") {
             return false;
         } else if (typeof n != "number") {
@@ -421,7 +428,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateMillisecond = function (value) {
-        return $D._validate(value, 0, 999, "millisecond");
+        return validate(value, 0, 999, "millisecond");
     };
 
     /**
@@ -430,7 +437,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateSecond = function (value) {
-        return $D._validate(value, 0, 59, "second");
+        return validate(value, 0, 59, "second");
     };
 
     /**
@@ -439,7 +446,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateMinute = function (value) {
-        return $D._validate(value, 0, 59, "minute");
+        return validate(value, 0, 59, "minute");
     };
 
     /**
@@ -448,7 +455,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateHour = function (value) {
-        return $D._validate(value, 0, 23, "hour");
+        return validate(value, 0, 23, "hour");
     };
 
     /**
@@ -457,7 +464,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateDay = function (value, year, month) {
-        return $D._validate(value, 1, $D.getDaysInMonth(year, month), "day");
+        return validate(value, 1, $D.getDaysInMonth(year, month), "day");
     };
 
     /**
@@ -466,7 +473,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateMonth = function (value) {
-        return $D._validate(value, 0, 11, "month");
+        return validate(value, 0, 11, "month");
     };
 
     /**
@@ -475,7 +482,7 @@
      * @return {Boolean} true if within range, otherwise false.
      */
     $D.validateYear = function (value) {
-        return $D._validate(value, 0, 9999, "year");
+        return validate(value, 0, 9999, "year");
     };
 
     /**
@@ -528,7 +535,7 @@
             this.setTimezoneOffset(config.timezoneOffset); 
         }
 
-        if (config.week && $D._validate(config.week, 0, 53, "week")) {
+        if (config.week && validate(config.week, 0, 53, "week")) {
             this.setWeek(config.week);
         }
         
@@ -631,8 +638,8 @@
      * Indicates whether this Date instance is within the Daylight Saving Time range for the current time zone.
      * @return {Boolean} true|false
      */
-    $P.isDaylightSavingTime = function () { 
-        return (this.hasDaylightSavingTime() && new Date().getTimezoneOffset() === Date.today().set({month: 6, day: 1}).getTimezoneOffset());
+    $P.isDaylightSavingTime = function () {
+        return Date.today().set({month: 0, day: 1}).getTimezoneOffset() != this.getTimezoneOffset();
     };
 
     /**

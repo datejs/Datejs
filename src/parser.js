@@ -9,7 +9,7 @@
  
 (function () {
     Date.Parsing = {
-        Exception: function (s) { 
+        Exception: function (s) {
             this.message = "Parse error at '" + s.substring(0, 10) + " ...'"; 
         }
     };
