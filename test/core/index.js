@@ -1,5 +1,4 @@
-﻿
-if(typeof require !== 'undefined') {
+﻿if(typeof require !== 'undefined') {
   var Specification = require('../scripts/specification-converter.js');
 }
 

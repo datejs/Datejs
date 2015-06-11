@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
 Date.Specification = new Specification({
 'Daylight Saving Time': {
     setup: function() { },

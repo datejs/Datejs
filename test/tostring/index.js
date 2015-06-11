@@ -1,4 +1,8 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+Date.Specification = new Specification({
 'en-US': {
     setup: function() {
         this.today = new Date().clearTime();

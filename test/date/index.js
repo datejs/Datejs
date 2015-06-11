@@ -1,4 +1,9 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+Date.Specification = new Specification({
   'Overview': {
     setup: function() {  this.baseline = new Date('7/8/2004') },
     'July 8th, 2004 : Typical': {
