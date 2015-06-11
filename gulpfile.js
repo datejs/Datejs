@@ -1,5 +1,8 @@
 var gulp     = require('gulp');
 var jasmine = require('gulp-jasmine');
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
 var runSequence = require('run-sequence');
 
 
@@ -29,16 +32,27 @@ var extendedtests = [
 gulp.task('coretest', function() {
 	return gulp.src(corefiles.concat(coretests))
 		.pipe(jasmine());
-})
+});
 
 gulp.task('extendedtest', function() {
 	return gulp.src(corefiles.concat(extendedtests))
 		.pipe(jasmine());
-})
+});
+
+gulp.task('build', ['coretest'], function() {
+	return gulp.src(corefiles)
+	.pipe(sourcemaps.init())
+    .pipe(concat('date.js'))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./dist'))
+});
 
 gulp.task('test', function() {
 	runSequence(['coretest'],['extendedtest']);
-})
+});
 
-gulp.task('default', ['test']);
+
+
+gulp.task('default', ['build']);
 
