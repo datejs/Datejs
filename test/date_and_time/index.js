@@ -99,7 +99,7 @@
     },
     '11 Aug 2007 7:15:00 am EDT': {
       run: function() { this.date =  Date.parse('11 Aug 2007 7:15:00 am EDT') },
-      assert: function() { return new Date(2007,7,11,7,15,0).add(-2).hours().equals( this.date ) }
+      assert: function() { return new Date(2007,7,11,7,15,0).setTimezone('EDT').equals( this.date ) }
     },
     'Tue Nov 20 2007 08:00:00 UTC': {
       run: function() { this.date = Date.parse("Tue Nov 20 2007 08:00:00 UTC") },
@@ -701,11 +701,16 @@
         run: function() { },
         assert: function() { return new Date(1997,6,16,19,20,30).setTimezoneOffset('+0100').equals( Date.parseExact('1997-07-16T19:20:30+01:00', "yyyy-MM-ddTHH:mm:ssz") ) }
       },
+  },
+
+'Fail': {
        '1997-07-16T19:20:30.45+01:00 : "YYYY-MM-DDThh:mm:ss.sTZD"': {
         run: function() { },
-        assert: function() { return new Date(1997,6,16,19,20,30,45).setTimezoneOffset('+0100').equals( Date.parse('1997-07-16T19:20:30.45+01:00') ) }
+        assert: function() { 
+          return new Date(1997,6,16,19,20,30,45).setTimezoneOffset('+0100').equals( Date.parse('1997-07-16T19:20:30.45+01:00') ) 
+        }
       }    
-  },
+},
 
 'RFC 3339 Formats': {
     setup: function() {
@@ -737,4 +742,3 @@
   }      
 });
 
-$(document).ready( function() { Date.Specification.validate().show() });

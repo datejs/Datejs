@@ -1,4 +1,10 @@
-﻿Date.Specification = new Specification({
+﻿
+if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+new Specification({
 'Exception Handling': {
     setup: function() {},
 	'Date.parse() : No params': {
@@ -1372,5 +1378,3 @@
   }
   
 });
-
-$(document).ready(function() { Date.Specification.validate().show() });

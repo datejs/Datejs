@@ -852,7 +852,5 @@
       run: function() { },
       assert: function() {  return this.today.add(-5).weeks().equals( Date.parse('-5 Weeks') ) }
     }
-  }   
+  }
 });
-
-$(document).ready( function() { Date.Specification.validate().show() } );

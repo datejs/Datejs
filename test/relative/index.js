@@ -1088,4 +1088,3 @@
   }   
 });
 
-$(document).ready( function() { Date.Specification.validate().show() } );
