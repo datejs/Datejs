@@ -400,23 +400,35 @@ Date.Specification = new Specification({
     },
   },
 
-    'Fail' : {
+    'Fail -- pattern "d" does not handle single numbers in ambiguous contexts' : {
       setup: function() {
         this.baseline = new Date(2004,6,1);
         this.baseline2 = new Date(2004,6,15);
     },
       '712004': {
-      run: function() { this.date =  Date.parse('712004') },
-      assert: function() { return this.baseline.equals( this.date ) }
+      run: function() { 
+        this.date =  Date.parseExact('712004', 'Mdyyyy') 
+      },
+      assert: function() { 
+        return this.baseline.equals( this.date ) 
+      }
     },
     '7104': {
-      run: function() { this.date =  Date.parse('7104', { format : "Mdyy" } ) },
-      assert: function() { return this.baseline.equals( this.date ) }
+      run: function() { 
+        this.date =  Date.parse('7104', { format : "Mdyy" } ) 
+      },
+      assert: function() { 
+        return this.baseline.equals( this.date ) 
+      }
     },  
 
     '71504': {
-      run: function() { this.date =  Date.parse('71504', { format : "Mdyy" } ) },
-      assert: function() { return this.baseline2.equals( this.date ) }
+      run: function() { 
+        this.date =  Date.parse('71504', { format : "Mdyy" } ) 
+      },
+      assert: function() { 
+        return this.baseline2.equals( this.date ) 
+      }
     }, 
     }    
 });

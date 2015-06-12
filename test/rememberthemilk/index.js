@@ -53,10 +53,6 @@ Date.Specification = new Specification({
       run: function() { },
       assert: function() { return Date.today().set({ day: 25 }).equals( Date.parse('25th') ) }
     },
-    'End of month : Not supported currently.': {
-      run: function() { },
-      assert: function() { return Date.today().moveToLastDayOfMonth().equals( Date.parse('End of month') ) }
-    },  
     'Friday': {
       run: function() { },
       assert: function() { return Date.friday().equals( Date.parse('Friday') ) }
@@ -95,13 +91,20 @@ Date.Specification = new Specification({
       },
       assert: function() { return Date.today().add(2).days().equals( this.date ) }
     },
+    
+  },
+  "Fail: Differences between RememberTheMilk and Date.js": {
     '3 weeks : Datejs uses "+3 weeks."': {
       run: function() { 
         this.date = Date.parse('3 weeks'); 
         this.date.setMilliseconds(0);
       },
       assert: function() { return Date.today().add(3).weeks().equals( this.date ) }
-    }
+    },
+    'End of month : Not supported currently.': {
+      run: function() { },
+      assert: function() { return Date.today().moveToLastDayOfMonth().equals( Date.parse('End of month') ) }
+    },  
   }
 });
 

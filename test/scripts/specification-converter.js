@@ -18,12 +18,18 @@
 					(function(s,testJig){
 						it(test, function(){
 							//apply is used to ensure that run and assert get the same contexts
-							 testJig.run.apply(this);
-							 if(s === 'Fail') {
-							 	expect(testJig.assert.apply(this)).toBe(false);
+							 testJig.run.call(this);
+
+							 if(testJig.expect) {
+							 	testJig.expect.call(this,expect);
 							 } else {
-							 	expect(testJig.assert.apply(this)).toBe(true);
+
+							 if(s.length > 3 && s.substring(0,4) === 'Fail') {
+							 	expect(testJig.assert.call(this)).toBe(false);
+							 } else {
+							 	expect(testJig.assert.call(this)).toBe(true);
 							 }
+							}
 							 
 						})
 					})(suite,spec[suite][test]);

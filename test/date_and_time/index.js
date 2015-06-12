@@ -708,15 +708,6 @@ Date.Specification = new Specification({
       },
   },
 
-'Fail': {
-       '1997-07-16T19:20:30.45+01:00 : "YYYY-MM-DDThh:mm:ss.sTZD"': {
-        run: function() { },
-        assert: function() { 
-          return new Date(1997,6,16,19,20,30,45).setTimezoneOffset('+0100').equals( Date.parse('1997-07-16T19:20:30.45+01:00') ) 
-        }
-      }    
-},
-
 'RFC 3339 Formats': {
     setup: function() {
           this.d = [];
@@ -744,6 +735,19 @@ Date.Specification = new Specification({
         assert: function() { return new Date(1985,3,12,23,20,50).equals( Date.parseExact('1985-04-12T23:20:50Z', "yyyy-MM-ddTHH:mm:ssZ") ) }
       }         
 
-  }      
+  },
+  'Quriks: Date.parse cannot handle ISO Dates with milliseconds and tz data, use new Date() instead': {
+       '1997-07-16T19:20:30.045+01:00 : "YYYY-MM-DDThh:mm:ss.sTZD"': {
+        run: function() { 
+            var ISOString = '1997-07-16T19:20:30.045+0100';
+            this.date = new Date(1997,6,16,19,20,30,45).setTimezoneOffset('+0100');
+            this.shouldBeNull = Date.parse(ISOString);
+            this.fromNew = new Date(ISOString);
+        },
+        assert: function() { 
+          return this.shouldBeNull === null && this.date.equals(this.fromNew);
+        }
+      }    
+},
 });
 
