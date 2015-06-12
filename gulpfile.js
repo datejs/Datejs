@@ -1,12 +1,16 @@
+var fs		= require('fs');
 var gulp     = require('gulp');
 var jasmine = require('gulp-jasmine');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var runSequence = require('run-sequence');
+var merge = require('merge-stream');
 
-
-var corefiles = ['src/globalization/en-US.js','src/core.js','src/sugarpak.js','src/parser.js','src/time.js']
+var gloablizationDir = 'src/globalization/';
+var basefiles = ['src/core.js','src/sugarpak.js','src/parser.js','src/time.js'];
+var corefiles = [gloablizationDir+'en-US.js'].concat(basefiles);
+var globalizationFiles = fs.readdirSync(gloablizationDir);
 
 var coretests = [ 
 		 'test/core/index.js', 
@@ -39,14 +43,32 @@ gulp.task('extendedtest', function() {
 		.pipe(jasmine());
 });
 
-gulp.task('build', ['coretest'], function() {
+gulp.task('buildCore', ['coretest'], function() {
 	return gulp.src(corefiles)
 	.pipe(sourcemaps.init())
     .pipe(concat('date.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./build'))
 });
+
+gulp.task('buildGlobal', ['coretest'], function() {
+	var tasks = globalizationFiles.map(function(culture){
+		var files = [gloablizationDir + culture].concat(basefiles);
+		return pipeline(files, culture);
+	});
+
+	return merge(tasks);
+});
+
+function pipeline(files, culture) {
+	return gulp.src(files)
+	//  .pipe(sourcemaps.init())
+    .pipe(concat(culture ? 'date-'+culture : 'date.js'))
+  	//  .pipe(uglify())
+  	//  .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./build'))
+}
 
 gulp.task('test', function() {
 	runSequence(['coretest'],['extendedtest']);
@@ -54,5 +76,6 @@ gulp.task('test', function() {
 
 
 
-gulp.task('default', ['build']);
+
+gulp.task('default', ['buildCore','buildGlobal']);
 
