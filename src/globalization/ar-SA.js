@@ -5,21 +5,21 @@ Date.CultureInfo = {
     nativeName: "العربية (المملكة العربية السعودية)",
     
     /* Day Name Strings */
-    dayNames: ["الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة", "السبت"],
-    abbreviatedDayNames: ["الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة", "السبت"],
-    shortestDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
+    dayNames: ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
+    abbreviatedDayNames: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
+    shortestDayNames: ["حد", "ثن", "ثل", "رع", "خم", "جم", "سب"],
     firstLetterDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
     
     /* Month Name Strings */
-    monthNames: ["محرم", "صفر", "ربيع الأول", "ربيع الثاني", "جمادى الأولى", "جمادى الثانية", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"],
-    abbreviatedMonthNames: ["محرم", "صفر", "ربيع الاول", "ربيع الثاني", "جمادى الاولى", "جمادى الثانية", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"],
+    monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+    abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"],
 
 	/* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
 
     firstDayOfWeek: 6,
-    twoDigitYearMax: 1451,
+    twoDigitYearMax: 2029,
     
     /**
      * The dateElementOrder is based on the order of the 
@@ -82,19 +82,19 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-        jan: /^محرم/i,
-        feb: /^صفر/i,
-        mar: /^ربيع الأول/i,
-        apr: /^ربيع الثاني/i,
-        may: /^جمادى الأولى/i,
-        jun: /^جمادى الثانية/i,
-        jul: /^رجب/i,
-        aug: /^شعبان/i,
-        sep: /^رمضان/i,
-        oct: /^شوال/i,
-        nov: /^ذو القعدة/i,
-        dec: /^ذو الحجة/i,
-
+        jan: /^يناير/i,
+        feb: /^فبراير/i,
+        mar: /^مارس/i,
+        apr: /^ابريل/i,
+        may: /^مايو/i,
+        jun: /^يونيو/i,
+        jul: /^يوليو/i,
+        aug: /^اغسطس/i,
+        sep: /^سبتمبر/i,
+        oct: /^اكتوبر/i,
+        nov: /^نوفمبر/i,
+        dec: /^ديسمبر/i,
+        
         sun: /^الاحد/i,
         mon: /^الاثنين/i,
         tue: /^الثلاثاء/i,
