@@ -107,12 +107,7 @@ Date.CultureInfo = {
         past: /^الماضي/i,
         add: /^(\+|بعد|عقب)/i,
         subtract: /^(\-|قبل|منذ)/i,
-/*
-        yesterday: /^yes(terday)?/i,
-        today: /^t(od(ay)?)?/i,
-        tomorrow: /^tom(orrow)?/i,
-        now: /^n(ow)?/i,
-        */
+
         yesterday: /^((ال)?(ا|أ)مس|(ال)?بارح(ة)?)/i,
         today: /^اليوم/i,
         tomorrow: /^(الغد|غد(ا)?)/i,
@@ -129,7 +124,8 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-        timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب)?توقيت )?((مكة (المكرمة)?|(المملكة العربية)?السعودية|الرياض|ast|arab (standard)? tim(e|ing))/i,
+        timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب)?توقيت )?(مكة (المكرمة)?|(المملكة العربية)?السعودية|الرياض|ast|arab (standard)? tim(e|ing)))/i,
+        
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
