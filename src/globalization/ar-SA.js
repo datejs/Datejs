@@ -150,47 +150,47 @@ Date.CultureInfo = {
  *
  * English Name        Translated
  * ------------------  -----------------
- * about               about
- * ago                 ago
- * date                date
- * time                time
- * calendar            calendar
- * show                show
- * hourly              hourly
- * daily               daily
- * weekly              weekly
- * bi-weekly           bi-weekly
- * fortnight           fortnight
- * monthly             monthly
- * bi-monthly          bi-monthly
- * quarter             quarter
- * quarterly           quarterly
- * yearly              yearly
- * annual              annual
- * annually            annually
- * annum               annum
- * again               again
- * between             between
- * after               after
- * from now            from now
- * repeat              repeat
- * times               times
- * per                 per
- * min (abbrev minute) min
- * morning             morning
- * noon                noon
- * night               night
- * midnight            midnight
- * mid-night           mid-night
- * evening             evening
- * final               final
- * future              future
- * spring              spring
- * summer              summer
- * fall                fall
- * winter              winter
- * end of              end of
- * end                 end
- * long                long
- * short               short
+ * about               قرابة
+ * ago                 مضت
+ * date                التاريخ
+ * time                الوقت
+ * calendar            التقويم
+ * show                اظهار
+ * hourly              كل ساعة
+ * daily               يومياً
+ * weekly              اسبوعياً
+ * bi-weekly           مرتين بالإسبوع
+ * fortnight           اسبوعان
+ * monthly             شهرياً
+ * bi-monthly          مرتين بالشهر
+ * quarter             ربع
+ * quarterly           كل ربع سنة
+ * yearly              سنوياً
+ * annual              سنوي
+ * annually            سنوياً
+ * annum               عام
+ * again               مرة أخرى
+ * between             بين
+ * after               بعد
+ * from now            من الآن
+ * repeat              كرر
+ * times               مرات
+ * per                 كل
+ * min (abbrev minute) د.
+ * morning             صباح
+ * noon                ظهيرة
+ * night               ليل
+ * midnight            نصف الليل
+ * mid-night           نصف الليل
+ * evening             مساء
+ * final               ختامي
+ * future              مستقبل
+ * spring              ربيع
+ * summer              صيف
+ * fall                خريف
+ * winter              شتاء
+ * end of              نهاية
+ * end                 نهاية
+ * long                طويل
+ * short               قصير
  */
