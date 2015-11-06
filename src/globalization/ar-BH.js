@@ -124,8 +124,7 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-        timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب)?توقيت )?(مكة (المكرمة)?|(المملكة العربية)?السعودية|الرياض|ast|arab (standard)? tim(e|ing)))/i,
-        
+	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?(مكة( المكرمة)?|(مملكة )?البحرين|المنامة|العرب(ي)?( القياسي)?|ast|arabia( standard)? tim(e|ing)))/i,        
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
