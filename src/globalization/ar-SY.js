@@ -125,13 +125,13 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?(((ال)?جمهورية )?(ال)?سوري(ة|ا)?|دمشق|شرق أوروبا( الصيفي)?|eet|eest|eastern european( summer)? tim(e|ing)))/i,
+	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?(((ال)?جمهورية )?(ال)?سوري(ة|ا)?|دمشق|شرق أوروبا( الصيفي)?|ast|adt|arabia( daylight)?( standard)? tim(e|ing)|eet|eest|eastern european (summer)? tim(e|ing)))/i,
 
 	ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"EET", offset:"+0200"}, {name:"EEST", offset:"+0300"}]
+	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"EET", offset:"+0200"}, {name:"EEST", offset:"+0300"}, {name:"AST", offset:"+0300"}, {name:"ADT", offset:"+0300"}]
 };
 
 /********************
