@@ -12,8 +12,8 @@ Date.CultureInfo = {
     
     /* Month Name Strings */
     monthNames: ["جانفي", "فيفري", "مارس", "افريل", "ماي", "جوان", "جويلية", "اوت", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
-    abbreviatedMonthNames: ["جانفي", "فيفري", "مارس", "افريل", "ماي", "جوان", "جويلية", "اوت", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
-
+    timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?تونس(ية)?|تونس|وسط أوروبا(صيفي)?|cet|cest|central europe (summer)? tim(e|ing))/i,
+    
     /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
