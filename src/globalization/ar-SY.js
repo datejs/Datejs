@@ -19,7 +19,7 @@ Date.CultureInfo = {
     amDesignator: "ص",
     pmDesignator: "م",
 
-    firstDayOfWeek: 6,
+    firstDayOfWeek: 7,
     twoDigitYearMax: 2029,
     
     /**
