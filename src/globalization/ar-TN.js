@@ -1,5 +1,5 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-TN",
     englishName: "Arabic (Tunisia)",
     nativeName: "العربية (تونس)",
@@ -12,8 +12,8 @@ Date.CultureInfo = {
     
     /* Month Name Strings */
     monthNames: ["جانفي", "فيفري", "مارس", "افريل", "ماي", "جوان", "جويلية", "اوت", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
-    timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?تونس(ية)?|تونس|وسط أوروبا(صيفي)?|cet|cest|central europe (summer)? tim(e|ing))/i,
-    
+    abbreviatedMonthNames: ["جان", "فيف", "مار", "أفر", "ماي", "جوا", "جوي", "أوت", "سبت", "أكت", "نوف", "ديس"],
+
     /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
@@ -124,13 +124,12 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?تونس(ية)?|تونس|وسط أوروبا(صيفي)?|cet|cest|central europe (summer)? tim(e|ing))/i,
-       
+    	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?تونس(ية)?|تونس|وسط أوروبا(صيفي)?|cet|cest|central europe (summer)? tim(e|ing))/i,
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"CET", offset:"+0100"}, {name:"CEST", offset:"+0200"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"CET", offset:"+0100"}, {name:"CEST", offset:"+0200"}]
 };
 
 /********************
