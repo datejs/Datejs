@@ -1,5 +1,5 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-MR",
     englishName: "Arabic (Mauritania)",
     nativeName: "العربية (موريتانيا)",
@@ -13,6 +13,7 @@ Date.CultureInfo = {
     /* Month Name Strings */
     monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغشت", "شتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
     abbreviatedMonthNames:  : ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغش", "شتم", "أكت", "نوف", "ديس"],
+    
     /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
@@ -123,13 +124,14 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-  timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((جمهورية )?موريتانيا|نواكشوط|جرينتش|غرب أوروبا|wet|west|western europe tim(e|ing))/i,
-
-  ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-  timeContext: /^\s*(\:|a(?!u|p)|p)/i
+	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((جمهورية )?موريتانيا|نواكشوط|جرينتش|غرب أوروبا|wet|west|western europe tim(e|ing))/i,
+	ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+  	timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"WET", offset:"+000"}]
+    
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"WET", offset:"+000"}]
 };
+
 /********************
  ** Future Strings **
  ********************
