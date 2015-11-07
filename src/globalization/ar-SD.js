@@ -1,7 +1,7 @@
 Date.CultureInfo = {
-	/* Culture Name */
-    name: "ar-SU",
-    englishName: "Arabic (Egypt)",
+    /* Culture Name */
+    name: "ar-SD",
+    englishName: "Arabic (Sudan)",
     nativeName: "العربية (السودان)",
         
     /* Day Name Strings */
@@ -124,13 +124,12 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-  timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((جمهورية )?السودان|الخرطوم|شرق افريقيا|eat|eastern africa? tim(e|ing)))/i,
-        
-  ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-  timeContext: /^\s*(\:|a(?!u|p)|p)/i
+ 	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((جمهورية )?السودان|الخرطوم|شرق افريقيا|eat|eastern africa? tim(e|ing)))/i,
+	ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+  	timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"EET", offset:"+0200"}, {name:"EEST", offset:"+0300"}, {name:"AST", offset:"+0300"}, {name:"ADT", offset:"+0200"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"EET", offset:"+0200"}, {name:"EEST", offset:"+0300"}, {name:"AST", offset:"+0300"}, {name:"ADT", offset:"+0200"}]
 };
 
 /********************
