@@ -1,5 +1,5 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-OM",
     englishName: "Arabic (Oman)",
     nativeName: "العربية (عمان)",
@@ -14,7 +14,7 @@ Date.CultureInfo = {
     monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
     abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"],
 
-	/* AM/PM Designators */
+    /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
 
@@ -125,12 +125,11 @@ Date.CultureInfo = {
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
 	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب)?توقيت )?(الخليج|gst|gulf (standard)? tim(e|ing)))/i,
-
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"GST", offset:"+0400"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"GST", offset:"+0400"}]
 };
 
 /********************
