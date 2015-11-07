@@ -1,5 +1,5 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-LY",
     englishName: "Arabic (Libya)",
     nativeName: "العربية (ليبيا)",
@@ -14,7 +14,7 @@ Date.CultureInfo = {
     monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
     abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"],
 
-	/* AM/PM Designators */
+    /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
 
@@ -129,7 +129,7 @@ Date.CultureInfo = {
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"EET", offset:"+0200"}, {name:"CET", offset:"+0100"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"EET", offset:"+0200"}, {name:"CET", offset:"+0100"}]
 };
 
 /********************
