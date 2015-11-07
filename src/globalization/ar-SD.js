@@ -12,9 +12,9 @@ Date.CultureInfo = {
     
     /* Month Name Strings */
     monthNames: ["يناير", "فبراير", "مارس", "أبريل", "ماي", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "دجنبر"],
-    iatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "دجم"],
+    abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "دجم"],
 
-	/* AM/PM Designators */
+    /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
 
