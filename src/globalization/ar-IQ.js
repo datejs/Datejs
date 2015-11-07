@@ -129,7 +129,7 @@ Date.CultureInfo = {
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"AST", offset:"+0300"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"AST", offset:"+0300"}]
 };
 
 /********************
