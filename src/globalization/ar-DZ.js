@@ -1,5 +1,5 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-DZ",
     englishName: "Arabic (Algeria)",
     nativeName: "العربية (الجزائر)",
@@ -14,7 +14,7 @@ Date.CultureInfo = {
     monthNames: ["جانفييه", "فيفرييه", "مارس", "أفريل", "مي", "جوان", "جوييه", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
     abbreviatedMonthNames: ["جان", "فيف", "مار", "أفر", "مي", "جوا", "جوي", "أوت", "سبت", "اكت", "نوف", "ديس"],
 
-	/* AM/PM Designators */
+    /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
 
@@ -125,10 +125,11 @@ Date.CultureInfo = {
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
 	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?جزائر(ية)?|وسط أوروبا|cet|(central)? european tim(e|ing)))/i,        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"CET", offset:"+0100"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"CET", offset:"+0100"}]
 };
 
 /********************
