@@ -1,10 +1,9 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-SY",
     englishName: "Arabic (Syria)",
     nativeName: "العربية (سوريا)",
     
-   
     /* Day Name Strings */
     dayNames: ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
     abbreviatedDayNames: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
@@ -131,7 +130,7 @@ Date.CultureInfo = {
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"EET", offset:"+0200"}, {name:"EEST", offset:"+0300"}, {name:"AST", offset:"+0300"}, {name:"ADT", offset:"+0200"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"EET", offset:"+0200"}, {name:"EEST", offset:"+0300"}, {name:"AST", offset:"+0300"}, {name:"ADT", offset:"+0200"}]
 };
 
 /********************
