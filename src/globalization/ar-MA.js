@@ -1,5 +1,5 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-MA",
     englishName: "Arabic (Morocco)",
     nativeName: "العربية (المملكة المغربية)",
@@ -125,12 +125,11 @@ Date.CultureInfo = {
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
 	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(مملكة )?(ال)?مغرب(ية)?|الرباط|جرينتش|غرب أوروبا|wet|west|western europe (summer)? tim(e|ing))/i,
-       
-        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+	ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"WET", offset:"+000"}, {name:"WEST", offset:"+0100"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"WET", offset:"+000"}, {name:"WEST", offset:"+0100"}]
 };
 
 /********************
