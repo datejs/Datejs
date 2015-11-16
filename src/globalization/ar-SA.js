@@ -1,5 +1,5 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-SA",
     englishName: "Arabic (Saudi Arabia)",
     nativeName: "العربية (المملكة العربية السعودية)",
@@ -14,11 +14,11 @@ Date.CultureInfo = {
     monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
     abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"],
 
-	/* AM/PM Designators */
+    /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
 
-    firstDayOfWeek: 6,
+    firstDayOfWeek: 7,
     twoDigitYearMax: 2029,
     
     /**
@@ -82,26 +82,26 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-        jan: /^يناير/i,
-        feb: /^فبراير/i,
-        mar: /^مارس/i,
-        apr: /^أبريل/i,
-        may: /^مايو/i,
-        jun: /^يونيو/i,
-        jul: /^يوليو/i,
-        aug: /^أغسطس/i,
-        sep: /^سبتمبر/i,
-        oct: /^أكتوبر/i,
-        nov: /^نوفمبر/i,
-        dec: /^ديسمبر/i,
+        jan: /^ينا(ير)?/i,
+        feb: /^فبر(اير)?/i,
+        mar: /^مار(س)?/i,
+        apr: /^أبر(يل)?/i,
+        may: /^ماي(و)?/i,
+        jun: /^يون(يو)?/i,
+        jul: /^يول(يو)?/i,
+        aug: /^أغس(طس)?/i,
+        sep: /^سبت(مبر)?/i,
+        oct: /^أكت(وبر)?/i,
+        nov: /^نوف(مبر)?/i,
+        dec: /^ديس(مبر)?/i,
         
-        sun: /^الأحد/i,
-        mon: /^الإثنين/i,
-        tue: /^الثلاثاء/i,
-        wed: /^الأربعاء/i,
-        thu: /^الخميس/i,
-        fri: /^الجمعة/i,
-        sat: /^السبت/i,
+	sun: /^الأحد|(أ|ا)حد|ح(د)?/i,
+        mon: /^الإثنين|(إ|ا)ثنين|(ث)?ن/i,
+        tue: /^الثلاثاء|ث(ل|لاثاء)?/i,
+        wed: /^الأربعاء|(أ|ا)ربعاء|ر(ع)?/i,
+        thu: /^الخميس|خ(م|ميس)?/i,
+        fri: /^الجمعة|ج(م|معة)?/i,
+        sat: /^السبت|س(ب|بت)?/i,
 
         future: /^القادم/i,
         past: /^الماضي/i,
@@ -125,12 +125,11 @@ Date.CultureInfo = {
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
         timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب)?توقيت )?(مكة (المكرمة)?|(المملكة العربية)?السعودية|الرياض|ast|arab (standard)? tim(e|ing)))/i,
-        
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"AST", offset:"+0300"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"AST", offset:"+0300"}]
 };
 
 /********************

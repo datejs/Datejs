@@ -1,9 +1,9 @@
 Date.CultureInfo = {
     /* Culture Name */
-    name: "ar-DZ",
-    englishName: "Arabic (Algeria)",
-    nativeName: "العربية (الجزائر)",
-   
+    name: "ar-PS",
+    englishName: "Arabic (Palestine)",
+    nativeName: "العربية (فلسطين)",
+
     /* Day Name Strings */
     dayNames: ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
     abbreviatedDayNames: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
@@ -11,8 +11,8 @@ Date.CultureInfo = {
     firstLetterDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
     
     /* Month Name Strings */
-    monthNames: ["جانفييه", "فيفرييه", "مارس", "أفريل", "مي", "جوان", "جوييه", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
-    abbreviatedMonthNames: ["جان", "فيف", "مار", "أفر", "مي", "جوا", "جوي", "أوت", "سبت", "اكت", "نوف", "ديس"],
+    monthNames: ["كانون الثاني", "شباط", "آذار", "نيسان", "أيار", "حزيران", "تموز", "آب", "أيلول", "تشرين الأول", "تشرين الثاني", "كانون الأول"],
+    abbreviatedMonthNames: ["كانون 2", "شباط", "آذار", "نيسان", "أيار", "حزيران", "تموز", "آب", "أيلول", "تشرين 1", "تشرين 2", "كانون 1"],
 
     /* AM/PM Designators */
     amDesignator: "ص",
@@ -82,18 +82,18 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-        jan: /^جان(فييه)?/i,
-        feb: /^فيف(رييه)?/i,
-        mar: /^مار(س)?/i,
-        apr: /^أفر(يل)?/i,
-        may: /^مي/i,
-        jun: /^جوا(ن)?/i,
-        jul: /^جوي(يه)/i,
-        aug: /^أغس(طس)?/i,
-        sep: /^سبت(مبر)?/i,
-        oct: /^أكت(وبر)?/i,
-        nov: /^نوف(مبر)?/i,
-        dec: /^ديس(مبر)?/i,
+        jan: /^كا(2|نون (2|الثاني))/i,
+        feb: /^شبا(ط)?/i,
+        mar: /^آذا(ر)?/i,
+        apr: /^نيس(ان)?/i,
+        may: /^أيا(ر)?/i,
+        jun: /^حزي(ران)?/i,
+        jul: /^تمو(ز)?/i,
+        aug: /^آب/i,
+        sep: /^أيل(ول)/i,
+        oct: /^تش(1|رين (1|الأول))/i,
+        nov: /^تش(2|رين (2|الثاني))/i,
+        dec: /^كا(1|نون (1|الأول))/i,
         
 	sun: /^الأحد|(أ|ا)حد|ح(د)?/i,
         mon: /^الإثنين|(إ|ا)ثنين|(ث)?ن/i,
@@ -124,12 +124,12 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?جزائر(ية)?|وسط أوروبا|cet|(central)? european tim(e|ing)))/i,        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((دولة )?فلسطين|القدس(المحتلة)?|العرب(ي)?( الصيفي)?( القياسي)?|ast|adt|arabia( daylight)?( standard)? tim(e|ing)))/i,
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"CET", offset:"+0100"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"AST", offset:"+0300"}, {name:"ADT", offset:"+0200"}]
 };
 
 /********************
