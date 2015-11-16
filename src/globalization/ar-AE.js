@@ -82,7 +82,6 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-<<<<<<< HEAD
         jan: /^ينا(ير)?/i,
         feb: /^فبر(اير)?/i,
         mar: /^مار(س)?/i,
@@ -108,35 +107,7 @@ Date.CultureInfo = {
         past: /^الماضي/i,
         add: /^(\+|بعد|عقب)/i,
         subtract: /^(\-|قبل|منذ)/i,
-
-=======
-        jan: /^يناير/i,
-        feb: /^فبراير/i,
-        mar: /^مارس/i,
-        apr: /^أبريل/i,
-        may: /^مايو/i,
-        jun: /^يونيو/i,
-        jul: /^يوليو/i,
-        aug: /^أغسطس/i,
-        sep: /^سبتمبر/i,
-        oct: /^أكتوبر/i,
-        nov: /^نوفمبر/i,
-        dec: /^ديسمبر/i,
         
-        sun: /^الأحد/i,
-        mon: /^الإثنين/i,
-        tue: /^الثلاثاء/i,
-        wed: /^الأربعاء/i,
-        thu: /^الخميس/i,
-        fri: /^الجمعة/i,
-        sat: /^السبت/i,
-
-        future: /^القادم/i,
-        past: /^الماضي/i,
-        add: /^(\+|بعد|عقب)/i,
-        subtract: /^(\-|قبل|منذ)/i,
-
->>>>>>> master
         yesterday: /^((ال)?(ا|أ)مس|(ال)?بارح(ة)?)/i,
         today: /^اليوم/i,
         tomorrow: /^(الغد|غد(ا)?)/i,
@@ -154,19 +125,11 @@ Date.CultureInfo = {
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
 	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب)?توقيت )?(الخليج|gst|gulf (standard)? tim(e|ing)))/i,
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-<<<<<<< HEAD
 	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"GST", offset:"+0400"}]
-=======
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"GST", offset:"+0400"}]
->>>>>>> master
 };
 
 /********************
