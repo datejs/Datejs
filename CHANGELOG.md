@@ -1,8 +1,10 @@
-CHANGE LOG
---------------------
+# CHANGE LOG
 
-2008-05-12 [geoffrey.mcgill]
-Revision #191
+#### 2015-11-25 [@geoffreymcgill]
+
+1. [#72](https://github.com/datejs/Datejs/issues/72) - Changed license to Apache 2.0. More permissive and less vague. 
+
+#### 2008-05-12 [@geoffrey.mcgill]
 
 1.  Added .same() function to sugarpak.js. The new .same() function will compare two date objects to 
 	determine if they occur on/in exactly the same instance of the given date part.
@@ -60,10 +62,7 @@ Revision #191
     var o2 = {month: 1, day: 20, hour: 18}; // birthday party!
     Date.fromObject(o2);
     
---------------------
-
-2008-05-12 [geoffrey.mcgill]
-Revision #190
+#### 2008-05-12 [@geoffreymcgill]
 
 1.  Added .today() equality check function. Checks to determine if the current date instance occurs 
     during Today. Must be preceeded by the .is() function.
@@ -75,10 +74,7 @@ Revision #190
     Date.today().is().today();// true
     Date.today().add(-1).day().is().today(); // false
 	
---------------------
-
-2008-05-07 [geoffrey.mcgill]
-Revision #189
+#### 2008-05-07 [@geoffreymcgill]
 
 1.  Fixed bug in TimePeriod. See http://code.google.com/p/datejs/issues/detail?id=39
 
@@ -90,10 +86,7 @@ var ts = new TimePeriod(start, end);
 
 ts.getDays(); // 14
 
---------------------
-
-2008-04-25 [geoffrey.mcgill]
-Revision #182
+#### 2008-04-25 [@geoffreymcgill]
 
 1.  Small correction in core.js and extras.js to add an extra space in a couple functions so they would
 	pass JSLint (http://www.jslint.com) in white-space strict mode.
@@ -160,17 +153,11 @@ Revision #182
 	
 8.  Added new "Release Notes" RSS feed. http://feeds.feedburner.com/DatejsReleaseNotes
 	
---------------------
-
-2008-04-13 [geoffrey.mcgill]
-Revision #169
+#### 2008-04-13 [@geoffreymcgill]
 
 1.  Made correction to APIDocumentation.wiki. getDayNumberFromName and getMonthNumberFromName.
 
---------------------
-
-2008-04-13 [geoffrey.mcgill]
-Revision #162
+#### 2008-04-13 [@geoffreymcgill]
 
 1.  Fixed bug in sugarpak.js where .toISOString was not correctly checking the Date.prototype
     if an instance of .toISOString was already in the dom.
@@ -346,10 +333,7 @@ Revision #162
 	Date.strtotime("04/13/08");              // 1208044800
 	Date.strtotime("1970-01-01T00:00:00Z");  // 0	
 
---------------------    
-    
-2008-04-06 [geoffrey.mcgill] 
-Revision #152
+#### 2008-04-06 [@geoffreymcgill] 
 
 1.  Added Date.prototype.getWeek(). Gets the week number. 
 	The first week of the year is the week which contains the first Thursday. 
@@ -427,10 +411,7 @@ Revision #152
 
 10. Confirmed core.js and sugarpak.js modules still validate JSLint (http://www.jslint.com) 100% in whitespace strict mode.
 
---------------------
-
-2008-04-04 [geoffrey.mcgill] 
-Revision #150
+#### 2008-04-04 [@geoffreymcgill] 
 
 1.  Fixed Parser.js bug where the parser was using the static month token to compare against the 
     abbreviatedMonthNames array in the CultureInfo file. This was causing problems when the
@@ -469,10 +450,7 @@ Revision #150
 	console.log(tp.getMinutes());
 	console.log(tp.getSeconds());
     
---------------------
-
-2008-04-01 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-04-01 [@geoffreymcgill]
 
 1.  Fixed bug where Date.nov().final().sunday() would return the second to last sunday.
 	
@@ -490,10 +468,7 @@ Revision #UNKNOWN
 	
 2.  Added several tests to /trunk/test/core/ to test for this scenario.	
 
---------------------
-
-2008-03-27 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-03-27 [@geoffreymcgill]
 
 1.  Fixed bug which caused the string "Jan 2008" to not be parsed correctly. The 'Day' value would be
 	set to "today's" Day. For example, if Today is the 27th day of the month, Date.parse("Jan 2008")
@@ -516,10 +491,7 @@ Revision #UNKNOWN
 2.  Added about 100 new tests to /trunk/test/partial/ which test for vaiations on date strings 
 	with no Day value and No Year-or-Month value. View online at http://www.datejs.com/test/partial/
 
---------------------
-
-2008-03-24 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-03-24 [@geoffreymcgill]
 
 1.  Fixed bug where a single digit minute or second value would not parse correctly. 
 	See forum post http://tinyurl.com/3d8b57.
@@ -534,18 +506,12 @@ Revision #UNKNOWN
 	
 2.  Added a few tests to /trunk/test/time/ relating to above fix.
 
---------------------
-
-2008-03-18 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-03-18 [@geoffreymcgill]
 
 1.  Made small revision to .addDays() which should avoid addition/subtraction issues when 
     spanning over a Daylight Saving Time (Summer Time) change.
 
---------------------
-
-2008-03-03 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-03-03 [@geoffreymcgill]
 
 1.  Fixed .toString() bug where .toString would not return four characters if the year was less than 1000.
         
@@ -563,12 +529,9 @@ Revision #UNKNOWN
 	// New
 	console.log(Date.today().set({year: 5}).toString("yy"); // "05"
 
---------------------
+#### 2008-02-26 [@geoffreymcgill]
 
-2008-02-26 [geoffrey.mcgill]
-Revision #UNKNOWN
-
-1.  Dan Yoder fixed bug with timeContext pattern where if a date included "april" or "august", the parser thought the 'a' was the beginning of a time part (as in am/pm).
+1.  @dyoder fixed bug with timeContext pattern where if a date included "april" or "august", the parser thought the 'a' was the beginning of a time part (as in am/pm).
        
         "added a quick negative lookahead to the regexp to make sure the 'a' isn't followed by a 'u' or a 'p'."
         
@@ -580,26 +543,17 @@ Revision #UNKNOWN
 	
 2.  Fixed bug in Parser.finish, which was causing "11 Aug 2007 7:15:00 am EDT" to fail.
 
---------------------
-
-2008-02-21 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-02-21 [@geoffreymcgill]
 
 1.  Fixed bug in .parseExact where if the month was January ('0') the Parser.finishExact function was resetting to the current month.
 2.  Added several new tests to /trunk/test/parseExact/.
 
---------------------
-
-2008-02-18 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-02-18 [@geoffreymcgill]
 
 1.  Added .toISOString() back to sugarpak.js. Still investigating to figure out why/how this function was removed at Build 130-131.
 2.  Fixed small bug in .is().weekday() where .weekday() was not returning 'this' if the .is() flag had not been set.
 
---------------------
-
-2008-02-07 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-02-07 [@geoffreymcgill]
 
 1.  Fixed bug in parser.js which prevented some strings from parsing when the 'day' of the date string was greater than the last day of the current month.
 
@@ -610,10 +564,7 @@ Revision #UNKNOWN
 	
 	Date strings which fall under this scenario should now parse correctly.
 
---------------------
-
-2008-02-05 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-02-05 [@geoffreymcgill]
 
 1.  Added .is().weekday() function to sugarpak.js. 
     The .weekday() function determines if the current date is a weekday. 
@@ -623,18 +574,12 @@ Revision #UNKNOWN
 
     Date.today().is().weekday(); // true|false    
 
---------------------
-
-2008-02-04 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-02-04 [@geoffreymcgill]
 
 1.  Added .getOrdinal() tests to the new sugarpak (/trunk/test/sugarpak/) test package.
     See http://www.datejs.com/test/sugarpak/index.html
 
---------------------
-
-2008-01-02 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2008-01-02 [@geoffreymcgill]
 
 1.  Added .toISOString() to sugarpak.js. Returns ISO 8601 formatted string of date.
 2.  Changed .toJSONString() to return string value wrapped in double-quotes ("") as per
@@ -668,10 +613,7 @@ Revision #UNKNOWN
 		"3 years ago"
 		"7 hours ago"
 
---------------------
-
-2007-12-27 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2007-12-27 [@geoffreymcgill]
 
 1.  Modified the offset values of Date.CultureInfo.timezones.
 2.  Added <static> Date.compare(date1, date2).
@@ -723,10 +665,7 @@ Revision #UNKNOWN
     Returns a boolean value indicating whether this Date instance is within the Daylight Saving Time range for the current time zone.
 8.  Verified core.js, sugarpak.js, and time.js are passing JSLint (http://www.jslint/) in "Strict whitespace" mode.
 
---------------------
-
-2007-12-23 [geoffrey.mcgill]
-Revision #UNKNOWN
+#### 2007-12-23 [@geoffreymcgill]
 
 1.  Moved all minified files to the /build/ folder. Now all the original source files are 
     located in the /src/ folder, and all minified files are located in the /build/ folder. 
@@ -735,5 +674,3 @@ Revision #UNKNOWN
 4.  Added README.txt file to /trunk/ folder.
 5.  Added LICENSE.txt file to /trunk/ folder.
 6.  Added TODO.txt file to /trunk/ folder.
-
---------------------
