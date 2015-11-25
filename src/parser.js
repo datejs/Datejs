@@ -1,10 +1,10 @@
 /**
- * @version: 1.0 Alpha-1
- * @author: Coolite Inc. http://www.coolite.com/
- * @date: 2008-04-13
- * @copyright: Copyright (c) 2006-2008, Coolite Inc. (http://www.coolite.com/). All rights reserved.
- * @license: Licensed under The MIT License. See license.txt and http://www.datejs.com/license/. 
- * @website: http://www.datejs.com/
+ * @version: 1.0
+ * @author: @geoffreymcgill
+ * @date: 2015-11-25
+ * @copyright: Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net). All rights reserved.
+ * @license: See LICENSE and https://github.com/datejs/Datejs/blob/master/LICENSE
+ * @website: http://datejs.com/
  */
  
 (function () {
