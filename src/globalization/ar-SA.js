@@ -1,25 +1,25 @@
 Date.CultureInfo = {
-	/* Culture Name */
+    /* Culture Name */
     name: "ar-SA",
     englishName: "Arabic (Saudi Arabia)",
     nativeName: "العربية (المملكة العربية السعودية)",
     
     /* Day Name Strings */
-    dayNames: ["الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة", "السبت"],
-    abbreviatedDayNames: ["الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة", "السبت"],
-    shortestDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
+    dayNames: ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
+    abbreviatedDayNames: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
+    shortestDayNames: ["حد", "ثن", "ثل", "رع", "خم", "جم", "سب"],
     firstLetterDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
     
     /* Month Name Strings */
-    monthNames: ["محرم", "صفر", "ربيع الأول", "ربيع الثاني", "جمادى الأولى", "جمادى الثانية", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"],
-    abbreviatedMonthNames: ["محرم", "صفر", "ربيع الاول", "ربيع الثاني", "جمادى الاولى", "جمادى الثانية", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"],
+    monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+    abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"],
 
-	/* AM/PM Designators */
+    /* AM/PM Designators */
     amDesignator: "ص",
     pmDesignator: "م",
 
-    firstDayOfWeek: 6,
-    twoDigitYearMax: 1451,
+    firstDayOfWeek: 7,
+    twoDigitYearMax: 2029,
     
     /**
      * The dateElementOrder is based on the order of the 
@@ -82,54 +82,54 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-        jan: /^محرم/i,
-        feb: /^صفر/i,
-        mar: /^ربيع الأول/i,
-        apr: /^ربيع الثاني/i,
-        may: /^جمادى الأولى/i,
-        jun: /^جمادى الثانية/i,
-        jul: /^رجب/i,
-        aug: /^شعبان/i,
-        sep: /^رمضان/i,
-        oct: /^شوال/i,
-        nov: /^ذو القعدة/i,
-        dec: /^ذو الحجة/i,
-
-        sun: /^الاحد/i,
-        mon: /^الاثنين/i,
-        tue: /^الثلاثاء/i,
-        wed: /^الاربعاء/i,
-        thu: /^الخميس/i,
-        fri: /^الجمعة/i,
-        sat: /^السبت/i,
-
-        future: /^next/i,
-        past: /^last|past|prev(ious)?/i,
-        add: /^(\+|aft(er)?|from|hence)/i,
-        subtract: /^(\-|bef(ore)?|ago)/i,
+        jan: /^ينا(ير)?/i,
+        feb: /^فبر(اير)?/i,
+        mar: /^مار(س)?/i,
+        apr: /^أبر(يل)?/i,
+        may: /^ماي(و)?/i,
+        jun: /^يون(يو)?/i,
+        jul: /^يول(يو)?/i,
+        aug: /^أغس(طس)?/i,
+        sep: /^سبت(مبر)?/i,
+        oct: /^أكت(وبر)?/i,
+        nov: /^نوف(مبر)?/i,
+        dec: /^ديس(مبر)?/i,
         
-        yesterday: /^yes(terday)?/i,
-        today: /^t(od(ay)?)?/i,
-        tomorrow: /^tom(orrow)?/i,
-        now: /^n(ow)?/i,
+	sun: /^الأحد|(أ|ا)حد|ح(د)?/i,
+        mon: /^الإثنين|(إ|ا)ثنين|(ث)?ن/i,
+        tue: /^الثلاثاء|ث(ل|لاثاء)?/i,
+        wed: /^الأربعاء|(أ|ا)ربعاء|ر(ع)?/i,
+        thu: /^الخميس|خ(م|ميس)?/i,
+        fri: /^الجمعة|ج(م|معة)?/i,
+        sat: /^السبت|س(ب|بت)?/i,
+
+        future: /^القادم/i,
+        past: /^الماضي/i,
+        add: /^(\+|بعد|عقب)/i,
+        subtract: /^(\-|قبل|منذ)/i,
+
+        yesterday: /^((ال)?(ا|أ)مس|(ال)?بارح(ة)?)/i,
+        today: /^اليوم/i,
+        tomorrow: /^(الغد|غد(ا)?)/i,
+        now: /^(ال)?آن/i,
         
-        millisecond: /^ms|milli(second)?s?/i,
-        second: /^sec(ond)?s?/i,
-        minute: /^mn|min(ute)?s?/i,
-		hour: /^h(our)?s?/i,
-		week: /^w(eek)?s?/i,
-        month: /^m(onth)?s?/i,
-        day: /^d(ay)?s?/i,
-        year: /^y(ear)?s?/i,
+        millisecond: /^(ال)?ج(زء(ا))?( من( ال(أ|ا)لف من)? |( )?.( )?)(ال)?ث(انية)?(.)?/i,
+	second: /^(ال)?ث(انية|وان(ي)?)?(.)?/i,
+	minute: /^(ال)?د(قيقة|قائق)?(.)?/i,
+	hour: /^(ال)?س(اعة|اعات)?(.)?/i,
+	week: /^(ال)?(إ|ا)س(بوع|ابيع)/i,
+	month: /^(ال)?((أ|ا)?شهر|شهور)/i,
+	day: /(ال)?(يوم|أيام)/i,
+	year: /^(ال)?سن(ة|ين|ون|وات)/i,
 		
-        shortMeridian: /^(a|p)/i,
-        longMeridian: /^(a\.?m?\.?|p\.?m?\.?)/i,
-        timezone: /^((e(s|d)t|c(s|d)t|m(s|d)t|p(s|d)t)|((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc)/i,
+	shortMeridian: /^(ص|م)/i,
+	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
+        timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب)?توقيت )?(مكة (المكرمة)?|(المملكة العربية)?السعودية|الرياض|ast|arab (standard)? tim(e|ing)))/i,
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"-000"}, {name:"GMT", offset:"-000"}, {name:"EST", offset:"-0500"}, {name:"EDT", offset:"-0400"}, {name:"CST", offset:"-0600"}, {name:"CDT", offset:"-0500"}, {name:"MST", offset:"-0700"}, {name:"MDT", offset:"-0600"}, {name:"PST", offset:"-0800"}, {name:"PDT", offset:"-0700"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"AST", offset:"+0300"}]
 };
 
 /********************
@@ -149,47 +149,47 @@ Date.CultureInfo = {
  *
  * English Name        Translated
  * ------------------  -----------------
- * about               about
- * ago                 ago
- * date                date
- * time                time
- * calendar            calendar
- * show                show
- * hourly              hourly
- * daily               daily
- * weekly              weekly
- * bi-weekly           bi-weekly
- * fortnight           fortnight
- * monthly             monthly
- * bi-monthly          bi-monthly
- * quarter             quarter
- * quarterly           quarterly
- * yearly              yearly
- * annual              annual
- * annually            annually
- * annum               annum
- * again               again
- * between             between
- * after               after
- * from now            from now
- * repeat              repeat
- * times               times
- * per                 per
- * min (abbrev minute) min
- * morning             morning
- * noon                noon
- * night               night
- * midnight            midnight
- * mid-night           mid-night
- * evening             evening
- * final               final
- * future              future
- * spring              spring
- * summer              summer
- * fall                fall
- * winter              winter
- * end of              end of
- * end                 end
- * long                long
- * short               short
+ * about               قرابة
+ * ago                 مضت
+ * date                التاريخ
+ * time                الوقت
+ * calendar            التقويم
+ * show                اظهار
+ * hourly              كل ساعة
+ * daily               يومياً
+ * weekly              اسبوعياً
+ * bi-weekly           مرتين بالإسبوع
+ * fortnight           اسبوعان
+ * monthly             شهرياً
+ * bi-monthly          مرتين بالشهر
+ * quarter             ربع
+ * quarterly           كل ربع سنة
+ * yearly              سنوياً
+ * annual              سنوي
+ * annually            سنوياً
+ * annum               عام
+ * again               مرة أخرى
+ * between             بين
+ * after               بعد
+ * from now            من الآن
+ * repeat              كرر
+ * times               مرات
+ * per                 كل
+ * min (abbrev minute) د.
+ * morning             صباح
+ * noon                ظهيرة
+ * night               ليل
+ * midnight            نصف الليل
+ * mid-night           نصف الليل
+ * evening             مساء
+ * final               ختامي
+ * future              مستقبل
+ * spring              ربيع
+ * summer              صيف
+ * fall                خريف
+ * winter              شتاء
+ * end of              نهاية
+ * end                 نهاية
+ * long                طويل
+ * short               قصير
  */

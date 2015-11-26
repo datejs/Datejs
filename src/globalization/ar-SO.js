@@ -1,9 +1,9 @@
 Date.CultureInfo = {
     /* Culture Name */
-    name: "ar-DZ",
-    englishName: "Arabic (Algeria)",
-    nativeName: "العربية (الجزائر)",
-   
+    name: "ar-SO",
+    englishName: "Arabic (Somalia)",
+    nativeName: "العربية (الصومال)",
+        
     /* Day Name Strings */
     dayNames: ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
     abbreviatedDayNames: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
@@ -11,8 +11,8 @@ Date.CultureInfo = {
     firstLetterDayNames: ["ح", "ن", "ث", "ر", "خ", "ج", "س"],
     
     /* Month Name Strings */
-    monthNames: ["جانفييه", "فيفرييه", "مارس", "أفريل", "مي", "جوان", "جوييه", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
-    abbreviatedMonthNames: ["جان", "فيف", "مار", "أفر", "مي", "جوا", "جوي", "أوت", "سبت", "اكت", "نوف", "ديس"],
+    monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+    abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"],
 
     /* AM/PM Designators */
     amDesignator: "ص",
@@ -82,13 +82,13 @@ Date.CultureInfo = {
      * As well, please review the list of "Future Strings" section below. 
      */	
     regexPatterns: {
-        jan: /^جان(فييه)?/i,
-        feb: /^فيف(رييه)?/i,
+        jan: /^ينا(ير)?/i,
+        feb: /^فبر(اير)?/i,
         mar: /^مار(س)?/i,
-        apr: /^أفر(يل)?/i,
-        may: /^مي/i,
-        jun: /^جوا(ن)?/i,
-        jul: /^جوي(يه)/i,
+        apr: /^أبر(يل)?/i,
+        may: /^ماي(و)?/i,
+        jun: /^يون(يو)?/i,
+        jul: /^يول(يو)?/i,
         aug: /^أغس(طس)?/i,
         sep: /^سبت(مبر)?/i,
         oct: /^أكت(وبر)?/i,
@@ -124,12 +124,12 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?جزائر(ية)?|وسط أوروبا|cet|(central)? european tim(e|ing)))/i,        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-        ordinalSuffix: /^\s*(st|nd|rd|th)/i,
-        timeContext: /^\s*(\:|a(?!u|p)|p)/i
+	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((جمهورية )?|الصومال|مقديشو|شرق افريقيا|eat|ast|eastern africa? tim(e|ing)))/i,
+ 	ordinalSuffix: /^\s*(st|nd|rd|th)/i,
+  	timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },
 
-	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"CET", offset:"+0100"}]
+	timezones: [{name:"UTC", offset:"+000"}, {name:"GMT", offset:"+000"}, {name:"EAT", offset:"+0300"}, {name:"AST", offset:"+0300"}]
 };
 
 /********************
