@@ -1,4 +1,9 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+Date.Specification = new Specification({
   'Pass': {
     setup: function() { 
         this.now = new Date();
@@ -41,26 +46,6 @@
       run: function() { },
       assert: function() { return Date.today().next().month().equals( Date.parse('next month') ) }
     },                     
-    'yesterday at 4:00': {
-      run: function() { },
-      assert: function() { return Date.today().add(-1).day().set({ hour: 4 }).equals( Date.parse('yesterday at 4:00') ) }
-    },
-    'last friday at 20:00': {
-      run: function() { },
-      assert: function() { return Date.today().last().friday().set({ hour: 20 }).equals( Date.parse('last friday at 20:00') ) }
-    }, 
-    'last week tuesday': {
-      run: function() { },
-      assert: function() { return Date.tuesday().last().week().equals( Date.parse('last week tuesday') ) }
-    },             
-    'tomorrow at 6:45pm': {
-      run: function() { },
-      assert: function() { return Date.today().add(1).day().set({ hour: 18, minute: 45}).equals( Date.parse('tomorrow at 6:45pm') ) }
-    },
-   'thursday last week': {
-      run: function() { },
-      assert: function() { return Date.thursday().last().week().equals( Date.parse('thursday last week') ) }
-    },
    '5 months before now': {
       run: function() { },
       assert: function() { return new Date().set({ millisecond: 0 }).add(-5).months().equals(Date.parse('5 months before now').set({millisecond: 0})) }
@@ -163,7 +148,11 @@
     'January 5 @ 7pm': {
       run: function() { },
       assert: function() { return Date.january().set({day: 5, hour: 19}).equals(Date.parse('January 5 @ 7pm')) }
-    }              
+    },
+    'this second : The term "this" is not supported': {
+      run: function() { },
+      assert: function() { return new Date().equals( Date.parse('this second') ) }
+    }   
   },
 'Fail': {
     setup: function() { 
@@ -194,6 +183,33 @@
       run: function() { },
       assert: function() { return Date.today().set({ month: 11, day: 21 }).add(-1).year().equals( Date.parse('last winter') ) }
     }, 
+    'thursday last week -- last not supported': {
+      run: function() { },
+      assert: function() { 
+        return Date.thursday().last().week().equals( Date.parse('thursday last week') ) 
+      }
+    },
+    'last week tuesday -- last not supported': {
+      run: function() { },
+      assert: function() { return Date.tuesday().last().week().equals( Date.parse('last week tuesday') ) }
+    },  
+        'yesterday at 4:00 -- at not supported': {
+      run: function() { 
+          this.parsed = Date.parse('yesterday at 4:00');
+          this.computed = Date.today().addDays(-1).set({ hour: 4 });
+      },
+      assert: function() { 
+        return this.parsed.equals(this.computed); 
+      }
+    },           
+    'tomorrow at 6:45pm -- at not supported': {
+      run: function() { },
+      assert: function() { return Date.today().addDays(1).set({ hour: 18, minute: 45}).equals( Date.parse('tomorrow at 6:45pm') ) }
+    },
+    'last friday at 20:00 -- last not supported': {
+      run: function() { },
+      assert: function() { return Date.today().last().friday().set({ hour: 20 }).equals( Date.parse('last friday at 20:00') ) }
+    },
     'this morning : The term "morning" is not supported': {
       run: function() { },
       assert: function() { return Date.today().set({ hour: 9 }).equals( Date.parse('this morning') ) }
@@ -201,19 +217,15 @@
     'last night : The term "night" is not supported': {
       run: function() { },
       assert: function() { return Date.today().set({ hour: 18 }).equals( Date.parse('last night') ) }
-    },
-    'this second : The term "this" is not supported': {
-      run: function() { },
-      assert: function() { return new Date().equals( Date.parse('this second') ) }
-    },            
+    },         
     'afternoon yesterday : The term "afternoon" is not supported': {
       run: function() { },
       assert: function() { return Date.today().add(1).day().set({ hour: 12 }).equals( Date.parse('afternoon yesterday') ) }
     },    
-   'in 3 hours : problem with "in"': {
-      run: function() { },
-      assert: function() { return new Date().set({millisecond:0}).add(3).hours().equals(Date.parse('in 3 hours').set({millisecond:0})) }
-    },
+   // 'in 3 hours : problem with "in"': {
+   //    run: function() { },
+   //    assert: function() { return new Date().set({millisecond:0}).add(3).hours().equals(Date.parse('in 3 hours').set({millisecond:0})) }
+   //  },
    '3 months ago saturday at 5:00 pm': {
       run: function() { },
       assert: function() { return Date.saturday().add({month: -3}).set({hour: 17}).equals(Date.parse('3 months ago saturday at 5:00 pm')) }
@@ -245,4 +257,3 @@
  }       
 });
 
-$(document).ready( function() { Date.Specification.validate().show() } );

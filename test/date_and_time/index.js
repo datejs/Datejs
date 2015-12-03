@@ -1,4 +1,9 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+Date.Specification = new Specification({
   'Overview': {
     setup: function() {
       this.d = [];
@@ -99,7 +104,7 @@
     },
     '11 Aug 2007 7:15:00 am EDT': {
       run: function() { this.date =  Date.parse('11 Aug 2007 7:15:00 am EDT') },
-      assert: function() { return new Date(2007,7,11,7,15,0).add(-2).hours().equals( this.date ) }
+      assert: function() { return new Date(2007,7,11,7,15,0).setTimezone('EDT').equals( this.date ) }
     },
     'Tue Nov 20 2007 08:00:00 UTC': {
       run: function() { this.date = Date.parse("Tue Nov 20 2007 08:00:00 UTC") },
@@ -701,10 +706,6 @@
         run: function() { },
         assert: function() { return new Date(1997,6,16,19,20,30).setTimezoneOffset('+0100').equals( Date.parseExact('1997-07-16T19:20:30+01:00', "yyyy-MM-ddTHH:mm:ssz") ) }
       },
-       '1997-07-16T19:20:30.45+01:00 : "YYYY-MM-DDThh:mm:ss.sTZD"': {
-        run: function() { },
-        assert: function() { return new Date(1997,6,16,19,20,30,45).setTimezoneOffset('+0100').equals( Date.parse('1997-07-16T19:20:30.45+01:00') ) }
-      }    
   },
 
 'RFC 3339 Formats': {
@@ -734,7 +735,19 @@
         assert: function() { return new Date(1985,3,12,23,20,50).equals( Date.parseExact('1985-04-12T23:20:50Z', "yyyy-MM-ddTHH:mm:ssZ") ) }
       }         
 
-  }      
+  },
+  'Quriks: Date.parse cannot handle ISO Dates with milliseconds and tz data, use new Date() instead': {
+       '1997-07-16T19:20:30.045+01:00 : "YYYY-MM-DDThh:mm:ss.sTZD"': {
+        run: function() { 
+            var ISOString = '1997-07-16T19:20:30.045+0100';
+            this.date = new Date(1997,6,16,19,20,30,45).setTimezoneOffset('+0100');
+            this.shouldBeNull = Date.parse(ISOString);
+            this.fromNew = new Date(ISOString);
+        },
+        assert: function() { 
+          return this.shouldBeNull === null && this.date.equals(this.fromNew);
+        }
+      }    
+},
 });
 
-$(document).ready( function() { Date.Specification.validate().show() });

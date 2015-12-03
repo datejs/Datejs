@@ -1,4 +1,9 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+Date.Specification = new Specification({
 'Date Math': {
     setup: function() { 
       var dow = function(dow,orient,date) { 
@@ -852,7 +857,5 @@
       run: function() { },
       assert: function() {  return this.today.add(-5).weeks().equals( Date.parse('-5 Weeks') ) }
     }
-  }   
+  }
 });
-
-$(document).ready( function() { Date.Specification.validate().show() } );

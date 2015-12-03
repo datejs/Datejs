@@ -1,4 +1,9 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+Date.Specification = new Specification({
   'Times': {
     setup: function() {
       this.baseline = []; 
@@ -261,4 +266,3 @@
   }  
 });
 
-$(document).ready( function() { Date.Specification.validate().show() } );

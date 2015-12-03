@@ -1,4 +1,9 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+Date.Specification = new Specification({
   'Overview': {
     setup: function() { },
     'Today': {
@@ -1088,4 +1093,3 @@
   }   
 });
 
-$(document).ready( function() { Date.Specification.validate().show() } );

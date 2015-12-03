@@ -1,4 +1,9 @@
-﻿Date.Specification = new Specification({
+﻿if(typeof require !== 'undefined') {
+  var Specification = require('../scripts/specification-converter.js');
+}
+
+
+Date.Specification = new Specification({
   'Overview': {
     setup: function() {  this.baseline = new Date('7/8/2004') },
     'July 8th, 2004 : Typical': {
@@ -383,14 +388,7 @@
       run: function() { this.date =  Date.parse('07012004') },
       assert: function() { return this.baseline.equals( this.date ) }
     },
-    '712004': {
-      run: function() { this.date =  Date.parse('712004') },
-      assert: function() { return this.baseline.equals( this.date ) }
-    },
-    '7104': {
-      run: function() { this.date =  Date.parse('7104', { format : "Mdyy" } ) },
-      assert: function() { return this.baseline.equals( this.date ) }
-    },    
+      
 
     '07152004': {
       run: function() { this.date =  Date.parse('07152004') },
@@ -400,11 +398,38 @@
       run: function() { this.date =  Date.parse('7152004') },
       assert: function() { return this.baseline2.equals( this.date ) }
     },
+  },
+
+    'Fail -- pattern "d" does not handle single numbers in ambiguous contexts' : {
+      setup: function() {
+        this.baseline = new Date(2004,6,1);
+        this.baseline2 = new Date(2004,6,15);
+    },
+      '712004': {
+      run: function() { 
+        this.date =  Date.parseExact('712004', 'Mdyyyy') 
+      },
+      assert: function() { 
+        return this.baseline.equals( this.date ) 
+      }
+    },
+    '7104': {
+      run: function() { 
+        this.date =  Date.parse('7104', { format : "Mdyy" } ) 
+      },
+      assert: function() { 
+        return this.baseline.equals( this.date ) 
+      }
+    },  
+
     '71504': {
-      run: function() { this.date =  Date.parse('71504', { format : "Mdyy" } ) },
-      assert: function() { return this.baseline2.equals( this.date ) }
-    }        
- }     
+      run: function() { 
+        this.date =  Date.parse('71504', { format : "Mdyy" } ) 
+      },
+      assert: function() { 
+        return this.baseline2.equals( this.date ) 
+      }
+    }, 
+    }    
 });
 
-$(document).ready( function() { Date.Specification.validate().show() } );
