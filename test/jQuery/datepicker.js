@@ -1,4 +1,4 @@
-﻿/* jQuery UI Date Picker v3.2 - previously jQuery Calendar
+/* jQuery UI Date Picker v3.2 - previously jQuery Calendar
    Written by Marc Grabanski (m@marcgrabanski.com) and Keith Wood (kbwood@iprimus.com.au).
 
    Copyright (c) 2007 Marc Grabanski (http://marcgrabanski.com/code/ui-datepicker)

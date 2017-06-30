@@ -12,7 +12,7 @@ Date.CultureInfo = {
     
     /* Month Name Strings */
     monthNames: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغشت", "شتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
-    abbreviatedMonthNames:  : ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغش", "شتم", "أكت", "نوف", "ديس"],
+    abbreviatedMonthNames: ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغش", "شتم", "أكت", "نوف", "ديس"],
     
     /* AM/PM Designators */
     amDesignator: "ص",
@@ -124,7 +124,7 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((جمهورية )?موريتانيا|نواكشوط|جرينتش|غرب أوروبا|wet|west|western europe tim(e|ing))/i,
+	timezone: /^((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((جمهورية )?موريتانيا|نواكشوط|جرينتش|غرب أوروبا|wet|west|western europe tim(e|ing))/i,
 	ordinalSuffix: /^\s*(st|nd|rd|th)/i,
   	timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },

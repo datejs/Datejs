@@ -171,8 +171,7 @@
             };
         },
         all: function () { 
-            var px = arguments, _ = _; 
-            return _.each(_.optional(px)); 
+            return _.each(_.optional(arguments));
         },
 
         // delimited operators

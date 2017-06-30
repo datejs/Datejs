@@ -217,9 +217,9 @@ ts.getDays(); // 14
         return z.substring(0, z.length - 2) + ":" + z.substring(z.length - 2);
         
     // Documentation
-    z      The offset time zone from UTC in hours.                                      "–12" through "+13", "-6"
-    zz     The offset time zone from UTC in hours with leading zero.                    "–12" through "+13", "-06"
-    zzz    The offset time zone from UTC in hours and minutes.                          "–12:00" through "+13:00", "-06:00"    
+    z      The offset time zone from UTC in hours.                                      "â€“12" through "+13", "-6"
+    zz     The offset time zone from UTC in hours with leading zero.                    "â€“12" through "+13", "-06"
+    zzz    The offset time zone from UTC in hours and minutes.                          "â€“12:00" through "+13:00", "-06:00"    
 
 8.  Contemplated add "fff" as format specifier option of .toString() but changed my mind. 
 	For future reference, here's the code required if adding "fff" support to .toString().
@@ -340,7 +340,7 @@ ts.getDays(); // 14
 	Monday is considered the first day of the week.
 
 	The .getWeek algorithm is a JavaScript port of the work presented by 
-	Claus Tøndering at http://www.tonderingdk/claus/cal/node8.html#SECTION00880000000000000000
+	Claus TÃ¸ndering at http://www.tonderingdk/claus/cal/node8.html#SECTION00880000000000000000
     .getWeek() Algorithm Copyright (c) Claus Tondering.
     
     The .getWeek() function does NOT convert the date to UTC. The local datetime is used. 

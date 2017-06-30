@@ -124,7 +124,7 @@ Date.CultureInfo = {
 		
 	shortMeridian: /^(ص|م)/i,
 	longMeridian: /^(صباح(ا)?|مساء(ا)?)/i,
-    	timezone: /^(((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?تونس(ية)?|تونس|وسط أوروبا(صيفي)?|cet|cest|central europe (summer)? tim(e|ing))/i,
+    	timezone: /^((gmt)?\s*(\+|\-)\s*\d\d\d\d?)|gmt|utc|((ب(ال)?)?توقيت )?((ال)?(جمهورية )?(ال)?تونس(ية)?|تونس|وسط أوروبا(صيفي)?|cet|cest|central europe (summer)? tim(e|ing))/i,
         ordinalSuffix: /^\s*(st|nd|rd|th)/i,
         timeContext: /^\s*(\:|a(?!u|p)|p)/i
     },

@@ -329,7 +329,7 @@
                 //   Date.march().add(1).second().second().monday(); // but it works!!
                 //
                 if (dayName._isSecond) {
-                    dayName.addSeconds(dayname._orient * -1);
+                    dayName.addSeconds(dayName._orient * -1);
                 }
                 // make sure we reset _isSecond
                 dayName._isSecond = false;
@@ -378,10 +378,10 @@
         return function () {
             var monthName = this;
             if (monthName._is) {
-                monthname._is = false;
+                monthName._is = false;
                 return monthName.getMonth() === n;
             }
-            return monthName.moveToMonth(n, monthname._orient);
+            return monthName.moveToMonth(n, monthName._orient);
         };
     };
 

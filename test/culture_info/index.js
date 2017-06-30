@@ -1,4 +1,4 @@
-﻿Date.Specification = new Specification({
+Date.Specification = new Specification({
   'Overview': {
     setup: function() {  this.baseline = new Date('7/8/2004') },
     'Julio 8, 2004 : Espanol': {
