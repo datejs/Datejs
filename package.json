@@ -2,6 +2,7 @@
   "name": "Datejs",
   "version": "1.0.0",
   "description": "A Date library for browsers",
+  "main": "build/date.js",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-jasmine": "^2.0.1",
