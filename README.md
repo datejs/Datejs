@@ -2,7 +2,7 @@
 
 ## Overview
 
-[Datejs](http://datejs.com/) is an open source JavaScript Date library for parsing, formatting and processing.
+**Datejs** is an open source JavaScript Date library for parsing, formatting and processing.
 
 The last 'official' release was **Alpha-1** on November 19th, 2007. The project has been mostly dormant since that early release, but steps are being taken to revive the project.
 
