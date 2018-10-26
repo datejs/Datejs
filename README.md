@@ -8,8 +8,6 @@ The last 'official' release was **Alpha-1** on November 19th, 2007. The project 
 
 ## Getting Started
 
-**NOTE** Please be sure to check out our blog post [Getting Started with DateJS](http://datejs.com/2007/11/27/getting-started-with-datejs/).
-
 We recommend including one of the .js files from within the `/build/` folder. 
 
 ``` html
