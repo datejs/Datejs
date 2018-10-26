@@ -6,8 +6,6 @@
 
 The last 'official' release was **Alpha-1** on November 19th, 2007. The project has been mostly dormant since that early release, but steps are being taken to revive the project.
 
-A test suite is available online at http://datejs.com/test/.
-
 ## Getting Started
 
 **NOTE** Please be sure to check out our blog post [Getting Started with DateJS](http://datejs.com/2007/11/27/getting-started-with-datejs/).
