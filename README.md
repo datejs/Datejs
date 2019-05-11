@@ -4,19 +4,19 @@
 
 **Datejs** is an open source JavaScript Date library for parsing, formatting and processing.
 
-The last 'official' release was **Alpha-1** on November 19th, 2007. The project has been mostly dormant since that early release, but steps are being taken to revive the project.
+The last official release was **Alpha-1** on November 19th, 2007. The project has been mostly dormant since that early release.
 
 ## Getting Started
 
 We recommend including one of the .js files from within the `/build/` folder. 
 
-``` html
+```html
 <script type="text/javascript" src="date.js"></script>
 ```
 
 Within the `/build/` folder, a date.js file has been created for each of the 150+ supported Cultures. Changing the Culture of the library is as easy as changing the `date.js` file.
 
-``` html
+```html
 <!-- Set the CultureInfo to de-DE (German/Deutsch) -->
 <script type="text/javascript" src="date-de-DE.js"></script>
 ```
@@ -26,23 +26,23 @@ Before minification, the Datejs library is contained in five (6) separate JavaSc
 The following is a list of precedence *if including the files individually*. Each file requires the one above it. For example, `core.js` requires a `CultureInfo` file. 
 
 ```
-  1. CultureInfo       Contains all Globalized strings and culture specific properties.
-                       Debug versions available within the /trunk/source/globalization/ folder.
-  2. core.js           All core Date processing logic.
-  3. parser.js         All parsing logic.
-  4. sugarpak.js*      All syntactical sugar.
-  5. time.js**         TimeSpan and TimePeriod classes.
-  6. extras.js**       PHP/Unix date format conversion functions.
+1. CultureInfo       Contains all Globalized strings and culture specific properties.
+                     Debug versions available within the /trunk/source/globalization/ folder.
+2. core.js           All core Date processing logic.
+3. parser.js         All parsing logic.
+4. sugarpak.js*      All syntactical sugar.
+5. time.js**         TimeSpan and TimePeriod classes.
+6. extras.js**       PHP/Unix date format conversion functions.
 
-  *  The parser.js file is not required for sugarpak.js
-  ** The time.js and extras.js files are optional and are not included in the compiled /build/ versions.
+*  The parser.js file is not required for sugarpak.js
+** The time.js and extras.js files are optional and are not included in the compiled /build/ versions.
 ```
 
 ## Example Usage
 
 #### Syntax Overview
 
-``` javascript
+```js
 Date.today()                    // Returns today's date, with time set to 00:00 (start of day).
 
 Date.today().next().friday()    // Returns the date of the next Friday.
@@ -106,66 +106,66 @@ All CultureInfo files can be found in the `/trunk/source/globalization/` folder.
 
 The following `.parse()` samples use the `en-US.js` CultureInfo file.
 
-``` javascript
-Date.parse('t')                 // Returns today's date.
-Date.parse('today')             // Returns today's date.
-Date.parse('tomorrow')          // Returns tomorrow's date.
-Date.parse('yesterday')         // Returns yesterday's date.
+```js
+Date.parse("t")                 // Returns today's date.
+Date.parse("today")             // Returns today's date.
+Date.parse("tomorrow")          // Returns tomorrow's date.
+Date.parse("yesterday")         // Returns yesterday's date.
 
-Date.parse('next friday')       // Returns the date of the next Friday.
-Date.parse('last monday')       // Returns the date of the previous Monday.
+Date.parse("next friday")       // Returns the date of the next Friday.
+Date.parse("last monday")       // Returns the date of the previous Monday.
 
-Date.parse('July 8th, 2004')    // Thu Jul 08 2004
-Date.parse('15-Jan-2004')       // Thu Jan 15 2004
+Date.parse("July 8th, 2004")    // Thu Jul 08 2004
+Date.parse("15-Jan-2004")       // Thu Jan 15 2004
 
-Date.parse('7/1/2004')          // Thu Jul 01 2004
-Date.parse('7.1.2004')          // Thu Jul 01 2004
-Date.parse('07.15.04')          // Thu Jul 15 2004
+Date.parse("7/1/2004")          // Thu Jul 01 2004
+Date.parse("7.1.2004")          // Thu Jul 01 2004
+Date.parse("07.15.04")          // Thu Jul 15 2004
 
-Date.parse('July 23rd 2004')    // Fri Jul 23 2004
-Date.parse('Sat July 3, 2004')  // Sat Jul 03 2004
+Date.parse("July 23rd 2004")    // Fri Jul 23 2004
+Date.parse("Sat July 3, 2004")  // Sat Jul 03 2004
 
-Date.parse('10:30 PM EST')      // Wed Oct 31 2007 20:30:00
-Date.parse('10PM')              // Wed Oct 31 2007 22:00:00
+Date.parse("10:30 PM EST")      // Wed Oct 31 2007 20:30:00
+Date.parse("10PM")              // Wed Oct 31 2007 22:00:00
 
-Date.parse('t + 5d')            // Adds 5 days to today.
-Date.parse('today - 1 month')   // Subtracts 1 month from today.
+Date.parse("t + 5d")            // Adds 5 days to today.
+Date.parse("today - 1 month")   // Subtracts 1 month from today.
 
-Date.parse('+')                 // Add 1 day to today = tomorrow.
-Date.parse('- 3months')         // Subtract 3 months.
+Date.parse("+")                 // Add 1 day to today = tomorrow.
+Date.parse("- 3months")         // Subtract 3 months.
 
-Date.parse('+1year')            // Add a year to today.
-Date.parse('-12 months')        // Subtract 12 months (1 year) from today.
+Date.parse("+1year")            // Add a year to today.
+Date.parse("-12 months")        // Subtract 12 months (1 year) from today.
 
-Date.parse('July 4th')          // July 4th of this year.
-Date.parse('15')                // 15th day of current month/year.
+Date.parse("July 4th")          // July 4th of this year.
+Date.parse("15")                // 15th day of current month/year.
 
-Date.parse('July 8th, 2004, 10:30 PM')      // Thu Jul 08 2004 22:30:00
-Date.parse('2004-07-15T06:45:00')           // Thu Jul 15 2004 06:45:00
-Date.parse('Thu, 1 July 2004 22:30:00 GMT') // Thu Jul 01 2004 16:30:00
+Date.parse("July 8th, 2004, 10:30 PM")      // Thu Jul 08 2004 22:30:00
+Date.parse("2004-07-15T06:45:00")           // Thu Jul 15 2004 06:45:00
+Date.parse("Thu, 1 July 2004 22:30:00 GMT") // Thu Jul 01 2004 16:30:00
 
-Date.parse('1997-07-16T19:20:15')           // ISO 8601 Formats
-Date.parse('1997-07-16T19:20:30+01:00')     // ISO 8601 with Timezone offset
-Date.parse('1985-04-12T23:20:50Z')          // RFC 3339 Formats
+Date.parse("1997-07-16T19:20:15")           // ISO 8601 Formats
+Date.parse("1997-07-16T19:20:30+01:00")     // ISO 8601 with Timezone offset
+Date.parse("1985-04-12T23:20:50Z")          // RFC 3339 Formats
 ```
 
 #### Chaining
 
-``` javascript
+```js
 Date.today().add({ months: 1, days: 5 }).is().fri()        // Add 1 month and 5 days, then check if that date is a Friday.
-Date.parse('10-July-2004').next().friday().add(-1).month() // Take in a date, then move to the next Friday and subtract a month.
+Date.parse("10-July-2004").next().friday().add(-1).month() // Take in a date, then move to the next Friday and subtract a month.
 ```
 
 #### Comparison
 
-``` javascript
-Date.today().equals( Date.parse('today'))                  // true|false
-Date.parse('last Tues').equals(Date.today())               // true|false
+```js
+Date.today().equals( Date.parse("today"))                  // true|false
+Date.parse("last Tues").equals(Date.today())               // true|false
 
-Date.equals(Date.today(), Date.parse('today'))             // true|false
-Date.compare(Date.today(), Date.parse('today'))            // 1 = greater, -1 = less than, 
+Date.equals(Date.today(), Date.parse("today"))             // true|false
+Date.compare(Date.today(), Date.parse("today"))            // 1 = greater, -1 = less than, 
 
-Date.today().compareTo(Date.parse('yesterday'))            // 1 = greater, -1 = less than, 0 = equal
+Date.today().compareTo(Date.parse("yesterday"))            // 1 = greater, -1 = less than, 0 = equal
 Date.today().between(startDate, endDate)                   // true|false
 ```
 
@@ -226,14 +226,14 @@ A detailed list of supported FormatSpecifiers is listed in the [http://code.goog
 | - | hyphen|dash |
 | , | comma |
 
-``` javascript
+```js
 new Date().toString()                  // "Wed Oct 31 2007 16:18:10 GMT-0700 (Pacfic Daylight Time)"
-new Date().toString('M/d/yyyy')        // "10/31/2007"
+new Date().toString("M/d/yyyy")        // "10/31/2007"
 
-Date.today().toString('d-MMM-yyyy')    // "31-Oct-2007"
-new Date().toString('HH:mm')           // "16:18"
+Date.today().toString("d-MMM-yyyy")    // "31-Oct-2007"
+new Date().toString("HH:mm")           // "16:18"
 
-Date.today().toString('MMMM dS, yyyy') // "April 12th, 2008"
+Date.today().toString("MMMM dS, yyyy") // "April 12th, 2008"
 
 Date.today().toShortDateString()       // "10/31/2007". Culture specific as per Date.CultureInfo.shortDatePattern.
 Date.today().toLongDateString()        // "Wednesday, October 31, 2007". Culture specific as per Date.CultureInfo.longDatePattern.
@@ -244,7 +244,7 @@ new Date().toLongTimeString()          // "4:18:34 PM". Culture specific as per 
 
 #### Core
 
-``` javascript
+```js
 Date.today().set({ day: 15 })          // Sets the day to the 15th of the current month and year. Other object values include year|month|day|hour|minute|second.
 
         Date.today().set({ year: 2007, month: 1, day: 20 })
@@ -273,9 +273,9 @@ Date.today().setTimeToNow()            // Resets the time to the current time (n
 
 #### ISO 8601
 
-``` javascript
+```js
 // Parse ISO 8601 string
-Date.parse('\"1997-07-16T19:20:15\"')  // ISO 8601 string format with wrapping double-quotes
+Date.parse("\"1997-07-16T19:20:15\"")  // ISO 8601 string format with wrapping double-quotes
 
 // Convert date to ISO 8601 string
 new Date().toISOString()               // Returns ISO 8601 string of date converted to it's UTC value. "2007-10-31T16:18:00Z"
@@ -286,9 +286,9 @@ Date.today().getISOWeek()              // Returns ISO 8601 week of year. Returns
 
 #### Misc
 
-``` javascript
-Date.getMonthNumberFromName('March')   // 2 - CultureInfo specific. <static>
-Date.getDayNumberFromName('sat')       // 6 - CultureInfo specific. <static>
+```js
+Date.getMonthNumberFromName("March")   // 2 - CultureInfo specific. <static>
+Date.getDayNumberFromName("sat")       // 6 - CultureInfo specific. <static>
 
 Date.isLeapYear(2008)                  // true|false. <static>
 Date.getDaysInMonth(2007, 9)           // 31 <static>
