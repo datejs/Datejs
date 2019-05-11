@@ -189,16 +189,16 @@ A detailed list of supported FormatSpecifiers is listed in the [http://code.goog
 | HH | The hour of the day with leading zero if required. | "00" to "23" | 
 | d | The day of the month between 1 and 31. | "1"  to "31" | 
 | dd | The day of the month with leading zero if required. | "01" to "31" | 
-| ddd | Abbreviated day name. Date.!CultureInfo.abbreviatedDayNames. | "Mon" to "Sun" |  
-| dddd | The full day name. Date.!CultureInfo.dayNames. | "Monday" to "Sunday" | 
+| ddd | Abbreviated day name. Date.CultureInfo.abbreviatedDayNames. | "Mon" to "Sun" |  
+| dddd | The full day name. Date.CultureInfo.dayNames. | "Monday" to "Sunday" | 
 | M | The month of the year between 1-12. | "1" to "12" | 
 | MM | The month of the year with leading zero if required. | "01" to "12" | 
-| MMM | Abbreviated month name. Date.!CultureInfo.abbreviatedMonthNames. | "Jan" to "Dec" | 
-| MMMM | The full month name. Date.!CultureInfo.monthNames. | "January" to "December" | 
+| MMM | Abbreviated month name. Date.CultureInfo.abbreviatedMonthNames. | "Jan" to "Dec" | 
+| MMMM | The full month name. Date.CultureInfo.monthNames. | "January" to "December" | 
 | yy | Displays the year as a two-digit number. | "99" or "07" | 
 | yyyy | Displays the full four digit year. | "1999" or "2007" | 
-| t | Displays the first character of the A.M./P.M. designator. Date.!CultureInfo.amDesignator or Date.!CultureInfo.pmDesignator | "A" or "P" | 
-| tt | Displays the A.M./P.M. designator. Date.!CultureInfo.amDesignator or Date.!CultureInfo.pmDesignator | "AM" or "PM" | 
+| t | Displays the first character of the A.M./P.M. designator. Date.CultureInfo.amDesignator or Date.CultureInfo.pmDesignator | "A" or "P" | 
+| tt | Displays the A.M./P.M. designator. Date.CultureInfo.amDesignator or Date.CultureInfo.pmDesignator | "AM" or "PM" | 
 | S | The ordinal suffix ("st, "nd", "rd" or "th") of the current day. | "st, "nd", "rd" or "th" | 
 
 *Custom Date and Time Format Specifiers*
@@ -206,15 +206,15 @@ A detailed list of supported FormatSpecifiers is listed in the [http://code.goog
 | Format | Description | Example |
 | :---- | :---- | :---- |
 | d      | The CultureInfo shortDate Format Pattern                                     | "M/d/yyyy" |
-| D      | The !CultureInfo longDate Format Pattern                                      | "dddd, MMMM dd, yyyy" |
-| F      | The !CultureInfo fullDateTime Format Pattern                                  | "dddd, MMMM dd, yyyy h:mm:ss tt" |
-| m      | The !CultureInfo monthDay Format Pattern                                      | "MMMM dd" |
-| r      | The !CultureInfo rfc1123 Format Pattern                                       | "ddd, dd MMM yyyy HH:mm:ss GMT" |
-| s      | The !CultureInfo sortableDateTime Format Pattern                              | "yyyy-MM-ddTHH:mm:ss" |
-| t      | The !CultureInfo shortTime Format Pattern                                     | "h:mm tt" |
-| T      | The !CultureInfo longTime Format Pattern                                      | "h:mm:ss tt" |
-| u      | The !CultureInfo universalSortableDateTime Format Pattern                     | "yyyy-MM-dd HH:mm:ssZ" |
-| y      | The !CultureInfo yearMonth Format Pattern                                     | "MMMM, yyyy" |
+| D      | The CultureInfo longDate Format Pattern                                      | "dddd, MMMM dd, yyyy" |
+| F      | The CultureInfo fullDateTime Format Pattern                                  | "dddd, MMMM dd, yyyy h:mm:ss tt" |
+| m      | The CultureInfo monthDay Format Pattern                                      | "MMMM dd" |
+| r      | The CultureInfo rfc1123 Format Pattern                                       | "ddd, dd MMM yyyy HH:mm:ss GMT" |
+| s      | The CultureInfo sortableDateTime Format Pattern                              | "yyyy-MM-ddTHH:mm:ss" |
+| t      | The CultureInfo shortTime Format Pattern                                     | "h:mm tt" |
+| T      | The CultureInfo longTime Format Pattern                                      | "h:mm:ss tt" |
+| u      | The CultureInfo universalSortableDateTime Format Pattern                     | "yyyy-MM-dd HH:mm:ssZ" |
+| y      | The CultureInfo yearMonth Format Pattern                                     | "MMMM, yyyy" |
 
 *Separator Characters*
 
