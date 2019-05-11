@@ -14,20 +14,20 @@ We recommend including one of the .js files from within the `/build/` folder.
 <script type="text/javascript" src="date.js"></script>
 ```
 
-Within the `/build/` folder, a date.js file has been created for each of the 150+ supported Cultures. Changing the Culture of the library is as easy as changing the `date.js` file.
+Within the `/build/` folder, a **date.js** file has been created for each of the 150+ supported Cultures. Changing the Culture of the library is as easy as changing the **date.js** file.
 
 ```html
 <!-- Set the CultureInfo to de-DE (German/Deutsch) -->
 <script type="text/javascript" src="date-de-DE.js"></script>
 ```
 
-Before minification, the Datejs library is contained in five (6) separate JavaScript files. Each of the files can be included individually. 
+Before minification, the Datejs library is contained in six (6) separate JavaScript files. Each of the files can be included individually. 
 
-The following is a list of precedence *if including the files individually*. Each file requires the one above it. For example, `core.js` requires a `CultureInfo` file. 
+The following is a list of precedence **if including the files individually**. Each file requires the one above it. For example, `core.js` requires a `CultureInfo` file. 
 
 ```
 1. CultureInfo       Contains all Globalized strings and culture specific properties.
-                     Debug versions available within the /trunk/source/globalization/ folder.
+                     Debug versions available within the /src/globalization/ folder.
 2. core.js           All core Date processing logic.
 3. parser.js         All parsing logic.
 4. sugarpak.js*      All syntactical sugar.
@@ -40,7 +40,7 @@ The following is a list of precedence *if including the files individually*. Eac
 
 ## Example Usage
 
-#### Syntax Overview
+### Syntax Overview
 
 ```js
 Date.today()                    // Returns today's date, with time set to 00:00 (start of day).
@@ -98,7 +98,7 @@ var birthDayParty = {month: 1, day: 20, hour: 20, minute: 30};
 Date.today().set(birthDayParty);// Set date and time with a config object.
 ```
 
-#### Parsing
+### Parsing
 
 The following list is only a small subset of hundreds of string formats which can be parsed correctly without providing a date format. All parsing is fully Globalized by including the appropriate CultureInfo file. The CultureInfo file contains all the strings used for parsing and formatting.
 
@@ -149,14 +149,14 @@ Date.parse("1997-07-16T19:20:30+01:00")     // ISO 8601 with Timezone offset
 Date.parse("1985-04-12T23:20:50Z")          // RFC 3339 Formats
 ```
 
-#### Chaining
+### Chaining
 
 ```js
 Date.today().add({ months: 1, days: 5 }).is().fri()        // Add 1 month and 5 days, then check if that date is a Friday.
 Date.parse("10-July-2004").next().friday().add(-1).month() // Take in a date, then move to the next Friday and subtract a month.
 ```
 
-#### Comparison
+### Comparison
 
 ```js
 Date.today().equals( Date.parse("today"))                  // true|false
@@ -169,62 +169,62 @@ Date.today().compareTo(Date.parse("yesterday"))            // 1 = greater, -1 = 
 Date.today().between(startDate, endDate)                   // true|false
 ```
 
-#### Converting to String
+### Converting to String
 
 **Note** The `format` parameter is optional with the `.toString()` function. If no `format` is provided, the native JavaScript Date `.toString()` function will be called.
 
 A detailed list of supported FormatSpecifiers is listed in the [http://code.google.com/p/datejs/wiki/FormatSpecifiers Wiki] documentation.
 
-**Standard Date and Time Format Specifiers**
+#### Standard Date and Time Format Specifiers
 
 | Format | Description | Example |
 | :---- | :---- | :---- |
-| s | The seconds of the minute between 0-59. | "0" to "59" |
-| ss | The seconds of the minute with leading zero if required. | "00" to "59" | 
-| m | The minute of the hour between 0-59. | "0"  or "59" | 
-| mm | The minute of the hour with leading zero if required. | "00" or "59" | 
-| h | The hour of the day between 1-12. | "1"  to "12" | 
-| hh | The hour of the day with leading zero if required. | "01" to "12" | 
-| H | The hour of the day between 0-23. | "0"  to "23" | 
-| HH | The hour of the day with leading zero if required. | "00" to "23" | 
-| d | The day of the month between 1 and 31. | "1"  to "31" | 
-| dd | The day of the month with leading zero if required. | "01" to "31" | 
-| ddd | Abbreviated day name. Date.CultureInfo.abbreviatedDayNames. | "Mon" to "Sun" |  
-| dddd | The full day name. Date.CultureInfo.dayNames. | "Monday" to "Sunday" | 
-| M | The month of the year between 1-12. | "1" to "12" | 
-| MM | The month of the year with leading zero if required. | "01" to "12" | 
-| MMM | Abbreviated month name. Date.CultureInfo.abbreviatedMonthNames. | "Jan" to "Dec" | 
-| MMMM | The full month name. Date.CultureInfo.monthNames. | "January" to "December" | 
-| yy | Displays the year as a two-digit number. | "99" or "07" | 
-| yyyy | Displays the full four digit year. | "1999" or "2007" | 
-| t | Displays the first character of the A.M./P.M. designator. Date.CultureInfo.amDesignator or Date.CultureInfo.pmDesignator | "A" or "P" | 
-| tt | Displays the A.M./P.M. designator. Date.CultureInfo.amDesignator or Date.CultureInfo.pmDesignator | "AM" or "PM" | 
-| S | The ordinal suffix ("st, "nd", "rd" or "th") of the current day. | "st, "nd", "rd" or "th" | 
+| s | The seconds of the minute between 0-59. | `0` to `59` |
+| ss | The seconds of the minute with leading zero if required. | `00` to `59` | 
+| m | The minute of the hour between 0-59. | `0`  or `59` | 
+| mm | The minute of the hour with leading zero if required. | `00` to `59` | 
+| h | The hour of the day between 1-12. | `1` to `12` | 
+| hh | The hour of the day with leading zero if required. | `01` to `12` | 
+| H | The hour of the day between 0-23. | `0`  to `23` | 
+| HH | The hour of the day with leading zero if required. | `00` to `23` | 
+| d | The day of the month between 1 and 31. | `1`  to `31` | 
+| dd | The day of the month with leading zero if required. | `01` to `31` | 
+| ddd | Abbreviated day name. Date.CultureInfo.abbreviatedDayNames. | `Mon` to `Sun` |  
+| dddd | The full day name. Date.CultureInfo.dayNames. | `Monday` to `Sunday` | 
+| M | The month of the year between 1-12. | `1` to `12` | 
+| MM | The month of the year with leading zero if required. | `01` to `12` | 
+| MMM | Abbreviated month name. Date.CultureInfo.abbreviatedMonthNames. | `Jan` to `Dec` | 
+| MMMM | The full month name. Date.CultureInfo.monthNames. | `January` to `December` | 
+| yy | Displays the year as a two-digit number. | `99` or `07` | 
+| yyyy | Displays the full four digit year. | `1999` or `2007` | 
+| t | Displays the first character of the A.M./P.M. designator. Date.CultureInfo.amDesignator or Date.CultureInfo.pmDesignator | `A` or `P` | 
+| tt | Displays the A.M./P.M. designator. Date.CultureInfo.amDesignator or Date.CultureInfo.pmDesignator | `AM` or `PM` |  
+| S | The ordinal suffix of the current day. | `st`, `nd`, `rd`, or `th` | 
 
 *Custom Date and Time Format Specifiers*
 
 | Format | Description | Example |
 | :---- | :---- | :---- |
-| d      | The CultureInfo shortDate Format Pattern                                     | "M/d/yyyy" |
-| D      | The CultureInfo longDate Format Pattern                                      | "dddd, MMMM dd, yyyy" |
-| F      | The CultureInfo fullDateTime Format Pattern                                  | "dddd, MMMM dd, yyyy h:mm:ss tt" |
-| m      | The CultureInfo monthDay Format Pattern                                      | "MMMM dd" |
-| r      | The CultureInfo rfc1123 Format Pattern                                       | "ddd, dd MMM yyyy HH:mm:ss GMT" |
-| s      | The CultureInfo sortableDateTime Format Pattern                              | "yyyy-MM-ddTHH:mm:ss" |
-| t      | The CultureInfo shortTime Format Pattern                                     | "h:mm tt" |
-| T      | The CultureInfo longTime Format Pattern                                      | "h:mm:ss tt" |
-| u      | The CultureInfo universalSortableDateTime Format Pattern                     | "yyyy-MM-dd HH:mm:ssZ" |
-| y      | The CultureInfo yearMonth Format Pattern                                     | "MMMM, yyyy" |
+| d      | The CultureInfo shortDate Format Pattern                                     | `M/d/yyyy` |
+| D      | The CultureInfo longDate Format Pattern                                      | `dddd, MMMM dd, yyyy` |
+| F      | The CultureInfo fullDateTime Format Pattern                                  | `dddd, MMMM dd, yyyy h:mm:ss tt` |
+| m      | The CultureInfo monthDay Format Pattern                                      | `MMMM dd` |
+| r      | The CultureInfo rfc1123 Format Pattern                                       | `ddd, dd MMM yyyy HH:mm:ss GMT` |
+| s      | The CultureInfo sortableDateTime Format Pattern                              | `yyyy-MM-ddTHH:mm:ss` |
+| t      | The CultureInfo shortTime Format Pattern                                     | `h:mm tt` |
+| T      | The CultureInfo longTime Format Pattern                                      | `h:mm:ss tt` |
+| u      | The CultureInfo universalSortableDateTime Format Pattern                     | `yyyy-MM-dd HH:mm:ssZ` |
+| y      | The CultureInfo yearMonth Format Pattern                                     | `MMMM, yyyy` |
 
-*Separator Characters*
+#### Separator Characters
 
 | Character | Name |
 | :---- | :---- |
-| / | forward slash |
-|  | space |
-| . | period|dot |
-| - | hyphen|dash |
-| , | comma |
+| `/` | forward slash |
+| ` ` | space |
+| `.` | period|dot |
+| `-` | hyphen|dash |
+| `,` | comma |
 
 ```js
 new Date().toString()                  // "Wed Oct 31 2007 16:18:10 GMT-0700 (Pacfic Daylight Time)"
@@ -242,19 +242,14 @@ new Date().toShortTimeString()         // "4:18 PM". Culture specific as per Dat
 new Date().toLongTimeString()          // "4:18:34 PM". Culture specific as per Date.CultureInfo.longTimePattern.
 ```
 
-#### Core
+### Core
 
 ```js
 Date.today().set({ day: 15 })          // Sets the day to the 15th of the current month and year. Other object values include year|month|day|hour|minute|second.
-
-        Date.today().set({ year: 2007, month: 1, day: 20 })
-
+Date.today().set({ year: 2007, month: 1, day: 20 })
 
 Date.today().add({ days: 2 })          // Adds 2 days to the Date. Other object values include year|month|day|hour|minute|second.
-
-        Date.today().add({ years: -1, months: 6, hours: 3 })
-
-
+Date.today().add({ years: -1, months: 6, hours: 3 })
 Date.today().addYears(1)               // Adds 1 year.
 Date.today().addMonths(-2)             // Subtracts 2 months.
 Date.today().addWeeks(1)               // Adds 1 week.
@@ -271,7 +266,7 @@ new Date().clearTime()                 // Sets the time to 00:00 (start of the d
 Date.today().setTimeToNow()            // Resets the time to the current time (now). The functional opposite of .clearTime()
 ```
 
-#### ISO 8601
+### ISO 8601
 
 ```js
 // Parse ISO 8601 string
@@ -284,7 +279,7 @@ new Date().toISOString()               // Returns ISO 8601 string of date conver
 Date.today().getISOWeek()              // Returns ISO 8601 week of year. Returns "01" to ("52" | "53") depending on the year. See also .getWeek()
 ```
 
-#### Misc
+### Misc
 
 ```js
 Date.getMonthNumberFromName("March")   // 2 - CultureInfo specific. <static>
