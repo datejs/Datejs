@@ -1,4 +1,4 @@
-![](http://datejs.com/images/googlecode-header.jpg)![](http://datejs.com/images/googlecode-header.gif)
+![](https://user-images.githubusercontent.com/62210/57574317-169b4600-73f4-11e9-8f98-8756e92cacfe.png)
 
 ## Overview
 
