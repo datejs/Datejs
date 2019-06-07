@@ -925,8 +925,10 @@
         "yyyy-MM-ddTHH:mmZ",
         "yyyy-MM-ddTHH:mmz",
         "yyyy-MM-ddTHH:mm",
+        "yyyy-MM-dd",
         "ddd, MMM dd, yyyy H:mm:ss tt",
         "ddd MMM d yyyy HH:mm:ss zzz",
+        "MMM dd",
         "MMddyyyy",
         "ddMMyyyy",
         "Mddyyyy",
@@ -936,6 +938,7 @@
         "yyyy",
         "Mdyy",
         "dMyy",
+        "ddd",
         "d"
     ]);
 
