@@ -5,7 +5,7 @@
   "main": "build/date.js",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-jasmine": "^2.0.1",
+    "gulp-jasmine": "^4.0.0",
     "gulp-concat": "^2.5.2",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
