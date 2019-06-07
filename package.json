@@ -7,7 +7,7 @@
     "gulp": "^4.0.2",
     "gulp-jasmine": "^4.0.0",
     "gulp-concat": "^2.5.2",
-    "gulp-sourcemaps": "^1.5.2",
+    "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "run-sequence": "^1.1.0",
     "merge-stream": "^2.0.0"
