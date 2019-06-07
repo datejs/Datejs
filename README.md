@@ -173,7 +173,7 @@ Date.today().between(startDate, endDate)                   // true|false
 
 **Note** The `format` parameter is optional with the `.toString()` function. If no `format` is provided, the native JavaScript Date `.toString()` function will be called.
 
-A detailed list of supported FormatSpecifiers is listed in the [http://code.google.com/p/datejs/wiki/FormatSpecifiers Wiki] documentation.
+A detailed list of supported FormatSpecifiers is listed in the [Format Specifiers](https://github.com/datejs/Datejs/wiki/Format-Specifiers) page on the wiki.
 
 #### Standard Date and Time Format Specifiers
 
