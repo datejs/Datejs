@@ -9,7 +9,7 @@
     "gulp-concat": "^2.5.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "run-sequence": "^1.1.0",
+    "run-sequence": "^2.2.1",
     "merge-stream": "^2.0.0"
   },
   "author": "",
