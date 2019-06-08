@@ -2,9 +2,9 @@
  * @version: 1.0
  * @author: @geoffreymcgill
  * @date: 2015-11-25
- * @copyright: Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net). All rights reserved.
+ * @copyright: Copyright (c) 2008-2019, Object.NET, Inc. (https://object.net). All rights reserved.
  * @license: See LICENSE and https://github.com/datejs/Datejs/blob/master/LICENSE
- * @website: http://datejs.com/
+ * @website: https://datejs.com
  */
 
 /**

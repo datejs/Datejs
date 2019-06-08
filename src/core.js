@@ -2,9 +2,9 @@
  * @version: 1.0
  * @author: @geoffreymcgill
  * @date: 2015-11-25
- * @copyright: Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net). All rights reserved.
+ * @copyright: Copyright (c) 2008-2019, Object.NET, Inc. (https://object.net). All rights reserved.
  * @license: See LICENSE and https://github.com/datejs/Datejs/blob/master/LICENSE
- * @website: http://datejs.com/
+ * @website: https://datejs.com
  */
  
 (function () {
@@ -728,17 +728,18 @@
      
      S      The ordinal suffix ("st, "nd", "rd" or "th") of the current day.            "st, "nd", "rd" or "th"
 
-|| *Format* || *Description* || *Example* ||
-|| d      || The CultureInfo shortDate Format Pattern                                     || "M/d/yyyy" ||
-|| D      || The CultureInfo longDate Format Pattern                                      || "dddd, MMMM dd, yyyy" ||
-|| F      || The CultureInfo fullDateTime Format Pattern                                  || "dddd, MMMM dd, yyyy h:mm:ss tt" ||
-|| m      || The CultureInfo monthDay Format Pattern                                      || "MMMM dd" ||
-|| r      || The CultureInfo rfc1123 Format Pattern                                       || "ddd, dd MMM yyyy HH:mm:ss GMT" ||
-|| s      || The CultureInfo sortableDateTime Format Pattern                              || "yyyy-MM-ddTHH:mm:ss" ||
-|| t      || The CultureInfo shortTime Format Pattern                                     || "h:mm tt" ||
-|| T      || The CultureInfo longTime Format Pattern                                      || "h:mm:ss tt" ||
-|| u      || The CultureInfo universalSortableDateTime Format Pattern                     || "yyyy-MM-dd HH:mm:ssZ" ||
-|| y      || The CultureInfo yearMonth Format Pattern                                     || "MMMM, yyyy" ||
+    | Format | Description | Example |
+    | -- | -- | -- |
+    | d      | The CultureInfo shortDate Format Pattern                                     | "M/d/yyyy" |
+    | D      | The CultureInfo longDate Format Pattern                                      | "dddd, MMMM dd, yyyy" |
+    | F      | The CultureInfo fullDateTime Format Pattern                                  | "dddd, MMMM dd, yyyy h:mm:ss tt" |
+    | m      | The CultureInfo monthDay Format Pattern                                      | "MMMM dd" |
+    | r      | The CultureInfo rfc1123 Format Pattern                                       | "ddd, dd MMM yyyy HH:mm:ss GMT" |
+    | s      | The CultureInfo sortableDateTime Format Pattern                              | "yyyy-MM-ddTHH:mm:ss" |
+    | t      | The CultureInfo shortTime Format Pattern                                     | "h:mm tt" |
+    | T      | The CultureInfo longTime Format Pattern                                      | "h:mm:ss tt" |
+    | u      | The CultureInfo universalSortableDateTime Format Pattern                     | "yyyy-MM-dd HH:mm:ssZ" |
+    | y      | The CultureInfo yearMonth Format Pattern                                     | "MMMM, yyyy" |
      
 
     STANDARD DATE AND TIME FORMAT STRINGS

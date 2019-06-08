@@ -54,5 +54,5 @@ Your reward is sweet karma and that warm fuzzy feeling knowing you’ve helped t
 
 1. [Contributor License Agreement](https://github.com/datejs/Datejs/blob/master/CLA.md)
 2. [Issue tracker](https://github.com/datejs/Datejs/issues)
-3. [Datejs Blog](http://datejs.com/blog/)
+3. [Datejs Blog](https://datejs.comblog/)
 5. [StackOverflow](https://stackoverflow.com/questions/tagged/datejs)
